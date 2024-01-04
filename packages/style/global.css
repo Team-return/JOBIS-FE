@@ -1,0 +1,74 @@
+//default
+:root {
+    --jobis-color-primary-blue-10: #f3f3fb;
+    --jobis-color-primary-blue-20: #135c9d;
+    --jobis-color-primary-blue-30: #0f4c82;
+    --jobis-color-primary-blue-40: #002c53;
+    --jobis-color-gray-10: #ffffff;
+    --jobis-color-gray-20: #fafafa;
+    --jobis-color-gray-30: #f7f7f7;
+    --jobis-color-gray-40: #e5e5e5;
+    --jobis-color-gray-50: #cccccc;
+    --jobis-color-gray-60: #7f7f7f;
+    --jobis-color-gray-70: #444444;
+    --jobis-color-gray-80: #333333;
+    --jobis-color-gray-90: #000000;
+    --jobis-color-sub-red-10: #fce9e7;
+    --jobis-color-sub-red-10: #e74c3c;
+    --jobis-color-sub-green-10: #e5f8ee;
+    --jobis-color-sub-green-10: #2ecc71;
+    --jobis-color-sub-blue-10: #e0ebf6;
+    --jobis-color-sub-blue-10: #237bc9;
+    --jobis-color-sub-yellow-10: #fdf7e2;
+    --jobis-color-sub-yellow-10: #f1c40f;
+}
+
+//light모드
+:root[color-theme='light'] {
+    --jobis-color-primary-blue-10: #f3f3fb;
+    --jobis-color-primary-blue-20: #135c9d;
+    --jobis-color-primary-blue-30: #0f4c82;
+    --jobis-color-primary-blue-40: #002c53;
+    --jobis-color-gray-10: #ffffff;
+    --jobis-color-gray-20: #fafafa;
+    --jobis-color-gray-30: #f7f7f7;
+    --jobis-color-gray-40: #e5e5e5;
+    --jobis-color-gray-50: #cccccc;
+    --jobis-color-gray-60: #7f7f7f;
+    --jobis-color-gray-70: #444444;
+    --jobis-color-gray-80: #333333;
+    --jobis-color-gray-90: #000000;
+    --jobis-color-sub-red-10: #fce9e7;
+    --jobis-color-sub-red-10: #e74c3c;
+    --jobis-color-sub-green-10: #e5f8ee;
+    --jobis-color-sub-green-10: #2ecc71;
+    --jobis-color-sub-blue-10: #e0ebf6;
+    --jobis-color-sub-blue-10: #237bc9;
+    --jobis-color-sub-yellow-10: #fdf7e2;
+    --jobis-color-sub-yellow-10: #f1c40f;
+}
+
+//dark모드
+:root[color-theme='dark'] {
+    --jobis-color-primary-blue-10: #002559;
+    --jobis-color-primary-blue-20: #135c9d;
+    --jobis-color-primary-blue-30: #2770b1;
+    --jobis-color-primary-blue-40: #4f98d9;
+    --jobis-color-gray-10: #000000;
+    --jobis-color-gray-20: #060606;
+    --jobis-color-gray-30: #191919;
+    --jobis-color-gray-40: #333333;
+    --jobis-color-gray-50: #545454;
+    --jobis-color-gray-60: #8e8e8e;
+    --jobis-color-gray-70: #d9d9d9;
+    --jobis-color-gray-80: #eeeeee;
+    --jobis-color-gray-90: #ffffff;
+    --jobis-color-sub-red-10: #4c1914;
+    --jobis-color-sub-red-10: #e74c3c;
+    --jobis-color-sub-green-10: #0f4325;
+    --jobis-color-sub-green-10: #2ecc71;
+    --jobis-color-sub-blue-10: #0c2942;
+    --jobis-color-sub-blue-10: #237bc9;
+    --jobis-color-sub-yellow-10: #504105;
+    --jobis-color-sub-yellow-10: #f1c40f;
+}
