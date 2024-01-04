@@ -1,0 +1,15 @@
+{
+    "name": "@jobis/design-token",
+    "version": "0.0.0",
+    "description": "",
+    "main": "index.ts",
+    "scripts": {
+        "build": "node ./esbuild.config.js"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@yarnpkg/esbuild-plugin-pnp": "^3.0.0-rc.15",
+        "esbuild": "^0.16.10"
+    }
+}

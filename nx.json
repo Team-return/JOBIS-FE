@@ -1,21 +1,24 @@
 {
-  "targetDefaults": {
-    "build": {
-      "cache": true,
-      "dependsOn": ["^build"],
-      "inputs": ["production", "^production"]
+    "targetDefaults": {
+        "build": {
+            "cache": true,
+            "dependsOn": ["^build"],
+            "inputs": ["production", "^production"]
+        },
+        "test": {
+            "cache": true
+        },
+        "lint": {
+            "cache": true
+        }
     },
-    "test": {
-      "cache": true
+    "namedInputs": {
+        "default": ["{projectRoot}/**/*", "sharedGlobals"],
+        "production": ["default"],
+        "sharedGlobals": []
     },
-    "lint": {
-      "cache": true
+    "nxCloudAccessToken": "NWU0MzNiYTktMzJhNi00ZTFjLWE3ZWUtYjZjODJmZGQxYTUyfHJlYWQtd3JpdGU=",
+    "affected": {
+        "defaultBase": "main"
     }
-  },
-  "namedInputs": {
-    "default": ["{projectRoot}/**/*", "sharedGlobals"],
-    "production": ["default"],
-    "sharedGlobals": []
-  },
-  "nxCloudAccessToken": "NWU0MzNiYTktMzJhNi00ZTFjLWE3ZWUtYjZjODJmZGQxYTUyfHJlYWQtd3JpdGU="
 }
