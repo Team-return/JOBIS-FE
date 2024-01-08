@@ -1,5 +1,5 @@
-const esbuild = require('esbuild');
-const { pnpPlugin } = require('@yarnpkg/esbuild-plugin-pnp');
+import esbuild from "esbuild"
+import {pnpPlugin} from "@yarnpkg/esbuild-plugin-pnp"
 import pkg from './package.json' assert { type: 'json' };
 
 const dev = process.argv.includes('--dev');
