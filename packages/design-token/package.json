@@ -2,14 +2,18 @@
     "name": "@jobis/design-token",
     "version": "0.0.0",
     "description": "",
-    "main": "index.ts",
+    "type": "module",
+    "main": "dist/index.js",
     "scripts": {
-        "build": "node ./esbuild.config.js"
+        "build": "yarn run build:js",
+        "build:js": "node ./esbuild.config.js",
+        "clean": "rm -rf dist"
     },
     "author": "",
     "license": "ISC",
     "devDependencies": {
         "@yarnpkg/esbuild-plugin-pnp": "^3.0.0-rc.15",
-        "esbuild": "^0.16.17"
+        "esbuild": "^0.16.17",
+        "typescript": "^5.3.3"
     }
 }

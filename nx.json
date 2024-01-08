@@ -1,4 +1,20 @@
 {
+    "extends": "nx/presets/npm.json",
+    "affected": {
+        "defaultBase": "main"
+    },
+    "workspaceLayout": {
+        "appsDir": "apps",
+        "libsDir": "packages"
+    },
+    "tasksRunnerOptions": {
+        "default": {
+            "runner": "nx/tasks-runners/default",
+            "options": {
+                "cacheableOperations": ["build", "test", "dev"]
+            }
+        }
+    },
     "targetDefaults": {
         "build": {
             "cache": true,
@@ -6,9 +22,11 @@
             "inputs": ["production", "^production"]
         },
         "test": {
-            "cache": true
+            "cache": true,
+            "dependsOn": ["^build"]
         },
         "lint": {
+            "dependsOn": ["^build"],
             "cache": true
         }
     },
@@ -17,8 +35,5 @@
         "production": ["default"],
         "sharedGlobals": []
     },
-    "nxCloudAccessToken": "NWU0MzNiYTktMzJhNi00ZTFjLWE3ZWUtYjZjODJmZGQxYTUyfHJlYWQtd3JpdGU=",
-    "affected": {
-        "defaultBase": "main"
-    }
+    "nxCloudAccessToken": "NWU0MzNiYTktMzJhNi00ZTFjLWE3ZWUtYjZjODJmZGQxYTUyfHJlYWQtd3JpdGU="
 }
