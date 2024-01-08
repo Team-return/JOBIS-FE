@@ -35,7 +35,17 @@ testem.log
 /typings
 
 # System Files
-.DS_Store
+*.DS_Store
+*.log
+*.tsbuildinfo
 Thumbs.db
 
 .nx/cache
+
+.yarn/*
+!.yarn/cache
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
