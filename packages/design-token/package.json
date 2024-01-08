@@ -10,6 +10,6 @@
     "license": "ISC",
     "devDependencies": {
         "@yarnpkg/esbuild-plugin-pnp": "^3.0.0-rc.15",
-        "esbuild": "^0.16.10"
+        "esbuild": "^0.16.17"
     }
 }

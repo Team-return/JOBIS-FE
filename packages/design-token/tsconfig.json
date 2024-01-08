@@ -2,10 +2,11 @@
     "extends": "../../tsconfig.base.json",
     "compilerOptions": {
         "target": "ESNext",
-        "module": "NodeNext",
-        "moduleResolution": "NodeNext",
+        "module": "ESNext",
+        "moduleResolution": "Node",
         "rootDir": ".",
-        "outDir": "dist"
+        "outDir": "dist",
+        "jsx": "react-jsx"
     },
-    "include": ["./src/**/*", "./index.ts"]
+    "include": ["./src/**/*", "src/index.ts"]
 }
