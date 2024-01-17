@@ -1,0 +1,11 @@
+{
+    "name": "@jobis/esbuild-config",
+    "packageManager": "yarn@4.0.2",
+    "main": "index.js",
+    "files": [
+        "index.js"
+    ],
+    "dependencies": {
+        "esbuild": "0.16.17"
+    }
+}

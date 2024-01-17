@@ -1,22 +1,11 @@
 {
-    "compileOnSave": false,
     "compilerOptions": {
-        "rootDir": ".",
         "target": "ESNext",
         "module": "ESNext",
         "lib": ["ESNext", "DOM"],
         "declaration": true,
         "strict": true,
         "moduleResolution": "node",
-        "jsx": "react-jsx",
-        "sourceMap": true,
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "importHelpers": true,
-        "skipLibCheck": true,
-        "skipDefaultLibCheck": true,
-        "baseUrl": ".",
-        "paths": {}
-    },
-    "exclude": ["node_modules", "tmp"]
+        "jsx": "react-jsx"
+    }
 }
