@@ -4,10 +4,19 @@
     "description": "",
     "type": "module",
     "main": "dist/index.js",
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.js",
+            "require": "./dist/index.cjs"
+        },
+        "./global.css": "./dist/global.css"
+    },
     "scripts": {
-        "build": "yarn clean && yarn build:js && yarn build:type",
+        "build": "yarn clean && yarn build:js && yarn build:type & yarn build:css",
         "build:js": "node ./esbuild.config.js",
         "build:type": "yarn tsc --emitDeclarationOnly",
+        "build:css": "node ./scripts/build-css-modules.js",
         "clean": "rm -rf dist"
     },
     "author": "",

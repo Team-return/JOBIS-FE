@@ -1,5 +1,8 @@
-//default
-:root {
+import * as token from '../dist/index.js';
+import fs from 'fs';
+
+const generateThemeCss = () => {
+    const cssString = `:root {
     --primary-10: #f3f3fb;
     --primary-20: #135c9d;
     --primary-30: #0f4c82;
@@ -23,37 +26,11 @@
     --subcolor-yellow-10: #f1c40f;
 }
 
-//light모드
-:root[color-theme='light'] {
-    --primary-10: #f3f3fb;
+:root .theme-dark {
+    --primary-10: #002559;
     --primary-20: #135c9d;
-    --primary-30: #0f4c82;
-    --primary-40: #002c53;
-    --grayscale-10: #ffffff;
-    --grayscale-20: #fafafa;
-    --grayscale-30: #f7f7f7;
-    --grayscale-40: #e5e5e5;
-    --grayscale-50: #cccccc;
-    --grayscale-60: #7f7f7f;
-    --grayscale-70: #444444;
-    --grayscale-80: #333333;
-    --grayscale-90: #000000;
-    --subcolor-red-10: #fce9e7;
-    --subcolor-red-10: #e74c3c;
-    --subcolor-green-10: #e5f8ee;
-    --subcolor-green-10: #2ecc71;
-    --subcolor-blue-10: #e0ebf6;
-    --subcolor-blue-10: #237bc9;
-    --subcolor-yellow-10: #fdf7e2;
-    --subcolor-yellow-10: #f1c40f;
-}
-
-//dark모드
-:root[color-theme='dark'] {
-    --jobis-color-primary-blue-10: #002559;
-    --jobis-color-primary-blue-20: #135c9d;
-    --jobis-color-primary-blue-30: #2770b1;
-    --jobis-color-primary-blue-40: #4f98d9;
+    --primary-30: #2770b1;
+    --primary-40: #4f98d9;
     --grayscale-10: #000000;
     --grayscale-20: #060606;
     --grayscale-30: #191919;
@@ -112,3 +89,9 @@
     font-size: 12px;
     line-height: 18px;
 }
+    `;
+
+    fs.writeFileSync('dist/global.css', cssString);
+};
+
+generateThemeCss();
