@@ -6,12 +6,14 @@
     "scripts": {
         "build": "nx build",
         "build:many": "nx run-many -t build",
-        "build:affected": "npx nx affected -t build",
+        "build:affected": "nx affected -t build",
+        "dev:storybook": "nx storybook @jobis/storybook",
         "prepare": "husky install"
     },
     "devDependencies": {
         "@nx/js": "17.2.3",
         "@nx/workspace": "17.2.3",
+        "@storybook/addon-docs": "^7.6.10",
         "@swc-node/register": "~1.6.7",
         "@swc/core": "~1.3.85",
         "husky": "^8.0.3",
