@@ -72,3 +72,43 @@
     --jobis-color-sub-yellow-10: #504105;
     --jobis-color-sub-yellow-10: #f1c40f;
 }
+.h1 {
+    font-size: 40px;
+    line-height: 60px;
+}
+.h2 {
+    font-size: 36px;
+    line-height: 54px;
+}
+.h3 {
+    font-size: 32px;
+    line-height: 48px;
+}
+.h4 {
+    font-size: 28px;
+    line-height: 40px;
+}
+.h5 {
+    font-size: 24px;
+    line-height: 36px;
+}
+.h6 {
+    font-size: 20px;
+    line-height: 26px;
+}
+.body1 {
+    font-size: 18px;
+    line-height: 24px;
+}
+.body2 {
+    font-size: 16px;
+    line-height: 22px;
+}
+.body3 {
+    font-size: 14px;
+    line-height: 20px;
+}
+.caption {
+    font-size: 12px;
+    line-height: 18px;
+}
