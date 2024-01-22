@@ -1587,9 +1587,18 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@jobis/design-token@workspace:packages/design-token"
   dependencies:
+    "@jobis/esbuild-config": "workspace:^"
     "@yarnpkg/esbuild-plugin-pnp": "npm:^3.0.0-rc.15"
     esbuild: "npm:^0.16.17"
     typescript: "npm:^5.3.3"
+  languageName: unknown
+  linkType: soft
+
+"@jobis/esbuild-config@workspace:^, @jobis/esbuild-config@workspace:packages/esbuild-config":
+  version: 0.0.0-use.local
+  resolution: "@jobis/esbuild-config@workspace:packages/esbuild-config"
+  dependencies:
+    esbuild: "npm:0.16.17"
   languageName: unknown
   linkType: soft
 
@@ -2786,7 +2795,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esbuild@npm:^0.16.17":
+"esbuild@npm:0.16.17, esbuild@npm:^0.16.17":
   version: 0.16.17
   resolution: "esbuild@npm:0.16.17"
   dependencies:

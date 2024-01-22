@@ -18,6 +18,10 @@ const RAW_RUNTIME_STATE =
       "reference": "workspace:packages/design-token"\
     },\
     {\
+      "name": "@jobis/esbuild-config",\
+      "reference": "workspace:packages/esbuild-config"\
+    },\
+    {\
       "name": "@jobis/style",\
       "reference": "workspace:packages/style"\
     }\
@@ -26,6 +30,7 @@ const RAW_RUNTIME_STATE =
   "ignorePatternData": "(^(?:\\\\.yarn\\\\/sdks(?:\\\\/(?!\\\\.{1,2}(?:\\\\/|$))(?:(?:(?!(?:^|\\\\/)\\\\.{1,2}(?:\\\\/|$)).)*?)|$))$)",\
   "fallbackExclusionList": [\
     ["@jobis/design-token", ["workspace:packages/design-token"]],\
+    ["@jobis/esbuild-config", ["workspace:packages/esbuild-config"]],\
     ["@jobis/style", ["workspace:packages/style"]],\
     ["jobis", ["workspace:."]]\
   ],\
@@ -2735,9 +2740,20 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./packages/design-token/",\
         "packageDependencies": [\
           ["@jobis/design-token", "workspace:packages/design-token"],\
+          ["@jobis/esbuild-config", "workspace:packages/esbuild-config"],\
           ["@yarnpkg/esbuild-plugin-pnp", "virtual:693e51a3803ddfb62a199b0e71147c0556eff792d139af0abced3e3ed879b2a90735d574c317ce67c04f6d8af9955218a65dbbdbb0cff7a261d7d5784375e779#npm:3.0.0-rc.15"],\
           ["esbuild", "npm:0.16.17"],\
           ["typescript", "patch:typescript@npm%3A5.3.3#optional!builtin<compat/typescript>::version=5.3.3&hash=e012d7"]\
+        ],\
+        "linkType": "SOFT"\
+      }]\
+    ]],\
+    ["@jobis/esbuild-config", [\
+      ["workspace:packages/esbuild-config", {\
+        "packageLocation": "./packages/esbuild-config/",\
+        "packageDependencies": [\
+          ["@jobis/esbuild-config", "workspace:packages/esbuild-config"],\
+          ["esbuild", "npm:0.16.17"]\
         ],\
         "linkType": "SOFT"\
       }]\

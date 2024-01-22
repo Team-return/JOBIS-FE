@@ -5,13 +5,15 @@
     "type": "module",
     "main": "dist/index.js",
     "scripts": {
-        "build": "yarn run build:js",
+        "build": "yarn clean && yarn build:js && yarn build:type",
         "build:js": "node ./esbuild.config.js",
+        "build:type": "yarn tsc --emitDeclarationOnly",
         "clean": "rm -rf dist"
     },
     "author": "",
     "license": "ISC",
     "devDependencies": {
+        "@jobis/esbuild-config": "workspace:^",
         "@yarnpkg/esbuild-plugin-pnp": "^3.0.0-rc.15",
         "esbuild": "^0.16.17",
         "typescript": "^5.3.3"
