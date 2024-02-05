@@ -3886,6 +3886,7 @@ const RAW_RUNTIME_STATE =
           ["@types/react", "npm:18.2.48"],\
           ["@types/react-dom", "npm:18.2.18"],\
           ["@vanilla-extract/css", "npm:1.14.1"],\
+          ["@vanilla-extract/dynamic", "npm:2.1.0"],\
           ["@vanilla-extract/esbuild-plugin", "virtual:fb23c78fe1fb9639eb563289de17268978ec249311ec26b256519a95f232f995feefccd0775b0dfaa14ba81932c65fa1aa90cb101089dac9234449725297722e#npm:2.3.4"],\
           ["@vanilla-extract/recipes", "virtual:fb23c78fe1fb9639eb563289de17268978ec249311ec26b256519a95f232f995feefccd0775b0dfaa14ba81932c65fa1aa90cb101089dac9234449725297722e#npm:0.5.1"],\
           ["clsx", "npm:2.1.0"],\
@@ -3912,6 +3913,7 @@ const RAW_RUNTIME_STATE =
           ["@types/react", "npm:18.2.48"],\
           ["@types/react-dom", "npm:18.2.18"],\
           ["@vanilla-extract/css", "npm:1.14.1"],\
+          ["@vanilla-extract/dynamic", "npm:2.1.0"],\
           ["@vanilla-extract/esbuild-plugin", "virtual:fb23c78fe1fb9639eb563289de17268978ec249311ec26b256519a95f232f995feefccd0775b0dfaa14ba81932c65fa1aa90cb101089dac9234449725297722e#npm:2.3.4"],\
           ["@vanilla-extract/recipes", "virtual:fb23c78fe1fb9639eb563289de17268978ec249311ec26b256519a95f232f995feefccd0775b0dfaa14ba81932c65fa1aa90cb101089dac9234449725297722e#npm:0.5.1"],\
           ["clsx", "npm:2.1.0"],\
@@ -8015,6 +8017,16 @@ const RAW_RUNTIME_STATE =
           ["media-query-parser", "npm:2.0.2"],\
           ["modern-ahocorasick", "npm:1.0.1"],\
           ["outdent", "npm:0.8.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@vanilla-extract/dynamic", [\
+      ["npm:2.1.0", {\
+        "packageLocation": "../../../../.yarn/berry/cache/@vanilla-extract-dynamic-npm-2.1.0-2392b86275-10c0.zip/node_modules/@vanilla-extract/dynamic/",\
+        "packageDependencies": [\
+          ["@vanilla-extract/dynamic", "npm:2.1.0"],\
+          ["@vanilla-extract/private", "npm:1.0.3"]\
         ],\
         "linkType": "HARD"\
       }]\
