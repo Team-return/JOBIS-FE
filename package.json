@@ -1,29 +1,31 @@
 {
-    "name": "jobis",
-    "version": "0.0.0",
-    "license": "MIT",
-    "private": true,
-    "scripts": {
-        "build": "nx build",
-        "build:many": "nx run-many -t build",
-        "build:affected": "nx affected -t build",
-        "dev:storybook": "nx storybook @jobis/storybook",
-        "prepare": "husky install"
-    },
-    "devDependencies": {
-        "@nx/js": "17.2.3",
-        "@nx/workspace": "17.2.3",
-        "@storybook/addon-docs": "^7.6.10",
-        "@swc-node/register": "~1.6.7",
-        "@swc/core": "~1.3.85",
-        "husky": "^8.0.3",
-        "nx": "17.2.7",
-        "prettier": "2.8.8",
-        "typescript": "^4.3.5"
-    },
-    "workspaces": [
-        "apps/*",
-        "packages/*"
-    ],
-    "packageManager": "yarn@4.0.2"
+  "name": "jobis",
+  "version": "0.0.0",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "nx build",
+    "build:many": "nx run-many -t build",
+    "build:affected": "nx affected -t build",
+    "dev:storybook": "nx storybook @jobis/storybook",
+    "prepare": "husky install",
+    "dev:packages": "nx run-many --target=dev --projects='@jobis/ui,@jobis/icons,@jobis/design-token'"
+  },
+  "devDependencies": {
+    "@nx/js": "17.2.3",
+    "@nx/workspace": "17.2.3",
+    "@storybook/addon-docs": "^7.6.10",
+    "@swc-node/register": "~1.6.7",
+    "@swc/core": "~1.3.85",
+    "@yarnpkg/pnpify": "^4.0.1",
+    "husky": "^8.0.3",
+    "nx": "17.2.7",
+    "prettier": "2.8.8",
+    "typescript": "^4.3.5"
+  },
+  "workspaces": [
+    "apps/**/*",
+    "packages/**/*"
+  ],
+  "packageManager": "yarn@4.0.2"
 }
