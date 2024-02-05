@@ -1,8 +1,8 @@
-import * as token from '../dist/index.js';
-import fs from 'fs';
+import * as token from "../dist/index.js";
+import fs from "fs";
 
 const generateThemeCss = () => {
-    const cssString = `:root {
+  const cssString = `:root {
     --primary-10: #f3f3fb;
     --primary-20: #135c9d;
     --primary-30: #0f4c82;
@@ -17,13 +17,13 @@ const generateThemeCss = () => {
     --grayscale-80: #333333;
     --grayscale-90: #000000;
     --subcolor-red-10: #fce9e7;
-    --subcolor-red-10: #e74c3c;
+    --subcolor-red-20: #e74c3c;
     --subcolor-green-10: #e5f8ee;
-    --subcolor-green-10: #2ecc71;
+    --subcolor-green-20: #2ecc71;
     --subcolor-blue-10: #e0ebf6;
-    --subcolor-blue-10: #237bc9;
+    --subcolor-blue-20: #237bc9;
     --subcolor-yellow-10: #fdf7e2;
-    --subcolor-yellow-10: #f1c40f;
+    --subcolor-yellow-20: #f1c40f;
 }
 
 :root .theme-dark {
@@ -41,13 +41,13 @@ const generateThemeCss = () => {
     --grayscale-80: #eeeeee;
     --grayscale-90: #ffffff;
     --subcolor-red-10: #4c1914;
-    --subcolor-red-10: #e74c3c;
+    --subcolor-red-20: #e74c3c;
     --subcolor-green-10: #0f4325;
-    --subcolor-green-10: #2ecc71;
+    --subcolor-green-20: #2ecc71;
     --subcolor-blue-10: #0c2942;
-    --subcolor-blue-10: #237bc9;
+    --subcolor-blue-20: #237bc9;
     --subcolor-yellow-10: #504105;
-    --subcolor-yellow-10: #f1c40f;
+    --subcolor-yellow-20: #f1c40f;
 }
 .h1 {
     font-size: 40px;
@@ -89,9 +89,15 @@ const generateThemeCss = () => {
     font-size: 12px;
     line-height: 18px;
 }
+
+body * {
+    font-family: "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI",
+      Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+      "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
     `;
 
-    fs.writeFileSync('dist/global.css', cssString);
+  fs.writeFileSync("dist/global.css", cssString);
 };
 
 generateThemeCss();
