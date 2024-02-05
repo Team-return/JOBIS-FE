@@ -1,0 +1,43 @@
+{
+  "name": "@jobis/ui",
+  "version": "0.0.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./style.css": "./dist/index.css"
+  },
+  "scripts": {
+    "build": "yarn clean && yarn build:js && yarn build:type && yarn build:css",
+    "build:js": "node build.js",
+    "build:type": "yarn tsc --emitDeclarationOnly",
+    "clean": "rm -rf dist",
+    "dev": "yarn build:js --watch && yarn build:type --watch"
+  },
+  "devDependencies": {
+    "@jobis/design-token": "workspace:^",
+    "@jobis/esbuild-config": "workspace:^",
+    "@jobis/icons": "workspace:^",
+    "@storybook/addon-a11y": "^7.6.12",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@vanilla-extract/css": "^1.14.0",
+    "@vanilla-extract/esbuild-plugin": "^2.3.1",
+    "@vanilla-extract/recipes": "^0.5.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "storybook-addon-pseudo-states": "^2.1.2",
+    "typescript": "^5.3.3"
+  },
+  "peerDependencies": {
+    "@jobis/design-token": "workspace:^",
+    "react": "*"
+  },
+  "dependencies": {
+    "clsx": "^2.1.0"
+  }
+}

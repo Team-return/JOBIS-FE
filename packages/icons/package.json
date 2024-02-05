@@ -1,0 +1,33 @@
+{
+  "name": "@jobis/icons",
+  "version": "0.0.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "scripts": {
+    "build": "yarn clean && yarn build:js && yarn build:type",
+    "build:js": "node build.js",
+    "build:type": "yarn tsc --emitDeclarationOnly",
+    "clean": "rm -rf dist",
+    "dev": "yarn build:js --watch && yarn build:type --watch"
+  },
+  "devDependencies": {
+    "@jobis/design-token": "workspace:^",
+    "@jobis/esbuild-config": "workspace:^",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^5.3.3"
+  },
+  "peerDependencies": {
+    "@jobis/design-token": "workspace:^",
+    "react": "*"
+  }
+}
