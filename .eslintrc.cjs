@@ -31,7 +31,7 @@ module.exports = {
         ], // switch case문에서 case마다 줄바꿈
         'no-constant-condition': 'warn', // if문의 조건같은 부분에 true나 false같이 변하지 않는 값이 들어가는 것 금지
         'sort-vars': 'error', // 변수 알파벳 순서로 정렬
-        quotes: ['error', 'single', { avoidEscape: true, allowTemplateLiterals: true }], // 문자열 내에 따옴표가 포함될 경우 템플릿 리터럴을 사용
+        quotes: ['error', 'double', { avoidEscape: true, allowTemplateLiterals: true }], // 문자열 내에 따옴표가 포함될 경우 템플릿 리터럴을 사용
         'prefer-template': 'error', // 문자열을 연결할 때 문자열 연결 연산자(+) 금지
         'arrow-parens': 'error', // 매개변수가 단일 매개변수라면 소괄호 생략
         'no-undef': 'off', // CommonJS, ES 모듈 관련 린트
