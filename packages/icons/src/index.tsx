@@ -1,25 +1,25 @@
-import { ChevronBarDownIcon } from './chevronBarDownIcons';
-import { Chevron } from './chevrons';
-import { Close } from './closes';
-import { DateIcon } from './dateIcons';
-import { Download } from './downloads';
-import { EyesClose } from './eyesCloses';
-import { EyesOpen } from './eyesOpens';
-import { FileEarmarkArrowDownIcon } from './fileEarmarkArrowDownIcons';
-import { FileEarmarkPlusIcon } from './fileEarmarkPlusIcons';
-import { Logout } from './logouts';
-import { Plus } from './pluss';
-import { SearchIcon } from './searchIcons';
-import { ToastSuccess } from './toastSuccesss';
-import { UploadIcon } from './uploadIcons';
-import { Trash } from './trashs';
-import { MyPg } from './myPgs';
-import { EditPencil } from './editPencils';
-import { KebabMenu } from './kebabMenus';
-import { BookmarkOn } from './bookmarkOns';
-import { BookmarkOff } from './bookmarkOffs';
-import { Document } from './documents';
-import { Check } from './checks';
+import { ChevronBarDownIcon } from './chevronBarDownIcon';
+import { Chevron } from './chevron';
+import { Close } from './close';
+import { DateIcon } from './dateIcon';
+import { Download } from './download';
+import { EyesClose } from './eyesClose';
+import { EyesOpen } from './eyesOpen';
+import { FileEarmarkArrowDownIcon } from './fileEarmarkArrowDownIcon';
+import { FileEarmarkPlusIcon } from './fileEarmarkPlusIcon';
+import { Logout } from './logout';
+import { Plus } from './plus';
+import { SearchIcon } from './searchIcon';
+import { ToastSuccess } from './toastSuccess';
+import { UploadIcon } from './uploadIcon';
+import { Trash } from './trash';
+import { MyPg } from './myPg';
+import { EditPencil } from './editPencil';
+import { KebabMenu } from './kebabMenu';
+import { BookmarkOn } from './bookmarkOn';
+import { BookmarkOff } from './bookmarkOff';
+import { Document } from './document';
+import { Check } from './check';
 
 // Icon paths
 export const Icons = {
