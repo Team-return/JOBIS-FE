@@ -10,6 +10,7 @@
         "dev:storybook": "nx storybook @jobis/storybook",
         "dev:packages": "nx run-many --target=dev --projects='@jobis/ui,@jobis/icons,@jobis/design-token'",
         "prepare": "husky install",
+        "postinstall": "husky install && rm -rf .git/hooks && ln -s ../.husky .git/hooks",
         "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
         "lint:styled": "stylelint './{app,packages}/**/*.{js,ts,jsx,tsx}' --fix"
     },
@@ -39,8 +40,8 @@
         "eslint-plugin-react-hooks": "^4.6.0",
         "eslint-plugin-react-refresh": "^0.4.5",
         "eslint-plugin-unicorn": "^50.0.1",
-        "husky": "^8.0.3",
-        "lint-staged": "^15.2.1",
+        "husky": "^8.0.0",
+        "lint-staged": "^15.2.2",
         "nx": "17.2.7",
         "postcss": "^8.4.33",
         "postcss-styled-syntax": "^0.6.4",
