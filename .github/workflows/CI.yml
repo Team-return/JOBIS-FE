@@ -1,0 +1,42 @@
+name: CI
+
+on:
+    push:
+        branches:
+            - 'dev_**'
+            - 'hot_**'
+            - 'rel_**'
+            - 'main'
+    pull_request:
+        branches:
+            - 'main'
+            - 'rel_**'
+
+concurrency:
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                node-version: [18.12.0]
+
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v4
+              with:
+                  node-version: ${{ matrix.node-version }}
+                  cache: 'yarn'
+
+            - name: Install Dependencies
+              run: yarn install --immutable
+
+            - name: Check Eslint, Prettier, Stylelint
+              run: yarn run lint-staged
+
+            - name: Build Packages
+              run: yarn run build
