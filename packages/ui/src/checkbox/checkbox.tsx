@@ -22,8 +22,7 @@ export const Checkbox = React.forwardRef(
                     className={clsx([
                         CheckboxBackgroundStyle,
                         !disabled && CheckboxBackgroundStyleDetail,
-                    ])}
-                >
+                    ])}>
                     <input
                         className={clsx([CheckboxStyle])}
                         type="checkbox"
@@ -38,8 +37,7 @@ export const Checkbox = React.forwardRef(
                     as="span"
                     fontSize="body1"
                     color={disabled ? themes.color.grayScale[50] : themes.color.grayScale[90]}
-                    style={{ cursor: disabled ? 'not-allowed' : 'pointer' }}
-                >
+                    style={{ cursor: disabled ? 'not-allowed' : 'pointer' }}>
                     {children}
                 </Text>
             </label>

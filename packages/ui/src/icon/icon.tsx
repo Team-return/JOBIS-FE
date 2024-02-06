@@ -20,8 +20,7 @@ export const Icon = ({
             width={size}
             height={size}
             color={color}
-            {...props}
-        >
+            {...props}>
             <>{icons[icon]}</>
         </svg>
     );
