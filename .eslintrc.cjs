@@ -51,11 +51,13 @@ module.exports = {
         'unicorn/prefer-module': 'off', // 축약어 사용 방지하는 규칙 off
         'unicorn/consistent-function-scoping': 'off', // ??
 
+        '@typescript-eslint/ban-ts-comment': 'off', // ts-ignore 가능
         '@typescript-eslint/no-unused-vars': 'off', // 위 no-unused-vars와 중복
         '@typescript-eslint/no-shadow': 'error', // 같은 변수명 금지
         '@typescript-eslint/naming-convention': [
             // 코드 전반 네이밍 컨벤션
             'error',
+            { format: ['PascalCase'], selector: 'variable', modifiers: ['exported'] },
             { format: ['camelCase'], selector: 'variable', leadingUnderscore: 'allow' },
             { format: ['camelCase'], selector: 'parameter', leadingUnderscore: 'allow' },
             { format: ['PascalCase'], selector: 'function', modifiers: ['exported'] },
