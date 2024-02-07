@@ -33,14 +33,14 @@ export const Checkbox = React.forwardRef(
             {...checkboxProps}
           />
           {checked && (
-            <Icon icon="Check" size={12} color={themes.color.grayScale[10]} />
+            <Icon icon="Check" size={12} color={themes.Color.grayScale[10]} />
           )}
         </div>
         <Text
           as="span"
           fontSize="body1"
           color={
-            disabled ? themes.color.grayScale[50] : themes.color.grayScale[90]
+            disabled ? themes.Color.grayScale[50] : themes.Color.grayScale[90]
           }
           style={{ cursor: disabled ? "not-allowed" : "pointer" }}
         >

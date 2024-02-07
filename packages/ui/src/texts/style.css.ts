@@ -4,7 +4,7 @@ import { themes } from "@jobis/design-token";
 export const TextStyle = recipe({
   variants: {
     fontSize: {
-      ...themes.font,
+      ...themes.Font,
     },
     defaultVariants: {
       fontSize: "h1",

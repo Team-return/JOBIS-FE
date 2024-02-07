@@ -1,8 +1,8 @@
 import * as React from "react";
 import { TextProps } from "./types";
 import { clsx } from "clsx";
-import { baseStyle } from "../core/style.css";
-import { textStyle } from "./style.css";
+import { BaseStyle } from "../core/style.css";
+import { TextStyle } from "./style.css";
 import { themes } from "@jobis/design-token";
 
 export const Text = React.forwardRef(
@@ -23,11 +23,11 @@ export const Text = React.forwardRef(
       {
         ...props,
         ref,
-        className: clsx([baseStyle, textStyle({ fontSize }), className]),
+        className: clsx([BaseStyle, TextStyle({ fontSize }), className]),
         style: {
           color,
           background,
-          fontWeight: themes.fontWeight[fontWeight],
+          fontWeight: themes.FontWeight[fontWeight],
           ...style,
         },
       },

@@ -50,16 +50,16 @@ export const CheckboxStyle = style({
   width: 20,
   height: 20,
   margin: 0,
-  accentColor: themes.color.primary[20],
-  border: `2px solid ${themes.color.grayScale[50]}`,
+  accentColor: themes.Color.primary[20],
+  border: `2px solid ${themes.Color.grayScale[50]}`,
   borderRadius: 4,
   ":checked": {
     borderColor: "transparent",
-    backgroundColor: themes.color.primary[20],
+    backgroundColor: themes.Color.primary[20],
   },
   ":disabled": {
-    backgroundColor: themes.color.grayScale[40],
-    border: `2px solid ${themes.color.grayScale[40]}`,
+    backgroundColor: themes.Color.grayScale[40],
+    border: `2px solid ${themes.Color.grayScale[40]}`,
     cursor: "not-allowed",
   },
 });
