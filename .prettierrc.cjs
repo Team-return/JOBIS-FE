@@ -5,7 +5,7 @@ module.exports = {
   semi: true, // 세미콜론 사용
   singleQuote: false, // ' ' 사용
   quoteProps: "consistent",
-  jsxBracketSameLine: true, // JSX 태그를 사용하는경우에 > 기호를 한줄 내려서 사용
+  jsxBracketSameLine: false, // JSX 태그를 사용하는경우에 > 기호를 한줄 내려서 사용
   bracketSpacing: true, // 객체의 양 끝 간격 사용
   arrowParens: "avoid", // 매개변수가 1개 이더라도 소괄호 필수
   trailingComma: "es5", // 배열, 객체등의 마지막 요소에 콤마
