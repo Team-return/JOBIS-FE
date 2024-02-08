@@ -4,7 +4,7 @@ import { clsx } from "clsx";
 import { toggleBackgroundStyle, circleStyle } from "./style.css";
 import { ToggleProps } from "./types";
 
-function Toggle(props: ToggleProps, ref: React.Ref<HTMLInputElement>) {
+export const Toggle = (props: ToggleProps) => {
   const { checked, onClick } = props;
   return (
     <div
@@ -14,7 +14,4 @@ function Toggle(props: ToggleProps, ref: React.Ref<HTMLInputElement>) {
       <div className={clsx([circleStyle])} />
     </div>
   );
-}
-
-const _Toggle = React.forwardRef(Toggle);
-export { _Toggle as Toggle };
+};
