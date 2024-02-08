@@ -1,9 +1,9 @@
-import { Button as _Button } from "@jobis/ui";
+import { Button } from "@jobis/ui";
 import { Meta } from "@storybook/react";
 
 export default {
   title: "Components/Button",
-  component: _Button,
+  component: Button,
   parameters: {
     layout: "centered",
   },
@@ -20,10 +20,15 @@ export default {
       control: "boolean",
     },
   },
-} as Meta<typeof _Button>;
+} as Meta<typeof Button>;
 
 export const ButtonStory = {
-  args: { children: "hello", disabled: false, isLoading: false },
+  args: {
+    children: "hello",
+    disabled: false,
+    isLoading: false,
+    variant: "solid",
+  },
 };
 
 export const LeftIconButtonStory = {
@@ -32,6 +37,7 @@ export const LeftIconButtonStory = {
     disabled: false,
     isLoading: false,
     leftIcon: "✅",
+    variant: "solid",
   },
 };
 
@@ -41,5 +47,6 @@ export const ReftIconButtonStory = {
     disabled: false,
     isLoading: false,
     rightIcon: "✅",
+    variant: "solid",
   },
 };

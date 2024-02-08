@@ -12,58 +12,58 @@ import {
 } from "./style.css";
 import { assignInlineVars } from "@vanilla-extract/dynamic";
 
-const Button = (props: ButtonProps, ref: React.Ref<HTMLButtonElement>) => {
-  const {
-    children,
-    isLoading,
-    isDisabled,
-    variant = "solid",
-    style,
-    leftIcon,
-    rightIcon,
-    onKeyDown,
-    ...buttonProps
-  } = props;
+export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  (props, ref) => {
+    const {
+      children,
+      isLoading,
+      isDisabled,
+      variant = "solid",
+      style,
+      leftIcon,
+      rightIcon,
+      onKeyDown,
+      ...buttonProps
+    } = props;
 
-  const enableColor = themes.color.primary[20];
-  const hoverColor = variant === "solid" ? "#4D82B2" : themes.color.primary[20];
-  const activeColor = themes.color.primary[30];
+    const enableColor = themes.color.primary[20];
+    const hoverColor =
+      variant === "solid" ? "#4D82B2" : themes.color.primary[20];
+    const activeColor = themes.color.primary[30];
 
-  const disabled = isLoading || isDisabled;
+    const disabled = isLoading || isDisabled;
 
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
-    onKeyDown?.(event);
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
+      onKeyDown?.(event);
 
-    if (event.key === "Enter" || event.key === "13") {
-      event.preventDefault();
-      event.currentTarget.click();
-    }
-  };
+      if (event.key === "Enter" || event.key === "13") {
+        event.preventDefault();
+        event.currentTarget.click();
+      }
+    };
 
-  return (
-    <button
-      className={clsx([buttonStyle({ variant })])}
-      ref={ref}
-      onKeyDown={handleKeyDown}
-      role="button"
-      disabled={disabled}
-      style={{
-        ...assignInlineVars({
-          [enableColorVariant]: enableColor,
-          [hoverColorVariant]: hoverColor,
-          [activeColorVariant]: activeColor,
-        }),
-        ...style,
-      }}
-      {...buttonProps}
-    >
-      {isLoading && <div className={spinnerStyle} />}
-      {leftIcon && <span className={spanStyle}>{leftIcon}</span>}
-      <span>{children}</span>
-      {rightIcon && <span className={spanStyle}>{rightIcon}</span>}
-    </button>
-  );
-};
-
-const _Button = React.forwardRef(Button);
-export { _Button as Button };
+    return (
+      <button
+        className={clsx([buttonStyle({ variant })])}
+        ref={ref}
+        onKeyDown={handleKeyDown}
+        role="button"
+        disabled={disabled}
+        style={{
+          ...assignInlineVars({
+            [enableColorVariant]: enableColor,
+            [hoverColorVariant]: hoverColor,
+            [activeColorVariant]: activeColor,
+          }),
+          ...style,
+        }}
+        {...buttonProps}
+      >
+        {isLoading && <div className={spinnerStyle} />}
+        {leftIcon && <span className={spanStyle}>{leftIcon}</span>}
+        <span>{children}</span>
+        {rightIcon && <span className={spanStyle}>{rightIcon}</span>}
+      </button>
+    );
+  }
+);
