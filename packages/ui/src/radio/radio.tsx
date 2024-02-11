@@ -4,15 +4,16 @@ import {
   RadioStyleBackgroundStyle,
   LabelStyle,
   RadioStyle,
-} from "./style.css";
+} from "./radioStyle.css";
 import { clsx } from "clsx";
-import { Text } from "@jobis/ui";
+import { Text } from "../texts";
 
 export const Radio = (props: RadioType, ref: React.Ref<HTMLInputElement>) => {
-  const { checked, children } = props;
+  const { checked, children, onClick } = props;
 
   return (
-    <label className={clsx([LabelStyle])}>
+    <>
+    <label className={clsx([LabelStyle({checked: checked})])} onClick={onClick}>
       <div className={clsx([RadioStyleBackgroundStyle])}>
         <input 
           style={{"display": "none"}}
@@ -23,9 +24,10 @@ export const Radio = (props: RadioType, ref: React.Ref<HTMLInputElement>) => {
           <div />
         </div>
       </div>
-      <div>
-        {"children"}
-      </div>
+      <Text fontSize="body1" fontWeight="medium" color="#000000">
+        {children}
+      </Text>
     </label>
+    </>
   )
 }

@@ -16,5 +16,5 @@ export default {
 } as Meta<typeof Radio>;
 
 export const RadioStory = {
-  args: { checked: false }
+  args: { checked: false, children: "홍길동" }
 }

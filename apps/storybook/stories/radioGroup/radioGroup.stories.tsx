@@ -1,4 +1,4 @@
-import { RadioGroup } from "@jobis/ui";
+import { RadioGroup, Radio } from "@jobis/ui";
 import { Meta } from "@storybook/react";
 
 export default {
@@ -8,9 +8,21 @@ export default {
     layout: "centered",
   },
   tags: ["autodocs"],
-  argTypes: {}
+  argTypes: {
+    direction: {
+      options: ["column", "row"],
+      control: { type: 'radio' },
+    },
+    value: {
+      control: "text",
+    }
+  }
 } as Meta<typeof RadioGroup>;
 
 export const RadioGroupStory = {
-  args: {}
+  args: { 
+    value:undefined,
+    direction: "column", 
+    children: Array(3).fill("_").map((_,idx)=><Radio value={idx.toString()}>홍길동</Radio>)
+  }
 }

@@ -2,17 +2,32 @@ import { style } from "@vanilla-extract/css";
 import { themes } from "@jobis/design-token";
 import { recipe } from "@vanilla-extract/recipes";
 
-export const LabelStyle = style([{
-  display: "inline-flex",
-  alignItems: "center",
-  cursor: "pointer",
-  gap: 4,
-  ":hover": {
-    ":nth-child(1)": {
-      backgroundColor: themes.Color.subColor.blue[10],
-    }
+export const LabelStyle = recipe({
+  base: {
+    display: "inline-flex",
+    alignItems: "center",
+    cursor: "pointer",
+    gap: 4,
   },
-}])
+  variants: {
+    checked: {
+      true : {
+        ":hover": {
+          ">div:nth-child(1)": {
+            backgroundColor: themes.Color.subColor.blue[10],
+          }
+        },
+      },
+      false: {
+        ":hover": {
+          ">div:nth-child(1)": {
+            backgroundColor: "rgba(224, 235, 246, 0.4)",
+          }
+        },
+      }
+    }
+  }
+})
 
 export const RadioStyleBackgroundStyle = style({
   width: 32,
@@ -40,6 +55,7 @@ export const RadioStyle = recipe({
     justifyContent: "center",
     alignItems: "center",
     transition: "all 0.2s",
+    boxSizing: "border-box",
     "div": {
       width: "12px",
       height: "12px",
