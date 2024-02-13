@@ -8,7 +8,7 @@ import {
 import { clsx } from "clsx";
 import { Text } from "../texts";
 
-export const Radio = (props: RadioType, ref: React.Ref<HTMLInputElement>) => {
+export const Radio = React.forwardRef((props: RadioType, ref: React.Ref<HTMLInputElement>) => {
   const { checked, children, onClick } = props;
 
   return (
@@ -19,6 +19,7 @@ export const Radio = (props: RadioType, ref: React.Ref<HTMLInputElement>) => {
           style={{"display": "none"}}
           type="radio" 
           checked={checked}
+          ref={ref}
         />
         <div className={clsx([RadioStyle({checked: checked})])}>
           <div />
@@ -30,4 +31,4 @@ export const Radio = (props: RadioType, ref: React.Ref<HTMLInputElement>) => {
     </label>
     </>
   )
-}
+});
