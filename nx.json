@@ -1,34 +1,33 @@
 {
-    "extends": "nx/presets/npm.json",
-    "affected": {
-        "defaultBase": "main"
+  "extends": "nx/presets/npm.json",
+  "affected": {
+    "defaultBase": "main"
+  },
+  "workspaceLayout": {
+    "appsDir": "apps",
+    "libsDir": "packages"
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "nx/tasks-runners/default",
+      "options": {
+        "cacheableOperations": ["build", "test", "dev"]
+      }
+    }
+  },
+  "targetDefaults": {
+    "build": {
+      "cache": true,
+      "dependsOn": ["^build"]
     },
-    "workspaceLayout": {
-        "appsDir": "apps",
-        "libsDir": "packages"
+    "test": {
+      "cache": true,
+      "dependsOn": ["^build"]
     },
-    "tasksRunnerOptions": {
-        "default": {
-            "runner": "nx/tasks-runners/default",
-            "options": {
-                "cacheableOperations": ["build", "test", "dev"]
-            }
-        }
-    },
-    "targetDefaults": {
-        "build": {
-            "cache": true,
-            "dependsOn": ["^build"],
-            "inputs": ["production", "^production"]
-        },
-        "test": {
-            "cache": true,
-            "dependsOn": ["^build"]
-        },
-        "lint": {
-            "dependsOn": ["^build"],
-            "cache": true
-        }
-    },
-    "nxCloudAccessToken": "NWU0MzNiYTktMzJhNi00ZTFjLWE3ZWUtYjZjODJmZGQxYTUyfHJlYWQtd3JpdGU="
+    "lint": {
+      "dependsOn": ["^build"],
+      "cache": true
+    }
+  },
+  "nxCloudAccessToken": "NWU0MzNiYTktMzJhNi00ZTFjLWE3ZWUtYjZjODJmZGQxYTUyfHJlYWQtd3JpdGU="
 }
