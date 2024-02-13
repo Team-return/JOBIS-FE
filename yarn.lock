@@ -2565,17 +2565,18 @@ __metadata:
     "@jobis/design-token": "workspace:^"
     "@jobis/esbuild-config": "workspace:^"
     "@jobis/icons": "workspace:^"
-    "@storybook/addon-a11y": ^7.6.12
-    "@types/react": ^18.2.0
-    "@types/react-dom": ^18.2.0
-    "@vanilla-extract/css": ^1.14.0
-    "@vanilla-extract/esbuild-plugin": ^2.3.1
-    "@vanilla-extract/recipes": ^0.5.1
-    clsx: ^2.1.0
-    react: ^18.2.0
-    react-dom: ^18.2.0
-    storybook-addon-pseudo-states: ^2.1.2
-    typescript: ^5.3.3
+    "@storybook/addon-a11y": "npm:^7.6.12"
+    "@types/react": "npm:^18.2.0"
+    "@types/react-dom": "npm:^18.2.0"
+    "@vanilla-extract/css": "npm:^1.14.0"
+    "@vanilla-extract/dynamic": "npm:^2.1.0"
+    "@vanilla-extract/esbuild-plugin": "npm:^2.3.1"
+    "@vanilla-extract/recipes": "npm:^0.5.1"
+    clsx: "npm:^2.1.0"
+    react: "npm:^18.2.0"
+    react-dom: "npm:^18.2.0"
+    storybook-addon-pseudo-states: "npm:^2.1.2"
+    typescript: "npm:^5.3.3"
   peerDependencies:
     "@jobis/design-token": "workspace:^"
     react: "*"
@@ -5437,6 +5438,15 @@ __metadata:
     modern-ahocorasick: ^1.0.0
     outdent: ^0.8.0
   checksum: d46afaf16ad0d487fe4ad83f6ca3a08aa0c566fcaa1360d045b30282eab8853005e9bac36c969d27a06185e15832674e5c5de281afe5b3e3dcf8416d137cc819
+  languageName: node
+  linkType: hard
+
+"@vanilla-extract/dynamic@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "@vanilla-extract/dynamic@npm:2.1.0"
+  dependencies:
+    "@vanilla-extract/private": "npm:^1.0.3"
+  checksum: dcb8149bd815c4be75184f90e350750b6bc16ffdb5841f62f7211385478589dc0a0b261a442011149c2edbdbd83a956a425eec94f6c735f269a1cdb310541a66
   languageName: node
   linkType: hard
 
