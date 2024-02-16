@@ -3,12 +3,12 @@ import { ButtonProps } from "./types";
 import { clsx } from "clsx";
 import { themes } from "@jobis/design-token";
 import {
-  buttonStyle,
-  enableColorVariant,
-  hoverColorVariant,
-  activeColorVariant,
-  spinnerStyle,
-  spanStyle,
+  ButtonStyle,
+  EnableColorVariant,
+  HoverColorVariant,
+  ActiveColorVariant,
+  SpinnerStyle,
+  SpanStyle,
 } from "./style.css";
 import { assignInlineVars } from "@vanilla-extract/dynamic";
 
@@ -26,10 +26,10 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       ...buttonProps
     } = props;
 
-    const enableColor = themes.color.primary[20];
+    const enableColor = themes.Color.primary[20];
     const hoverColor =
-      variant === "solid" ? "#4D82B2" : themes.color.primary[20];
-    const activeColor = themes.color.primary[30];
+      variant === "solid" ? "#4D82B2" : themes.Color.primary[20];
+    const activeColor = themes.Color.primary[30];
 
     const disabled = isLoading || isDisabled;
 
@@ -44,25 +44,25 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     return (
       <button
-        className={clsx([buttonStyle({ variant })])}
+        className={clsx([ButtonStyle({ variant })])}
         ref={ref}
         onKeyDown={handleKeyDown}
         role="button"
         disabled={disabled}
         style={{
           ...assignInlineVars({
-            [enableColorVariant]: enableColor,
-            [hoverColorVariant]: hoverColor,
-            [activeColorVariant]: activeColor,
+            [EnableColorVariant]: enableColor,
+            [HoverColorVariant]: hoverColor,
+            [ActiveColorVariant]: activeColor,
           }),
           ...style,
         }}
         {...buttonProps}
       >
-        {isLoading && <div className={spinnerStyle} />}
-        {leftIcon && <span className={spanStyle}>{leftIcon}</span>}
+        {isLoading && <div className={SpinnerStyle} />}
+        {leftIcon && <span className={SpanStyle}>{leftIcon}</span>}
         <span>{children}</span>
-        {rightIcon && <span className={spanStyle}>{rightIcon}</span>}
+        {rightIcon && <span className={SpanStyle}>{rightIcon}</span>}
       </button>
     );
   }
