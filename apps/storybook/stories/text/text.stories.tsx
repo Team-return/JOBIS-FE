@@ -14,11 +14,11 @@ export default {
       control: "color",
     },
     fontSize: {
-      options: Object.keys(themes.font),
+      options: Object.keys(themes.Font),
       control: "select",
     },
     fontWeight: {
-      options: Object.keys(themes.fontWeight),
+      options: Object.keys(themes.FontWeight),
       control: "select",
     },
   },
