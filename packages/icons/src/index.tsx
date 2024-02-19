@@ -20,6 +20,9 @@ import { BookmarkOn } from "./bookmarkOn";
 import { BookmarkOff } from "./bookmarkOff";
 import { Document } from "./document";
 import { Check } from "./check";
+import { ToastError } from "./toastError";
+import { ToastWarning } from "./toastWarning";
+import { ToastMessage } from "./toastMessage";
 
 // Icon paths
 export const Icons = {
@@ -43,6 +46,9 @@ export const Icons = {
   Plus: <Plus />,
   Search: <SearchIcon />,
   ToastSuccess: <ToastSuccess />,
+  ToastError: <ToastError />,
+  ToastWarning: <ToastWarning />,
+  ToastMessage: <ToastMessage />,
   Trash: <Trash />,
   Upload: <UploadIcon />,
 } as const;

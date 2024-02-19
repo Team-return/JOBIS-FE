@@ -1,31 +1,29 @@
 {
-    "name": "@jobis/storybook",
-    "devDependencies": {
-        "@jobis/design-token": "workspace:^",
-        "@jobis/icons": "workspace:^",
-        "@storybook/addon-a11y": "^7.6.12",
-        "@storybook/addon-essentials": "^7.6.10",
-        "@storybook/addon-interactions": "^7.6.10",
-        "@storybook/addon-links": "^7.6.10",
-        "@storybook/addon-onboarding": "^1.0.10",
-        "@storybook/blocks": "^7.6.10",
-        "@storybook/react": "^7.6.10",
-        "@storybook/react-vite": "^7.6.10",
-        "@storybook/test": "^7.6.10",
-        "@vanilla-extract/sprinkles": "^1.6.1",
-        "prop-types": "^15.8.1",
-        "react": "^18.2.0",
-        "react-dom": "^18.2.0",
-        "storybook": "^7.6.10",
-        "storybook-addon-pseudo-states": "^2.1.2",
-        "storybook-addon-root-attributes": "^2.1.3",
-        "vite": "^5.0.12"
-    },
-    "scripts": {
-        "storybook": "storybook dev -p 6006",
-        "build": "storybook build"
-    },
-    "dependencies": {
-        "@jobis/ui": "workspace:^"
-    }
+  "name": "@jobis/storybook",
+  "devDependencies": {
+    "@jobis/design-token": "workspace:^",
+    "@jobis/icons": "workspace:^",
+    "@jobis/ui": "workspace:^",
+    "@storybook/addon-a11y": "^7.6.12",
+    "@storybook/addon-essentials": "^7.6.10",
+    "@storybook/addon-interactions": "^7.6.10",
+    "@storybook/addon-links": "^7.6.10",
+    "@storybook/addon-onboarding": "^1.0.10",
+    "@storybook/blocks": "^7.6.10",
+    "@storybook/react": "^7.6.10",
+    "@storybook/react-vite": "^7.6.10",
+    "@storybook/test": "^7.6.10",
+    "@vanilla-extract/sprinkles": "^1.6.1",
+    "prop-types": "^15.8.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "storybook": "^7.6.10",
+    "storybook-addon-pseudo-states": "^2.1.2",
+    "storybook-addon-root-attributes": "^2.1.3",
+    "vite": "5.0.11"
+  },
+  "scripts": {
+    "storybook": "storybook dev -p 6006",
+    "build": "storybook build"
+  }
 }

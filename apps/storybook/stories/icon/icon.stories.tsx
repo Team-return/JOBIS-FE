@@ -1,6 +1,6 @@
 import { Icon as _Icon } from "@jobis/ui";
 import { Meta } from "@storybook/react";
-import { icons } from "@jobis/icons";
+import { Icons } from "@jobis/icons";
 
 export default {
   title: "Icon/Icon",
@@ -14,7 +14,7 @@ export default {
       control: "color",
     },
     icon: {
-      options: Object.keys(icons),
+      options: Object.keys(Icons),
       control: "select",
     },
     size: {

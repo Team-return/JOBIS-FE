@@ -1,3 +1,5 @@
+import * as React from "react";
+
 // todo filled, outlined 북마크 분리
 export const BookmarkOn = () => {
   return (
