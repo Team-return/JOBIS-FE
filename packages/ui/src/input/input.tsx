@@ -1,5 +1,5 @@
 import * as React from "react";
-import { InputProps } from "./types";
+import type { InputProps } from "./types";
 import { themes } from "@jobis/design-token";
 import { Text } from "../texts";
 import {
@@ -13,16 +13,17 @@ import {
 import { assignInlineVars } from "@vanilla-extract/dynamic";
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  (props, ref) => {
-    const {
+  (
+    {
       errorMessage,
       errorBorderColor = themes.Color.subColor.red[20],
       focusBorderColor = themes.Color.primary[20],
       label,
       icon,
       ...inputProps
-    } = props;
-
+    },
+    ref
+  ) => {
     return (
       <label className={LabelStyle}>
         {label}
