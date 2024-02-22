@@ -10,4 +10,5 @@ export type TextProps = AsElementProps & {
   align?: CSSProperties["textAlign"];
   casing?: CSSProperties["textTransform"];
   decoration?: CSSProperties["textDecoration"];
+  whiteSpace?: CSSProperties["whiteSpace"];
 };

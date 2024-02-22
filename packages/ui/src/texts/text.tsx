@@ -15,6 +15,10 @@ export const Text = React.forwardRef(
       fontSize = "h1",
       fontWeight = "medium",
       className,
+      align,
+      whiteSpace,
+      decoration,
+      casing,
       style,
     } = props;
 
@@ -28,6 +32,10 @@ export const Text = React.forwardRef(
           color,
           background,
           fontWeight: themes.FontWeight[fontWeight],
+          textAlign: align,
+          textDecoration: decoration,
+          textTransform: casing,
+          whiteSpace,
           ...style,
         },
       },
