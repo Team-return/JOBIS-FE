@@ -35,7 +35,11 @@ const run = ({ entryPoints = ["src/index.ts"], pkg, config = {} }) => {
     }),
   ]).catch(() => {
     console.error("Build failed");
+<<<<<<< main
     process.exit(1);
+=======
+    Process.exit();
+>>>>>>> fix :: 코멘트 반영
   });
 };
 

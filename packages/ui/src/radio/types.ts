@@ -1,17 +1,6 @@
-import React from "react";
-import { Radio } from './index'
+import * as React from "react";
 
-export interface RadioType {
-  checked?: boolean;
+export interface RadioType extends React.InputHTMLAttributes<HTMLInputElement> {
   children?: React.ReactNode;
   onClick?: () => void;
-  value: string;
-}
-
-export interface RadioGroupType {
-  children: React.ReactElement<typeof Radio> | React.ReactElement<typeof Radio>[];
-  direction: "column" | "row";
-  className?: string;
-  value: string;
-  setValue: React.Dispatch<React.SetStateAction<string>>
 }

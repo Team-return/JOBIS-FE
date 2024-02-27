@@ -1,5 +1,8 @@
+import { themes } from "@jobis/design-token";
+import { clsx } from "clsx";
 import * as React from "react";
-import { CheckboxProps } from "./types";
+import { Icon } from "../icon";
+import { Text } from "../texts";
 import {
   CheckboxBackgroundStyle,
   CheckboxBackgroundStyleDetail,
@@ -7,10 +10,7 @@ import {
   CursorStyle,
   LabelStyle,
 } from "./style.css";
-import { clsx } from "clsx";
-import { Text } from "../texts";
-import { themes } from "@jobis/design-token";
-import { Icon } from "../icon";
+import { CheckboxProps } from "./types";
 
 export const Checkbox = React.forwardRef(
   (props: CheckboxProps, ref: React.Ref<HTMLInputElement>) => {

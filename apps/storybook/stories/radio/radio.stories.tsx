@@ -12,9 +12,9 @@ export default {
     checked: {
       control: "boolean",
     },
-  }
+  },
 } as Meta<typeof Radio>;
 
 export const RadioStory = {
-  args: { checked: false, children: "홍길동" }
-}
+  args: { checked: false, children: "홍길동" },
+};
