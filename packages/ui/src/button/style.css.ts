@@ -13,9 +13,11 @@ export const ButtonStyle = recipe({
     background: "none",
 
     position: "relative",
-    width: "auto",
-    borderRadius: 8,
     display: "flex",
+    justifyContent: "center",
+    width: "auto",
+    height: 56,
+    borderRadius: 8,
     alignItems: "center",
     cursor: "pointer",
     userSelect: "none",
