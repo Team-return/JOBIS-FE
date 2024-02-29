@@ -1,4 +1,4 @@
-import { build } from "esbuild";
+const { build } = require("esbuild");
 
 const run = ({ entryPoints = ["src/index.ts"], pkg, config = {} }) => {
   const dev = process.argv.includes("--dev");
@@ -35,6 +35,7 @@ const run = ({ entryPoints = ["src/index.ts"], pkg, config = {} }) => {
     }),
   ]).catch(() => {
     console.error("Build failed");
+    process.exit(1);
   });
 };
 

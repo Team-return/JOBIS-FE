@@ -45,7 +45,7 @@ module.exports = {
       { avoidEscape: true, allowTemplateLiterals: true },
     ], // 문자열 내에 따옴표가 포함될 경우 템플릿 리터럴을 사용
     "prefer-template": "error", // 문자열을 연결할 때 문자열 연결 연산자(+) 금지
-    "arrow-parens": "error", // 매개변수가 단일 매개변수라면 소괄호 생략
+    "arrow-parens": ["error", "as-needed"], // 매개변수가 단일 매개변수라면 소괄호 생략
     "no-undef": "off", // CommonJS, ES 모듈 관련 린트
 
     "unicorn/filename-case": [
@@ -62,14 +62,20 @@ module.exports = {
     "unicorn/no-useless-undefined": "off", //불필요하게 undefined를 반환하거나 설정하는 것을 방지하는 규칙 off
     "unicorn/prefer-module": "off", // 축약어 사용 방지하는 규칙 off
     "unicorn/consistent-function-scoping": "off", // ??
+    "unicorn/no-process-exit": "off", // process.exit() 허용
 
     "@typescript-eslint/ban-ts-comment": "off", // ts-ignore 가능
     "@typescript-eslint/no-unused-vars": "off", // 위 no-unused-vars와 중복
     "@typescript-eslint/no-shadow": "error", // 같은 변수명 금지
+    "@typescript-eslint/no-var-requires": "off", // require 허용
     "@typescript-eslint/naming-convention": [
       // 코드 전반 네이밍 컨벤션
       "error",
-      { format: ["PascalCase"], selector: "variable", modifiers: ["exported"] },
+      {
+        format: ["PascalCase", "camelCase"],
+        selector: "variable",
+        modifiers: ["exported"],
+      },
       {
         format: ["camelCase"],
         selector: "variable",
