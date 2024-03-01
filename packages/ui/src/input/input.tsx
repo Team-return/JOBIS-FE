@@ -20,6 +20,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
       focusBorderColor = themes.Color.primary[20],
       label,
       icon,
+      width,
       ...inputProps
     },
     ref
@@ -38,6 +39,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
                 [ErrorBorderColorVariant]: errorBorderColor,
                 [FocusBorderColorVariant]: focusBorderColor,
               }),
+              width,
             }}
             {...inputProps}
           />

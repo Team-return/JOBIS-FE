@@ -6,9 +6,10 @@ export const FocusBorderColorVariant = createVar();
 
 export const IconStyle = style({
   position: "absolute",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
   right: 16,
-  width: 24,
-  height: 24,
   zIndex: 3,
 });
 
@@ -16,9 +17,9 @@ export const LabelStyle = style({
   display: "flex",
   flexDirection: "column",
   gap: 4,
-  color: themes.Color.grayScale[80],
+  color: themes.Color.grayScale[90],
   fontWeight: themes.FontWeight.regular,
-  ...themes.Font.caption,
+  ...themes.Font.body3,
 });
 
 export const InputWrapper = style({
@@ -38,8 +39,8 @@ export const InputStyle = style({
   display: "flex",
   alignItems: "center",
   fontWeight: themes.FontWeight.regular,
-  backgroundColor: themes.Color.grayScale[10],
-  borderColor: themes.Color.grayScale[50],
+  borderColor: themes.Color.grayScale[20],
+  backgroundColor: themes.Color.grayScale[20],
   color: themes.Color.grayScale[80],
   width: "100%",
 
@@ -48,8 +49,8 @@ export const InputStyle = style({
   transition: "background-color 0.2s, color 0.2s, border-color 0.2s",
 
   borderRadius: 8,
-  padding: "14px 16px",
-  ...themes.Font.body3,
+  padding: 14,
+  ...themes.Font.body2,
 
   // @ts-ignore
   "&::placeholder": {
@@ -61,8 +62,10 @@ export const InputStyle = style({
   },
 
   "&[disabled]": {
-    borderColor: themes.Color.grayScale[20],
-    backgroundColor: themes.Color.grayScale[20],
+    borderColor: themes.Color.grayScale[50],
+    backgroundColor: themes.Color.grayScale[30],
+    color: themes.Color.grayScale[60],
+    cursor: "not-allowed",
   },
 
   "&[data-isError='true']": {
@@ -70,6 +73,6 @@ export const InputStyle = style({
   },
 
   "&[data-isIcon='true']": {
-    padding: "16px 56px 16px 14px",
+    padding: "14px 56px 14px 14px",
   },
 });
