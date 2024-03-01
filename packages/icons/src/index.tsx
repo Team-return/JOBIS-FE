@@ -23,6 +23,7 @@ import { Check } from "./check";
 import { ToastError } from "./toastError";
 import { ToastWarning } from "./toastWarning";
 import { ToastMessage } from "./toastMessage";
+import { Info } from "./info";
 
 // Icon paths
 export const Icons = {
@@ -40,6 +41,7 @@ export const Icons = {
   EyesOpen: <EyesOpen />,
   FileEarmarkArrowDown: <FileEarmarkArrowDownIcon />,
   FileEarmarkPlus: <FileEarmarkPlusIcon />,
+  Info: <Info />,
   KebabMenu: <KebabMenu />,
   Logout: <Logout />,
   MyPg: <MyPg />,
