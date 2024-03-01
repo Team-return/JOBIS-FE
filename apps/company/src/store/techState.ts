@@ -10,10 +10,14 @@ interface ITechState {
 }
 
 export const useTechState = create<ITechState>()(
-  devtools((set) => ({
+  devtools(set => ({
     techList: [],
-    appendTechList: (tech: ICode) => set((state) => ({ techList: [...state.techList, tech] })),
-    deleteTechList: (id: number) => set((state) => ({ techList: state.techList.filter((tech) => tech.code !== id) })),
+    appendTechList: (tech: ICode) =>
+      set(state => ({ techList: [...state.techList, tech] })),
+    deleteTechList: (id: number) =>
+      set(state => ({
+        techList: state.techList.filter(tech => tech.code !== id),
+      })),
     resetTechList: () => set(() => ({ techList: [] })),
   }))
 );

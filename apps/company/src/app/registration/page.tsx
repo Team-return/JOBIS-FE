@@ -12,7 +12,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useModal } from "@/hooks/useModal";
 import { Address } from "react-daum-postcode";
 import DaumPostcode from "react-daum-postcode";
-import Modal from "@/components/Modal";
+import Modal from "@/components/modal";
 import { regex } from "@/utils/regex";
 import UploadImage from "../../../public/imageUpload.svg";
 import Image from "next/image";
@@ -109,7 +109,6 @@ export default function Registration() {
       business_area_code,
       business_number,
     } = data;
-    console.log();
     registerCompany({
       ...data,
       business_number: business_number.replaceAll("-", ""),
@@ -157,7 +156,7 @@ export default function Registration() {
     };
   }, []);
 
-  const onUploadFile = useCallback(ref => {
+  const onUploadFile = useCallback((ref: any) => {
     if (!ref.current) {
       return;
     }
@@ -175,10 +174,6 @@ export default function Registration() {
       router.push("/");
     }
   }, [searchParams, router, setValue]);
-
-  useEffect(() => {
-    console.log(previewFiles);
-  }, [previewFiles]);
 
   return (
     <S.Container onSubmit={handleSubmit(onSubmit)}>
@@ -568,7 +563,7 @@ export default function Registration() {
               />
               {previewFiles.bizRegistrationFile.map(file => (
                 <Text fontSize="body2" color={themes.Color.grayScale[50]}>
-                  {file.name}-{(file.size / 1024.0).toFixed(2)}KB
+                  {file.name}-{(file.size / 1024).toFixed(2)}KB
                 </Text>
               ))}
             </Flex>
@@ -591,7 +586,7 @@ export default function Registration() {
               />
               {previewFiles.attachmentFile.map(file => (
                 <Text fontSize="body2" color={themes.Color.grayScale[50]}>
-                  {file.name}-{(file.size / 1024.0).toFixed(2)}KB
+                  {file.name}-{(file.size / 1024).toFixed(2)}KB
                 </Text>
               ))}
             </Flex>

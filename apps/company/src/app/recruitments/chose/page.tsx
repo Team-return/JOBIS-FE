@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import * as S from "./style";
 import Link from "next/link";
 import { Text, Flex } from "@jobis/ui";

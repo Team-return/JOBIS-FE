@@ -9,10 +9,24 @@ interface IAreaState {
 }
 
 export const useAreaState = create<IAreaState>()(
-  devtools((set) => ({
-    area: { job_codes: [], tech_codes: [], hiring: 0, major_task: "", preferential_treatment: "" },
+  devtools(set => ({
+    area: {
+      job_codes: [],
+      tech_codes: [],
+      hiring: 0,
+      major_task: "",
+      preferential_treatment: "",
+    },
     setArea: (area: IArea) => set(() => ({ area })),
     resetArea: () =>
-      set(() => ({ area: { job_codes: [], tech_codes: [], hiring: 0, major_task: "", preferential_treatment: "" } })),
+      set(() => ({
+        area: {
+          job_codes: [],
+          tech_codes: [],
+          hiring: 0,
+          major_task: "",
+          preferential_treatment: "",
+        },
+      })),
   }))
 );

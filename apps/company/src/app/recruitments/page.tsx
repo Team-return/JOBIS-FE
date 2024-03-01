@@ -14,17 +14,17 @@ import {
 } from "@/apis/recruitments/types";
 import { useEffect, useState } from "react";
 import { useModal } from "@/hooks/useModal";
-import Modal from "@/components/Modal";
-import ProgressModal from "@/components/Modal/progressModal/progressModal";
+import Modal from "@/components/modal";
+import ProgressModal from "@/components/modal/progressModal/progressModal";
 import { regex } from "@/utils/regex";
 import { useSearchParams } from "next/navigation";
-import GatherModal from "@/components/Modal/recruitmentModal";
+import GatherModal from "@/components/modal/recruitmentModal/recruitmentModal";
 import { useAreaState } from "@/store/areasState";
 import { useGetCode } from "@/hooks/apis/useCodeApi";
 import XBtn from "../../../public/X.svg";
-import TechModal from "@/components/Modal/techModal/techModal";
+import TechModal from "@/components/modal/techModal/techModal";
 import { hiringProgressType } from "@/utils/translate";
-import LicenseModal from "@/components/Modal/licenseModal/licenseModal";
+import LicenseModal from "@/components/modal/licenseModal/licenseModal";
 import { useCreateRecruitmentRequest } from "@/hooks/apis/useRecruitmentsApi";
 
 export default function Recruitments() {
@@ -59,8 +59,8 @@ export default function Recruitments() {
 
   useEffect(() => {
     if (alwaysRecruit) {
-      setValue("start_date", null);
-      setValue("end_date", null);
+      setValue("start_date", undefined);
+      setValue("end_date", undefined);
     }
   }, [alwaysRecruit, setValue]);
 
@@ -85,11 +85,11 @@ export default function Recruitments() {
 
   useEffect(() => {
     setValue("hiring_progress", hiringProgress);
-  }, [watch, hiringProgress]);
+  }, [watch, hiringProgress, setValue]);
 
   useEffect(() => {
     setValue("areas", areas);
-  }, [watch, areas]);
+  }, [watch, areas, setValue]);
 
   useEffect(() => {
     setValue("required_licenses", licenses);
@@ -266,7 +266,7 @@ export default function Recruitments() {
                           {techName?.codes.map(
                             code =>
                               tech_codes.includes(code?.code) &&
-                              code?.keyword + " "
+                              `${code?.keyword} `
                           ) || "없음"}
                         </S.FieldText>
                         <S.FieldText style={{ top: 70 }}>

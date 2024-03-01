@@ -52,7 +52,7 @@ module.exports = {
       "error",
       {
         case: "camelCase",
-        ignore: ["App.tsx", "vite-env.d.ts", /^vendor/i],
+        ignore: ["App.tsx", "vite-env.d.ts", "next-env.d.ts", /^vendor/i],
       },
     ], // 파일명은 camelCase
     "unicorn/prevent-abbreviations": "off", //축약어 사용피하도록 권장 off
@@ -64,6 +64,8 @@ module.exports = {
     "unicorn/consistent-function-scoping": "off", // ??
     "unicorn/no-process-exit": "off", // process.exit() 허용
     "unicorn/switch-case-braces": "off",
+    "unicorn/catch-error-name": "off",
+    "unicorn/prefer-spread": "off",
 
     "@typescript-eslint/ban-ts-comment": "off", // ts-ignore 가능
     "@typescript-eslint/no-unused-vars": "off", // 위 no-unused-vars와 중복
@@ -78,7 +80,7 @@ module.exports = {
         modifiers: ["exported"],
       },
       {
-        format: ["camelCase"],
+        format: ["camelCase", "snake_case"],
         selector: "variable",
         leadingUnderscore: "allow",
       },
@@ -87,7 +89,11 @@ module.exports = {
         selector: "parameter",
         leadingUnderscore: "allow",
       },
-      { format: ["PascalCase"], selector: "function", modifiers: ["exported"] },
+      {
+        format: ["PascalCase", "camelCase"],
+        selector: "function",
+        modifiers: ["exported"],
+      },
       { format: ["camelCase"], selector: "function" },
       { format: ["PascalCase"], selector: "interface" },
       { format: ["PascalCase"], selector: "typeAlias" },

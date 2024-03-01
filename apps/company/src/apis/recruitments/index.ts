@@ -10,7 +10,7 @@ const router = "/recruitments";
 
 export const createRecruitmentsRequest = async (
   body: IRecruitment,
-  companyId
+  companyId: string
 ) => {
   const { data } = await instance.post<IRecruitment>(
     `${router}/${companyId}`,
@@ -32,11 +32,8 @@ export const updateRecruitment = async (
   return data;
 };
 
-export const addRecruitArea = async (body: IArea, recruitment_id: number) => {
-  const { data } = await instance.post(
-    `${router}/${recruitment_id}/area`,
-    body
-  );
+export const addRecruitArea = async (body: IArea, recruitmentId: number) => {
+  const { data } = await instance.post(`${router}/${recruitmentId}/area`, body);
   return data;
 };
 

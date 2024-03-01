@@ -11,12 +11,24 @@ export const useLogin = (body: ILoginRequest) => {
   const { append } = useToastStore();
 
   return useMutation(() => login(body), {
-    onSuccess: (res) => {
-      const { access_token, access_expires_at, refresh_expires_at, refresh_token, authority } = res;
+    onSuccess: res => {
+      const {
+        access_token,
+        access_expires_at,
+        refresh_expires_at,
+        refresh_token,
+        authority,
+      } = res;
       const accessTokenExpire = new Date(access_expires_at);
       const refresTokenExpire = new Date(refresh_expires_at);
-      cookie.save("access_token", access_token, { expires: accessTokenExpire, path: "/" });
-      cookie.save("refresh_token", refresh_token, { expires: refresTokenExpire, path: "/" });
+      cookie.save("access_token", access_token, {
+        expires: accessTokenExpire,
+        path: "/",
+      });
+      cookie.save("refresh_token", refresh_token, {
+        expires: refresTokenExpire,
+        path: "/",
+      });
       localStorage.setItem("authority", authority);
       append({
         type: "GREEN",

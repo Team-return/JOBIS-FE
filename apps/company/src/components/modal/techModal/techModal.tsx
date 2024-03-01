@@ -18,7 +18,7 @@ const TechModal = () => {
   const { openModal } = useModal();
 
   const checkArray = (tech: ICode) => {
-    (techList.filter(datas => datas.code === tech.code).length ? true : false)
+    (techList.some(datas => datas.code === tech.code) ? true : false)
       ? deleteArray(tech.code)
       : pushArray(tech);
   };
@@ -90,9 +90,7 @@ const TechModal = () => {
                 <>
                   <S.BigCard
                     key={idx}
-                    colorBool={
-                      !!techList.filter(datas => datas.code === res.code).length
-                    }
+                    colorBool={techList.some(datas => datas.code === res.code)}
                     onClick={() => {
                       checkArray(tech);
                     }}

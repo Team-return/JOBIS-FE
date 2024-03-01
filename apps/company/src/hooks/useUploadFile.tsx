@@ -27,8 +27,8 @@ export const useUpload = <T, K>(
         fileUpload(formData, {
           onSuccess: (res: IFileResponse) => {
             multiple
-              ? setForm(prev => ({ ...prev, [name + "_urls"]: res.urls }))
-              : setForm(prev => ({ ...prev, [name + "_url"]: res.urls[0] }));
+              ? setForm(prev => ({ ...prev, [`${name}_urls`]: res.urls }))
+              : setForm(prev => ({ ...prev, [`${name}_url`]: res.urls[0] }));
           },
         });
       }

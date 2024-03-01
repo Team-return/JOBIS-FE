@@ -1,10 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { Container, Wrapper } from "./style";
 import { Text, Icon, Input, Button, Flex } from "@jobis/ui";
 import { themes } from "@jobis/design-token";
-import { regex } from "@/utils/regex";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { useCheckBusinessNumber } from "@/hooks/apis/useCheckBusinessNumber";
 

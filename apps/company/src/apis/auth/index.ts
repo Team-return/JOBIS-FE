@@ -8,12 +8,16 @@ export const getNoticeDetail = async (noticeId: string) => {
   return data;
 };
 
-export const ReissueToken = async (refresh_token: string) => {
-  const response = await instance.put<IAuthorizationResponse>(`${router}/reissue`, null, {
-    headers: {
-      "X-Refresh-Token": `${refresh_token}`,
-    },
-  });
+export const ReissueToken = async (refreshToken: string) => {
+  const response = await instance.put<IAuthorizationResponse>(
+    `${router}/reissue`,
+    null,
+    {
+      headers: {
+        "X-Refresh-Token": `${refreshToken}`,
+      },
+    }
+  );
 
   return response.data;
 };

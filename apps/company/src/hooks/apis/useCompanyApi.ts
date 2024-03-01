@@ -21,7 +21,7 @@ export const useCompanyRegister = () => {
       //   type: "GREEN",
       //   message: "가입에 성공하였습니다",
       // });
-      router.push(`/recruitmetns?company-id=${company_id}`);
+      router.push(`/recruitments?company-id=${company_id}`);
       queryClient.invalidateQueries(["myRecruit"]);
       queryClient.invalidateQueries(["myCompany"]);
     },

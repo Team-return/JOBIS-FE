@@ -9,9 +9,9 @@ import {
 
 const router = "/companies";
 
-export const checkBusinessNumber = async (business_number: string) => {
+export const checkBusinessNumber = async (businessNumber: string) => {
   const { data } = await instance.get<ICheckBuisnessNumberResponse>(
-    `${router}/exists/${business_number.replace(/-/g, "")}`
+    `${router}/exists/${businessNumber.replaceAll("-", "")}`
   );
   return data;
 };
@@ -31,8 +31,8 @@ export const myCompanyInfo = async () => {
 
 export const updateCompanyInfo = async (
   body: IUpdateCompanyInfoRequest,
-  company_id: number
+  companyId: number
 ) => {
-  const { data } = await instance.patch(`${router}/${company_id}`, body);
+  const { data } = await instance.patch(`${router}/${companyId}`, body);
   return data;
 };

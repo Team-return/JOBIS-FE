@@ -7,30 +7,25 @@ import {
   Droppable,
 } from "react-beautiful-dnd";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import {
-  IEditRecruitmentRequest,
-  IHiringProgress,
-  IRecruitment,
-} from "@/apis/recruitments/types";
+import { IHiringProgress } from "@/apis/recruitments/types";
 import dndIcon from "../../../../public/dndIcon.svg";
 import Image from "next/image";
 import { hiringProgressType } from "@/utils/translate";
 import selectIcon from "../../../../public/selectIcon.svg";
 import { useModal } from "@/hooks/useModal";
 import { Flex, Button, Text } from "@jobis/ui";
-import { UseFormSetValue, UseFormWatch } from "react-hook-form";
 import * as S from "./style";
 import { themes } from "@jobis/design-token";
 
-interface PropsType<T> {
+interface PropsType {
   hiringProgressArray: IHiringProgress[];
   setRecruitmentFormDetailInfo: Dispatch<SetStateAction<IHiringProgress[]>>;
 }
 
-const ProgressModal = <T extends IRecruitment | IEditRecruitmentRequest>({
+const ProgressModal = ({
   hiringProgressArray,
   setRecruitmentFormDetailInfo,
-}: PropsType<T>) => {
+}: PropsType) => {
   const [state, setState] = useState<IHiringProgress[]>([]);
 
   const { closeModal } = useModal();
@@ -38,7 +33,9 @@ const ProgressModal = <T extends IRecruitment | IEditRecruitmentRequest>({
 
   const handleChange = (result: DropResult) => {
     const { source, destination } = result;
-    if (!destination) return;
+    if (!destination) {
+      return;
+    }
 
     const items = [...state];
     const [newOrder] = items.splice(source.index, 1);
@@ -81,11 +78,11 @@ const ProgressModal = <T extends IRecruitment | IEditRecruitmentRequest>({
                         draggableId={String(idx)}
                         index={idx}
                       >
-                        {provided => (
+                        {provide => (
                           <S.DndItemWrapper
-                            ref={provided.innerRef}
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
+                            ref={provide.innerRef}
+                            {...provide.draggableProps}
+                            {...provide.dragHandleProps}
                           >
                             <Image src={dndIcon} alt="" />
                             <Text

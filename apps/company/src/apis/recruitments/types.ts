@@ -30,8 +30,8 @@ export interface IRecruitment {
   military: boolean;
   hiring_progress: IHiringProgress[];
   submit_document?: string;
-  start_date: string | null;
-  end_date: string | null;
+  start_date?: string;
+  end_date?: string;
   etc: string;
   winter_intern?: boolean;
 }

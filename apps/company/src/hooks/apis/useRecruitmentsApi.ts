@@ -66,10 +66,10 @@ export const useUpdateRecruitment = (body: IEditRecruitmentRequest) => {
   });
 };
 
-export const useAddRecruitArea = (body: IArea, recruitment_id: number) => {
+export const useAddRecruitArea = (body: IArea, recruitmentId: number) => {
   const queryClient = useQueryClient();
 
-  return useMutation(() => addRecruitArea(body, recruitment_id), {
+  return useMutation(() => addRecruitArea(body, recruitmentId), {
     onSuccess: () => {
       queryClient.invalidateQueries(["myRecruit"]);
       // append({

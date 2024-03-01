@@ -20,7 +20,7 @@ interface IProgress {
 }
 
 export const useProgressListStore = create<IProgressListState>()(
-  devtools((set) => ({
+  devtools(set => ({
     progressList: [
       { id: 0, name: "서류전형", isSelect: true },
       { id: 1, name: "인적성테스트", isSelect: false },
@@ -33,24 +33,28 @@ export const useProgressListStore = create<IProgressListState>()(
       { id: 8, name: "최종면접", isSelect: false },
     ],
     setProgressList: (id: number) =>
-      set((state) => ({
-        progressList: state.progressList.map((progress) =>
-          progress.id === id ? { ...progress, isSelect: !progress.isSelect } : progress
+      set(state => ({
+        progressList: state.progressList.map(progress =>
+          progress.id === id
+            ? { ...progress, isSelect: !progress.isSelect }
+            : progress
         ),
       })),
   }))
 );
 
 export const useHiringProgressStore = create<IHiringProgressState>()(
-  devtools((set) => ({
+  devtools(set => ({
     hiringProgress: [{ id: 0, name: "서류전형" }],
     setHiringProgress: (id: number, name: string) =>
-      set((state) => ({
-        hiringProgress: state.hiringProgress.concat({ id, name }),
+      set(state => ({
+        hiringProgress: [...state.hiringProgress, { id, name }],
       })),
     delteHiringProgress: (id: number) =>
-      set((state) => ({
-        hiringProgress: state.hiringProgress.filter((progress) => progress.id !== id),
+      set(state => ({
+        hiringProgress: state.hiringProgress.filter(
+          progress => progress.id !== id
+        ),
       })),
     dragHiringProgress: (value: Omit<IProgress, "isSelect">[]) =>
       set(() => ({

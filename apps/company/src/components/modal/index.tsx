@@ -1,8 +1,8 @@
-import { styled } from "styled-components";
 import ModalPortal from "./modalPortal";
 import React, { MouseEvent } from "react";
 import { Icon } from "@jobis/ui";
 import { themes } from "@jobis/design-token";
+import * as S from "./style";
 
 interface ModalProps {
   onClose: () => void;
@@ -18,8 +18,8 @@ const Modal = ({ onClose, children, width, closeAble }: ModalProps) => {
 
   return (
     <ModalPortal>
-      <Background onClick={onClose}>
-        <ModalContainer width={width} onClick={blockClick}>
+      <S.Background onClick={onClose}>
+        <S.ModalContainer width={width} onClick={blockClick}>
           {closeAble && (
             <Icon
               cursor="pointer"
@@ -31,33 +31,10 @@ const Modal = ({ onClose, children, width, closeAble }: ModalProps) => {
             />
           )}
           {children}
-        </ModalContainer>
-      </Background>
+        </S.ModalContainer>
+      </S.Background>
     </ModalPortal>
   );
 };
 
 export default Modal;
-
-const Background = styled.div`
-  display: flex;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: fixed;
-  left: 0;
-  top: 0;
-  text-align: center;
-  background-color: #00000033;
-  z-index: 10000;
-`;
-
-const ModalContainer = styled.div<{ width: number }>`
-  position: relative;
-  width: ${({ width }) => width}px;
-  min-height: 0px;
-  background-color: white;
-`;
