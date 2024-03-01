@@ -63,6 +63,7 @@ module.exports = {
     "unicorn/prefer-module": "off", // 축약어 사용 방지하는 규칙 off
     "unicorn/consistent-function-scoping": "off", // ??
     "unicorn/no-process-exit": "off", // process.exit() 허용
+    "unicorn/switch-case-braces": "off",
 
     "@typescript-eslint/ban-ts-comment": "off", // ts-ignore 가능
     "@typescript-eslint/no-unused-vars": "off", // 위 no-unused-vars와 중복
