@@ -22,7 +22,6 @@
     "@jobis/design-token": "workspace:^",
     "@jobis/esbuild-config": "workspace:^",
     "@jobis/icons": "workspace:^",
-    "@storybook/addon-a11y": "^7.6.12",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
     "@vanilla-extract/css": "^1.14.0",
@@ -31,7 +30,6 @@
     "@vanilla-extract/recipes": "^0.5.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "storybook-addon-pseudo-states": "^2.1.2",
     "typescript": "^5.3.3"
   },
   "peerDependencies": {
