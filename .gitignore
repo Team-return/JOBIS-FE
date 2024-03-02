@@ -50,6 +50,18 @@ Thumbs.db
 !.yarn/sdks
 !.yarn/versions
 
-.next
+**/dist/*
+dist
+
+# storybook
+**/storybook-static/
+
+# next.js
+**/.next/
+**/out/
+
+# production
+**/build
+
 .env
-out
+**/.env
