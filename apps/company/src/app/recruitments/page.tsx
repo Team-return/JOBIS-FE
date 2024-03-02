@@ -558,7 +558,7 @@ export default function Recruitments() {
         <Button type="submit">확인</Button>
       </Flex>
       {modalState === "HIRING_PROGRESS" && (
-        <Modal width={810} onClose={closeModal} closeAble>
+        <Modal width={780} onClose={closeModal} closeAble>
           <ProgressModal
             hiringProgressArray={hiringProgress}
             setRecruitmentFormDetailInfo={setHiringProgress}
