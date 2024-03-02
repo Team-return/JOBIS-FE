@@ -1,3 +1,4 @@
+import React from "react";
 import { ChangeEvent, useState } from "react";
 import { useGetCode } from "@/hooks/apis/useCodeApi";
 import { ICode } from "@/apis/codes/types";
@@ -53,13 +54,7 @@ const TechModal = () => {
           </div>
           <div>
             <S.SearchInput type="text" value={search} onChange={onChange} />
-            <S.SearchIcon
-              src={SearchBtn}
-              width={40}
-              height={40}
-              alt=""
-              unoptimized
-            />
+            <S.SearchIcon src={SearchBtn} width={40} height={40} alt="" />
           </div>
         </S.TitleWrapper>
         <S.SmallCardWrapper>

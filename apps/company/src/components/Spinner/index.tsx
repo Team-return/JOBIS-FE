@@ -16,7 +16,7 @@ export const Spinner = ({ size = 180, position, isMessage }: LoadingProps) => {
 
   return (
     <S.Wrapper pos={position ?? "center"}>
-      <S.Img size={size} src={LoadingImg} alt="" unoptimized />
+      <S.Img size={size} src={LoadingImg} alt="" />
       {isMessage && (
         <Text
           style={{ margin: "28px 0" }}
