@@ -14,7 +14,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 
 /** 모집의뢰 작성 */
-export const useCreateRecruitmentRequest = (companyId: number) => {
+export const useCreateRecruitmentRequest = (companyId: string) => {
   const router = useRouter();
 
   return useMutation(

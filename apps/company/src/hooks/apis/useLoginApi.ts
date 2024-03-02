@@ -4,11 +4,9 @@ import { useMutation } from "@tanstack/react-query";
 import cookie from "react-cookies";
 import { useRouter } from "next/navigation";
 import { AxiosError } from "axios";
-import { useToastStore } from "@team-return/design-system";
 
 export const useLogin = (body: ILoginRequest) => {
   const router = useRouter();
-  const { append } = useToastStore();
 
   return useMutation(() => login(body), {
     onSuccess: res => {
@@ -30,15 +28,15 @@ export const useLogin = (body: ILoginRequest) => {
         path: "/",
       });
       localStorage.setItem("authority", authority);
-      append({
-        type: "GREEN",
-        message: "로그인에 성공하였습니다",
-      });
+      // append({
+      //   type: "GREEN",
+      //   message: "로그인에 성공하였습니다",
+      // });
       router.push("/");
     },
     onError: (err: AxiosError) => {
       if (err.response?.status === 401) {
-        append({ type: "RED", message: "비밀번호가 일치하지 않습니다" });
+        // append({ type: "RED", message: "비밀번호가 일치하지 않습니다" });
         cookie.remove("access_token");
         cookie.remove("refresh_token");
       }

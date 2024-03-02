@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import {
   DragDropContext,
   Draggable,
@@ -64,7 +65,7 @@ const ProgressModal = ({
 
   return (
     <S.Container>
-      <Flex direction="column" width={300}>
+      <Flex direction="column" style={{ width: 300 }}>
         <S.Title>채용 방법</S.Title>
         <S.DndWrapper>
           <DragDropContext onDragEnd={handleChange}>

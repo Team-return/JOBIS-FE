@@ -68,7 +68,9 @@ export default function Home() {
                 placeholder="사업자 번호를 입력해주세요"
                 maxLength={12}
                 autoComplete="off"
-                onChange={e => field.onChange(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  field.onChange(e.target.value)
+                }
                 errorMessage={errors.business_number?.message}
               />
             )}

@@ -2,7 +2,7 @@ import { instance } from "../axios";
 
 const router = "/files";
 
-type ImageType = "LOGO_IMAGE" | "EXTENSION_FILE";
+export type ImageType = "LOGO_IMAGE" | "EXTENSION_FILE";
 
 export const fileUpload = async (
   body: FormData,

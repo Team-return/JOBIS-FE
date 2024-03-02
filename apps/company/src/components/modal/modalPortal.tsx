@@ -1,7 +1,6 @@
-import React from "react";
 import ReactDOM from "react-dom";
 
-const ModalPortal = ({ children }: { children: React.ReactNode }) => {
+const ModalPortal = ({ children }: { children: JSX.Element }) => {
   const modalRoot = document.querySelector("#modal-root") as HTMLElement;
   if (!modalRoot) {
     return null;

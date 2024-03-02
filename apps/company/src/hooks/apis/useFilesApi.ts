@@ -1,4 +1,4 @@
-import { fileUpload } from "@/apis/files";
+import { ImageType, fileUpload } from "@/apis/files";
 import { useMutation } from "@tanstack/react-query";
 
 export const useFileUpload = () => {

@@ -25,14 +25,14 @@ export interface IRecruitment {
   start_time: string;
   end_time: string;
   train_pay: string;
-  pay: string;
-  benefits: string;
+  pay?: string;
+  benefits?: string;
   military: boolean;
   hiring_progress: IHiringProgress[];
   submit_document?: string;
   start_date?: string;
   end_date?: string;
-  etc: string;
+  etc?: string;
   winter_intern?: boolean;
 }
 

@@ -12,7 +12,7 @@ import {
   IHiringProgress,
   IRecruitment,
 } from "@/apis/recruitments/types";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useModal } from "@/hooks/useModal";
 import Modal from "@/components/modal";
 import ProgressModal from "@/components/modal/progressModal/progressModal";
@@ -103,24 +103,34 @@ export default function Recruitments() {
   const { data: techName } = useGetCode("TECH");
   const { data: jobName } = useGetCode("JOB");
   const { mutate } = useCreateRecruitmentRequest(
-    Number(searchParams.get("company-id"))
+    searchParams.get("company-id") || ""
   );
 
   const onSubmit: SubmitHandler<IRecruitment> = data => {
-    const benefit = [];
-    if (data.benefits) {
-      benefit.push(data.benefits);
+    const { pay, train_pay, submit_document, benefits, required_grade, etc } =
+      data;
+    const document = [];
+    if (submit_document) {
+      document.push(submit_document);
     }
     if (!submitDocumentOption.portfolio) {
-      benefit.push("포트폴리오");
+      document.push("포트폴리오");
     }
     if (!submitDocumentOption.resume) {
-      benefit.push("이력서");
+      document.push("이력서");
     }
     if (!submitDocumentOption.self_introduction) {
-      benefit.push("자기소개서");
+      document.push("자기소개서");
     }
-    mutate({ ...data, benefits: benefit.join(", ") });
+    mutate({
+      ...data,
+      submit_document: document.join(", "),
+      pay: pay?.replaceAll(",", "") || undefined,
+      train_pay: train_pay.replaceAll(",", ""),
+      benefits: benefits || undefined,
+      required_grade: required_grade || undefined,
+      etc: etc || undefined,
+    });
   };
 
   return (
@@ -166,7 +176,7 @@ export default function Recruitments() {
                           cursor="pointer"
                         />
                       }
-                      onChange={e =>
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                         field.onChange(regex.date_number(e.target.value))
                       }
                       errorMessage={errors.start_date?.message}
@@ -204,7 +214,7 @@ export default function Recruitments() {
                           cursor="pointer"
                         />
                       }
-                      onChange={e =>
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                         field.onChange(regex.date_number(e.target.value))
                       }
                       errorMessage={errors.end_date?.message}
@@ -299,7 +309,11 @@ export default function Recruitments() {
         components={[
           <InputTemplate title="국가자격증">
             <Flex direction="column" gap={8} style={{ width: 604 }}>
-              <Button variant="outline" onClick={() => openModal("LICENSE")}>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => openModal("LICENSE")}
+              >
                 추가
               </Button>
               <S.LicenseList>
@@ -374,7 +388,9 @@ export default function Recruitments() {
                     width={272}
                     maxLength={5}
                     placeholder="hh:mm"
-                    onChange={e => field.onChange(regex.time(e.target.value))}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      field.onChange(regex.time(e.target.value))
+                    }
                     errorMessage={errors.start_time?.message}
                   />
                 )}
@@ -398,7 +414,9 @@ export default function Recruitments() {
                     width={272}
                     maxLength={5}
                     placeholder="hh:mm"
-                    onChange={e => field.onChange(regex.time(e.target.value))}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      field.onChange(regex.time(e.target.value))
+                    }
                     errorMessage={errors.end_time?.message}
                   />
                 )}
@@ -416,7 +434,9 @@ export default function Recruitments() {
                   width={604}
                   placeholder="직접입력"
                   maxLength={30}
-                  onChange={e => field.onChange(regex.money(e.target.value))}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                    field.onChange(regex.money(e.target.value))
+                  }
                   icon={
                     <Text
                       fontSize="body2"
@@ -441,7 +461,9 @@ export default function Recruitments() {
                   width={604}
                   placeholder="직접입력"
                   maxLength={30}
-                  onChange={e => field.onChange(regex.money(e.target.value))}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                    field.onChange(regex.money(e.target.value))
+                  }
                   errorMessage={errors.pay?.message}
                   icon={
                     <Text

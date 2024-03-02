@@ -8,7 +8,7 @@ import { Input, Icon, Text, Flex, Button } from "@jobis/ui";
 import { themes } from "@jobis/design-token";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { ICompanyRegisterRequest } from "@/apis/company/types";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { RefObject, useCallback, useEffect, useRef, useState } from "react";
 import { useModal } from "@/hooks/useModal";
 import { Address } from "react-daum-postcode";
 import DaumPostcode from "react-daum-postcode";
@@ -112,7 +112,7 @@ export default function Registration() {
     registerCompany({
       ...data,
       business_number: business_number.replaceAll("-", ""),
-      manager_phone_no: manager_phone_no?.replace(/-/g, ""),
+      manager_phone_no: manager_phone_no?.replaceAll("-", ""),
       sub_zip_code: sub_zip_code || undefined,
       sub_address_detail: sub_address_detail || undefined,
       sub_manager_name: sub_manager_name || undefined,
@@ -156,7 +156,7 @@ export default function Registration() {
     };
   }, []);
 
-  const onUploadFile = useCallback((ref: any) => {
+  const onUploadFile = useCallback((ref: RefObject<HTMLInputElement>) => {
     if (!ref.current) {
       return;
     }
