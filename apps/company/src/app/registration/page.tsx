@@ -369,7 +369,6 @@ export default function Registration() {
             <Flex direction="column" gap={4}>
               <S.Select
                 isError={!!errors.business_area_code}
-                placeholder="직접입력"
                 {...register("business_area_code", {
                   required: "필수 선택 항목입니다.",
                 })}
