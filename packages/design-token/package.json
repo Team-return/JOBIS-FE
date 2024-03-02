@@ -1,29 +1,29 @@
 {
-    "name": "@jobis/design-token",
-    "version": "0.0.0",
-    "description": "",
-    "type": "module",
-    "main": "dist/index.js",
-    "exports": {
-        ".": {
-            "types": "./dist/index.d.ts",
-            "import": "./dist/index.js",
-            "require": "./dist/index.cjs"
-        },
-        "./global.css": "./dist/global.css"
+  "name": "@jobis/design-token",
+  "version": "0.0.0",
+  "description": "",
+  "type": "module",
+  "main": "dist/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
     },
-    "scripts": {
-        "build": "yarn build:js && yarn build:type & yarn build:css",
-        "build:js": "node ./esbuild.config.js",
-        "build:type": "yarn tsc --emitDeclarationOnly",
-        "build:css": "node ./scripts/build-css-modules.js"
-    },
-    "author": "",
-    "license": "ISC",
-    "devDependencies": {
-        "@jobis/esbuild-config": "workspace:^",
-        "@yarnpkg/esbuild-plugin-pnp": "^3.0.0-rc.15",
-        "esbuild": "^0.16.17",
-        "typescript": "^5.3.3"
-    }
+    "./global.css": "./dist/global.css"
+  },
+  "scripts": {
+    "build": "yarn build:js && yarn build:type & yarn build:css",
+    "build:js": "node ./esbuild.config.js",
+    "build:type": "yarn tsc --emitDeclarationOnly",
+    "build:css": "node ./scripts/build-css-modules.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@jobis/esbuild-config": "workspace:^",
+    "@yarnpkg/esbuild-plugin-pnp": "^3.0.0-rc.15",
+    "esbuild": "^0.16.17",
+    "typescript": "5.0.3"
+  }
 }
