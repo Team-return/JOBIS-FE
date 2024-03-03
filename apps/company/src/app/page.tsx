@@ -5,6 +5,7 @@ import { Text, Icon, Input, Button, Flex } from "@jobis/ui";
 import { themes } from "@jobis/design-token";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { useCheckBusinessNumber } from "@/hooks/apis/useCheckBusinessNumber";
+import { regex } from "@/utils/regex";
 
 export default function Home() {
   const {
@@ -16,7 +17,9 @@ export default function Home() {
     business_number: string;
   }>();
 
-  const { mutate } = useCheckBusinessNumber(watch("business_number"));
+  const { mutate, isLoading } = useCheckBusinessNumber(
+    watch("business_number")
+  );
 
   const onSubmit: SubmitHandler<{
     business_number: string;
@@ -69,13 +72,15 @@ export default function Home() {
                 maxLength={12}
                 autoComplete="off"
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  field.onChange(e.target.value)
+                  field.onChange(regex.buisness_number(e.target.value))
                 }
                 errorMessage={errors.business_number?.message}
               />
             )}
           />
-          <Button type="submit">확인</Button>
+          <Button type="submit" isLoading={isLoading}>
+            확인
+          </Button>
         </Flex>
       </Wrapper>
     </Container>
