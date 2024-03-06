@@ -16,10 +16,10 @@ export const toggleBackgroundStyle = recipe({
     checked: {
       true: {
         paddingLeft: 30,
-        backgroundColor: themes.color.primary[20],
+        backgroundColor: themes.Color.primary[20],
       },
       false: {
-        backgroundColor: themes.color.grayScale[40],
+        backgroundColor: themes.Color.grayScale[40],
       },
     },
   },
