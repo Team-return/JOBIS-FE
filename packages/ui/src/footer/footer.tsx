@@ -13,9 +13,10 @@ import {
 import { clsx } from "clsx";
 import { Icon } from "../icon";
 import { themes } from "@jobis/design-token";
+import { MembersListType } from "./types";
 
 export const Footer = () => {
-  const membersInfo = {
+  const membersInfo: MembersListType = {
     Frontend: ["강용수", "강지인", "정지관"],
     Backend: ["강민", "길근우", "이하성"],
     Android: ["정승훈"],
@@ -28,14 +29,18 @@ export const Footer = () => {
       <div className={clsx([ContentStyle])}>
         <div className={clsx([MemberAndLink])}>
           <div className={clsx([MemberTableStyle, DefaultTextStyle])}>
-            {Object.keys(membersInfo).map(major => (
-              <div className={clsx([MemberSectionStyle])}>
-                <p className={clsx([MajorLabelStyle])}>{major}</p>
-                {membersInfo[major].map(name => (
-                  <p className={clsx([DefaultTextStyle])}>{name}</p>
-                ))}
-              </div>
-            ))}
+            {Object.keys(membersInfo).map((major: keyof MembersListType) => {
+              return (
+                <div className={clsx([MemberSectionStyle])} key={major}>
+                  <p className={clsx([MajorLabelStyle])}>{major}</p>
+                  {membersInfo[major].map((name, idx) => (
+                    <p className={clsx([DefaultTextStyle])} key={idx}>
+                      {name}
+                    </p>
+                  ))}
+                </div>
+              );
+            })}
           </div>
           <div className={clsx([SocialmediaLinksStyle])}>
             <a href="https://github.com/Team-return" target="_blank">
