@@ -10,10 +10,10 @@ import {
   CursorStyle,
   LabelStyle,
 } from "./style.css";
-import { CheckboxProps } from "./types";
+import { CheckboxPropsType } from "./types";
 
 export const Checkbox = React.forwardRef(
-  (props: CheckboxProps, ref: React.Ref<HTMLInputElement>) => {
+  (props: CheckboxPropsType, ref: React.Ref<HTMLInputElement>) => {
     const { children, disabled, checked, ...checkboxProps } = props;
 
     return (
