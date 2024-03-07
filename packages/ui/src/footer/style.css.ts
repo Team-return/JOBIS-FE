@@ -1,5 +1,10 @@
-import { style } from "@vanilla-extract/css";
+import { style, createVar } from "@vanilla-extract/css";
 import { themes } from "@jobis/design-token";
+
+export const GapVariant = createVar();
+export const DirectionVariant = createVar();
+export const JustifyVariant = createVar();
+export const AlignVariant = createVar();
 
 export const FooterStyle = style({
   marginLeft: "1000px",
@@ -14,9 +19,6 @@ export const FooterStyle = style({
 export const ContentStyle = style({
   width: "70%",
   height: "100%",
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "space-between",
 });
 
 export const HrStyle = style({
@@ -33,35 +35,16 @@ export const DefaultTextStyle = style({
   margin: 0,
 });
 
-export const CopyrightStyle = style({
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "end",
-});
-
-export const MemberAndLink = style({
-  display: "flex",
-  justifyContent: "space-between",
-});
-
-export const MemberTableStyle = style({
-  display: "flex",
-  gap: 40,
-});
-
-export const MemberSectionStyle = style({
-  display: "flex",
-  flexDirection: "column",
-  gap: 8,
-});
-
-export const SocialmediaLinksStyle = style({
-  display: "flex",
-  gap: 25,
-});
-
 export const MajorLabelStyle = style({
   fontSize: "12px",
   color: themes.Color.grayScale[10],
   fontWeight: themes.FontWeight.medium,
+});
+
+export const FlexStyle = style({
+  display: "flex",
+  gap: GapVariant,
+  flexDirection: DirectionVariant,
+  justifyContent: JustifyVariant,
+  alignItems: AlignVariant,
 });

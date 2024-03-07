@@ -1,29 +1,55 @@
+import { themes } from "@jobis/design-token";
+import { assignInlineVars } from "@vanilla-extract/dynamic";
+import { clsx } from "clsx";
+import { Icon } from "../icon";
 import {
   FooterStyle,
   ContentStyle,
   HrStyle,
   DefaultTextStyle,
-  CopyrightStyle,
-  MemberAndLink,
-  MemberTableStyle,
-  MemberSectionStyle,
   MajorLabelStyle,
-  SocialmediaLinksStyle,
+  FlexStyle,
+  GapVariant,
+  DirectionVariant,
+  JustifyVariant,
+  AlignVariant,
 } from "./style.css";
-import { clsx } from "clsx";
-import { Icon } from "../icon";
-import { themes } from "@jobis/design-token";
 import { MemberList, Contact } from "./utils";
 
 export const Footer = () => {
   return (
     <footer className={clsx([FooterStyle])}>
-      <div className={clsx([ContentStyle])}>
-        <div className={clsx([MemberAndLink])}>
-          <div className={clsx([MemberTableStyle, DefaultTextStyle])}>
+      <div
+        className={clsx([ContentStyle, FlexStyle])}
+        style={assignInlineVars({
+          [DirectionVariant]: "column",
+          [JustifyVariant]: "space-between",
+        })}
+      >
+        <div
+          className={clsx([FlexStyle])}
+          style={assignInlineVars({
+            [DirectionVariant]: "row",
+            [JustifyVariant]: "space-between",
+          })}
+        >
+          <div
+            className={clsx([FlexStyle, DefaultTextStyle])}
+            style={assignInlineVars({
+              [GapVariant]: "40px",
+            })}
+          >
             {Object.keys(MemberList).map((major: string) => {
               return (
-                <div className={clsx([MemberSectionStyle])} key={major}>
+                <div
+                  className={clsx([FlexStyle])}
+                  style={assignInlineVars({
+                    [GapVariant]: "8px",
+                    [DirectionVariant]: "column",
+                    [JustifyVariant]: "start",
+                  })}
+                  key={major}
+                >
                   <p className={clsx([MajorLabelStyle])}>{major}</p>
                   {MemberList[major].map((name, idx) => (
                     <p className={clsx([DefaultTextStyle])} key={idx}>
@@ -34,7 +60,12 @@ export const Footer = () => {
               );
             })}
           </div>
-          <div className={clsx([SocialmediaLinksStyle])}>
+          <div
+            className={clsx([FlexStyle])}
+            style={assignInlineVars({
+              [GapVariant]: "25px",
+            })}
+          >
             <a href="https://github.com/Team-return" target="_blank">
               <Icon
                 icon="Return"
@@ -55,7 +86,14 @@ export const Footer = () => {
           </div>
         </div>
         <hr className={clsx([HrStyle])} />
-        <div className={clsx([CopyrightStyle, DefaultTextStyle])}>
+        <div
+          className={clsx([FlexStyle, DefaultTextStyle])}
+          style={assignInlineVars({
+            [DirectionVariant]: "row",
+            [JustifyVariant]: "space-between",
+            [AlignVariant]: "end",
+          })}
+        >
           <p>{Contact}</p>
           <p>©2023 Copyright team-return ALL RIGHTS RESERVED.</p>
         </div>
