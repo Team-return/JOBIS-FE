@@ -13,26 +13,19 @@ import {
 import { clsx } from "clsx";
 import { Icon } from "../icon";
 import { themes } from "@jobis/design-token";
+import { MemberList, Contact } from "./utils";
 
 export const Footer = () => {
-  const membersInfo: Record<string, string[]> = {
-    Frontend: ["강용수", "강지인", "정지관"],
-    Backend: ["강민", "길근우", "이하성"],
-    Android: ["정승훈"],
-    iOS: ["홍승재"],
-    Design: ["김하온", "박시원"],
-  };
-
   return (
     <footer className={clsx([FooterStyle])}>
       <div className={clsx([ContentStyle])}>
         <div className={clsx([MemberAndLink])}>
           <div className={clsx([MemberTableStyle, DefaultTextStyle])}>
-            {Object.keys(membersInfo).map((major: string) => {
+            {Object.keys(MemberList).map((major: string) => {
               return (
                 <div className={clsx([MemberSectionStyle])} key={major}>
                   <p className={clsx([MajorLabelStyle])}>{major}</p>
-                  {membersInfo[major].map((name, idx) => (
+                  {MemberList[major].map((name, idx) => (
                     <p className={clsx([DefaultTextStyle])} key={idx}>
                       {name}
                     </p>
@@ -63,11 +56,7 @@ export const Footer = () => {
         </div>
         <hr className={clsx([HrStyle])} />
         <div className={clsx([CopyrightStyle, DefaultTextStyle])}>
-          <p>
-            {`연락처) 042-000-0000 
-이메일) team-return@team-return.com 
-주소) 대전광역시 유성구 가정북로 76(창의관 산학협력부)`}
-          </p>
+          <p>{Contact}</p>
           <p>©2023 Copyright team-return ALL RIGHTS RESERVED.</p>
         </div>
       </div>
