@@ -1,15 +1,24 @@
+import axios from "axios";
 import { instance } from "../axios";
+import { PresignedURLResponse } from "./types";
 
 const router = "/files";
 
 export type ImageType = "LOGO_IMAGE" | "EXTENSION_FILE";
 
-export const fileUpload = async (
-  body: FormData,
-  imageType: ImageType = "EXTENSION_FILE"
-) => {
-  const { data } = await instance.post(`${router}?type=${imageType}`, body, {
-    headers: { "Content-Type": "multipart/form-data" },
-  });
-  return data;
+export const fileUpload = async (files: File[]) => {
+  const body = files.map(file => ({
+    type: "EXTENSION_FILE",
+    file_name: file.name,
+  }));
+  const { data } = await instance.post<PresignedURLResponse>(
+    `${router}/pre-signed`,
+    {
+      files: body,
+    }
+  );
+  return { data, files };
 };
+
+export const requestPresignedURL = async (presignedURL: string, file: File) =>
+  await axios.put(presignedURL, file);

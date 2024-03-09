@@ -75,3 +75,14 @@ export const Option = styled.option`
   font-weight: ${themes.FontWeight.regular};
   line-height: ${themes.Font.body2.lineHeight};
 `;
+
+export const FileWrapper = styled.button`
+  display: flex;
+  align-items: center;
+  outline: none;
+  border: none;
+  gap: 12px;
+  padding: 4px 8px;
+  border-radius: 88px;
+  background-color: ${themes.Color.grayScale[30]};
+`;
