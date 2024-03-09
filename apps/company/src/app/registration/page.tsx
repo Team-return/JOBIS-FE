@@ -569,6 +569,7 @@ export default function Registration() {
               type="file"
               name="company_profile_url"
               style={{ display: "none" }}
+              accept=".jpg, .png, .svg"
               ref={companyLogoRef}
               onChange={uploadImgFile}
             />
@@ -584,6 +585,7 @@ export default function Registration() {
               <Input
                 name="biz_registration_url"
                 type="file"
+                accept=".jpg, .png, .svg, .ppt, .pptx, .hwp, .mp4, .txt, .zip, .pdf"
                 style={{ display: "none" }}
                 ref={bizRegistrationRef}
                 onChange={uploadImgFile}
@@ -637,6 +639,7 @@ export default function Registration() {
                 name="attachment_urls"
                 type="file"
                 style={{ display: "none" }}
+                accept=".jpg, .png, .svg, .ppt, .pptx, .hwp, .mp4, .txt, .zip, .pdf"
                 onChange={uploadImgFile}
                 ref={attachmentRef}
                 multiple
