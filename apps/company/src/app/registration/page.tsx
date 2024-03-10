@@ -127,6 +127,7 @@ export default function Registration() {
 
   const onSubmit: SubmitHandler<ICompanyRegisterRequest> = data => {
     const {
+      representative_phone_no,
       sub_manager_phone_no,
       sub_manager_name,
       manager_phone_no,
@@ -140,6 +141,7 @@ export default function Registration() {
     registerCompany({
       ...data,
       business_number: business_number.replaceAll("-", ""),
+      representative_phone_no: representative_phone_no.replaceAll("-", ""),
       manager_phone_no: manager_phone_no?.replaceAll("-", ""),
       sub_zip_code: sub_zip_code || undefined,
       sub_address_detail: sub_address_detail || undefined,
@@ -203,6 +205,16 @@ export default function Registration() {
     }
   }, [searchParams, router, setValue]);
 
+  useEffect(() => {
+    (() => {
+      window.addEventListener("beforeunload", preventClose);
+    })();
+
+    return () => {
+      window.removeEventListener("beforeunload", preventClose);
+    };
+  }, []);
+
   return (
     <S.Container onSubmit={handleSubmit(onSubmit)}>
       <TitleTemplate
@@ -238,6 +250,32 @@ export default function Registration() {
                 },
               })}
               errorMessage={errors.business_number?.message}
+            />
+          </InputTemplate>,
+          <InputTemplate title="기업 대표 번호" required>
+            <Controller
+              control={control}
+              name="representative_phone_no"
+              rules={{
+                required: "필수 입력 항목입니다.",
+                pattern: {
+                  value: /^\d{2,3}-\d{3,4}-\d{4}$/,
+                  message: "유효한 전화번호 형식이 아닙니다.",
+                },
+              }}
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  type="tel"
+                  width={604}
+                  placeholder="nnn-nnnn-nnnn"
+                  maxLength={13}
+                  onChange={e =>
+                    field.onChange(regex.phone_number(e.target.value))
+                  }
+                  errorMessage={errors.representative_phone_no?.message}
+                />
+              )}
             />
           </InputTemplate>,
           <InputTemplate title="대표자" required>
