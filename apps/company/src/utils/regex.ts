@@ -12,11 +12,11 @@ export const regex = {
   date_number: (value: string) =>
     value
       ?.replace(/[^0-9]/g, "")
-      .replaceAll(/^(\d{4})(\d{2})(\d{2})$/g, "$1-$2-$3")
+      ?.replaceAll(/^(\d{4})(\d{2})(\d{2})$/g, "$1-$2-$3")
       .replaceAll(/(-{1,2})$/g, ""),
   money: (value: string) =>
     value
-      ?.replace(/[^0-9]/g, "")
+      ?.replace(/[^0-9.]/g, "")
       .replaceAll(/,/gi, "")
       .replaceAll(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ","),
   time: (value: string) =>

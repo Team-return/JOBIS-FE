@@ -1,6 +1,7 @@
 export interface IUpdateCompanyInfoRequest {
   founded_at: string;
   representative_name: string;
+  representative_phone_no: string;
   main_zip_code: string;
   sub_zip_code?: string;
   main_address: string;
@@ -37,7 +38,7 @@ export interface ICompanyRegisterResponse {
 
 export interface ICheckBuisnessNumberResponse {
   company_name: string;
-  company_id: boolean;
+  exists: boolean;
 }
 
 export interface IMyCompanyResponse {

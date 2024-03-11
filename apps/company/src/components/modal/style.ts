@@ -13,7 +13,7 @@ export const Background = styled.div`
   top: 0;
   text-align: center;
   background-color: #00000033;
-  z-index: 10000;
+  z-index: 800;
 `;
 
 export const ModalContainer = styled.div<{ width: number }>`
