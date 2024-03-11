@@ -24,6 +24,8 @@ import { ToastError } from "./toastError";
 import { ToastWarning } from "./toastWarning";
 import { ToastMessage } from "./toastMessage";
 import { Info } from "./info";
+import { Return } from "./return";
+import { Github } from "./github";
 
 // Icon paths
 export const Icons = {
@@ -53,4 +55,6 @@ export const Icons = {
   ToastMessage: <ToastMessage />,
   Trash: <Trash />,
   Upload: <UploadIcon />,
+  Return: <Return />,
+  Github: <Github />,
 } as const;
