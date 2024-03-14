@@ -21,7 +21,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
     ref
   ) => {
     return (
-      <label>
+      <label style={{ width: width || "100%" }}>
         <textarea
           data-isError={!!errorMessage}
           className={TextareaStyle}
@@ -31,7 +31,6 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
               [ErrorBorderColorVariant]: errorBorderColor,
               [FocusBorderColorVariant]: focusBorderColor,
             }),
-            width,
           }}
           {...textareaProps}
         />
