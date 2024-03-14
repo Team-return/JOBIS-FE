@@ -41,7 +41,11 @@ const TechModal = () => {
   };
 
   const addTech = async () => {
-    if (!techs.codes.some(list => list.keyword === search)) {
+    if (techs?.codes.some(list => list.keyword === search)) {
+      if (!techList.some(list => list.keyword === search)) {
+        pushArray(techs.codes.find(list => list.keyword === search) as ICode);
+      }
+    } else {
       const response = await addCode({
         code_type: "TECH",
         keyword: search,
@@ -51,15 +55,11 @@ const TechModal = () => {
         keyword: search,
       };
       if (
-        !techs.codes.some(list => list.keyword === tech.keyword) &&
+        !techs?.codes.some(list => list.keyword === tech.keyword) &&
         !addedTechList.some(list => list.keyword === tech.keyword)
       ) {
         pushArray(tech);
         appendAddedTechList(tech);
-      }
-    } else {
-      if (!techList.some(list => list.keyword === search)) {
-        pushArray(techs.codes.find(list => list.keyword === search));
       }
     }
     setSearch("");
