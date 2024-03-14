@@ -4,7 +4,16 @@ import * as S from "./style";
 import { TitleTemplate } from "@/components/titleTemplate";
 import { SubTitleTemplate } from "@/components/subTitleTemplate";
 import { InputTemplate } from "@/components/inputTemplate";
-import { Text, Input, Icon, Flex, Checkbox, Button } from "@jobis/ui";
+import {
+  Text,
+  Input,
+  Icon,
+  Flex,
+  Checkbox,
+  Button,
+  Textarea,
+  useToast,
+} from "@jobis/ui";
 import { themes } from "@jobis/design-token";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import {
@@ -26,6 +35,9 @@ import TechModal from "@/components/modal/techModal/techModal";
 import { hiringProgressType } from "@/utils/translate";
 import LicenseModal from "@/components/modal/licenseModal/licenseModal";
 import { useCreateRecruitmentRequest } from "@/hooks/apis/useRecruitmentsApi";
+import { useTechState } from "@/store/techState";
+import { ICode } from "@/apis/codes/types";
+import { useAddedJob, useAddedTech } from "@/store/addCodeState";
 
 export default function Recruitments() {
   const {
@@ -35,12 +47,17 @@ export default function Recruitments() {
     formState: { errors },
     setValue,
     control,
-  } = useForm<IRecruitment>();
+    reset,
+  } = useForm<IRecruitment & { start_time: string; end_time: string }>();
 
   const [alwaysRecruit, setAlwaysRecruit] = useState(false);
   const searchParams = useSearchParams();
+  const [areaIndex, setAreaIndex] = useState<number | null>(null);
 
   const { modalState, closeModal, openModal } = useModal();
+  const { addedJob } = useAddedJob();
+  const { addedTechList } = useAddedTech();
+  const { toast } = useToast();
 
   const preventClose = (e: BeforeUnloadEvent) => {
     e.preventDefault();
@@ -81,7 +98,8 @@ export default function Recruitments() {
   });
   const [licenses, setLicenses] = useState<string[]>([]);
 
-  const { resetArea } = useAreaState();
+  const { resetArea, setArea } = useAreaState();
+  const { resetTechList, setTechList } = useTechState();
 
   useEffect(() => {
     setValue("hiring_progress", hiringProgress);
@@ -102,13 +120,23 @@ export default function Recruitments() {
 
   const { data: techName } = useGetCode("TECH");
   const { data: jobName } = useGetCode("JOB");
-  const { mutate } = useCreateRecruitmentRequest(
-    searchParams.get("company-id") || ""
-  );
+  const { mutate } = useCreateRecruitmentRequest();
 
-  const onSubmit: SubmitHandler<IRecruitment> = data => {
-    const { pay, train_pay, submit_document, benefits, required_grade, etc } =
-      data;
+  const onSubmit: SubmitHandler<
+    IRecruitment & { start_time: string; end_time: string }
+  > = data => {
+    const {
+      pay,
+      train_pay,
+      submit_document,
+      benefits,
+      required_grade,
+      etc,
+      working_hours,
+      start_time,
+      end_time,
+      ...rest
+    } = data;
     const document = [];
     if (submit_document) {
       document.push(submit_document);
@@ -122,14 +150,35 @@ export default function Recruitments() {
     if (!submitDocumentOption.self_introduction) {
       document.push("자기소개서");
     }
+
+    if (data.hiring_progress.length <= 0) {
+      return toast({
+        payload: {
+          type: "error",
+          message: "채용절차를 입력해주세요",
+        },
+      });
+    } else if (data.areas.length <= 0) {
+      return toast({
+        payload: {
+          type: "error",
+          message: "모집분야를 입력해주세요",
+        },
+      });
+    }
+
     mutate({
-      ...data,
+      ...rest,
       submit_document: document.join(", "),
       pay: pay?.replaceAll(",", "") || undefined,
       train_pay: train_pay.replaceAll(",", ""),
       benefits: benefits || undefined,
       required_grade: required_grade || undefined,
+      working_hours: watch("flexible_working")
+        ? working_hours
+        : `${start_time} ~ ${end_time}`,
       etc: etc || undefined,
+      personal_contact: false,
     });
   };
 
@@ -151,6 +200,7 @@ export default function Recruitments() {
                 <Controller
                   control={control}
                   name="start_date"
+                  defaultValue=""
                   rules={{
                     required: {
                       value: !alwaysRecruit,
@@ -179,7 +229,9 @@ export default function Recruitments() {
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                         field.onChange(regex.date_number(e.target.value))
                       }
-                      errorMessage={errors.start_date?.message}
+                      errorMessage={
+                        alwaysRecruit ? undefined : errors.start_date?.message
+                      }
                     />
                   )}
                 />
@@ -189,6 +241,7 @@ export default function Recruitments() {
                 <Controller
                   control={control}
                   name="end_date"
+                  defaultValue=""
                   rules={{
                     required: {
                       value: !alwaysRecruit,
@@ -217,7 +270,9 @@ export default function Recruitments() {
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                         field.onChange(regex.date_number(e.target.value))
                       }
-                      errorMessage={errors.end_date?.message}
+                      errorMessage={
+                        alwaysRecruit ? undefined : errors.end_date?.message
+                      }
                     />
                   )}
                 />
@@ -229,14 +284,6 @@ export default function Recruitments() {
                 상시채용
               </Checkbox>
             </Flex>
-          </InputTemplate>,
-          <InputTemplate title="기타사항">
-            <Input
-              width={604}
-              placeholder="직접입력"
-              {...register("etc")}
-              errorMessage={errors.etc?.message}
-            />
           </InputTemplate>,
         ]}
       />
@@ -267,25 +314,58 @@ export default function Recruitments() {
                         <S.FieldBoxTitle>
                           분야:{" "}
                           {jobName?.codes
+                            .concat(addedJob)
                             .filter(code => job_codes.includes(code?.code))
                             .map(code => code.keyword)
                             .join(" / ")}
                         </S.FieldBoxTitle>
                         <S.FieldText>
                           사용기술 :{" "}
-                          {techName?.codes.map(
-                            code =>
-                              tech_codes.includes(code?.code) &&
-                              `${code?.keyword} `
-                          ) || "없음"}
+                          {techName?.codes
+                            .concat(addedTechList)
+                            .map(
+                              code =>
+                                tech_codes.includes(code?.code) &&
+                                `${code?.keyword} `
+                            ) || "없음"}
                         </S.FieldText>
                         <S.FieldText style={{ top: 70 }}>
-                          주요 업무 : {major_task || "없음"}
+                          주요 업무 : {"\n"}
+                          {major_task || "없음"}
                         </S.FieldText>
                         <S.FieldText style={{ top: 70 }}>
-                          우대사항 : {preferential_treatment || "없음"}
+                          우대사항 : {"\n"}
+                          {preferential_treatment || "없음"}
                         </S.FieldText>
                         <S.PeopleCount>{hiring}명</S.PeopleCount>
+                        <Icon
+                          icon="EditPencil"
+                          size={12}
+                          style={{
+                            position: "absolute",
+                            right: 40,
+                            top: 15,
+                          }}
+                          onClick={() => {
+                            openModal("GATHER_FIELD");
+                            setArea({
+                              job_codes,
+                              tech_codes,
+                              hiring,
+                              major_task,
+                              preferential_treatment,
+                            });
+                            setTechList(
+                              tech_codes.map(techCode => {
+                                return techName?.codes.find(
+                                  code => code.code === techCode
+                                ) as ICode;
+                              })
+                            );
+                            setAreaIndex(idx);
+                          }}
+                          cursor="pointer"
+                        />
                         <S.CancelIcon
                           width={10}
                           height={10}
@@ -332,7 +412,7 @@ export default function Recruitments() {
                       onClick={() =>
                         setLicenses(licenses.filter((_, idx2) => idx !== idx2))
                       }
-                      cursor="center"
+                      cursor="pointer"
                     />
                   </S.SelectedLicense>
                 ))}
@@ -371,56 +451,80 @@ export default function Recruitments() {
         title="근무 조건"
         components={[
           <InputTemplate title="근무시간" required>
-            <Flex align="center" gap={22}>
-              <Controller
-                control={control}
-                name="start_time"
-                rules={{
-                  required: "필수 입력 항목입니다.",
-                  pattern: {
-                    value: /^([01][0-9]|2[0-3]):([0-5][0-9])$/,
-                    message: "유효한 시간 형식이 아닙니다. (ex: hh:mm)",
-                  },
-                }}
-                render={({ field }) => (
-                  <Input
-                    {...field}
-                    width={272}
-                    maxLength={5}
-                    placeholder="hh:mm"
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      field.onChange(regex.time(e.target.value))
-                    }
-                    errorMessage={errors.start_time?.message}
+            <Flex direction="column" gap={8}>
+              {watch("flexible_working") ? (
+                <Input
+                  width={604}
+                  placeholder="직접입력"
+                  {...register("working_hours", {
+                    required: {
+                      value: watch("flexible_working"),
+                      message: "필수 입력항목입니다.",
+                    },
+                  })}
+                  errorMessage={errors.working_hours?.message}
+                />
+              ) : (
+                <Flex align="center" gap={22}>
+                  <Controller
+                    control={control}
+                    name="start_time"
+                    defaultValue=""
+                    rules={{
+                      required: "필수 입력 항목입니다.",
+                      pattern: {
+                        value: /^([01][0-9]|2[0-3]):([0-5][0-9])$/,
+                        message: "유효한 시간 형식이 아닙니다. (ex: hh:mm)",
+                      },
+                    }}
+                    render={({ field }) => (
+                      <Input
+                        {...field}
+                        width={272}
+                        maxLength={5}
+                        placeholder="hh:mm"
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                          field.onChange(regex.time(e.target.value))
+                        }
+                        errorMessage={errors.start_time?.message}
+                      />
+                    )}
                   />
-                )}
-              />
-              <Text fontSize="h5" color={themes.Color.grayScale[60]}>
-                ~
-              </Text>
-              <Controller
-                control={control}
-                name="end_time"
-                rules={{
-                  required: "필수 입력 항목입니다.",
-                  pattern: {
-                    value: /^([01][0-9]|2[0-3]):([0-5][0-9])$/,
-                    message: "유효한 시간 형식이 아닙니다. (ex: hh:mm)",
-                  },
-                }}
-                render={({ field }) => (
-                  <Input
-                    {...field}
-                    width={272}
-                    maxLength={5}
-                    placeholder="hh:mm"
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      field.onChange(regex.time(e.target.value))
-                    }
-                    errorMessage={errors.end_time?.message}
+                  <Text fontSize="h5" color={themes.Color.grayScale[60]}>
+                    ~
+                  </Text>
+                  <Controller
+                    control={control}
+                    defaultValue=""
+                    name="end_time"
+                    rules={{
+                      required: "필수 입력 항목입니다.",
+                      pattern: {
+                        value: /^([01][0-9]|2[0-3]):([0-5][0-9])$/,
+                        message: "유효한 시간 형식이 아닙니다. (ex: hh:mm)",
+                      },
+                    }}
+                    render={({ field }) => (
+                      <Input
+                        {...field}
+                        width={272}
+                        maxLength={5}
+                        placeholder="hh:mm"
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                          field.onChange(regex.time(e.target.value))
+                        }
+                        errorMessage={errors.end_time?.message}
+                      />
+                    )}
                   />
-                )}
-              />
+                </Flex>
+              )}
+              <Checkbox
+                checked={watch("flexible_working")}
+                {...register("flexible_working")}
+              >
+                유연근무제
+              </Checkbox>
             </Flex>
           </InputTemplate>,
           <InputTemplate title="실습수당" required>
@@ -443,7 +547,7 @@ export default function Recruitments() {
                       fontWeight="regular"
                       color={themes.Color.grayScale[60]}
                     >
-                      만원/월
+                      원/월
                     </Text>
                   }
                   errorMessage={errors.train_pay?.message}
@@ -479,14 +583,19 @@ export default function Recruitments() {
             />
           </InputTemplate>,
           <InputTemplate title="복리후생">
-            <Flex direction="column" gap={8}>
-              <Input
-                width={604}
-                placeholder="직접입력"
-                {...register("benefits")}
-                errorMessage={errors.benefits?.message}
-              />
-              <Checkbox checked={watch("military")} {...register("military")}>
+            <Textarea
+              width={604}
+              placeholder="직접입력"
+              {...register("benefits")}
+              errorMessage={errors.benefits?.message}
+            />
+          </InputTemplate>,
+          <InputTemplate title="병역특례">
+            <Flex style={{ width: 604 }}>
+              <Checkbox
+                checked={watch("military_support")}
+                {...register("military_support")}
+              >
                 병역특례 신청
               </Checkbox>
             </Flex>
@@ -549,10 +658,28 @@ export default function Recruitments() {
               </Flex>
             </Flex>
           </InputTemplate>,
+          <InputTemplate title="기타사항">
+            <Textarea
+              width={604}
+              placeholder="직접입력"
+              {...register("etc")}
+              errorMessage={errors.etc?.message}
+            />
+          </InputTemplate>,
         ]}
       />
       <Flex justify="flex-end" gap={12} style={{ width: 850 }}>
-        <Button type="reset" variant="outline">
+        <Button
+          type="button"
+          variant="outline"
+          onClick={() => {
+            reset();
+            setAlwaysRecruit(false);
+            resetArea();
+            resetTechList();
+            setLicenses([]);
+          }}
+        >
           취소
         </Button>
         <Button type="submit">확인</Button>
@@ -571,14 +698,25 @@ export default function Recruitments() {
           onClose={() => {
             closeModal();
             resetArea();
+            resetTechList();
           }}
           closeAble
         >
-          <GatherModal setForm={setAreas} />
+          <GatherModal
+            setForm={setAreas}
+            areaIndex={areaIndex}
+            setAreaIndex={setAreaIndex}
+          />
         </Modal>
       )}
       {modalState === "LICENSE" && (
-        <Modal width={700} onClose={closeModal}>
+        <Modal
+          width={700}
+          onClose={() => {
+            closeModal();
+            setAreaIndex(null);
+          }}
+        >
           <LicenseModal
             requiredLicensesArray={licenses}
             setForm={setLicenses}
@@ -586,7 +724,14 @@ export default function Recruitments() {
         </Modal>
       )}
       {modalState === "USE_TECH" && (
-        <Modal width={700} onClose={() => openModal("GATHER_FIELD")} closeAble>
+        <Modal
+          width={700}
+          onClose={() => {
+            openModal("GATHER_FIELD");
+            resetTechList();
+          }}
+          closeAble
+        >
           <TechModal />
         </Modal>
       )}
