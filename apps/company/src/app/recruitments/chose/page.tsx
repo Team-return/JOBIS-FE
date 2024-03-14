@@ -58,7 +58,7 @@ export default function Chose() {
                 color={themes.Color.grayScale[10]}
                 whiteSpace="pre-wrap"
               >
-                3학년 학생들을 대상으로 한 현장실습 이며, 현장실습 이후
+                3학년 학생들을 대상으로 한 현장실습이며, 현장실습 이후
                 근로계약으로 연계 될 예정입니다.
               </Text>
             </S.RecruitOption>
