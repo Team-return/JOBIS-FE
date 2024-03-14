@@ -40,6 +40,7 @@ instance.interceptors.response.use(
         const originalRequest = config;
 
         if (refreshToken) {
+          cookie.remove("access_token");
           ReissueToken(refreshToken)
             .then(res => {
               const accessExpired = new Date(res.access_expires_at);
@@ -53,6 +54,7 @@ instance.interceptors.response.use(
                 expires: refreshExpired,
                 path: "/",
               });
+              cookie.set("authority", res.authority);
               if (originalRequest!.headers) {
                 originalRequest!.headers.Authorization = `Bearer ${res.access_token}`;
               }
@@ -67,13 +69,13 @@ instance.interceptors.response.use(
               ) {
                 cookie.remove("access_token");
                 cookie.remove("refresh_token");
-                window.location.href = "/login";
+                window.location.href = "/";
               }
             });
         } else {
           cookie.remove("access_token");
           cookie.remove("refresh_token");
-          window.location.href = "/login";
+          window.location.href = "/";
         }
       } else {
         throw error;

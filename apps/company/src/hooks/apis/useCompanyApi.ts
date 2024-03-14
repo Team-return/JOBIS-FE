@@ -9,21 +9,41 @@ import {
 } from "@/apis/company/types";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
+import { useToast } from "@jobis/ui";
+import { Cookies } from "react-cookie";
 
 export const useCompanyRegister = () => {
   const router = useRouter();
-  const queryClient = useQueryClient();
+  const { toast } = useToast();
+  const cookie = new Cookies();
 
   return useMutation((body: ICompanyRegisterRequest) => companyRegister(body), {
     onSuccess: res => {
-      const { company_id } = res;
-      // append({
-      //   type: "GREEN",
-      //   message: "가입에 성공하였습니다",
-      // });
-      router.push(`/recruitments?company-id=${company_id}`);
-      queryClient.invalidateQueries(["myRecruit"]);
-      queryClient.invalidateQueries(["myCompany"]);
+      const {
+        access_token,
+        access_expires_at,
+        refresh_token,
+        refresh_expires_at,
+        authority,
+      } = res;
+      toast({
+        payload: {
+          type: "success",
+          message: "가입에 성공하였습니다",
+        },
+      });
+      router.push(`/my`);
+      const accessTokenExpire = new Date(access_expires_at);
+      const refresTokenExpire = new Date(refresh_expires_at);
+      cookie.set("access_token", access_token, {
+        expires: accessTokenExpire,
+        path: "/",
+      });
+      cookie.set("refresh_token", refresh_token, {
+        expires: refresTokenExpire,
+        path: "/",
+      });
+      cookie.set("authority", authority);
     },
     onError: () => {
       // append({
@@ -34,21 +54,29 @@ export const useCompanyRegister = () => {
   });
 };
 
-export const useMyCompanyInfo = () => {
-  return useQuery(["myCompany"], () => myCompanyInfo());
+export const useMyCompanyInfo = (enabled?: boolean) => {
+  return useQuery(["myCompany"], () => myCompanyInfo(), {
+    enabled,
+  });
 };
 
-export const useUpdateCompanyInfo = (body: IUpdateCompanyInfoRequest) => {
+export const useUpdateCompanyInfo = (companyId: number) => {
   const queryClient = useQueryClient();
   const router = useRouter();
+  const { toast } = useToast();
 
   return useMutation(
-    (companyId: number) => updateCompanyInfo(body, companyId),
+    (body: IUpdateCompanyInfoRequest) => updateCompanyInfo(body, companyId),
     {
       onSuccess: () => {
-        // append({ type: "GREEN", message: "기업 정보 수정이 완료 되었습니다." });
+        toast({
+          payload: {
+            type: "success",
+            message: "기업 정보 수정이 완료 되었습니다.",
+          },
+        });
         queryClient.invalidateQueries(["myCompany"]);
-        router.push("/mypage");
+        router.push("/my");
       },
       onError: () => {
         // append({ type: "RED", message: "기업 정보 수정에 실패하였습니다." });
