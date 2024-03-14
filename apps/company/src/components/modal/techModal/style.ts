@@ -63,9 +63,8 @@ export const SearchIcon = styled(Image)`
 `;
 
 export const SearchInput = styled.input`
-  background: #eaeaea;
+  background-color: ${themes.Color.grayScale[30]};
   border: 0.5px solid #f7f7f7;
-  border-radius: 30px;
   width: 250px;
   height: 40px;
   outline: none;
@@ -99,5 +98,17 @@ export const BigCard = styled.button<{ colorBool: boolean }>`
       !props.colorBool && themes.Color.grayScale[40]};
     color: ${props => (props.colorBool ? "white" : "black")};
   }
+  cursor: pointer;
+`;
+
+export const AddText = styled.div`
+  position: absolute;
+  background-color: ${themes.Color.grayScale[30]};
+  color: ${themes.Color.grayScale[50]};
+  height: 40px;
+  width: 250px;
+  text-align: left;
+  padding: 10px 50px 10px 20px;
+  border-radius: 0 0 30px 30px;
   cursor: pointer;
 `;

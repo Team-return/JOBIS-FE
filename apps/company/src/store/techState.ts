@@ -5,6 +5,7 @@ import { devtools } from "zustand/middleware";
 interface ITechState {
   techList: ICode[];
   appendTechList: (tech: ICode) => void;
+  setTechList: (techs: ICode[]) => void;
   deleteTechList: (id: number) => void;
   resetTechList: () => void;
 }
@@ -12,9 +13,10 @@ interface ITechState {
 export const useTechState = create<ITechState>()(
   devtools(set => ({
     techList: [],
-    appendTechList: (tech: ICode) =>
+    appendTechList: tech =>
       set(state => ({ techList: [...state.techList, tech] })),
-    deleteTechList: (id: number) =>
+    setTechList: techs => set(() => ({ techList: techs })),
+    deleteTechList: id =>
       set(state => ({
         techList: state.techList.filter(tech => tech.code !== id),
       })),

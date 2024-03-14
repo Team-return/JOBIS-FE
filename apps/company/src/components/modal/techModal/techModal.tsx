@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ChangeEvent, useState } from "react";
-import { useGetCode } from "@/hooks/apis/useCodeApi";
+import { useGetCode, useAddCode } from "@/hooks/apis/useCodeApi";
 import { ICode } from "@/apis/codes/types";
 import { useModal } from "@/hooks/useModal";
 import { useTechState } from "@/store/techState";
@@ -9,12 +9,16 @@ import { useAreaState } from "@/store/areasState";
 import * as S from "./style";
 import { Text, Button } from "@jobis/ui";
 import { themes } from "@jobis/design-token";
+import { useAddedTech } from "@/store/addCodeState";
 
 const TechModal = () => {
   const { data: techs } = useGetCode("TECH");
   const { techList, appendTechList, deleteTechList } = useTechState();
   const { area, setArea } = useAreaState();
   const [search, setSearch] = useState("");
+  const { addedTechList, appendAddedTechList, setAddedTechList } =
+    useAddedTech();
+  const { mutateAsync: addCode } = useAddCode();
 
   const { openModal } = useModal();
 
@@ -36,6 +40,41 @@ const TechModal = () => {
     setSearch(e.target.value);
   };
 
+  const addTech = async () => {
+    if (!techs.codes.some(list => list.keyword === search)) {
+      const response = await addCode({
+        code_type: "TECH",
+        keyword: search,
+      });
+      const tech = {
+        code: response.code_id,
+        keyword: search,
+      };
+      if (
+        !techs.codes.some(list => list.keyword === tech.keyword) &&
+        !addedTechList.some(list => list.keyword === tech.keyword)
+      ) {
+        pushArray(tech);
+        appendAddedTechList(tech);
+      }
+    } else {
+      if (!techList.some(list => list.keyword === search)) {
+        pushArray(techs.codes.find(list => list.keyword === search));
+      }
+    }
+    setSearch("");
+  };
+
+  useEffect(() => {
+    if (techs) {
+      setAddedTechList(
+        addedTechList.filter(
+          tech => !techs.codes.some(code => code.code === tech.code)
+        )
+      );
+    }
+  }, [techs, setAddedTechList]);
+
   return (
     <>
       <S.Container>
@@ -53,8 +92,19 @@ const TechModal = () => {
             </Text>
           </div>
           <div>
-            <S.SearchInput type="text" value={search} onChange={onChange} />
+            <S.SearchInput
+              type="text"
+              value={search}
+              onChange={onChange}
+              onKeyDown={e => e.key === "Enter" && addTech()}
+              style={{
+                borderRadius: search.length > 0 ? "30px 30px 0 0" : "30px",
+              }}
+            />
             <S.SearchIcon src={SearchBtn} width={40} height={40} alt="" />
+            {search.length > 0 && (
+              <S.AddText onClick={addTech}>추가하기</S.AddText>
+            )}
           </div>
         </S.TitleWrapper>
         <S.SmallCardWrapper>
@@ -82,15 +132,32 @@ const TechModal = () => {
                 keyword: res.keyword,
               };
               return (
+                <S.BigCard
+                  key={idx}
+                  colorBool={techList.some(datas => datas.code === res.code)}
+                  onClick={() => {
+                    checkArray(tech);
+                  }}
+                >
+                  {res.keyword}
+                </S.BigCard>
+              );
+            })}
+          {addedTechList
+            .filter(datas => {
+              return datas.keyword.toLowerCase().includes(search.toLowerCase());
+            })
+            .map((tech, idx) => {
+              return (
                 <>
                   <S.BigCard
                     key={idx}
-                    colorBool={techList.some(datas => datas.code === res.code)}
+                    colorBool={techList.some(datas => datas.code === tech.code)}
                     onClick={() => {
                       checkArray(tech);
                     }}
                   >
-                    {res.keyword}
+                    {tech.keyword}
                   </S.BigCard>
                 </>
               );
