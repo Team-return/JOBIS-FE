@@ -28,6 +28,11 @@ import { useGetCode } from "@/hooks/apis/useCodeApi";
 import { AxiosError } from "axios";
 
 export default function Registration() {
+  const searchParams = useSearchParams();
+  const { data: businessCodes } = useGetCode("BUSINESS_AREA");
+  const { data: myCompanyInfo } = useMyCompanyInfo(
+    searchParams.get("type") === "edit"
+  );
   const {
     register,
     handleSubmit,
@@ -35,7 +40,44 @@ export default function Registration() {
     formState: { errors },
     setValue,
     getValues,
-  } = useForm<ICompanyRegisterRequest>();
+  } = useForm<ICompanyRegisterRequest>({
+    values: {
+      name: myCompanyInfo?.name || "",
+      main_address_detail: myCompanyInfo?.main_address_detail || "",
+      sub_address_detail: myCompanyInfo?.sub_address_detail,
+      business_number: regex.buisness_number(myCompanyInfo?.biz_no || ""),
+      biz_registration_url: myCompanyInfo?.biz_registration_url || "",
+      business_area_code:
+        businessCodes?.codes.find(
+          code => code.keyword === myCompanyInfo?.business_area
+        )?.keyword || 0,
+      service_name: myCompanyInfo?.service_name || "",
+      attachment_urls: myCompanyInfo?.attachment_urls,
+      founded_at: regex.date_number(myCompanyInfo?.founded_at || ""),
+      representative_name: myCompanyInfo?.representative || "",
+      representative_phone_no: regex.phone_number(
+        myCompanyInfo?.representative_phone_no || ""
+      ),
+      main_zip_code: myCompanyInfo?.main_zip_code || "",
+      sub_zip_code: myCompanyInfo?.sub_zip_code,
+      main_address: myCompanyInfo?.main_address || "",
+      sub_address: myCompanyInfo?.sub_address,
+      take: regex.money(myCompanyInfo?.take.toString() || ""),
+      worker_number: myCompanyInfo?.workers_count || 0,
+      company_introduce: myCompanyInfo?.company_introduce || "",
+      email: myCompanyInfo?.email || "",
+      manager_name: myCompanyInfo?.manager_name || "",
+      manager_phone_no: regex.phone_number(
+        myCompanyInfo?.manager_phone_no || ""
+      ),
+      sub_manager_name: myCompanyInfo?.sub_manager_name,
+      sub_manager_phone_no:
+        regex.phone_number(myCompanyInfo?.sub_manager_phone_no || "") ||
+        undefined,
+      fax: regex.phone_number(myCompanyInfo?.fax || "") || undefined,
+      company_profile_url: myCompanyInfo?.company_logo_url,
+    },
+  });
   const { toast } = useToast();
 
   const [companyLogoPreview, setCompanyLogoPreview] = useState("");
@@ -50,7 +92,6 @@ export default function Registration() {
   const attachmentRef = useRef<HTMLInputElement>(null);
   const { mutateAsync: fileUpload } = useCreatePresignedURL();
 
-  const searchParams = useSearchParams();
   const { closeModal, openModal, modalState } = useModal();
 
   const uploadImgFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -127,13 +168,9 @@ export default function Registration() {
     }
   };
 
-  const { data: businessCodes } = useGetCode("BUSINESS_AREA");
   const businessAreas = businessCodes?.codes.map(item => item.keyword) ?? [];
   const { mutate: registerCompany } = useCompanyRegister();
   const { mutate: updateCompany } = useUpdateCompanyInfo(companyId);
-  const { data: myCompanyInfo } = useMyCompanyInfo(
-    searchParams.get("type") === "edit"
-  );
 
   const onSubmit: SubmitHandler<ICompanyRegisterRequest> = data => {
     const {
@@ -224,7 +261,9 @@ export default function Registration() {
       setValue("name", decodeURI(searchParams.get("name") || ""));
       setValue(
         "business_number",
-        decodeURI(searchParams.get("business-number") || "")
+        regex.buisness_number(
+          decodeURI(searchParams.get("business-number") || "")
+        )
       );
     } else {
       router.push("/");
@@ -234,53 +273,6 @@ export default function Registration() {
   useEffect(() => {
     if (searchParams.get("type") === "edit") {
       if (myCompanyInfo) {
-        setValue("name", myCompanyInfo?.name);
-        setValue("main_address_detail", myCompanyInfo?.main_address_detail);
-        setValue("sub_address_detail", myCompanyInfo?.sub_address_detail);
-        setValue(
-          "business_number",
-          regex.buisness_number(myCompanyInfo?.biz_no)
-        );
-        setValue("biz_registration_url", myCompanyInfo?.biz_registration_url);
-        setValue(
-          "business_area_code",
-          businessCodes?.codes.find(
-            code => code.keyword === myCompanyInfo?.business_area
-          )?.keyword || 0
-        );
-        setValue("service_name", myCompanyInfo?.service_name);
-        setValue("attachment_urls", myCompanyInfo.attachment_urls);
-        setValue("founded_at", regex.date_number(myCompanyInfo?.founded_at));
-        setValue("representative_name", myCompanyInfo?.representative);
-        setValue(
-          "representative_phone_no",
-          regex.phone_number(myCompanyInfo.representative_phone_no)
-        );
-        setValue("main_zip_code", myCompanyInfo.main_zip_code);
-        setValue("sub_zip_code", myCompanyInfo.sub_zip_code);
-        setValue("main_address", myCompanyInfo.main_address);
-        setValue("sub_address", myCompanyInfo.sub_address);
-        setValue("sub_address_detail", myCompanyInfo.sub_address_detail);
-        setValue("take", regex.money(myCompanyInfo.take.toString()));
-        setValue("worker_number", myCompanyInfo.workers_count);
-        setValue("company_introduce", myCompanyInfo.company_introduce);
-        setValue("email", myCompanyInfo.email);
-        setValue("manager_name", myCompanyInfo.manager_name);
-        setValue("sub_manager_name", myCompanyInfo.sub_manager_name);
-        setValue(
-          "manager_phone_no",
-          regex.phone_number(myCompanyInfo.manager_phone_no)
-        );
-        setValue(
-          "sub_manager_phone_no",
-          regex.phone_number(myCompanyInfo.sub_manager_phone_no || "")
-        );
-        setValue(
-          "fax",
-          regex.phone_number(myCompanyInfo.fax || "") || undefined
-        );
-        setValue("company_profile_url", myCompanyInfo.company_logo_url);
-        setValue("service_name", myCompanyInfo.service_name);
         setCompanyLogoPreview(
           `${process.env.NEXT_PUBLIC_IMAGE_URL}/${myCompanyInfo.company_logo_url}`
         );
@@ -808,7 +800,7 @@ export default function Registration() {
         ]}
       />
       <Flex justify="flex-end" gap={12} style={{ width: 850 }}>
-        <Link href={"/"}>
+        <Link href={searchParams.get("type") === "edit" ? "/my" : "/"}>
           <Button type="reset" variant="outline">
             취소
           </Button>

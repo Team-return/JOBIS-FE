@@ -44,8 +44,12 @@ import {
 import { useTechState } from "@/store/techState";
 import { ICode } from "@/apis/codes/types";
 import { useAddedJob, useAddedTech } from "@/store/addCodeState";
+import Link from "next/link";
 
 export default function Recruitments({ params }: { params: { id: string } }) {
+  const { data: techName } = useGetCode("TECH");
+  const { data: jobName } = useGetCode("JOB");
+  const { data: recruitmentDetail } = useRecruitmentDetail(params!.id);
   const {
     register,
     handleSubmit,
@@ -54,7 +58,41 @@ export default function Recruitments({ params }: { params: { id: string } }) {
     setValue,
     control,
     reset,
-  } = useForm<IRecruitment & { start_time: string; end_time: string }>();
+  } = useForm<IRecruitment & { start_time: string; end_time: string }>({
+    values: {
+      winter_intern: recruitmentDetail?.winter_intern,
+      benefits: recruitmentDetail?.benefits,
+      end_date: recruitmentDetail?.end_date,
+      etc: recruitmentDetail?.etc,
+      hiring_progress: recruitmentDetail?.hiring_progress || [],
+      military_support: !!recruitmentDetail?.military,
+      pay: regex.money(recruitmentDetail?.pay || ""),
+      required_grade: recruitmentDetail?.required_grade,
+      required_licenses: recruitmentDetail?.required_licenses || [],
+      start_date: recruitmentDetail?.start_date,
+      train_pay: regex.money(recruitmentDetail?.train_pay.toString() || ""),
+      flexible_working: !!recruitmentDetail?.flexible_working,
+      areas:
+        recruitmentDetail?.areas.map(area => {
+          return {
+            id: area.id,
+            hiring: area.hiring,
+            preferential_treatment: area.preferential_treatment,
+            major_task: area.major_task,
+            job_codes: jobName?.codes
+              .filter(code => area.job.includes(code.keyword))
+              .map(res => res.code),
+            tech_codes: techName?.codes
+              .filter(code => area.tech.includes(code.keyword))
+              .map(res => res.code),
+          } as IArea;
+        }) || [],
+      working_hours: "",
+      personal_contact: false,
+      start_time: "",
+      end_time: "",
+    },
+  });
 
   const [alwaysRecruit, setAlwaysRecruit] = useState(false);
   const searchParams = useSearchParams();
@@ -126,8 +164,6 @@ export default function Recruitments({ params }: { params: { id: string } }) {
     setSubmitDocumentOption(prev => ({ ...prev, [name]: !checked }));
   };
 
-  const { data: techName } = useGetCode("TECH");
-  const { data: jobName } = useGetCode("JOB");
   const { mutateAsync: updateRecruitment } = useUpdateRecruitment(params!.id);
   const { mutateAsync: updateRecruitArea } = useUpdateRecruitArea();
   const { mutateAsync: addRecruitArea } = useAddRecruitArea(params!.id);
@@ -207,42 +243,8 @@ export default function Recruitments({ params }: { params: { id: string } }) {
     });
   };
 
-  const { data: recruitmentDetail } = useRecruitmentDetail(params!.id);
-
   useEffect(() => {
     if (recruitmentDetail) {
-      setValue("winter_intern", recruitmentDetail?.winter_intern);
-      setValue("benefits", recruitmentDetail?.benefits);
-      setValue("end_date", recruitmentDetail?.end_date);
-      setValue("etc", recruitmentDetail?.etc);
-      setValue("hiring_progress", recruitmentDetail?.hiring_progress);
-      setValue("military_support", recruitmentDetail?.military);
-      setValue("pay", regex.money(recruitmentDetail?.pay || ""));
-      setValue("required_grade", recruitmentDetail?.required_grade);
-      setValue("required_licenses", recruitmentDetail?.required_licenses);
-      setValue("start_date", recruitmentDetail?.start_date);
-      setValue(
-        "train_pay",
-        regex.money(recruitmentDetail?.train_pay.toString())
-      );
-      setValue("flexible_working", recruitmentDetail.flexible_working);
-      setValue(
-        "areas",
-        recruitmentDetail.areas.map(area => {
-          return {
-            id: area.id,
-            hiring: area.hiring,
-            preferential_treatment: area.preferential_treatment,
-            major_task: area.major_task,
-            job_codes: jobName?.codes
-              .filter(code => area.job.includes(code.keyword))
-              .map(res => res.code),
-            tech_codes: techName?.codes
-              .filter(code => area.tech.includes(code.keyword))
-              .map(res => res.code),
-          } as IArea;
-        })
-      );
       setAreas(
         recruitmentDetail.areas.map(area => {
           return {
@@ -791,19 +793,21 @@ export default function Recruitments({ params }: { params: { id: string } }) {
         ]}
       />
       <Flex justify="flex-end" gap={12} style={{ width: 850 }}>
-        <Button
-          type="button"
-          variant="outline"
-          onClick={() => {
-            reset();
-            setAlwaysRecruit(false);
-            resetArea();
-            resetTechList();
-            setLicenses([]);
-          }}
-        >
-          취소
-        </Button>
+        <Link href={"/my"}>
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => {
+              reset();
+              setAlwaysRecruit(false);
+              resetArea();
+              resetTechList();
+              setLicenses([]);
+            }}
+          >
+            취소
+          </Button>
+        </Link>
         <Button type="submit">수정</Button>
       </Flex>
       {modalState === "HIRING_PROGRESS" && (

@@ -23,7 +23,6 @@ export interface IUpdateCompanyInfoRequest {
 }
 export interface ICompanyRegisterRequest extends IUpdateCompanyInfoRequest {
   name: string;
-  password: string;
   main_address_detail: string;
   sub_address_detail?: string;
   business_number: string;

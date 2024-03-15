@@ -38,6 +38,7 @@ import { useCreateRecruitmentRequest } from "@/hooks/apis/useRecruitmentsApi";
 import { useTechState } from "@/store/techState";
 import { ICode } from "@/apis/codes/types";
 import { useAddedJob, useAddedTech } from "@/store/addCodeState";
+import Link from "next/link";
 
 export default function Recruitments() {
   const {
@@ -669,19 +670,22 @@ export default function Recruitments() {
         ]}
       />
       <Flex justify="flex-end" gap={12} style={{ width: 850 }}>
-        <Button
-          type="button"
-          variant="outline"
-          onClick={() => {
-            reset();
-            setAlwaysRecruit(false);
-            resetArea();
-            resetTechList();
-            setLicenses([]);
-          }}
-        >
-          취소
-        </Button>
+        <Link href={"/my"}>
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => {
+              reset();
+              setAlwaysRecruit(false);
+              resetArea();
+              resetTechList();
+              setAreas([]);
+              setLicenses([]);
+            }}
+          >
+            취소
+          </Button>
+        </Link>
         <Button type="submit">확인</Button>
       </Flex>
       {modalState === "HIRING_PROGRESS" && (
