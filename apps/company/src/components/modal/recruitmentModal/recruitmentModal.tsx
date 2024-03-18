@@ -122,9 +122,7 @@ const GatherModal = ({ setForm, areaIndex, setAreaIndex }: IPropsType) => {
                           <S.JobCard
                             type="button"
                             key={code.code}
-                            colorBool={
-                              area.job_codes?.includes(code.code) ? true : false
-                            }
+                            colorBool={area.job_codes?.includes(code.code)}
                             onClick={() => checkArray(techTech)}
                           >
                             {code.keyword}
@@ -154,9 +152,7 @@ const GatherModal = ({ setForm, areaIndex, setAreaIndex }: IPropsType) => {
                     <S.JobCard
                       type="button"
                       key={code.code}
-                      colorBool={
-                        area.job_codes.includes(code.code) ? true : false
-                      }
+                      colorBool={area.job_codes.includes(code.code)}
                       onClick={() => checkArray(techTech)}
                     >
                       {code.keyword}
@@ -172,9 +168,7 @@ const GatherModal = ({ setForm, areaIndex, setAreaIndex }: IPropsType) => {
                   <S.JobCard
                     type="button"
                     key={code.code}
-                    colorBool={
-                      area.job_codes.includes(code.code) ? true : false
-                    }
+                    colorBool={area.job_codes.includes(code.code)}
                     onClick={() => checkArray(tech)}
                   >
                     {code.keyword}
