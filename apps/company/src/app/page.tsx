@@ -156,7 +156,7 @@ export default function Home() {
                   {...field}
                   label="인증코드"
                   placeholder="인증 코드를 입력해주세요"
-                  maxLength={11}
+                  maxLength={10}
                   autoComplete="off"
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     field.onChange(e.target.value)
