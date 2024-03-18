@@ -332,7 +332,7 @@ const GatherModal = ({ setForm, areaIndex, setAreaIndex }: IPropsType) => {
                   message: "채용 직무를 선택해주세요",
                 },
               });
-            } else if (!area.major_task) {
+            } else if (area.major_task.length <= 0) {
               toast({
                 payload: {
                   type: "error",
