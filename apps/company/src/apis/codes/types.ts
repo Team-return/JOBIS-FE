@@ -9,3 +9,13 @@ export interface ICode {
 export interface ICodeResponse {
   codes: ICode[];
 }
+
+export interface IAddCodeRequest {
+  code_type: CodeType;
+  job_type?: string;
+  keyword: string;
+}
+
+export interface IAddCodeResponse {
+  code_id: number;
+}

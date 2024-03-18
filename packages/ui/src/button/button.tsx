@@ -48,7 +48,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         onKeyDown={handleKeyDown}
         role="button"
-        disabled={disabled}
+        disabled={disabled || isLoading}
         style={{
           ...assignInlineVars({
             [EnableColorVariant]: enableColor,
@@ -59,7 +59,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         }}
         {...buttonProps}
       >
-        {isLoading && <div className={SpinnerStyle} />}
+        {!disabled && isLoading && <div className={SpinnerStyle} />}
         {leftIcon && <span className={SpanStyle}>{leftIcon}</span>}
         <span>{children}</span>
         {rightIcon && <span className={SpanStyle}>{rightIcon}</span>}

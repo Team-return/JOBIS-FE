@@ -10,27 +10,27 @@ export const Document = () => {
         height="16"
         rx="2"
         stroke="currentColor"
-        stroke-width="1.5"
+        strokeWidth="1.5"
       />
       <path
         d="M8.47827 8.86914H14.7391"
         stroke="currentColor"
-        stroke-width="1.5"
-        stroke-linecap="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
         fill="currentColor"
       />
       <path
         d="M8.47827 12.3479H14.7391"
         stroke="currentColor"
-        stroke-width="1.5"
-        stroke-linecap="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
         fill="currentColor"
       />
       <path
         d="M8.47827 16.5215H12.6522"
         stroke="currentColor"
-        stroke-width="1.5"
-        stroke-linecap="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
         fill="currentColor"
       />
     </>

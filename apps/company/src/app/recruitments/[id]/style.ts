@@ -74,7 +74,6 @@ export const FieldText = styled.div`
   width: 400px;
   margin-top: 8px;
   color: #555555;
-  white-space: pre-wrap;
 `;
 
 export const PeopleCount = styled.div`

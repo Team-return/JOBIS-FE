@@ -26,7 +26,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     ref
   ) => {
     return (
-      <label className={LabelStyle}>
+      <label className={LabelStyle} style={{ width }}>
         {label}
         <div className={InputWrapper}>
           <input
@@ -39,7 +39,6 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
                 [ErrorBorderColorVariant]: errorBorderColor,
                 [FocusBorderColorVariant]: focusBorderColor,
               }),
-              width,
             }}
             {...inputProps}
           />

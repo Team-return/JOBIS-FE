@@ -4,7 +4,7 @@ import { TitleTemplate } from "@/components/titleTemplate";
 import { SubTitleTemplate } from "@/components/subTitleTemplate";
 import * as S from "./style";
 import { InputTemplate } from "@/components/inputTemplate";
-import { Input, Icon, Text, Flex, Button, useToast } from "@jobis/ui";
+import { Input, Icon, Text, Flex, Button, useToast, Textarea } from "@jobis/ui";
 import { themes } from "@jobis/design-token";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { ICompanyRegisterRequest } from "@/apis/company/types";
@@ -19,11 +19,20 @@ import Image from "next/image";
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { useCreatePresignedURL } from "@/hooks/apis/useFilesApi";
-import { useCompanyRegister } from "@/hooks/apis/useCompanyApi";
+import {
+  useCompanyRegister,
+  useMyCompanyInfo,
+  useUpdateCompanyInfo,
+} from "@/hooks/apis/useCompanyApi";
 import { useGetCode } from "@/hooks/apis/useCodeApi";
 import { AxiosError } from "axios";
 
 export default function Registration() {
+  const searchParams = useSearchParams();
+  const { data: businessCodes } = useGetCode("BUSINESS_AREA");
+  const { data: myCompanyInfo } = useMyCompanyInfo(
+    searchParams.get("type") === "edit"
+  );
   const {
     register,
     handleSubmit,
@@ -31,10 +40,48 @@ export default function Registration() {
     formState: { errors },
     setValue,
     getValues,
-  } = useForm<ICompanyRegisterRequest>();
+  } = useForm<ICompanyRegisterRequest>({
+    values: {
+      name: myCompanyInfo?.name || "",
+      main_address_detail: myCompanyInfo?.main_address_detail || "",
+      sub_address_detail: myCompanyInfo?.sub_address_detail,
+      business_number: regex.buisness_number(myCompanyInfo?.biz_no || ""),
+      biz_registration_url: myCompanyInfo?.biz_registration_url || "",
+      business_area_code:
+        businessCodes?.codes.find(
+          code => code.keyword === myCompanyInfo?.business_area
+        )?.keyword || 0,
+      service_name: myCompanyInfo?.service_name || "",
+      attachment_urls: myCompanyInfo?.attachment_urls,
+      founded_at: regex.date_number(myCompanyInfo?.founded_at || ""),
+      representative_name: myCompanyInfo?.representative || "",
+      representative_phone_no: regex.phone_number(
+        myCompanyInfo?.representative_phone_no || ""
+      ),
+      main_zip_code: myCompanyInfo?.main_zip_code || "",
+      sub_zip_code: myCompanyInfo?.sub_zip_code,
+      main_address: myCompanyInfo?.main_address || "",
+      sub_address: myCompanyInfo?.sub_address,
+      take: regex.money(myCompanyInfo?.take.toString() || ""),
+      worker_number: myCompanyInfo?.workers_count || 0,
+      company_introduce: myCompanyInfo?.company_introduce || "",
+      email: myCompanyInfo?.email || "",
+      manager_name: myCompanyInfo?.manager_name || "",
+      manager_phone_no: regex.phone_number(
+        myCompanyInfo?.manager_phone_no || ""
+      ),
+      sub_manager_name: myCompanyInfo?.sub_manager_name,
+      sub_manager_phone_no:
+        regex.phone_number(myCompanyInfo?.sub_manager_phone_no || "") ||
+        undefined,
+      fax: regex.phone_number(myCompanyInfo?.fax || "") || undefined,
+      company_profile_url: myCompanyInfo?.company_logo_url,
+    },
+  });
   const { toast } = useToast();
 
   const [companyLogoPreview, setCompanyLogoPreview] = useState("");
+  const [companyId, setCompanyId] = useState(0);
   const [previewFiles, setPreviewFiles] = useState<{
     bizRegistrationFile: File[];
     attachmentFile: File[];
@@ -121,9 +168,9 @@ export default function Registration() {
     }
   };
 
-  const { data: businessCodes } = useGetCode("BUSINESS_AREA");
   const businessAreas = businessCodes?.codes.map(item => item.keyword) ?? [];
   const { mutate: registerCompany } = useCompanyRegister();
+  const { mutate: updateCompany } = useUpdateCompanyInfo(companyId);
 
   const onSubmit: SubmitHandler<ICompanyRegisterRequest> = data => {
     const {
@@ -138,26 +185,42 @@ export default function Registration() {
       business_area_code,
       business_number,
     } = data;
-    registerCompany({
-      ...data,
-      business_number: business_number.replaceAll("-", ""),
-      representative_phone_no: representative_phone_no.replaceAll("-", ""),
-      manager_phone_no: manager_phone_no?.replaceAll("-", ""),
-      sub_zip_code: sub_zip_code || undefined,
-      sub_address_detail: sub_address_detail || undefined,
-      sub_manager_name: sub_manager_name || undefined,
-      sub_manager_phone_no:
-        sub_manager_phone_no?.replaceAll("-", "") || undefined,
-      take: +take.toString().replaceAll("-", ""),
-      worker_number: +worker_number,
-      business_area_code:
-        businessCodes?.codes.find(
-          code => code.keyword === business_area_code.toString()
-        )?.code || 0,
-    });
+    searchParams.get("type") === "edit"
+      ? updateCompany({
+          ...data,
+          representative_phone_no: representative_phone_no.replaceAll("-", ""),
+          manager_phone_no: manager_phone_no?.replaceAll("-", ""),
+          sub_zip_code: sub_zip_code || undefined,
+          sub_address_detail: sub_address_detail || undefined,
+          sub_manager_name: sub_manager_name || undefined,
+          sub_manager_phone_no:
+            sub_manager_phone_no?.replaceAll("-", "") || undefined,
+          take: +take.toString().replaceAll(",", ""),
+          worker_number: +worker_number,
+          business_area_code:
+            businessCodes?.codes.find(
+              code => code.keyword === business_area_code.toString()
+            )?.code || 0,
+        })
+      : registerCompany({
+          ...data,
+          business_number: business_number.replaceAll("-", ""),
+          representative_phone_no: representative_phone_no.replaceAll("-", ""),
+          manager_phone_no: manager_phone_no?.replaceAll("-", ""),
+          sub_zip_code: sub_zip_code || undefined,
+          sub_address_detail: sub_address_detail || undefined,
+          sub_manager_name: sub_manager_name || undefined,
+          sub_manager_phone_no:
+            sub_manager_phone_no?.replaceAll("-", "") || undefined,
+          take: +take.toString().replaceAll(",", ""),
+          worker_number: +worker_number,
+          business_area_code:
+            businessCodes?.codes.find(
+              code => code.keyword === business_area_code.toString()
+            )?.code || 0,
+        });
   };
 
-  const searchParams = useSearchParams();
   const router = useRouter();
 
   const selectAddress = (data: Address) => {
@@ -198,12 +261,37 @@ export default function Registration() {
       setValue("name", decodeURI(searchParams.get("name") || ""));
       setValue(
         "business_number",
-        decodeURI(searchParams.get("business-number") || "")
+        regex.buisness_number(
+          decodeURI(searchParams.get("business-number") || "")
+        )
       );
     } else {
       router.push("/");
     }
   }, [searchParams, router, setValue]);
+
+  useEffect(() => {
+    if (searchParams.get("type") === "edit") {
+      if (myCompanyInfo) {
+        setCompanyLogoPreview(
+          `${process.env.NEXT_PUBLIC_IMAGE_URL}/${myCompanyInfo.company_logo_url}`
+        );
+        setCompanyId(myCompanyInfo.company_id);
+        setPreviewFiles(prev => ({
+          ...prev,
+          bizRegistrationFile: [
+            new File(
+              ["foo"],
+              myCompanyInfo.biz_registration_url.split("/")[1].slice(36)
+            ),
+          ],
+          attachmentFile: myCompanyInfo?.attachment_urls.map(
+            url => new File(["foo"], url.split("/")[1].slice(36))
+          ),
+        }));
+      }
+    }
+  }, [searchParams, setValue, myCompanyInfo, businessCodes]);
 
   useEffect(() => {
     (() => {
@@ -318,7 +406,7 @@ export default function Registration() {
             <Flex direction="column" gap={8}>
               <Flex gap={8}>
                 <Input
-                  width={355}
+                  width={367}
                   disabled
                   {...register("main_address", {
                     required: "필수 입력 항목입니다.",
@@ -333,15 +421,13 @@ export default function Registration() {
                   })}
                   errorMessage={errors.main_zip_code?.message}
                 />
-                <Flex direction="column" style={{ width: "100%" }}>
-                  <Button
-                    type="button"
-                    variant="outline"
-                    onClick={() => openModal("MAIN_ADDRESS")}
-                  >
-                    검색
-                  </Button>
-                </Flex>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => openModal("MAIN_ADDRESS")}
+                >
+                  검색
+                </Button>
               </Flex>
               <Input
                 width={604}
@@ -357,7 +443,7 @@ export default function Registration() {
             <Flex direction="column" gap={8}>
               <Flex gap={8}>
                 <Input
-                  width={355}
+                  width={367}
                   disabled
                   {...register("sub_address")}
                   errorMessage={errors.sub_address?.message}
@@ -368,15 +454,13 @@ export default function Registration() {
                   {...register("sub_zip_code")}
                   errorMessage={errors.sub_zip_code?.message}
                 />
-                <Flex direction="column" style={{ width: "100%" }}>
-                  <Button
-                    type="button"
-                    variant="outline"
-                    onClick={() => openModal("SUB_ADDRESS")}
-                  >
-                    검색
-                  </Button>
-                </Flex>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => openModal("SUB_ADDRESS")}
+                >
+                  검색
+                </Button>
               </Flex>
               <Input
                 width={604}
@@ -580,7 +664,7 @@ export default function Registration() {
             />
           </InputTemplate>,
           <InputTemplate title="회사개요" required>
-            <Input
+            <Textarea
               width={604}
               placeholder="직접입력"
               {...register("company_introduce", {
@@ -716,7 +800,7 @@ export default function Registration() {
         ]}
       />
       <Flex justify="flex-end" gap={12} style={{ width: 850 }}>
-        <Link href={"/"}>
+        <Link href={searchParams.get("type") === "edit" ? "/my" : "/"}>
           <Button type="reset" variant="outline">
             취소
           </Button>
@@ -725,7 +809,7 @@ export default function Registration() {
       </Flex>
       {(modalState === "MAIN_ADDRESS" || modalState === "SUB_ADDRESS") && (
         <Modal width={400} onClose={closeModal}>
-          <DaumPostcode onComplete={selectAddress}></DaumPostcode>
+          <DaumPostcode onComplete={selectAddress} />
         </Modal>
       )}
     </S.Container>

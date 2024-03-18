@@ -30,17 +30,26 @@ import { useSearchParams } from "next/navigation";
 import GatherModal from "@/components/modal/recruitmentModal/recruitmentModal";
 import { useAreaState } from "@/store/areasState";
 import { useGetCode } from "@/hooks/apis/useCodeApi";
-import XBtn from "../../../public/X.svg";
+import XBtn from "../../../../public/X.svg";
 import TechModal from "@/components/modal/techModal/techModal";
 import { hiringProgressType } from "@/utils/translate";
 import LicenseModal from "@/components/modal/licenseModal/licenseModal";
-import { useCreateRecruitmentRequest } from "@/hooks/apis/useRecruitmentsApi";
+import {
+  useAddRecruitArea,
+  useDeleteRecruitArea,
+  useRecruitmentDetail,
+  useUpdateRecruitArea,
+  useUpdateRecruitment,
+} from "@/hooks/apis/useRecruitmentsApi";
 import { useTechState } from "@/store/techState";
 import { ICode } from "@/apis/codes/types";
 import { useAddedJob, useAddedTech } from "@/store/addCodeState";
 import Link from "next/link";
 
-export default function Recruitments() {
+export default function Recruitments({ params }: { params: { id: string } }) {
+  const { data: techName } = useGetCode("TECH");
+  const { data: jobName } = useGetCode("JOB");
+  const { data: recruitmentDetail } = useRecruitmentDetail(params!.id);
   const {
     register,
     handleSubmit,
@@ -49,7 +58,41 @@ export default function Recruitments() {
     setValue,
     control,
     reset,
-  } = useForm<IRecruitment & { start_time: string; end_time: string }>();
+  } = useForm<IRecruitment & { start_time: string; end_time: string }>({
+    values: {
+      winter_intern: recruitmentDetail?.winter_intern,
+      benefits: recruitmentDetail?.benefits,
+      end_date: recruitmentDetail?.end_date,
+      etc: recruitmentDetail?.etc,
+      hiring_progress: recruitmentDetail?.hiring_progress || [],
+      military_support: !!recruitmentDetail?.military,
+      pay: regex.money(recruitmentDetail?.pay || ""),
+      required_grade: recruitmentDetail?.required_grade,
+      required_licenses: recruitmentDetail?.required_licenses || [],
+      start_date: recruitmentDetail?.start_date,
+      train_pay: regex.money(recruitmentDetail?.train_pay.toString() || ""),
+      flexible_working: !!recruitmentDetail?.flexible_working,
+      areas:
+        recruitmentDetail?.areas.map(area => {
+          return {
+            id: area.id,
+            hiring: area.hiring,
+            preferential_treatment: area.preferential_treatment,
+            major_task: area.major_task,
+            job_codes: jobName?.codes
+              .filter(code => area.job.includes(code.keyword))
+              .map(res => res.code),
+            tech_codes: techName?.codes
+              .filter(code => area.tech.includes(code.keyword))
+              .map(res => res.code),
+          } as IArea;
+        }) || [],
+      working_hours: "",
+      personal_contact: false,
+      start_time: "",
+      end_time: "",
+    },
+  });
 
   const [alwaysRecruit, setAlwaysRecruit] = useState(false);
   const searchParams = useSearchParams();
@@ -58,6 +101,7 @@ export default function Recruitments() {
   const { modalState, closeModal, openModal } = useModal();
   const { addedJob } = useAddedJob();
   const { addedTechList } = useAddedTech();
+
   const { toast } = useToast();
 
   const preventClose = (e: BeforeUnloadEvent) => {
@@ -98,6 +142,7 @@ export default function Recruitments() {
     portfolio: false,
   });
   const [licenses, setLicenses] = useState<string[]>([]);
+  const [deleteAreas, setDeleteAreas] = useState<IArea[]>([]);
 
   const { resetArea, setArea } = useAreaState();
   const { resetTechList, setTechList } = useTechState();
@@ -119,13 +164,14 @@ export default function Recruitments() {
     setSubmitDocumentOption(prev => ({ ...prev, [name]: !checked }));
   };
 
-  const { data: techName } = useGetCode("TECH");
-  const { data: jobName } = useGetCode("JOB");
-  const { mutate } = useCreateRecruitmentRequest();
+  const { mutateAsync: updateRecruitment } = useUpdateRecruitment(params!.id);
+  const { mutateAsync: updateRecruitArea } = useUpdateRecruitArea();
+  const { mutateAsync: addRecruitArea } = useAddRecruitArea(params!.id);
+  const { mutateAsync: deleteRecruitArea } = useDeleteRecruitArea();
 
   const onSubmit: SubmitHandler<
     IRecruitment & { start_time: string; end_time: string }
-  > = data => {
+  > = async data => {
     const {
       pay,
       train_pay,
@@ -136,6 +182,8 @@ export default function Recruitments() {
       working_hours,
       start_time,
       end_time,
+      areas: editAreas,
+      military_support,
       ...rest
     } = data;
     const document = [];
@@ -159,7 +207,7 @@ export default function Recruitments() {
           message: "채용절차를 입력해주세요",
         },
       });
-    } else if (data.areas.length <= 0) {
+    } else if (editAreas.length <= 0) {
       return toast({
         payload: {
           type: "error",
@@ -168,7 +216,19 @@ export default function Recruitments() {
       });
     }
 
-    mutate({
+    await Promise.all(
+      editAreas
+        .filter(area => !!area.id)
+        .map(async area => updateRecruitArea(area))
+    );
+    await Promise.all(
+      editAreas.filter(area => !area.id).map(async area => addRecruitArea(area))
+    );
+    await Promise.all(
+      deleteAreas.map(async area => deleteRecruitArea(area.id!))
+    );
+
+    await updateRecruitment({
       ...rest,
       submit_document: document.join(", "),
       pay: pay?.replaceAll(",", "") || undefined,
@@ -178,10 +238,74 @@ export default function Recruitments() {
       working_hours: watch("flexible_working")
         ? working_hours
         : `${start_time} ~ ${end_time}`,
+      military: military_support || false,
       etc: etc || undefined,
-      personal_contact: false,
     });
   };
+
+  useEffect(() => {
+    if (recruitmentDetail) {
+      setAreas(
+        recruitmentDetail.areas.map(area => {
+          return {
+            id: area.id,
+            hiring: area.hiring,
+            major_task: area.major_task,
+            preferential_treatment: area.preferential_treatment,
+            job_codes: jobName?.codes
+              .filter(code => area.job.includes(code.keyword))
+              .map(res => res.code),
+            tech_codes: techName?.codes
+              .filter(code => area.tech.includes(code.keyword))
+              .map(res => res.code),
+          } as IArea;
+        })
+      );
+      if (!recruitmentDetail.start_date && !recruitmentDetail.end_date) {
+        setAlwaysRecruit(true);
+      }
+      setLicenses(recruitmentDetail.required_licenses);
+      setHiringProgress(recruitmentDetail.hiring_progress);
+      const documents = recruitmentDetail.submit_document?.split(", ");
+      if (!documents?.includes("자기소개서")) {
+        setSubmitDocumentOption(document => ({
+          ...document,
+          self_introduction: true,
+        }));
+      }
+      if (!documents?.includes("이력서")) {
+        setSubmitDocumentOption(document => ({
+          ...document,
+          resume: true,
+        }));
+      }
+      if (!documents?.includes("포트폴리오")) {
+        setSubmitDocumentOption(document => ({
+          ...document,
+          portfolio: true,
+        }));
+      }
+      setValue(
+        "submit_document",
+        documents
+          ?.filter(
+            document =>
+              document != "이력서" &&
+              document != "자기소개서" &&
+              document != "포트폴리오"
+          )
+          .join(", ")
+      );
+      if (recruitmentDetail.flexible_working) {
+        setValue("working_hours", recruitmentDetail.working_hours);
+      } else {
+        const [startTime, endTime] =
+          recruitmentDetail.working_hours.split(" ~ ");
+        setValue("start_time", startTime);
+        setValue("end_time", endTime);
+      }
+    }
+  }, [recruitmentDetail, setValue, params.id]);
 
   return (
     <S.Container onSubmit={handleSubmit(onSubmit)}>
@@ -316,7 +440,7 @@ export default function Recruitments() {
                           분야:{" "}
                           {jobName?.codes
                             .concat(addedJob)
-                            .filter(code => job_codes.includes(code?.code))
+                            .filter(code => job_codes?.includes(code.code))
                             .map(code => code.keyword)
                             .join(" / ")}
                         </S.FieldBoxTitle>
@@ -324,11 +448,9 @@ export default function Recruitments() {
                           사용기술 :{" "}
                           {techName?.codes
                             .concat(addedTechList)
-                            .map(
-                              code =>
-                                tech_codes.includes(code?.code) &&
-                                `${code?.keyword} `
-                            ) || "없음"}
+                            .filter(code => tech_codes?.includes(code?.code))
+                            .map(code => `${code?.keyword}`)
+                            .join(", ") || "없음"}
                         </S.FieldText>
                         <S.FieldText style={{ top: 70 }}>
                           주요 업무 : {"\n"}
@@ -370,9 +492,10 @@ export default function Recruitments() {
                         <S.CancelIcon
                           width={10}
                           height={10}
-                          onClick={() =>
-                            setAreas(areas.filter((_, idx2) => idx2 !== idx))
-                          }
+                          onClick={() => {
+                            setAreas(areas.filter((_, idx2) => idx2 !== idx));
+                            setDeleteAreas(prev => [...prev, area]);
+                          }}
                           src={XBtn}
                           alt=""
                         />
@@ -679,14 +802,13 @@ export default function Recruitments() {
               setAlwaysRecruit(false);
               resetArea();
               resetTechList();
-              setAreas([]);
               setLicenses([]);
             }}
           >
             취소
           </Button>
         </Link>
-        <Button type="submit">확인</Button>
+        <Button type="submit">수정</Button>
       </Flex>
       {modalState === "HIRING_PROGRESS" && (
         <Modal width={780} onClose={closeModal} closeAble>

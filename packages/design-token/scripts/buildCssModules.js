@@ -1,5 +1,4 @@
-import * as token from "../dist/index.js";
-import fs from "fs";
+import fs from "node:fs";
 
 const generateThemeCss = () => {
   const cssString = `:root {
@@ -88,6 +87,11 @@ const generateThemeCss = () => {
 .caption {
     font-size: 12px;
     line-height: 18px;
+}
+
+textarea {
+    resize: vertical !important;
+    min-height: 180px;
 }
 
 body * {

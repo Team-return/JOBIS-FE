@@ -1,10 +1,10 @@
+import { ICompanyLoginResponse } from "../auth/types";
 import { instance } from "../axios";
 import {
   ICompanyRegisterRequest,
   ICheckBuisnessNumberResponse,
   IMyCompanyResponse,
   IUpdateCompanyInfoRequest,
-  ICompanyRegisterResponse,
 } from "./types";
 
 const router = "/companies";
@@ -17,7 +17,7 @@ export const checkBusinessNumber = async (businessNumber: string) => {
 };
 
 export const companyRegister = async (body: ICompanyRegisterRequest) => {
-  const { data } = await instance.post<ICompanyRegisterResponse>(
+  const { data } = await instance.post<ICompanyLoginResponse>(
     `${router}`,
     body
   );

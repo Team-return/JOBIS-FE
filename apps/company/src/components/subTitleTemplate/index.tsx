@@ -7,6 +7,7 @@ export const SubTitleTemplate = ({
   components,
   title,
   requiredMessage = false,
+  button,
 }: ISubTitleTemplate) => {
   return (
     <Wrapper>
@@ -18,9 +19,12 @@ export const SubTitleTemplate = ({
           marginBottom: 48,
         }}
       >
-        <Text fontSize="h5" fontWeight="bold">
-          {title}
-        </Text>
+        <Flex align="center" gap={8}>
+          <Text fontSize="h5" fontWeight="bold">
+            {title}
+          </Text>
+          {button}
+        </Flex>
         {requiredMessage && (
           <Text
             fontSize="body3"

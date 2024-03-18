@@ -8,22 +8,22 @@ export const ToastError = () => {
         cy="12"
         r="9"
         stroke="currentColor"
-        stroke-width="2"
+        strokeWidth="2"
         fill="transparent"
       />
       <path
         d="M12 12.5V7.5"
         stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M12 16.5L12 16"
         stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </>
   );
