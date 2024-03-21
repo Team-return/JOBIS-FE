@@ -1,0 +1,52 @@
+import { Meta, Source } from "@storybook/blocks";
+
+<Meta title="Intro" />
+
+## Installation
+
+아래 Shell 명령어를 통해 JDS(Jobis Design System)을 프로젝트에 추가해보세요.
+
+<Source code={`yarn add @jobis/ui`} />
+
+## Setting
+
+**글로벌 스타일 적용**
+
+root에 import를 통해 ui 스타일과 design-token 전역 스타일을 적용합니다.
+
+<Source
+  code={`
+import  "@jobis/design-token/global.css";
+import  "@jobis/ui/style.css";
+`}
+/>
+
+**ToastProvider**
+
+<Source
+  code={`import { ToastProvider } from "@jobis/ui";
+
+function App({ children }: { children: ReactNode }) {
+return (
+
+<ToastProvider>{children}</ToastProvider>) } `} />
+
+## Use
+
+당신이 원하는 UI Components를 추가해보세요.
+
+`import { Button } from '@jobis/ui';`
+
+그리고 아래와 같이 사용해보세요
+
+<Source 
+code={`
+import  React, { Component } from "react";
+
+import { Button } from "@jobis/ui";
+
+const Example: React.FC = () => {
+return <Button>Hello, world!</Button>;
+};
+`}
+/>
