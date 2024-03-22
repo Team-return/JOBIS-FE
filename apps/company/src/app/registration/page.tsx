@@ -279,12 +279,14 @@ export default function Registration() {
         setCompanyId(myCompanyInfo.company_id);
         setPreviewFiles(prev => ({
           ...prev,
-          bizRegistrationFile: [
-            new File(
-              ["foo"],
-              myCompanyInfo.biz_registration_url.split("/")[1]?.slice(36)
-            ),
-          ],
+          bizRegistrationFile: myCompanyInfo.biz_registration_url
+            ? [
+                new File(
+                  ["foo"],
+                  myCompanyInfo.biz_registration_url.split("/")[1]?.slice(36)
+                ),
+              ]
+            : [],
           attachmentFile: myCompanyInfo?.attachment_urls.map(
             url => new File(["foo"], url.split("/")[1]?.slice(36))
           ),
