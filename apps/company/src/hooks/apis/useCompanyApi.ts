@@ -11,6 +11,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useToast } from "@jobis/ui";
 import { Cookies } from "react-cookie";
+import { AxiosError } from "axios";
 
 export const useCompanyRegister = () => {
   const router = useRouter();
@@ -45,11 +46,29 @@ export const useCompanyRegister = () => {
       });
       cookie.set("authority", authority);
     },
-    onError: () => {
-      // append({
-      //   type: "RED",
-      //   message: "가입에 실패하였습니다",
-      // });
+    onError: (err: AxiosError<AxiosError>) => {
+      if (err.response?.data.message === "Company Not Exists") {
+        toast({
+          payload: {
+            type: "error",
+            message: "기업이 존재하지 않습니다.",
+          },
+        });
+      } else if (err.response?.data.message === "Company Already Exists") {
+        toast({
+          payload: {
+            type: "error",
+            message: "이미 존재하는 기업입니다.",
+          },
+        });
+      } else {
+        toast({
+          payload: {
+            type: "error",
+            message: "가입에 실패하였습니다",
+          },
+        });
+      }
     },
   });
 };

@@ -13,7 +13,7 @@ import {
   IEditRecruitmentRequest,
   IRecruitment,
 } from "@/apis/recruitments/types";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useToast } from "@jobis/ui";
 import { AxiosError } from "axios";
@@ -41,13 +41,21 @@ export const useCreateRecruitmentRequest = () => {
             message: "입력되지 않은 필드가 있습니다.",
           },
         });
+      } else if (err.response?.data.message === "Recruitment Already Exist") {
+        toast({
+          payload: {
+            type: "error",
+            message: "모집의뢰서가 이미 존재합니다.",
+          },
+        });
+      } else {
+        toast({
+          payload: {
+            type: "error",
+            message: "모집의뢰서 작성에 실패하였습니다",
+          },
+        });
       }
-      toast({
-        payload: {
-          type: "error",
-          message: "모집의뢰서 작성에 실패하였습니다",
-        },
-      });
     },
   });
 };
