@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { themes } from "@jobis/design-token";
 
-export const Container = styled.div`
+export const Container = styled.form`
   position: relative;
   display: flex;
   flex-direction: column;

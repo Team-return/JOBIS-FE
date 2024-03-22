@@ -3,7 +3,7 @@ import * as React from "react";
 export const Logout = () => {
   return (
     <>
-      <g clip-path="url(#clip0_4785_2571)">
+      <g clipPath="url(#clip0_4785_2571)">
         <path
           fillRule="evenodd"
           clipRule="evenodd"

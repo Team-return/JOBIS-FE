@@ -22,25 +22,31 @@ export interface IRecruitment {
   areas: IArea[];
   required_licenses: string[];
   required_grade?: string;
-  start_time: string;
-  end_time: string;
+  working_hours: string;
+  flexible_working: boolean;
   train_pay: string;
   pay?: string;
   benefits?: string;
-  military: boolean;
+  military_support: boolean;
   hiring_progress: IHiringProgress[];
   submit_document?: string;
   start_date?: string;
   end_date?: string;
   etc?: string;
   winter_intern?: boolean;
+  personal_contact: boolean;
 }
 
-export interface IEditRecruitmentRequest extends Omit<IRecruitment, "areas"> {
+export interface IEditRecruitmentRequest
+  extends Omit<
+    IRecruitment,
+    "areas" | "personal_contact" | "winter_intern" | "military_support"
+  > {
   military: boolean;
 }
 
-export interface IMyRecruitmentResponse extends Omit<IRecruitment, "areas"> {
+export interface IMyRecruitmentResponse
+  extends Omit<IRecruitment, "areas" | "military_support"> {
   recruitment_id: number;
   recruit_year: number;
   company_biz_no?: string;
@@ -53,5 +59,14 @@ export interface IMyRecruitmentResponse extends Omit<IRecruitment, "areas"> {
     preferential_treatment: string;
   }[];
   company_name: string;
+  military: boolean;
   company_profile_url: string;
+}
+
+export interface IMyRecruitmentListResponse {
+  my_recruitments: {
+    id: number;
+    recruitment_areas: { jobs: string[]; hiring: number };
+    created_at: string;
+  }[];
 }

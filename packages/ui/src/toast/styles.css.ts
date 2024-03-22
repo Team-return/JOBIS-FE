@@ -18,13 +18,14 @@ export const ToastContainerStyle = style({
 
 export const ToastStyle = recipe({
   base: {
-    width: 300,
+    position: "relative",
+    minWidth: 300,
     textAlign: "center",
     ...themes.Font.body1,
     fontWeight: themes.FontWeight.medium,
     backgroundColor: themes.Color.grayScale[10],
     color: themes.Color.grayScale[90],
-    padding: "19px 24px",
+    padding: "19px 24px 19px 52px",
     borderRadius: 16,
     boxShadow: "0px 4px 20px 0px rgba(112, 144, 176, 0.12)",
   },

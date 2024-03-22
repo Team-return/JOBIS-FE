@@ -16,7 +16,7 @@
     "build": "yarn build:js && yarn build:type & yarn build:css",
     "build:js": "node ./esbuild.config.js",
     "build:type": "yarn tsc --emitDeclarationOnly",
-    "build:css": "node ./scripts/build-css-modules.js"
+    "build:css": "node ./scripts/buildCssModules.js"
   },
   "author": "",
   "license": "ISC",

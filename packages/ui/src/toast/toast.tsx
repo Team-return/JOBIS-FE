@@ -45,7 +45,7 @@ export const Toast = (props: ToastPayload) => {
         icon={toastIcon()}
         size={24}
         color={toastColor()}
-        style={{ position: "absolute" }}
+        style={{ position: "absolute", left: 24 }}
       />
       {message}
     </div>

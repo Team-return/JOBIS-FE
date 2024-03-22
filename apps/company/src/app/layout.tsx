@@ -5,6 +5,7 @@ import "./globals.css";
 import StyledComponentsRegistry from "./lib/registry";
 import { Noto_Sans_KR } from "next/font/google";
 import { ReactNode } from "react";
+import { ToastProvider } from "@jobis/ui";
 import "@jobis/design-token/global.css";
 import "@jobis/ui/style.css";
 
@@ -19,9 +20,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="ko" className={notoSans.className}>
       <body>
         <title>JOBIS</title>
-        <ReactQuery>
-          <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
-        </ReactQuery>
+        <ToastProvider>
+          <ReactQuery>
+            <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+          </ReactQuery>
+        </ToastProvider>
         <div id="modal-root"></div>
       </body>
     </html>

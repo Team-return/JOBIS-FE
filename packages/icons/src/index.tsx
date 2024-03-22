@@ -24,6 +24,9 @@ import { ToastError } from "./toastError";
 import { ToastWarning } from "./toastWarning";
 import { ToastMessage } from "./toastMessage";
 import { Info } from "./info";
+import { Return } from "./return";
+import { Github } from "./github";
+import { Recruitment } from "./recruitment";
 
 // Icon paths
 export const Icons = {
@@ -41,11 +44,14 @@ export const Icons = {
   EyesOpen: <EyesOpen />,
   FileEarmarkArrowDown: <FileEarmarkArrowDownIcon />,
   FileEarmarkPlus: <FileEarmarkPlusIcon />,
+  Github: <Github />,
   Info: <Info />,
   KebabMenu: <KebabMenu />,
   Logout: <Logout />,
   MyPg: <MyPg />,
   Plus: <Plus />,
+  Recruitment: <Recruitment />,
+  Return: <Return />,
   Search: <SearchIcon />,
   ToastSuccess: <ToastSuccess />,
   ToastError: <ToastError />,

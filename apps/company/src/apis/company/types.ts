@@ -1,13 +1,14 @@
 export interface IUpdateCompanyInfoRequest {
   founded_at: string;
   representative_name: string;
+  representative_phone_no: string;
   main_zip_code: string;
   sub_zip_code?: string;
   main_address: string;
   main_address_detail: string;
   sub_address?: string;
   sub_address_detail?: string;
-  take: number;
+  take: number | string;
   worker_number: number;
   company_introduce: string;
   email: string;
@@ -18,26 +19,22 @@ export interface IUpdateCompanyInfoRequest {
   fax?: string;
   company_profile_url?: string;
   service_name: string;
+  business_area_code: number | string;
 }
 export interface ICompanyRegisterRequest extends IUpdateCompanyInfoRequest {
   name: string;
-  password: string;
   main_address_detail: string;
   sub_address_detail?: string;
   business_number: string;
   biz_registration_url: string;
-  business_area_code: number;
+  business_area_code: number | string;
   service_name: string;
   attachment_urls?: string[] | null;
 }
 
-export interface ICompanyRegisterResponse {
-  company_id: number;
-}
-
 export interface ICheckBuisnessNumberResponse {
   company_name: string;
-  company_id: boolean;
+  exists: boolean;
 }
 
 export interface IMyCompanyResponse {
@@ -53,8 +50,8 @@ export interface IMyCompanyResponse {
   sub_address_detail?: string;
   sub_zip_code?: string;
   representative: string;
+  representative_phone_no: string;
   founded_at: string;
-  sales_per_year: number;
   workers_count: number;
   manager_name: string;
   manager_phone_no: string;
@@ -67,4 +64,5 @@ export interface IMyCompanyResponse {
   service_name: string;
   business_area: string;
   biz_registration_url: string;
+  attachment_urls: string[];
 }

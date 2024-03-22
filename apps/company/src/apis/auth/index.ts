@@ -1,16 +1,23 @@
-import { instance } from "../axios";
-import { IAuthorizationResponse } from "./types";
+import { instance } from "@/apis/axios";
+import {
+  IAuthorizationResponse,
+  ICompanyLoginRequest,
+  ICompanyLoginResponse,
+} from "./types";
 
 const router = "/auth";
 
-export const getNoticeDetail = async (noticeId: string) => {
-  const { data } = await instance.get(`${router}/${noticeId}`);
+export const companyLogin = async (body: ICompanyLoginRequest) => {
+  const { data } = await instance.post<ICompanyLoginResponse>(
+    `${router}/company`,
+    body
+  );
   return data;
 };
 
 export const ReissueToken = async (refreshToken: string) => {
-  const response = await instance.put<IAuthorizationResponse>(
-    `${router}/reissue`,
+  const { data } = await instance.put<IAuthorizationResponse>(
+    `${router}/reissue?platform-type=WEB`,
     null,
     {
       headers: {
@@ -19,5 +26,5 @@ export const ReissueToken = async (refreshToken: string) => {
     }
   );
 
-  return response.data;
+  return data;
 };

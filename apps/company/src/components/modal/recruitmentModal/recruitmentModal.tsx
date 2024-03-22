@@ -1,25 +1,40 @@
-import { useGetCode } from "@/hooks/apis/useCodeApi";
-import { Dispatch, SetStateAction, useCallback, useRef } from "react";
+import { useAddCode, useGetCode } from "@/hooks/apis/useCodeApi";
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { ICode } from "@/apis/codes/types";
 import { useModal } from "@/hooks/useModal";
 import { useTechState } from "@/store/techState";
 import { themes } from "@jobis/design-token";
-import { Text, Button, Flex, Input } from "@jobis/ui";
+import { Text, Button, Flex, Input, Textarea, Icon, useToast } from "@jobis/ui";
 import { useAreaState } from "@/store/areasState";
 import { IArea } from "@/apis/recruitments/types";
 import * as S from "./style";
+import { useAddedJob } from "@/store/addCodeState";
 
 const jobType = ["WEB", "APP", "GAME", "EMBEDDED", "SECURITY", "AI", "ASD"];
 
 interface IPropsType {
   setForm: Dispatch<SetStateAction<IArea[]>>;
+  areaIndex: number | null;
+  setAreaIndex: Dispatch<SetStateAction<number | null>>;
 }
 
-const GatherModal = ({ setForm }: IPropsType) => {
+const GatherModal = ({ setForm, areaIndex, setAreaIndex }: IPropsType) => {
   const { data: jobs } = useGetCode("JOB");
   const { closeModal } = useModal();
+  const { mutateAsync: addCode } = useAddCode();
+  const [isAddJob, setIsAddJob] = useState(false);
+  const { addedJob, appendAddedJob, setAddedJob } = useAddedJob();
+  const [addJobInput, setAddJobInput] = useState("");
 
   const { area, setArea, resetArea } = useAreaState();
+  const { toast } = useToast();
 
   const { techList, deleteTechList, resetTechList } = useTechState();
   const { openModal } = useModal();
@@ -43,6 +58,10 @@ const GatherModal = ({ setForm }: IPropsType) => {
 
   const deleteTech = (id: number) => {
     deleteTechList(id);
+    setArea({
+      ...area,
+      tech_codes: area.tech_codes.filter(techCode => techCode !== id),
+    });
   };
 
   const textRef = useRef<HTMLTextAreaElement>(null);
@@ -59,6 +78,14 @@ const GatherModal = ({ setForm }: IPropsType) => {
     resetArea();
     resetTechList();
   };
+
+  useEffect(() => {
+    if (jobs) {
+      setAddedJob(
+        addedJob.filter(job => !jobs.codes.some(code => code.code === job.code))
+      );
+    }
+  }, [jobs, setAddedJob]);
 
   return (
     <S.Container>
@@ -95,9 +122,7 @@ const GatherModal = ({ setForm }: IPropsType) => {
                           <S.JobCard
                             type="button"
                             key={code.code}
-                            colorBool={
-                              area.job_codes.includes(code.code) ? true : false
-                            }
+                            colorBool={area.job_codes?.includes(code.code)}
                             onClick={() => checkArray(techTech)}
                           >
                             {code.keyword}
@@ -110,6 +135,110 @@ const GatherModal = ({ setForm }: IPropsType) => {
             })}
           </div>
         </Flex>
+        <Flex>
+          <S.FieldTitle style={{ width: 113, textAlign: "right" }}>
+            기타
+          </S.FieldTitle>
+          <S.Field>
+            <Flex gap={8} wrap="wrap" style={{ width: 500 }}>
+              {jobs?.codes
+                .filter(code => code.job_type === "ETC")
+                .map(code => {
+                  const techTech = {
+                    code: code.code,
+                    keyword: code.keyword,
+                  };
+                  return (
+                    <S.JobCard
+                      type="button"
+                      key={code.code}
+                      colorBool={area.job_codes.includes(code.code)}
+                      onClick={() => checkArray(techTech)}
+                    >
+                      {code.keyword}
+                    </S.JobCard>
+                  );
+                })}
+              {addedJob?.map(code => {
+                const tech = {
+                  code: code.code,
+                  keyword: code.keyword,
+                };
+                return (
+                  <S.JobCard
+                    type="button"
+                    key={code.code}
+                    colorBool={area.job_codes.includes(code.code)}
+                    onClick={() => checkArray(tech)}
+                  >
+                    {code.keyword}
+                  </S.JobCard>
+                );
+              })}
+              {isAddJob ? (
+                <Input
+                  placeholder="추가하기"
+                  icon={
+                    <Icon
+                      icon="Close"
+                      onClick={() => setIsAddJob(false)}
+                      cursor="pointer"
+                    />
+                  }
+                  onChange={e => {
+                    setAddJobInput(e.target.value);
+                  }}
+                  onKeyDown={async e => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      if (
+                        jobs?.codes.some(code => code.keyword === addJobInput)
+                      ) {
+                        setIsAddJob(false);
+                        pushArray(
+                          jobs?.codes.find(
+                            code => code.keyword === addJobInput
+                          ) as ICode
+                        );
+                        return;
+                      } else {
+                        const response = await addCode({
+                          job_type: "ETC",
+                          code_type: "JOB",
+                          keyword: addJobInput,
+                        });
+                        setIsAddJob(false);
+                        appendAddedJob({
+                          code: response.code_id,
+                          keyword: addJobInput,
+                        });
+                        pushArray({
+                          job_type: "ETC",
+                          code: response.code_id,
+                          keyword: addJobInput,
+                        });
+                        setAddJobInput("");
+                      }
+                    }
+                  }}
+                />
+              ) : (
+                <Flex
+                  align="center"
+                  style={{
+                    padding: 8,
+                    borderRadius: 8,
+                    boxShadow: "0px 0px 8px rgba(0, 0, 0, 0.25)",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => setIsAddJob(true)}
+                >
+                  <Icon icon="Plus" size={20} />
+                </Flex>
+              )}
+            </Flex>
+          </S.Field>
+        </Flex>
       </S.BigWrapper>
       <S.BigWrapper>
         <Text fontSize="h5" fontWeight="bold" align="left">
@@ -119,12 +248,10 @@ const GatherModal = ({ setForm }: IPropsType) => {
         <S.CardWrapper>
           {techList.map(res => {
             return (
-              <>
-                <S.Card key={res.code}>
-                  {res.keyword}
-                  <S.XText onClick={() => deleteTech(res.code)}>x</S.XText>
-                </S.Card>
-              </>
+              <S.Card type="button" key={res?.code}>
+                {res?.keyword}
+                <S.XText onClick={() => deleteTech(res.code)}>x</S.XText>
+              </S.Card>
             );
           })}
           <S.AddTechButton onClick={() => openModal("USE_TECH")}>
@@ -165,7 +292,8 @@ const GatherModal = ({ setForm }: IPropsType) => {
           해당 직무에서 하는 일을 상세하게 입력해주세요.
         </S.ContentsText>
         <Flex align="center">
-          <S.Textarea
+          <Textarea
+            placeholder="직접입력"
             ref={textRef}
             value={area.major_task}
             onInput={handleResizeHeight}
@@ -179,7 +307,8 @@ const GatherModal = ({ setForm }: IPropsType) => {
         </Text>
         <S.ContentsText>우대사항을 입력해주세요</S.ContentsText>
         <Flex align="center">
-          <S.Textarea
+          <Textarea
+            placeholder="직접입력"
             ref={textRef}
             value={area.preferential_treatment}
             onInput={handleResizeHeight}
@@ -196,8 +325,29 @@ const GatherModal = ({ setForm }: IPropsType) => {
         <Button
           type="button"
           onClick={() => {
-            setForm(prev => [...prev, area]);
-            resetState();
+            if (area.job_codes.length <= 0) {
+              toast({
+                payload: {
+                  type: "error",
+                  message: "채용 직무를 선택해주세요",
+                },
+              });
+            } else if (area.major_task.length <= 0) {
+              toast({
+                payload: {
+                  type: "error",
+                  message: "상세 직무를 입력해주세요",
+                },
+              });
+            } else {
+              areaIndex == null
+                ? setForm(prev => [...prev, area])
+                : setForm(prev =>
+                    prev.map((areas, idx) => (idx === areaIndex ? area : areas))
+                  );
+              resetState();
+              setAreaIndex(null);
+            }
           }}
         >
           확인
