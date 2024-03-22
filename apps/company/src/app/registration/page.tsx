@@ -282,11 +282,11 @@ export default function Registration() {
           bizRegistrationFile: [
             new File(
               ["foo"],
-              myCompanyInfo.biz_registration_url.split("/")[1].slice(36)
+              myCompanyInfo.biz_registration_url.split("/")[1]?.slice(36)
             ),
           ],
           attachmentFile: myCompanyInfo?.attachment_urls.map(
-            url => new File(["foo"], url.split("/")[1].slice(36))
+            url => new File(["foo"], url.split("/")[1]?.slice(36))
           ),
         }));
       }
