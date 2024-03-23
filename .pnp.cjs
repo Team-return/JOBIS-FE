@@ -4449,7 +4449,7 @@ const RAW_RUNTIME_STATE =
           ["@types/react-outside-click-handler", "npm:1.3.3"],\
           ["@types/styled-components", "npm:5.1.34"],\
           ["@types/testing-library__jest-dom", "npm:5.14.9"],\
-          ["autoprefixer", "virtual:3d56d234886d4ad97fa4f74937d18583af1e798e4510f038d7cd99af74d90f133c440647b0d8b3d140e241533fe7e777b5c917d06ca560a768461ecead1a64d3#npm:10.4.18"],\
+          ["autoprefixer", "virtual:3d56d234886d4ad97fa4f74937d18583af1e798e4510f038d7cd99af74d90f133c440647b0d8b3d140e241533fe7e777b5c917d06ca560a768461ecead1a64d3#npm:10.4.19"],\
           ["axios", "npm:1.6.7"],\
           ["babel-plugin-styled-components", "virtual:3d56d234886d4ad97fa4f74937d18583af1e798e4510f038d7cd99af74d90f133c440647b0d8b3d140e241533fe7e777b5c917d06ca560a768461ecead1a64d3#npm:2.1.4"],\
           ["debug", "virtual:3d56d234886d4ad97fa4f74937d18583af1e798e4510f038d7cd99af74d90f133c440647b0d8b3d140e241533fe7e777b5c917d06ca560a768461ecead1a64d3#npm:4.3.4"],\
@@ -10525,20 +10525,20 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["autoprefixer", [\
-      ["npm:10.4.18", {\
-        "packageLocation": "./.yarn/cache/autoprefixer-npm-10.4.18-98c236b887-c5bc0b5394.zip/node_modules/autoprefixer/",\
+      ["npm:10.4.19", {\
+        "packageLocation": "./.yarn/cache/autoprefixer-npm-10.4.19-7c86a73b2f-98378eae37.zip/node_modules/autoprefixer/",\
         "packageDependencies": [\
-          ["autoprefixer", "npm:10.4.18"]\
+          ["autoprefixer", "npm:10.4.19"]\
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:3d56d234886d4ad97fa4f74937d18583af1e798e4510f038d7cd99af74d90f133c440647b0d8b3d140e241533fe7e777b5c917d06ca560a768461ecead1a64d3#npm:10.4.18", {\
-        "packageLocation": "./.yarn/__virtual__/autoprefixer-virtual-f8cdd9264a/0/cache/autoprefixer-npm-10.4.18-98c236b887-c5bc0b5394.zip/node_modules/autoprefixer/",\
+      ["virtual:3d56d234886d4ad97fa4f74937d18583af1e798e4510f038d7cd99af74d90f133c440647b0d8b3d140e241533fe7e777b5c917d06ca560a768461ecead1a64d3#npm:10.4.19", {\
+        "packageLocation": "./.yarn/__virtual__/autoprefixer-virtual-b6b89b4211/0/cache/autoprefixer-npm-10.4.19-7c86a73b2f-98378eae37.zip/node_modules/autoprefixer/",\
         "packageDependencies": [\
-          ["autoprefixer", "virtual:3d56d234886d4ad97fa4f74937d18583af1e798e4510f038d7cd99af74d90f133c440647b0d8b3d140e241533fe7e777b5c917d06ca560a768461ecead1a64d3#npm:10.4.18"],\
+          ["autoprefixer", "virtual:3d56d234886d4ad97fa4f74937d18583af1e798e4510f038d7cd99af74d90f133c440647b0d8b3d140e241533fe7e777b5c917d06ca560a768461ecead1a64d3#npm:10.4.19"],\
           ["@types/postcss", null],\
           ["browserslist", "npm:4.23.0"],\
-          ["caniuse-lite", "npm:1.0.30001596"],\
+          ["caniuse-lite", "npm:1.0.30001600"],\
           ["fraction.js", "npm:4.3.7"],\
           ["normalize-range", "npm:0.1.2"],\
           ["picocolors", "npm:1.0.0"],\
@@ -11379,6 +11379,13 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/caniuse-lite-npm-1.0.30001596-ca0e4b6215-4124d6e927.zip/node_modules/caniuse-lite/",\
         "packageDependencies": [\
           ["caniuse-lite", "npm:1.0.30001596"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:1.0.30001600", {\
+        "packageLocation": "./.yarn/cache/caniuse-lite-npm-1.0.30001600-89d888d155-4c52f83ed7.zip/node_modules/caniuse-lite/",\
+        "packageDependencies": [\
+          ["caniuse-lite", "npm:1.0.30001600"]\
         ],\
         "linkType": "HARD"\
       }]\
