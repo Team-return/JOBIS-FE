@@ -57,7 +57,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./",\
         "packageDependencies": [\
           ["@commitlint/cli", "npm:18.6.1"],\
-          ["@commitlint/config-conventional", "npm:18.6.2"],\
+          ["@commitlint/config-conventional", "npm:18.6.3"],\
           ["@nx/js", "virtual:0f900c532def39d3661b294c63c25cb192443e8e260e7bea5cb02c869c3e6e66291400e226f22c507c8abc06fa67966b9df259c364ea5e7ac15e7214331dc16d#npm:17.2.3"],\
           ["@nx/workspace", "npm:17.2.3"],\
           ["@storybook/addon-docs", "virtual:0f900c532def39d3661b294c63c25cb192443e8e260e7bea5cb02c869c3e6e66291400e226f22c507c8abc06fa67966b9df259c364ea5e7ac15e7214331dc16d#npm:7.6.17"],\
@@ -2998,10 +2998,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@commitlint/config-conventional", [\
-      ["npm:18.6.2", {\
-        "packageLocation": "./.yarn/cache/@commitlint-config-conventional-npm-18.6.2-d59698bbcc-4e7ba8c1e8.zip/node_modules/@commitlint/config-conventional/",\
+      ["npm:18.6.3", {\
+        "packageLocation": "./.yarn/cache/@commitlint-config-conventional-npm-18.6.3-1057bfca92-888c016c37.zip/node_modules/@commitlint/config-conventional/",\
         "packageDependencies": [\
-          ["@commitlint/config-conventional", "npm:18.6.2"],\
+          ["@commitlint/config-conventional", "npm:18.6.3"],\
           ["@commitlint/types", "npm:18.6.1"],\
           ["conventional-changelog-conventionalcommits", "npm:7.0.2"]\
         ],\
@@ -17199,7 +17199,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["jobis", "workspace:."],\
           ["@commitlint/cli", "npm:18.6.1"],\
-          ["@commitlint/config-conventional", "npm:18.6.2"],\
+          ["@commitlint/config-conventional", "npm:18.6.3"],\
           ["@nx/js", "virtual:0f900c532def39d3661b294c63c25cb192443e8e260e7bea5cb02c869c3e6e66291400e226f22c507c8abc06fa67966b9df259c364ea5e7ac15e7214331dc16d#npm:17.2.3"],\
           ["@nx/workspace", "npm:17.2.3"],\
           ["@storybook/addon-docs", "virtual:0f900c532def39d3661b294c63c25cb192443e8e260e7bea5cb02c869c3e6e66291400e226f22c507c8abc06fa67966b9df259c364ea5e7ac15e7214331dc16d#npm:7.6.17"],\
