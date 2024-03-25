@@ -9,7 +9,7 @@ export interface IUpdateCompanyInfoRequest {
   sub_address?: string;
   sub_address_detail?: string;
   take: number | string;
-  worker_number: number;
+  worker_number: number | string;
   company_introduce: string;
   email: string;
   manager_name: string;
