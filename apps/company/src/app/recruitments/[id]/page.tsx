@@ -213,15 +213,17 @@ export default function Recruitments({ params }: { params: { id: string } }) {
     }
 
     await Promise.all(
-      editAreas.filter(area => !area.id).map(async area => addRecruitArea(area))
+      editAreas
+        .filter(area => !area.id)
+        .map(async area => await addRecruitArea(area))
     );
     await Promise.all(
       editAreas
         .filter(area => !!area.id)
-        .map(async area => updateRecruitArea(area))
+        .map(async area => await updateRecruitArea(area))
     );
     await Promise.all(
-      deleteAreas.map(async area => deleteRecruitArea(area.id!))
+      deleteAreas.map(async area => await deleteRecruitArea(area.id!))
     );
 
     await updateRecruitment({
