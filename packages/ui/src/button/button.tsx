@@ -17,7 +17,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const {
       children,
       isLoading,
-      isDisabled,
+      disabled,
       variant = "solid",
       style,
       leftIcon,
@@ -31,7 +31,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       variant === "solid" ? "#4D82B2" : themes.Color.primary[20];
     const activeColor = themes.Color.primary[30];
 
-    const disabled = isLoading || isDisabled;
+    const isDisabed = isLoading || disabled;
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
       onKeyDown?.(event);
@@ -46,9 +46,10 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         className={clsx([ButtonStyle({ variant })])}
         ref={ref}
+        data-loading={isLoading}
         onKeyDown={handleKeyDown}
         role="button"
-        disabled={disabled || isLoading}
+        disabled={isDisabed}
         style={{
           ...assignInlineVars({
             [EnableColorVariant]: enableColor,
