@@ -15,7 +15,7 @@ import { Text, Button, Flex, Input, Textarea, Icon, useToast } from "@jobis/ui";
 import { useAreaState } from "@/store/areasState";
 import { IArea } from "@/apis/recruitments/types";
 import * as S from "./style";
-import { useAddedJob } from "@/store/addCodeState";
+import { useAddedJob, useAddedTech } from "@/store/addCodeState";
 
 const jobType = ["WEB", "APP", "GAME", "EMBEDDED", "SECURITY", "AI", "ASD"];
 
@@ -31,6 +31,7 @@ const GatherModal = ({ setForm, areaIndex, setAreaIndex }: IPropsType) => {
   const { mutateAsync: addCode } = useAddCode();
   const [isAddJob, setIsAddJob] = useState(false);
   const { addedJob, appendAddedJob, setAddedJob } = useAddedJob();
+  const { addedTechList, deleteAddedTechList } = useAddedTech();
   const [addJobInput, setAddJobInput] = useState("");
 
   const { area, setArea, resetArea } = useAreaState();
@@ -58,6 +59,7 @@ const GatherModal = ({ setForm, areaIndex, setAreaIndex }: IPropsType) => {
 
   const deleteTech = (id: number) => {
     deleteTechList(id);
+    deleteAddedTechList(id);
     setArea({
       ...area,
       tech_codes: area.tech_codes.filter(techCode => techCode !== id),
@@ -247,6 +249,14 @@ const GatherModal = ({ setForm, areaIndex, setAreaIndex }: IPropsType) => {
         <S.ContentsText>필요한 기술 스택을 추가하세요.</S.ContentsText>
         <S.CardWrapper>
           {techList.map(res => {
+            return (
+              <S.Card type="button" key={res?.code}>
+                {res?.keyword}
+                <S.XText onClick={() => deleteTech(res.code)}>x</S.XText>
+              </S.Card>
+            );
+          })}
+          {addedTechList.map(res => {
             return (
               <S.Card type="button" key={res?.code}>
                 {res?.keyword}

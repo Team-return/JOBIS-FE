@@ -79,12 +79,8 @@ export default function Recruitments({ params }: { params: { id: string } }) {
             hiring: area.hiring,
             preferential_treatment: area.preferential_treatment,
             major_task: area.major_task,
-            job_codes: jobName?.codes
-              .filter(code => area.job.includes(code.keyword))
-              .map(res => res.code),
-            tech_codes: techName?.codes
-              .filter(code => area.tech.includes(code.keyword))
-              .map(res => res.code),
+            job_codes: area.job.map(res => res.id),
+            tech_codes: area.tech.map(res => res.id),
           } as IArea;
         }) || [],
       working_hours: "",
@@ -99,8 +95,8 @@ export default function Recruitments({ params }: { params: { id: string } }) {
   const [areaIndex, setAreaIndex] = useState<number | null>(null);
 
   const { modalState, closeModal, openModal } = useModal();
-  const { addedJob } = useAddedJob();
-  const { addedTechList } = useAddedTech();
+  const { addedJob, setAddedJob } = useAddedJob();
+  const { addedTechList, setAddedTechList } = useAddedTech();
 
   const { toast } = useToast();
 
@@ -218,14 +214,16 @@ export default function Recruitments({ params }: { params: { id: string } }) {
 
     await Promise.all(
       editAreas
+        .filter(area => !area.id)
+        .map(async area => await addRecruitArea(area))
+    );
+    await Promise.all(
+      editAreas
         .filter(area => !!area.id)
-        .map(async area => updateRecruitArea(area))
+        .map(async area => await updateRecruitArea(area))
     );
     await Promise.all(
-      editAreas.filter(area => !area.id).map(async area => addRecruitArea(area))
-    );
-    await Promise.all(
-      deleteAreas.map(async area => deleteRecruitArea(area.id!))
+      deleteAreas.map(async area => await deleteRecruitArea(area.id!))
     );
 
     await updateRecruitment({
@@ -252,18 +250,36 @@ export default function Recruitments({ params }: { params: { id: string } }) {
             hiring: area.hiring,
             major_task: area.major_task,
             preferential_treatment: area.preferential_treatment,
-            job_codes: jobName?.codes
-              .filter(code => area.job.includes(code.keyword))
-              .map(res => res.code),
-            tech_codes: techName?.codes
-              .filter(code => area.tech.includes(code.keyword))
-              .map(res => res.code),
+            job_codes: area.job.map(res => res.id),
+            tech_codes: area.tech.map(res => res.id),
           } as IArea;
         })
       );
       if (!recruitmentDetail.start_date && !recruitmentDetail.end_date) {
         setAlwaysRecruit(true);
       }
+      recruitmentDetail.areas.map(area =>
+        setAddedJob(
+          area.job
+            .filter(
+              job =>
+                !jobName?.codes.map(jobCode => jobCode.code).includes(job.id)
+            )
+            .map(job => ({ keyword: job.name, code: job.id }))
+        )
+      );
+      recruitmentDetail.areas.map(area =>
+        setAddedTechList(
+          area.tech
+            .filter(
+              tech =>
+                !techName?.codes
+                  .map(techCode => techCode.code)
+                  .includes(tech.id)
+            )
+            .map(tech => ({ keyword: tech.name, code: tech.id }))
+        )
+      );
       setLicenses(recruitmentDetail.required_licenses);
       setHiringProgress(recruitmentDetail.hiring_progress);
       const documents = recruitmentDetail.submit_document?.split(", ");
@@ -301,8 +317,8 @@ export default function Recruitments({ params }: { params: { id: string } }) {
       } else {
         const [startTime, endTime] =
           recruitmentDetail.working_hours.split(" ~ ");
-        setValue("start_time", startTime);
-        setValue("end_time", endTime);
+        setValue("start_time", startTime.slice(0, 5));
+        setValue("end_time", endTime.slice(0, 5));
       }
     }
   }, [recruitmentDetail, setValue, params.id]);
@@ -428,6 +444,7 @@ export default function Recruitments({ params }: { params: { id: string } }) {
                 <S.Boxs>
                   {areas.map((area, idx) => {
                     const {
+                      id,
                       job_codes,
                       tech_codes,
                       hiring,
@@ -472,6 +489,7 @@ export default function Recruitments({ params }: { params: { id: string } }) {
                           onClick={() => {
                             openModal("GATHER_FIELD");
                             setArea({
+                              id,
                               job_codes,
                               tech_codes,
                               hiring,
@@ -479,11 +497,13 @@ export default function Recruitments({ params }: { params: { id: string } }) {
                               preferential_treatment,
                             });
                             setTechList(
-                              tech_codes.map(techCode => {
-                                return techName?.codes.find(
-                                  code => code.code === techCode
-                                ) as ICode;
-                              })
+                              tech_codes
+                                .map(techCode => {
+                                  return techName?.codes.find(
+                                    code => code.code === techCode
+                                  ) as ICode;
+                                })
+                                .filter(code => !!code)
                             );
                             setAreaIndex(idx);
                           }}

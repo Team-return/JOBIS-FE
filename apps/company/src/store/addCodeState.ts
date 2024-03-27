@@ -27,6 +27,7 @@ interface IAddedTech {
   appendAddedTechList: (tech: ICode) => void;
   setAddedTechList: (tech: ICode[]) => void;
   resetAddedTechList: () => void;
+  deleteAddedTechList: (id: number) => void;
 }
 
 export const useAddedTech = create<IAddedTech>()(
@@ -38,6 +39,10 @@ export const useAddedTech = create<IAddedTech>()(
     resetAddedTechList: () =>
       set(() => ({
         addedTechList: [],
+      })),
+    deleteAddedTechList: id =>
+      set(state => ({
+        addedTechList: state.addedTechList.filter(tech => tech.code !== id),
       })),
   }))
 );

@@ -69,11 +69,26 @@ export default function Recruitments() {
     (() => {
       window.addEventListener("beforeunload", preventClose);
     })();
+    const today = new Date();
+    setValue(
+      "start_date",
+      `${today.getFullYear()}-${(today.getMonth() + 1).toString().padStart(2, "0")}-${today.getDate().toString().padStart(2, "0")}`
+    );
 
     return () => {
       window.removeEventListener("beforeunload", preventClose);
     };
-  }, []);
+  }, [setValue]);
+
+  useEffect(() => {
+    const today = new Date();
+    if (!alwaysRecruit) {
+      setValue(
+        "start_date",
+        `${today.getFullYear()}-${(today.getMonth() + 1).toString().padStart(2, "0")}-${today.getDate().toString().padStart(2, "0")}`
+      );
+    }
+  }, [alwaysRecruit, setValue]);
 
   useEffect(() => {
     if (alwaysRecruit) {
@@ -422,27 +437,37 @@ export default function Recruitments() {
           </InputTemplate>,
           <InputTemplate title="성적">
             <Flex direction="column" gap={8}>
-              <Input
-                width={604}
-                placeholder="직접입력"
-                maxLength={3}
-                max={100}
-                {...register("required_grade", {
+              <Controller
+                control={control}
+                name="required_grade"
+                rules={{
                   max: {
                     value: 100,
                     message: "최대 100까지 입력할 수 있어요.",
                   },
-                })}
-                icon={
-                  <Text
-                    fontSize="body2"
-                    fontWeight="regular"
-                    color={themes.Color.grayScale[60]}
-                  >
-                    %이내
-                  </Text>
-                }
-                errorMessage={errors.required_grade?.message}
+                }}
+                render={({ field }) => (
+                  <Input
+                    {...field}
+                    width={604}
+                    placeholder="직접입력"
+                    maxLength={3}
+                    max={100}
+                    onChange={e =>
+                      field.onChange(e.target.value.replaceAll(/[^0-9]/g, ""))
+                    }
+                    icon={
+                      <Text
+                        fontSize="body2"
+                        fontWeight="regular"
+                        color={themes.Color.grayScale[60]}
+                      >
+                        %이내
+                      </Text>
+                    }
+                    errorMessage={errors.required_grade?.message}
+                  />
+                )}
               />
             </Flex>
           </InputTemplate>,
@@ -689,7 +714,7 @@ export default function Recruitments() {
         <Button type="submit">확인</Button>
       </Flex>
       {modalState === "HIRING_PROGRESS" && (
-        <Modal width={780} onClose={closeModal} closeAble>
+        <Modal width={780} onClose={closeModal}>
           <ProgressModal
             hiringProgressArray={hiringProgress}
             setRecruitmentFormDetailInfo={setHiringProgress}

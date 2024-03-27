@@ -52,8 +52,8 @@ export interface IMyRecruitmentResponse
   company_biz_no?: string;
   areas: {
     id?: number;
-    job: string[];
-    tech: string[];
+    job: { id: number; name: string }[];
+    tech: { id: number; name: string }[];
     major_task: string;
     hiring: number;
     preferential_treatment: string;
