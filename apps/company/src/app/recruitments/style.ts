@@ -7,7 +7,6 @@ export const Container = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100vw;
   height: 100%;
   background-color: ${themes.Color.grayScale[20]};
   gap: 16px;
@@ -96,7 +95,6 @@ export const LicenseList = styled.ul`
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
-  overflow: scroll;
   width: 604px;
   align-items: center;
   padding: 5px;
