@@ -25,7 +25,7 @@ JOBIS는 대덕소프트웨어마이스터고등학교의 취업 프로세스를
 ![graph](https://github.com/Team-return/JOBIS/assets/102665117/8ee8bd59-d3eb-4215-b361-34b36663a4e4)
 
 ## 명령어
-> 시작하기
+### 시작하기
 ```
 yarn
 yarn prepare
