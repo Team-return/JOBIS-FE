@@ -50,7 +50,7 @@ export default function Registration() {
       business_area_code:
         businessCodes?.codes.find(
           code => code.keyword === myCompanyInfo?.business_area
-        )?.keyword || 0,
+        )?.keyword || "",
       service_name: myCompanyInfo?.service_name || "",
       attachment_urls: myCompanyInfo?.attachment_urls,
       founded_at: regex.date_number(myCompanyInfo?.founded_at || ""),
@@ -63,7 +63,7 @@ export default function Registration() {
       main_address: myCompanyInfo?.main_address || "",
       sub_address: myCompanyInfo?.sub_address,
       take: regex.money(myCompanyInfo?.take.toString() || ""),
-      worker_number: myCompanyInfo?.workers_count || 0,
+      worker_number: myCompanyInfo?.workers_count || "",
       company_introduce: myCompanyInfo?.company_introduce || "",
       email: myCompanyInfo?.email || "",
       manager_name: myCompanyInfo?.manager_name || "",
@@ -499,22 +499,32 @@ export default function Registration() {
             />
           </InputTemplate>,
           <InputTemplate title="총 근로자수(명)" required>
-            <Input
-              width={604}
-              placeholder="직접입력"
-              {...register("worker_number", {
+            <Controller
+              control={control}
+              name="worker_number"
+              rules={{
                 required: "필수 입력 항목입니다.",
-              })}
-              errorMessage={errors.worker_number?.message}
-              icon={
-                <Text
-                  fontSize="body2"
-                  fontWeight="regular"
-                  color={themes.Color.grayScale[60]}
-                >
-                  명
-                </Text>
-              }
+              }}
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  width={604}
+                  placeholder="직접입력"
+                  errorMessage={errors.worker_number?.message}
+                  onChange={e =>
+                    field.onChange(e.target.value.replaceAll(/[^0-9]/g, ""))
+                  }
+                  icon={
+                    <Text
+                      fontSize="body2"
+                      fontWeight="regular"
+                      color={themes.Color.grayScale[60]}
+                    >
+                      명
+                    </Text>
+                  }
+                />
+              )}
             />
           </InputTemplate>,
           <InputTemplate title="사업분야" required>

@@ -119,6 +119,11 @@ export default function Home() {
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     field.onChange(regex.buisness_number(e.target.value))
                   }
+                  onKeyDown={e => {
+                    if (e.key === "Enter") {
+                      verify();
+                    }
+                  }}
                   errorMessage={errors.business_number?.message}
                 />
               )}
