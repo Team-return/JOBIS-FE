@@ -7,8 +7,8 @@ JOBIS는 대덕소프트웨어마이스터고등학교의 취업 프로세스를
 이 레포지토리는 JOBIS 프론트엔드 레포지토리입니다. <br />
 현재 JOBIS 프론트엔드는 [Nx](https://nx.dev/) 를 이용한 여러 서비스와 패키지를 하나의 레포지토리에서 관리하는 모노레포 방식을 사용하고 있습니다.
 
-[apps](https://github.com/Team-return/JOBIS/tree/develop/apps): jobis의 여러 웹들을 포함해요. <br />
-[packages](https://github.com/Team-return/JOBIS/tree/develop/packages): jobis 개발에 필요한 공통된 패키지 및 라이브러리를 포함해요. 
+[apps](https://github.com/Team-return/JOBIS/tree/develop/apps): jobis의 여러 웹들을 포함합니다. <br />
+[packages](https://github.com/Team-return/JOBIS/tree/develop/packages): jobis 개발에 필요한 공통된 패키지 및 라이브러리를 포함합니다. 
 
 ## 구조
 ┗━  apps <br/>
