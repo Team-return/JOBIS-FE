@@ -81,7 +81,7 @@ module.exports = {
         modifiers: ["exported"],
       },
       {
-        format: ["camelCase", "snake_case"],
+        format: ["PascalCase", "camelCase", "snake_case"],
         selector: "variable",
         leadingUnderscore: "allow",
       },

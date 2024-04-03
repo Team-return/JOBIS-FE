@@ -12,13 +12,13 @@
     "prepare": "husky install",
     "postinstall": "husky install && cp -a .husky/. .git/hooks/",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "lint:styled": "stylelint './{app,packages}/**/*.{js,ts,jsx,tsx}' --fix"
+    "lint:styled": "stylelint './{apps,packages}/**/*.{js,ts,jsx,tsx}' --fix"
   },
   "lint-staged": {
     "./{app,packages}/**/*.{js,ts,jsx,tsx}": [
       "eslint --fix",
       "prettier --config .prettierrc.cjs --write -u",
-      "stylelint './{app,packages}/**/*.{js,ts,jsx,tsx}' --fix"
+      "stylelint './{apps,packages}/**/*.{js,ts,jsx,tsx}' --fix"
     ]
   },
   "devDependencies": {
