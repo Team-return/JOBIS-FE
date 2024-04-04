@@ -9,7 +9,7 @@
   },
   "tasksRunnerOptions": {
     "default": {
-      "runner": "nx/tasks-runners/default",
+      "runner": "@vercel/remote-nx",
       "options": {
         "cacheableOperations": ["build", "test", "dev"]
       }
