@@ -12,7 +12,9 @@
       "runner": "@vercel/remote-nx",
       "options": {
         "cacheableOperations": ["build", "test", "dev"],
-        "cacheDirectory": "/tmp/nx-cache"
+        "cacheDirectory": "/tmp/nx-cache",
+        "token": "<token>",
+        "teamId": "<teamId>"
       }
     }
   },
