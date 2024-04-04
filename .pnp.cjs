@@ -72,7 +72,7 @@ const RAW_RUNTIME_STATE =
           ["@types/styled-components", "npm:5.1.34"],\
           ["@typescript-eslint/eslint-plugin", "virtual:0f900c532def39d3661b294c63c25cb192443e8e260e7bea5cb02c869c3e6e66291400e226f22c507c8abc06fa67966b9df259c364ea5e7ac15e7214331dc16d#npm:6.21.0"],\
           ["@typescript-eslint/parser", "virtual:0f900c532def39d3661b294c63c25cb192443e8e260e7bea5cb02c869c3e6e66291400e226f22c507c8abc06fa67966b9df259c364ea5e7ac15e7214331dc16d#npm:6.21.0"],\
-          ["@vercel/remote-nx", "npm:2.0.0"],\
+          ["@vercel/remote-nx", "npm:1.1.1"],\
           ["@yarnpkg/pnpify", "npm:4.0.1"],\
           ["eslint", "npm:8.57.0"],\
           ["eslint-config-prettier", "virtual:0f900c532def39d3661b294c63c25cb192443e8e260e7bea5cb02c869c3e6e66291400e226f22c507c8abc06fa67966b9df259c364ea5e7ac15e7214331dc16d#npm:9.1.0"],\
@@ -9713,13 +9713,13 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@vercel/remote-nx", [\
-      ["npm:2.0.0", {\
-        "packageLocation": "./.yarn/cache/@vercel-remote-nx-npm-2.0.0-39170db436-b4a2a2bbbc.zip/node_modules/@vercel/remote-nx/",\
+      ["npm:1.1.1", {\
+        "packageLocation": "./.yarn/cache/@vercel-remote-nx-npm-1.1.1-55bbf94094-8154a76a74.zip/node_modules/@vercel/remote-nx/",\
         "packageDependencies": [\
-          ["@vercel/remote-nx", "npm:2.0.0"],\
+          ["@vercel/remote-nx", "npm:1.1.1"],\
           ["@vercel/remote", "npm:1.0.1"],\
           ["chalk", "npm:4.1.2"],\
-          ["nx-remotecache-custom", "virtual:39170db4369018956462995f87580f6f5622b784c2e2f22434c9c080c15096dd5e0634b2e794d0743ecbdb2fff2ebc375090050f9b928ac1b50435d5674c3efc#npm:17.1.1"]\
+          ["nx-remotecache-custom", "virtual:55bbf9409446acfa216c357516fec978607df18022f69cc0d8c20dc3551c622e9547574ff5af6852bee882df816af6da7ac75b1eb731292e6f9a7bed7a034d36#npm:4.2.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -17451,7 +17451,7 @@ const RAW_RUNTIME_STATE =
           ["@types/styled-components", "npm:5.1.34"],\
           ["@typescript-eslint/eslint-plugin", "virtual:0f900c532def39d3661b294c63c25cb192443e8e260e7bea5cb02c869c3e6e66291400e226f22c507c8abc06fa67966b9df259c364ea5e7ac15e7214331dc16d#npm:6.21.0"],\
           ["@typescript-eslint/parser", "virtual:0f900c532def39d3661b294c63c25cb192443e8e260e7bea5cb02c869c3e6e66291400e226f22c507c8abc06fa67966b9df259c364ea5e7ac15e7214331dc16d#npm:6.21.0"],\
-          ["@vercel/remote-nx", "npm:2.0.0"],\
+          ["@vercel/remote-nx", "npm:1.1.1"],\
           ["@yarnpkg/pnpify", "npm:4.0.1"],\
           ["eslint", "npm:8.57.0"],\
           ["eslint-config-prettier", "virtual:0f900c532def39d3661b294c63c25cb192443e8e260e7bea5cb02c869c3e6e66291400e226f22c507c8abc06fa67966b9df259c364ea5e7ac15e7214331dc16d#npm:9.1.0"],\
@@ -19345,26 +19345,26 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["nx-remotecache-custom", [\
-      ["npm:17.1.1", {\
-        "packageLocation": "./.yarn/cache/nx-remotecache-custom-npm-17.1.1-a3b88f5373-25aba26a85.zip/node_modules/nx-remotecache-custom/",\
+      ["npm:4.2.1", {\
+        "packageLocation": "./.yarn/cache/nx-remotecache-custom-npm-4.2.1-40bc14f933-e990068eb8.zip/node_modules/nx-remotecache-custom/",\
         "packageDependencies": [\
-          ["nx-remotecache-custom", "npm:17.1.1"]\
+          ["nx-remotecache-custom", "npm:4.2.1"]\
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:39170db4369018956462995f87580f6f5622b784c2e2f22434c9c080c15096dd5e0634b2e794d0743ecbdb2fff2ebc375090050f9b928ac1b50435d5674c3efc#npm:17.1.1", {\
-        "packageLocation": "./.yarn/__virtual__/nx-remotecache-custom-virtual-88930dd051/0/cache/nx-remotecache-custom-npm-17.1.1-a3b88f5373-25aba26a85.zip/node_modules/nx-remotecache-custom/",\
+      ["virtual:55bbf9409446acfa216c357516fec978607df18022f69cc0d8c20dc3551c622e9547574ff5af6852bee882df816af6da7ac75b1eb731292e6f9a7bed7a034d36#npm:4.2.1", {\
+        "packageLocation": "./.yarn/__virtual__/nx-remotecache-custom-virtual-6ecda4e71d/0/cache/nx-remotecache-custom-npm-4.2.1-40bc14f933-e990068eb8.zip/node_modules/nx-remotecache-custom/",\
         "packageDependencies": [\
-          ["nx-remotecache-custom", "virtual:39170db4369018956462995f87580f6f5622b784c2e2f22434c9c080c15096dd5e0634b2e794d0743ecbdb2fff2ebc375090050f9b928ac1b50435d5674c3efc#npm:17.1.1"],\
-          ["@types/nx", null],\
+          ["nx-remotecache-custom", "virtual:55bbf9409446acfa216c357516fec978607df18022f69cc0d8c20dc3551c622e9547574ff5af6852bee882df816af6da7ac75b1eb731292e6f9a7bed7a034d36#npm:4.2.1"],\
+          ["@nx/workspace", null],\
+          ["@types/nx__workspace", null],\
           ["chalk", "npm:4.1.2"],\
           ["dotenv", "npm:16.4.5"],\
-          ["nx", null],\
           ["tar", "npm:6.2.1"]\
         ],\
         "packagePeers": [\
-          "@types/nx",\
-          "nx"\
+          "@nx/workspace",\
+          "@types/nx__workspace"\
         ],\
         "linkType": "HARD"\
       }]\

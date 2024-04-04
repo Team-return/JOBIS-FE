@@ -6326,14 +6326,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vercel/remote-nx@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "@vercel/remote-nx@npm:2.0.0"
+"@vercel/remote-nx@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "@vercel/remote-nx@npm:1.1.1"
   dependencies:
     "@vercel/remote": "npm:1.0.1"
     chalk: "npm:^4.1.0"
-    nx-remotecache-custom: "npm:^17.1.1"
-  checksum: 10/b4a2a2bbbcc02d3c0d3e089a079d3107c45decb03118ac77977a1c8c32d1d57a299853af8bc051d677ed46bb0a2a79e510b159ac246b733e334e5dbe19a34f27
+    nx-remotecache-custom: "npm:^4.0.0"
+  checksum: 10/8154a76a7481caa2b8ce21ee2092eb513f72f959c7e965c3822c1c8947c249a61e52ac016d39d031296ab0646045cc0e32a67b57d1edef0740a1ca5d24c5b435
   languageName: node
   linkType: hard
 
@@ -12922,7 +12922,7 @@ __metadata:
     "@types/styled-components": "npm:^5.1.34"
     "@typescript-eslint/eslint-plugin": "npm:^6.20.0"
     "@typescript-eslint/parser": "npm:^6.20.0"
-    "@vercel/remote-nx": "npm:^2.0.0"
+    "@vercel/remote-nx": "npm:^1.1.1"
     "@yarnpkg/pnpify": "npm:^4.0.1"
     eslint: "npm:^8.56.0"
     eslint-config-prettier: "npm:^9.1.0"
@@ -14442,16 +14442,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nx-remotecache-custom@npm:^17.1.1":
-  version: 17.1.1
-  resolution: "nx-remotecache-custom@npm:17.1.1"
+"nx-remotecache-custom@npm:^4.0.0":
+  version: 4.2.1
+  resolution: "nx-remotecache-custom@npm:4.2.1"
   dependencies:
     chalk: "npm:^4.1.2"
     dotenv: "npm:^16.0.3"
     tar: "npm:^6.1.12"
   peerDependencies:
-    nx: ^17.0.0
-  checksum: 10/25aba26a85c2c6894c81539b7169525c05ce80758d757d970a1dfd1f041d4891262d7e834ff965bc29aa964a202b2bd24d7c205e73736c139a4a268b741deaf6
+    "@nx/workspace": ">=16.0.0"
+  checksum: 10/e990068eb8a8ac284bb8533ab3ba511a5c6a6a313a0b10c449c2a01889182398f119fcec51f44f18d286315ca83bafec9a8706f00fa22c65ad4d6cf0031a2abb
   languageName: node
   linkType: hard
 
