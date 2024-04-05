@@ -11,7 +11,7 @@
     "default": {
       "runner": "nx-cloud",
       "options": {
-        "accessToken": "NWU0MzNiYTktMzJhNi00ZTFjLWE3ZWUtYjZjODJmZGQxYTUyfHJlYWQtd3JpdGU="
+        "accessToken": "ZjZlMjQ5ZjctZjM0Zi00ZDIyLTgyYWMtOWQxOGZhYWI1ZjJkfHJlYWQtd3JpdGU="
       }
     },
     "vercel": {
@@ -37,5 +37,5 @@
       "cache": true
     }
   },
-  "nxCloudAccessToken": "NWU0MzNiYTktMzJhNi00ZTFjLWE3ZWUtYjZjODJmZGQxYTUyfHJlYWQtd3JpdGU="
+  "nxCloudAccessToken": "ZjZlMjQ5ZjctZjM0Zi00ZDIyLTgyYWMtOWQxOGZhYWI1ZjJkfHJlYWQtd3JpdGU="
 }
