@@ -7,7 +7,6 @@ export const Container = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100vw;
   height: 100%;
   padding: 120px 0;
 

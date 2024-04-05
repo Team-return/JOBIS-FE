@@ -1,5 +1,5 @@
 {
-  "extends": "nx/presets/npm.json",
+  "extends": "./node_modules/nx/schemas/nx-schema.json",
   "affected": {
     "defaultBase": "main"
   },
@@ -9,9 +9,17 @@
   },
   "tasksRunnerOptions": {
     "default": {
-      "runner": "nx/tasks-runners/default",
+      "runner": "nx-cloud",
       "options": {
-        "cacheableOperations": ["build", "test", "dev"]
+        "accessToken": "ZjZlMjQ5ZjctZjM0Zi00ZDIyLTgyYWMtOWQxOGZhYWI1ZjJkfHJlYWQtd3JpdGU="
+      }
+    },
+    "vercel": {
+      "runner": "@vercel/remote-nx",
+      "options": {
+        "cacheableOperations": ["build", "test", "lint"],
+        "token": "<token>",
+        "teamId": "<teamId>"
       }
     }
   },
@@ -29,5 +37,5 @@
       "cache": true
     }
   },
-  "nxCloudAccessToken": "NWU0MzNiYTktMzJhNi00ZTFjLWE3ZWUtYjZjODJmZGQxYTUyfHJlYWQtd3JpdGU="
+  "nxCloudAccessToken": "ZjZlMjQ5ZjctZjM0Zi00ZDIyLTgyYWMtOWQxOGZhYWI1ZjJkfHJlYWQtd3JpdGU="
 }

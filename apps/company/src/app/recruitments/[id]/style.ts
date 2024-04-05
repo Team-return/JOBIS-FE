@@ -7,7 +7,6 @@ export const Container = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100vw;
   height: 100%;
   padding: 120px 0;
 
@@ -101,7 +100,6 @@ export const CancelIcon = styled(Image)`
 export const LicenseList = styled.ul`
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
   width: 604px;
   margin: 5px;
   padding: 5px;
