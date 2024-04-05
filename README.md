@@ -14,6 +14,7 @@ JOBIS는 대덕소프트웨어마이스터고등학교의 취업 프로세스를
 ┗━  apps <br/>
 ┃    ┗━[@jobis/company](https://github.com/Team-return/JOBIS/tree/develop/apps/company) <br/>
 ┃    ┗━ [@jobis/storybook](https://github.com/Team-return/JOBIS/tree/develop/apps/storybook) <br/>
+┃    ┗━ [@jobis/admin](https://github.com/Team-return/JOBIS/tree/develop/apps/admin) <br />
 ┗━  packages <br/>
 ┃    ┗━ [@jobis/design-token](https://github.com/Team-return/JOBIS/tree/develop/packages/design-token) <br/>
 ┃    ┗━ [@jobis/esbuild-config](https://github.com/Team-return/JOBIS/tree/develop/packages/esbuild-config) <br/>
