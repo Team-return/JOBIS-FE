@@ -6,8 +6,9 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 60px 0 20px 0;
+  margin: 60px 0 20px;
   border-radius: 10px;
+
   background-color: white;
 `;
 
@@ -23,46 +24,51 @@ export const InputWrapper = styled.div`
 
 export const SmallCardWrapper = styled.div`
   display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 600px;
+  padding: 10px 0;
+  padding-left: 10px;
   overflow-x: scroll;
   min-height: 40px;
   gap: 5px;
-  flex-wrap: wrap;
-  padding: 10px 0;
-  padding-left: 10px;
-  width: 600px;
-  align-items: center;
+
   ::-webkit-scrollbar-thumb {
     background-color: ${themes.Color.grayScale[60]};
   }
+
   ::-webkit-scrollbar-track {
     background-color: ${themes.Color.grayScale[40]};
   }
 `;
 
 export const SmallCard = styled.button`
-  border: none;
-  padding: 5px 10px;
-  background: #ffffff;
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 5px;
-  height: 25px;
   display: flex;
   align-items: center;
+  height: 25px;
   margin-right: 7px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+
+  background: #fff;
+  outline: none;
+
+  color: ${themes.Color.grayScale[90]};
   font-size: 14px;
   font-weight: 400;
-  color: ${themes.Color.grayScale[90]};
-  outline: none;
   white-space: nowrap;
+  box-shadow: 0 0 4px rgb(0 0 0 / 25%);
   cursor: default;
 `;
 
 export const XCardText = styled.div`
-  margin-left: 7px;
   margin-top: -1px;
-  cursor: pointer;
+  margin-left: 7px;
+
   color: red;
   font-size: 16px;
+  cursor: pointer;
 `;
 
 export const SearchIcon = styled(Icon)`
@@ -72,20 +78,22 @@ export const SearchIcon = styled(Icon)`
 `;
 
 export const ContentsText = styled.div`
-  font-weight: 400;
-  font-size: 14px;
-  color: #7f7f7f;
   margin-top: 8px;
+
+  color: #7f7f7f;
+  font-size: 14px;
+  font-weight: 400;
 `;
 
 export const SearchInput = styled.input`
-  background: #eaeaea;
-  border: 0.5px solid #f7f7f7;
-  border-radius: 30px;
   width: 250px;
   height: 40px;
-  outline: none;
   padding: 10px 50px 10px 20px;
+  border: 0.5px solid #f7f7f7;
+  border-radius: 30px;
+
+  background: #eaeaea;
+  outline: none;
 `;
 
 export const MaxSize = styled.div`
@@ -95,45 +103,52 @@ export const MaxSize = styled.div`
 export const BigCardWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  padding: 5px;
-  gap: 5px;
-  max-height: 300px;
   width: 600px;
   margin-bottom: 20px;
+  padding: 5px;
+
   overflow: scroll;
+  gap: 5px;
+  max-height: 300px;
 `;
 
 export const BigCard = styled.button<{ colorBool: boolean }>`
-  border: none;
-  width: 114px;
-  height: 76px;
-  background-color: ${props => (props.colorBool ? "#0F4C82" : "white")};
-  box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.25);
-  color: ${props => (props.colorBool ? "white" : "black")};
-  font-weight: 350;
-  font-size: 14px;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 5px;
+  width: 114px;
+  height: 76px;
   padding: 3px;
+  border: none;
+  border-radius: 5px;
+
+  background-color: ${props => (props.colorBool ? "#0F4C82" : "white")};
+
+  color: ${props => (props.colorBool ? "white" : "black")};
+  font-size: 14px;
+  font-weight: 350;
+  box-shadow: 0 0 1px 1px rgb(0 0 0 / 25%);
+  cursor: pointer;
+
   &:hover {
     background-color: ${props =>
       !props.colorBool && themes.Color.grayScale[40]};
+
     color: ${props => (props.colorBool ? "white" : "black")};
   }
-  cursor: pointer;
 `;
 
 export const Btn = styled.button`
   width: 92px;
   height: 40px;
+  margin-top: 20px;
   border: 1px solid #0f4c82;
   border-radius: 3px;
+
   background-color: white;
+
   color: #0f4c82;
   cursor: pointer;
-  margin-top: 20px;
 `;
 
 export const Title = styled.div`

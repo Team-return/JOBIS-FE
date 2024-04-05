@@ -8,23 +8,25 @@ export const Container = styled.form`
   flex-direction: column;
   align-items: center;
   height: 100%;
+  padding: 120px 0;
+
   background-color: ${themes.Color.grayScale[20]};
   gap: 16px;
-  padding: 120px 0;
 `;
 
 export const AddFileButton = styled.div`
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 12px;
-  font-size: ${themes.Font.body2.fontSize};
-  line-height: ${themes.Font.body2.lineHeight};
-  font-weight: ${themes.FontWeight.regular};
+  align-items: center;
   width: 604px;
-  color: ${themes.Color.primary[20]};
-  border-radius: 8px;
+  padding: 12px;
   border: 1px solid ${themes.Color.primary[20]};
+  border-radius: 8px;
+
+  color: ${themes.Color.primary[20]};
+  font-size: ${themes.Font.body2.fontSize};
+  font-weight: ${themes.FontWeight.regular};
+  line-height: ${themes.Font.body2.lineHeight};
   cursor: pointer;
 `;
 
@@ -35,35 +37,38 @@ export const ImageUpload = styled.div`
   width: 184px;
   height: 184px;
   margin-right: 420px;
-  background-color: ${themes.Color.grayScale[20]};
   border-radius: 8px;
+
+  background-color: ${themes.Color.grayScale[20]};
   cursor: pointer;
 `;
 
 export const LogoImage = styled(Image)`
-  border-radius: 8px;
   margin-right: 420px;
+  border-radius: 8px;
   cursor: pointer;
 `;
 
 export const Select = styled.select<{ isError: boolean }>`
-  border: none;
-  box-shadow: none;
-  outline: none;
-
-  background-color: ${themes.Color.grayScale[20]};
-  color: ${themes.Color.grayScale[80]};
-  border: 2px solid
-    ${({ isError }) =>
-      isError ? themes.Color.subColor.red[20] : themes.Color.grayScale[20]};
   z-index: 2;
-  border-radius: 8px;
-  font-size: ${themes.Font.body2.fontSize};
-  font-weight: ${themes.FontWeight.regular};
-  line-height: ${themes.Font.body2.lineHeight};
 
   width: 604px;
   padding: 14px;
+  border: none;
+  border: 2px solid
+    ${({ isError }) =>
+      isError ? themes.Color.subColor.red[20] : themes.Color.grayScale[20]};
+  border-radius: 8px;
+
+  background-color: ${themes.Color.grayScale[20]};
+  outline: none;
+
+  color: ${themes.Color.grayScale[80]};
+  font-size: ${themes.Font.body2.fontSize};
+  font-weight: ${themes.FontWeight.regular};
+  line-height: ${themes.Font.body2.lineHeight};
+  box-shadow: none;
+
   &::placeholder {
     color: ${themes.Color.grayScale[50]};
   }
@@ -78,10 +83,11 @@ export const Option = styled.option`
 export const FileWrapper = styled.button`
   display: flex;
   align-items: center;
-  outline: none;
-  border: none;
-  gap: 12px;
   padding: 4px 8px;
+  border: none;
   border-radius: 88px;
+
   background-color: ${themes.Color.grayScale[30]};
+  outline: none;
+  gap: 12px;
 `;

@@ -9,7 +9,7 @@ module.exports = {
     "plugin:unicorn/recommended",
     "plugin:prettier/recommended",
   ],
-  ignorePatterns: ["dist", ".eslintrc.cjs"],
+  ignorePatterns: ["dist", ".eslintrc.cjs", "vite.config.ts"],
   parser: "@typescript-eslint/parser",
   plugins: ["@typescript-eslint", "react-refresh", "unicorn", "prettier"],
   rules: {
@@ -81,7 +81,7 @@ module.exports = {
         modifiers: ["exported"],
       },
       {
-        format: ["camelCase", "snake_case"],
+        format: ["PascalCase", "camelCase", "snake_case"],
         selector: "variable",
         leadingUnderscore: "allow",
       },
