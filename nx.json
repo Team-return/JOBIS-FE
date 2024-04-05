@@ -1,5 +1,5 @@
 {
-  "extends": "nx/presets/npm.json",
+  "extends": "./node_modules/nx/schemas/nx-schema.json",
   "affected": {
     "defaultBase": "main"
   },
@@ -9,10 +9,15 @@
   },
   "tasksRunnerOptions": {
     "default": {
+      "runner": "nx-cloud",
+      "options": {
+        "accessToken": "NWU0MzNiYTktMzJhNi00ZTFjLWE3ZWUtYjZjODJmZGQxYTUyfHJlYWQtd3JpdGU="
+      }
+    },
+    "vercel": {
       "runner": "@vercel/remote-nx",
       "options": {
-        "cacheableOperations": ["build", "test", "dev"],
-        "cacheDirectory": "/tmp/nx-cache",
+        "cacheableOperations": ["build", "test", "lint"],
         "token": "<token>",
         "teamId": "<teamId>"
       }
