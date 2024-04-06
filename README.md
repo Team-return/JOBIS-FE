@@ -13,6 +13,7 @@ JOBIS는 대덕소프트웨어마이스터고등학교의 취업 프로세스를
 ## 구조
 ┗━  apps <br/>
 ┃    ┗━[@jobis/company](https://github.com/Team-return/JOBIS/tree/develop/apps/company) <br/>
+┃    ┗━[@jobis/policy](https://github.com/Team-return/JOBIS/tree/develop/apps/policy) <br/>
 ┃    ┗━ [@jobis/storybook](https://github.com/Team-return/JOBIS/tree/develop/apps/storybook) <br/>
 ┃    ┗━ [@jobis/admin](https://github.com/Team-return/JOBIS/tree/develop/apps/admin) <br />
 ┗━  packages <br/>
@@ -23,7 +24,7 @@ JOBIS는 대덕소프트웨어마이스터고등학교의 취업 프로세스를
 ┗━ package.json
 
 ## 의존성 그래프
-![graph](https://github.com/Team-return/JOBIS/assets/102665117/8ee8bd59-d3eb-4215-b361-34b36663a4e4)
+![graph](https://github.com/Team-return/JOBIS-FE/assets/102665117/23fffab8-2c01-4a4a-95d8-de4cccb9d021)
 
 ## 명령어
 ### 시작하기
