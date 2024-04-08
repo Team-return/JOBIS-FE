@@ -7,6 +7,7 @@
     "build": "nx build",
     "build:many": "nx run-many -t build",
     "build:affected": "npx nx affected -t build",
+    "graph": "nx run-many --target=build --graph",
     "dev:storybook": "nx storybook @jobis/storybook",
     "dev:packages": "nx run-many --target=dev --projects='@jobis/ui,@jobis/icons,@jobis/design-token'",
     "prepare": "husky install",
