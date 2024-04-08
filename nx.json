@@ -1,5 +1,5 @@
 {
-  "extends": "./node_modules/nx/schemas/nx-schema.json",
+  "extends": "nx/presets/npm.json",
   "affected": {
     "defaultBase": "main"
   },
@@ -27,7 +27,12 @@
   "targetDefaults": {
     "build": {
       "cache": true,
-      "dependsOn": ["^build"]
+      "dependsOn": ["^build"],
+      "outputs": [
+        "{projectRoot}/build",
+        "{projectRoot}/dist",
+        "{projectRoot}/.next"
+      ]
     },
     "test": {
       "cache": true,
