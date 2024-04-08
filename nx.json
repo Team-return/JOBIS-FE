@@ -9,12 +9,6 @@
   },
   "tasksRunnerOptions": {
     "default": {
-      "runner": "nx-cloud",
-      "options": {
-        "accessToken": "ZjZlMjQ5ZjctZjM0Zi00ZDIyLTgyYWMtOWQxOGZhYWI1ZjJkfHJlYWQtd3JpdGU="
-      }
-    },
-    "vercel": {
       "runner": "@vercel/remote-nx",
       "options": {
         "cacheableOperations": ["build"],
