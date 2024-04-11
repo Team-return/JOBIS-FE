@@ -4758,7 +4758,7 @@ const RAW_RUNTIME_STATE =
           ["@tanstack/react-query", "virtual:3d56d234886d4ad97fa4f74937d18583af1e798e4510f038d7cd99af74d90f133c440647b0d8b3d140e241533fe7e777b5c917d06ca560a768461ecead1a64d3#npm:4.36.1"],\
           ["@tanstack/react-query-devtools", "virtual:3d56d234886d4ad97fa4f74937d18583af1e798e4510f038d7cd99af74d90f133c440647b0d8b3d140e241533fe7e777b5c917d06ca560a768461ecead1a64d3#npm:4.36.1"],\
           ["@testing-library/jest-dom", "npm:5.17.0"],\
-          ["@testing-library/react", "virtual:3d56d234886d4ad97fa4f74937d18583af1e798e4510f038d7cd99af74d90f133c440647b0d8b3d140e241533fe7e777b5c917d06ca560a768461ecead1a64d3#npm:14.2.1"],\
+          ["@testing-library/react", "virtual:3d56d234886d4ad97fa4f74937d18583af1e798e4510f038d7cd99af74d90f133c440647b0d8b3d140e241533fe7e777b5c917d06ca560a768461ecead1a64d3#npm:14.3.1"],\
           ["@types/debug", "npm:4.1.12"],\
           ["@types/node", "npm:18.19.22"],\
           ["@types/react", "npm:18.2.64"],\
@@ -8850,17 +8850,17 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@testing-library/react", [\
-      ["npm:14.2.1", {\
-        "packageLocation": "./.yarn/cache/@testing-library-react-npm-14.2.1-95eb1af3fb-e02b2f32ae.zip/node_modules/@testing-library/react/",\
+      ["npm:14.3.1", {\
+        "packageLocation": "./.yarn/cache/@testing-library-react-npm-14.3.1-08c822f7c7-83359dcdf9.zip/node_modules/@testing-library/react/",\
         "packageDependencies": [\
-          ["@testing-library/react", "npm:14.2.1"]\
+          ["@testing-library/react", "npm:14.3.1"]\
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:3d56d234886d4ad97fa4f74937d18583af1e798e4510f038d7cd99af74d90f133c440647b0d8b3d140e241533fe7e777b5c917d06ca560a768461ecead1a64d3#npm:14.2.1", {\
-        "packageLocation": "./.yarn/__virtual__/@testing-library-react-virtual-2de670c58e/0/cache/@testing-library-react-npm-14.2.1-95eb1af3fb-e02b2f32ae.zip/node_modules/@testing-library/react/",\
+      ["virtual:3d56d234886d4ad97fa4f74937d18583af1e798e4510f038d7cd99af74d90f133c440647b0d8b3d140e241533fe7e777b5c917d06ca560a768461ecead1a64d3#npm:14.3.1", {\
+        "packageLocation": "./.yarn/__virtual__/@testing-library-react-virtual-de4f75c4d8/0/cache/@testing-library-react-npm-14.3.1-08c822f7c7-83359dcdf9.zip/node_modules/@testing-library/react/",\
         "packageDependencies": [\
-          ["@testing-library/react", "virtual:3d56d234886d4ad97fa4f74937d18583af1e798e4510f038d7cd99af74d90f133c440647b0d8b3d140e241533fe7e777b5c917d06ca560a768461ecead1a64d3#npm:14.2.1"],\
+          ["@testing-library/react", "virtual:3d56d234886d4ad97fa4f74937d18583af1e798e4510f038d7cd99af74d90f133c440647b0d8b3d140e241533fe7e777b5c917d06ca560a768461ecead1a64d3#npm:14.3.1"],\
           ["@babel/runtime", "npm:7.24.0"],\
           ["@testing-library/dom", "npm:9.3.4"],\
           ["@types/react", "npm:18.2.64"],\
