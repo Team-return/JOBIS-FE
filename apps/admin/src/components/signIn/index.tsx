@@ -98,22 +98,23 @@ export const SignIn = () => {
 };
 
 const Container = styled.div`
+  border-radius: 8px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 400px;
   height: 440px;
-  background-color: ${themes.Color.grayScale[10]};
-  border-radius: 8px;
-  box-shadow: 0px 4px 20px 0px rgba(112, 144, 176, 0.12);
   padding: 36px;
+
+  background-color: ${themes.Color.grayScale[10]};
+  box-shadow: 0 4px 20px 0 rgb(112 144 176 / 12%);
 `;
 
 const InputWrapper = styled.div`
-  margin: 26px 0 12px 0;
   display: flex;
   flex-direction: column;
+  margin: 26px 0 12px;
   gap: 16px;
 
   label {
@@ -127,24 +128,29 @@ const StyleInput = styled.input`
   padding: 14px 20px 14px 16px;
   border: 1px solid ${themes.Color.grayScale[50]};
   border-radius: 8px;
+
   outline: none;
+
   font-size: ${themes.Font.body2.fontSize};
   font-weight: ${themes.FontWeight.regular};
+
   &:focus {
     border: 1px solid ${themes.Color.grayScale[90]};
   }
 `;
 
 const StyleBtn = styled.button`
-  width: 100%;
-  height: 48px;
-  margin-top: 56px;
-  background-color: ${themes.Color.grayScale[90]};
-  border: none;
-  border-radius: 8px;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  height: 48px;
+  margin-top: 56px;
+  border: none;
+  border-radius: 8px;
+
+  background-color: ${themes.Color.grayScale[90]};
+
   color: ${themes.Color.grayScale[10]};
   cursor: pointer;
 `;

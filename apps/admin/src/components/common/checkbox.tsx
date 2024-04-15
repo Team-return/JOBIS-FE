@@ -30,8 +30,8 @@ export const Checkbox = forwardRef(
 
 const CheckboxWrapper = styled.label<{ $width: string }>`
   display: flex;
-  width: ${({ $width }) => $width};
   align-items: center;
+  width: ${({ $width }) => $width};
   gap: 8px;
   cursor: pointer;
 `;
@@ -42,11 +42,13 @@ const StyleCheckbox = styled.input`
   height: 18px;
   border: 2px solid ${themes.Color.grayScale[40]};
   border-radius: 4px;
+
   &:checked {
     border-color: transparent;
+
+    background-color: ${themes.Color.primary[20]};
     background-image: url("/Check.svg");
     background-position: 50%;
     background-repeat: no-repeat;
-    background-color: ${themes.Color.primary[20]};
   }
 `;

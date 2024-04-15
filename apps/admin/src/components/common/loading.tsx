@@ -18,12 +18,14 @@ export const Loading = ({ width = "100%", ...props }: PropsType) => {
 const Container = styled.div<{ $width: string }>`
   width: 28px;
   height: 28px;
+
   animation: load 1.5s ease-in-out infinite;
 
   @keyframes load {
     0% {
       transform: rotate(0deg);
     }
+
     100% {
       transform: rotate(360deg);
     }
