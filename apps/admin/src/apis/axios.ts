@@ -32,7 +32,7 @@ instance.interceptors.response.use(
       if (!refreshToken) {
         cookies.remove("access_token");
         cookies.remove("refresh_token");
-        window.location.href = "/login";
+        window.location.href = "/signin";
         return;
       }
       if (
