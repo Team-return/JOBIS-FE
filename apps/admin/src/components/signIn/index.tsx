@@ -20,12 +20,15 @@ export const SignIn = () => {
 
   const { account_id, password } = form;
 
-  const { mutate, isPending } = useSignIn(form, isSave);
+  const { mutate: signInMutate, isPending: signInIsPending } = useSignIn(
+    form,
+    isSave
+  );
   const { toast } = useToast();
 
   const enterMutate = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter" && !isPending) {
-      mutate();
+    if (e.key === "Enter" && !signInIsPending) {
+      signInMutate();
     }
   };
 
@@ -81,11 +84,11 @@ export const SignIn = () => {
       />
       <StyleBtn
         onClick={() => {
-          mutate();
+          signInMutate();
         }}
-        disabled={isPending}
+        disabled={signInIsPending}
       >
-        {isPending ? (
+        {signInIsPending ? (
           <Loading />
         ) : (
           <Text fontSize="body2" fontWeight="bold">
