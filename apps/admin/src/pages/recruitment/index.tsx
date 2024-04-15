@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 
-export const MainPage = () => {
+export const RecruitmentPage = () => {
   return <Container></Container>;
 };
 
