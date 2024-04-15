@@ -1,3 +1,3 @@
 /* eslint-disable react-refresh/only-export-components */
 export * from "./signIn";
-export * from "./main";
+export * from "./recruitment";
