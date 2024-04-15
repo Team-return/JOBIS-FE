@@ -16,7 +16,7 @@
     "lint:styled": "stylelint './{apps,packages}/**/*.{js,ts,jsx,tsx}' --fix"
   },
   "lint-staged": {
-    "./{app,packages}/**/*.{js,ts,jsx,tsx}": [
+    "./{apps,packages}/**/*.{js,ts,jsx,tsx}": [
       "eslint --fix",
       "prettier --config .prettierrc.cjs --write -u",
       "stylelint './{apps,packages}/**/*.{js,ts,jsx,tsx}' --fix"

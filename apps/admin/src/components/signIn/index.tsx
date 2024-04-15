@@ -98,7 +98,6 @@ export const SignIn = () => {
 };
 
 const Container = styled.div`
-  border-radius: 8px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -106,6 +105,7 @@ const Container = styled.div`
   width: 400px;
   height: 440px;
   padding: 36px;
+  border-radius: 8px;
 
   background-color: ${themes.Color.grayScale[10]};
   box-shadow: 0 4px 20px 0 rgb(112 144 176 / 12%);
