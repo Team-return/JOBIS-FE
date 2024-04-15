@@ -7,6 +7,10 @@ function App() {
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/signIn" element={<SignInPage />} />
+        <Route path="/recruitment" element={<></>} />
+        <Route path="/company" element={<></>} />
+        <Route path="/student" element={<></>} />
+        <Route path="/application" element={<></>} />
         <Route path="*" element={<div>404</div>} />
       </Routes>
     </BrowserRouter>

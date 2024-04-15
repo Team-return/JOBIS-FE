@@ -6,4 +6,7 @@ import tsconfigPaths from "vite-tsconfig-paths";
 export default defineConfig({
   plugins: [react(), tsconfigPaths()],
   cacheDir: "./.vite",
+  server: {
+    port: 3000,
+  },
 });
