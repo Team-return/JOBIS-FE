@@ -65,7 +65,7 @@ instance.interceptors.response.use(
               flag = false;
               cookies.remove("access_token");
               cookies.remove("refresh_token");
-              window.location.href = "/login";
+              window.location.href = "/signin";
             });
         }
       }
