@@ -4770,7 +4770,7 @@ const RAW_RUNTIME_STATE =
           ["@types/styled-components", "npm:5.1.34"],\
           ["@types/testing-library__jest-dom", "npm:5.14.9"],\
           ["autoprefixer", "virtual:3d56d234886d4ad97fa4f74937d18583af1e798e4510f038d7cd99af74d90f133c440647b0d8b3d140e241533fe7e777b5c917d06ca560a768461ecead1a64d3#npm:10.4.18"],\
-          ["axios", "npm:1.6.7"],\
+          ["axios", "npm:1.6.8"],\
           ["babel-plugin-styled-components", "virtual:3d56d234886d4ad97fa4f74937d18583af1e798e4510f038d7cd99af74d90f133c440647b0d8b3d140e241533fe7e777b5c917d06ca560a768461ecead1a64d3#npm:2.1.4"],\
           ["debug", "virtual:3d56d234886d4ad97fa4f74937d18583af1e798e4510f038d7cd99af74d90f133c440647b0d8b3d140e241533fe7e777b5c917d06ca560a768461ecead1a64d3#npm:4.3.4"],\
           ["downshift", "virtual:3d56d234886d4ad97fa4f74937d18583af1e798e4510f038d7cd99af74d90f133c440647b0d8b3d140e241533fe7e777b5c917d06ca560a768461ecead1a64d3#npm:8.4.0"],\
@@ -11459,16 +11459,6 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["axios", [\
-      ["npm:1.6.7", {\
-        "packageLocation": "./.yarn/cache/axios-npm-1.6.7-d7b9974d1b-a1932b089e.zip/node_modules/axios/",\
-        "packageDependencies": [\
-          ["axios", "npm:1.6.7"],\
-          ["follow-redirects", "virtual:d7b9974d1bba76881cc57a280a16dd4914416a6fc4923c2efbb6328057412974da1e719cef1530b7a62b97d85d828f7e1d49b5f6de3b5b0854d49902ec87827c#npm:1.15.5"],\
-          ["form-data", "npm:4.0.0"],\
-          ["proxy-from-env", "npm:1.1.0"]\
-        ],\
-        "linkType": "HARD"\
-      }],\
       ["npm:1.6.8", {\
         "packageLocation": "./.yarn/cache/axios-npm-1.6.8-85cf1e7152-3f9a79eaf1.zip/node_modules/axios/",\
         "packageDependencies": [\
@@ -15603,13 +15593,6 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["follow-redirects", [\
-      ["npm:1.15.5", {\
-        "packageLocation": "./.yarn/cache/follow-redirects-npm-1.15.5-9d14db76ca-d467f13c1c.zip/node_modules/follow-redirects/",\
-        "packageDependencies": [\
-          ["follow-redirects", "npm:1.15.5"]\
-        ],\
-        "linkType": "SOFT"\
-      }],\
       ["npm:1.15.6", {\
         "packageLocation": "./.yarn/cache/follow-redirects-npm-1.15.6-50635fe51d-70c7612c4c.zip/node_modules/follow-redirects/",\
         "packageDependencies": [\
@@ -15621,19 +15604,6 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/__virtual__/follow-redirects-virtual-7bb5ea93fd/0/cache/follow-redirects-npm-1.15.6-50635fe51d-70c7612c4c.zip/node_modules/follow-redirects/",\
         "packageDependencies": [\
           ["follow-redirects", "virtual:85cf1e7152e3c0d8e39e61ad2b81b59a43fb6bdb8f3bf49869bb97804b1403ecaee4505fcb0d4869cfdd99ee3eaa880b79498575407fb770c800bf64c64156ec#npm:1.15.6"],\
-          ["@types/debug", null],\
-          ["debug", null]\
-        ],\
-        "packagePeers": [\
-          "@types/debug",\
-          "debug"\
-        ],\
-        "linkType": "HARD"\
-      }],\
-      ["virtual:d7b9974d1bba76881cc57a280a16dd4914416a6fc4923c2efbb6328057412974da1e719cef1530b7a62b97d85d828f7e1d49b5f6de3b5b0854d49902ec87827c#npm:1.15.5", {\
-        "packageLocation": "./.yarn/__virtual__/follow-redirects-virtual-393395f3f6/0/cache/follow-redirects-npm-1.15.5-9d14db76ca-d467f13c1c.zip/node_modules/follow-redirects/",\
-        "packageDependencies": [\
-          ["follow-redirects", "virtual:d7b9974d1bba76881cc57a280a16dd4914416a6fc4923c2efbb6328057412974da1e719cef1530b7a62b97d85d828f7e1d49b5f6de3b5b0854d49902ec87827c#npm:1.15.5"],\
           ["@types/debug", null],\
           ["debug", null]\
         ],\
@@ -19949,7 +19919,7 @@ const RAW_RUNTIME_STATE =
           ["@yarnpkg/lockfile", "npm:1.1.0"],\
           ["@yarnpkg/parsers", "npm:3.0.0-rc.46"],\
           ["@zkochan/js-yaml", "npm:0.0.6"],\
-          ["axios", "npm:1.6.7"],\
+          ["axios", "npm:1.6.8"],\
           ["chalk", "npm:4.1.2"],\
           ["cli-cursor", "npm:3.1.0"],\
           ["cli-spinners", "npm:2.6.1"],\
@@ -20010,7 +19980,7 @@ const RAW_RUNTIME_STATE =
           ["@yarnpkg/lockfile", "npm:1.1.0"],\
           ["@yarnpkg/parsers", "npm:3.0.0-rc.46"],\
           ["@zkochan/js-yaml", "npm:0.0.6"],\
-          ["axios", "npm:1.6.7"],\
+          ["axios", "npm:1.6.8"],\
           ["chalk", "npm:4.1.2"],\
           ["cli-cursor", "npm:3.1.0"],\
           ["cli-spinners", "npm:2.6.1"],\
@@ -20071,7 +20041,7 @@ const RAW_RUNTIME_STATE =
           ["@yarnpkg/lockfile", "npm:1.1.0"],\
           ["@yarnpkg/parsers", "npm:3.0.0-rc.46"],\
           ["@zkochan/js-yaml", "npm:0.0.6"],\
-          ["axios", "npm:1.6.7"],\
+          ["axios", "npm:1.6.8"],\
           ["chalk", "npm:4.1.2"],\
           ["cli-cursor", "npm:3.1.0"],\
           ["cli-spinners", "npm:2.6.1"],\
