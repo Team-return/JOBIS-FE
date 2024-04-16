@@ -1,2 +1,1 @@
-/* eslint-disable react-refresh/only-export-components */
-export * from "./loadingIcon.tsx";
+export { default as LoadIcon } from "./loadIcon.svg";

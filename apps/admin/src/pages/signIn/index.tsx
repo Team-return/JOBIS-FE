@@ -1,4 +1,4 @@
-import { SignIn } from "@components/signIn";
+import { SignIn } from "@/components";
 import { styled } from "styled-components";
 
 export const SignInPage = () => {

@@ -1,9 +1,9 @@
-import { useSignIn } from "@apis/users";
+import { useSignIn } from "@/apis";
 import type { SignInRequest } from "@apis/users/types";
-import { Checkbox, Loading } from "@components/common";
-import { useForm } from "@hooks/useForm";
+import { Checkbox, Loading } from "@/components";
+import { useForm } from "@/hooks";
 import { themes } from "@jobis/design-token";
-import { Text, Icon, useToast } from "@jobis/ui";
+import { Text, Icon } from "@jobis/ui";
 import { useState } from "react";
 import { useCookies } from "react-cookie";
 import { styled } from "styled-components";
@@ -24,10 +24,9 @@ export const SignIn = () => {
     form,
     isSave
   );
-  const { toast } = useToast();
 
   const enterMutate = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter" && !signInIsPending) {
+    if (e.key === "Enter" && !signInIsPending && !!account_id && !!password) {
       signInMutate();
     }
   };
@@ -74,19 +73,13 @@ export const SignIn = () => {
         checked={isSave}
         onChange={() => {
           setIsSave(prev => !prev);
-          toast({
-            payload: {
-              message: "로그인에 성공하였습니다.",
-              type: "success",
-            },
-          });
         }}
       />
       <StyleBtn
         onClick={() => {
           signInMutate();
         }}
-        disabled={signInIsPending}
+        disabled={signInIsPending || !account_id || !password}
       >
         {signInIsPending ? (
           <Loading />

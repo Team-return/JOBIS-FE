@@ -1,7 +1,12 @@
+import { Recruitment } from "@/components";
 import { styled } from "styled-components";
 
 export const RecruitmentPage = () => {
-  return <Container></Container>;
+  return (
+    <Container>
+      <Recruitment />
+    </Container>
+  );
 };
 
 const Container = styled.div`

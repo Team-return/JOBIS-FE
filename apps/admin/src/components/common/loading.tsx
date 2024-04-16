@@ -1,4 +1,4 @@
-import { LoadingIcon } from "@assets/images";
+import { LoadIcon } from "@assets/images";
 import { type HTMLAttributes } from "react";
 import { styled } from "styled-components";
 
@@ -10,7 +10,7 @@ type PropsType = {
 export const Loading = ({ width = "100%", ...props }: PropsType) => {
   return (
     <Container $width={width} {...props}>
-      <LoadingIcon width={28} height={28} />
+      <img src={LoadIcon} width={28} height={28} />
     </Container>
   );
 };
