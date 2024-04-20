@@ -627,11 +627,16 @@ export default function Registration() {
           </InputTemplate>,
           <InputTemplate title="이메일" required>
             <Input
-              type="email"
+              type="text"
               width={604}
               placeholder="직접입력"
               {...register("email", {
                 required: "필수 입력 항목입니다.",
+                pattern: {
+                  value:
+                    /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/,
+                  message: "유효한 이메일 형식이 아닙니다.",
+                },
               })}
               errorMessage={errors.email?.message}
             />
