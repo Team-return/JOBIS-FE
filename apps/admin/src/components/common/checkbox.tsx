@@ -1,7 +1,7 @@
 import { themes } from "@jobis/design-token";
 import { Text } from "@jobis/ui";
-import { type InputHTMLAttributes, forwardRef, type ForwardedRef } from "react";
-import { styled } from "styled-components";
+import { forwardRef, type InputHTMLAttributes, type ForwardedRef } from "react";
+import { css, styled } from "styled-components";
 
 type PropsType = {
   label?: string;
@@ -10,7 +10,7 @@ type PropsType = {
 
 export const Checkbox = forwardRef(
   (
-    { label, width = "100%", ...props }: PropsType,
+    { label, width, ...props }: PropsType,
     ref: ForwardedRef<HTMLInputElement>
   ) => {
     return (
@@ -28,10 +28,14 @@ export const Checkbox = forwardRef(
   }
 );
 
-const CheckboxWrapper = styled.label<{ $width: string }>`
+const CheckboxWrapper = styled.label<{ $width: string | undefined }>`
   display: flex;
   align-items: center;
-  width: ${({ $width }) => $width};
+  ${({ $width }) =>
+    $width &&
+    css`
+      width: ${$width};
+    `}
   gap: 8px;
   cursor: pointer;
 `;
