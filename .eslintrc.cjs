@@ -67,6 +67,7 @@ module.exports = {
     "unicorn/catch-error-name": "off",
     "unicorn/prefer-spread": "off",
     "unicorn/no-lonely-if": "off",
+    "unicorn/prefer-string-replace-all": "off",
 
     "@typescript-eslint/ban-ts-comment": "off", // ts-ignore 가능
     "@typescript-eslint/no-unused-vars": "off", // 위 no-unused-vars와 중복
