@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { ChangeEvent, useState } from "react";
+import { useState, type ChangeEvent } from "react";
 
 /** input 상태를 관리하는 함수입니다.*/
 export function useForm<T>(initialState: T) {
