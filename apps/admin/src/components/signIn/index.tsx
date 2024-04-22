@@ -1,6 +1,6 @@
 import { useSignIn } from "@/apis";
-import type { SignInRequest } from "@apis/users/types";
-import { Checkbox, Loading } from "@/components";
+import type { SignInRequest } from "@/apis";
+import { Checkbox, Loading, Stack } from "@/components";
 import { useForm } from "@/hooks";
 import { themes } from "@jobis/design-token";
 import { Text, Icon } from "@jobis/ui";
@@ -48,7 +48,7 @@ export const SignIn = () => {
         </label>
         <label>
           <Text fontSize="caption">비밀번호</Text>
-          <IconWrapper>
+          <Stack position="relative" direction="column" justify="center">
             <StyleInput
               name="password"
               value={password}
@@ -65,16 +65,18 @@ export const SignIn = () => {
                 setView(prev => !prev);
               }}
             />
-          </IconWrapper>
+          </Stack>
         </label>
       </InputWrapper>
-      <Checkbox
-        label="아이디 저장"
-        checked={isSave}
-        onChange={() => {
-          setIsSave(prev => !prev);
-        }}
-      />
+      <Stack>
+        <Checkbox
+          label="아이디 저장"
+          checked={isSave}
+          onChange={() => {
+            setIsSave(prev => !prev);
+          }}
+        />
+      </Stack>
       <StyleBtn
         onClick={() => {
           signInMutate();
@@ -149,13 +151,10 @@ const StyleBtn = styled.button`
 
   color: ${themes.Color.grayScale[10]};
   cursor: pointer;
-`;
 
-const IconWrapper = styled.label`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  &:disabled {
+    opacity: 0.3;
+  }
 `;
 
 const EyeIcon = styled(Icon)`
