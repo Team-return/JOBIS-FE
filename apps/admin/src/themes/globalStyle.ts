@@ -1,3 +1,4 @@
+import { themes } from "@jobis/design-token";
 import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
@@ -37,7 +38,7 @@ footer, header, hgroup, main, menu, nav, section {
 }
 
 body {
-    background-color: #F5F5F5;
+    background-color: ${themes.Color.grayScale[30]};
 
     line-height: 1;
 }
