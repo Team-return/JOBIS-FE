@@ -59,9 +59,8 @@ export const DateRangePicker = ({
     },
   });
 
-  const firstDate = new Date(currentDate.year, currentDate.month, 1);
-  const lastDate = new Date(currentDate.year, currentDate.month - 1, 0);
-  const beforeLastDate = new Date(currentDate.year, currentDate.month, 0);
+  const lastDate = new Date(currentDate.year, currentDate.month, 0);
+  const beforeLastDate = new Date(currentDate.year, currentDate.month - 1, 0);
 
   const dateClickHandler = (year: number, month: number, date: number) => {
     const clickDate = new Date(year, month - 1, date);
@@ -226,7 +225,7 @@ export const DateRangePicker = ({
               </Stack>
             </Stack>
             <DateWrapper>
-              {Array.from({ length: firstDate.getDay() }, (_, idx) => (
+              {Array.from({ length: beforeLastDate.getDay() + 1 }, (_, idx) => (
                 <DateCell key={idx} disabled={true}>
                   {beforeLastDate.getDate() - idx}
                 </DateCell>
@@ -355,6 +354,14 @@ const DateCell = styled.button<{ $isSelect?: boolean; $isPeriod?: boolean }>`
   font-weight: ${themes.FontWeight.medium};
   cursor: pointer;
 
+  &:hover {
+    border: 1px solid ${themes.Color.primary[20]};
+
+    background-color: ${themes.Color.grayScale[10]};
+
+    color: ${themes.Color.primary[20]};
+  }
+
   &:disabled {
     border: 1px solid ${themes.Color.grayScale[40]};
 
@@ -362,20 +369,14 @@ const DateCell = styled.button<{ $isSelect?: boolean; $isPeriod?: boolean }>`
 
     color: ${themes.Color.grayScale[50]};
     cursor: not-allowed;
-
-    :hover {
-      border: 1px solid ${themes.Color.grayScale[40]};
-
-      color: ${themes.Color.grayScale[50]};
-    }
   }
 
-  &:hover {
-    border: 1px solid ${themes.Color.primary[20]};
+  &:disabled:hover {
+    border: 1px solid ${themes.Color.grayScale[40]};
 
-    background-color: ${themes.Color.grayScale[10]};
+    background-color: ${themes.Color.grayScale[30]};
 
-    color: ${themes.Color.primary[20]};
+    color: ${themes.Color.grayScale[50]};
   }
 `;
 
