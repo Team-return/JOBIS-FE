@@ -1,12 +1,12 @@
 import axios from "axios";
-import { RefreshResponse } from "./types";
+import type { RefreshResponse } from "@/apis";
 
 const router = "/auth";
 
 /** 토큰 재발급 */
 export const reIssueToken = async (refreshToken: string) => {
   const { data } = await axios.put<RefreshResponse>(
-    `${process.env.REACT_APP_BASE_URL}${router}/reissue`,
+    `${import.meta.env.VITE_BASE_URL}${router}/reissue?platform-type=WEB`,
     null,
     {
       headers: {
