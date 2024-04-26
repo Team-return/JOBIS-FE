@@ -60,3 +60,8 @@ export const CompanyStatusColor = {
   RECRUITING: themes.Color.subColor.blue[20],
   REQUESTED: themes.Color.subColor.yellow[20],
 } as const;
+
+export const winterInternStringToBool = {
+  체험형: true,
+  채용형: false,
+} as const;
