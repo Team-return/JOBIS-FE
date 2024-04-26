@@ -32,6 +32,7 @@
       "@themes/*": ["src/themes/*"],
       "@stores/*": ["src/stores/*"],
       "@constants/*": ["src/constants/*"],
+      "@@types/*": ["src/@types/*"],
       "@/*": ["./src/*"]
     }
   },
