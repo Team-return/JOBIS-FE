@@ -46,6 +46,7 @@ const StyleCheckbox = styled.input`
   height: 18px;
   border: 2px solid ${themes.Color.grayScale[40]};
   border-radius: 4px;
+  cursor: pointer;
 
   &:checked {
     border-color: transparent;

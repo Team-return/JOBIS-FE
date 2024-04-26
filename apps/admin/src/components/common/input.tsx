@@ -8,14 +8,14 @@ import {
 } from "react";
 import { styled } from "styled-components";
 
-type InputProps = {
+type PropsType = {
   isSearch?: boolean;
   width?: CSSProperties["width"];
 } & InputHTMLAttributes<HTMLInputElement>;
 
 export const Input = forwardRef(
   (
-    { isSearch = false, width = "100%", onChange, ...props }: InputProps,
+    { isSearch = false, width = "100%", onChange, ...props }: PropsType,
     ref: ForwardedRef<HTMLInputElement>
   ) => {
     return (
