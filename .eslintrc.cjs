@@ -4,14 +4,20 @@ module.exports = {
   extends: [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
     "plugin:react-hooks/recommended",
-    "plugin:@typescript-eslint/recommended",
     "plugin:unicorn/recommended",
     "plugin:prettier/recommended",
   ],
   ignorePatterns: ["dist", ".eslintrc.cjs", "vite.config.ts"],
   parser: "@typescript-eslint/parser",
-  plugins: ["@typescript-eslint", "react-refresh", "unicorn", "prettier"],
+  plugins: [
+    "@typescript-eslint",
+    "react",
+    "react-refresh",
+    "unicorn",
+    "prettier",
+  ],
   rules: {
     "prettier/prettier": [
       "error",
@@ -23,6 +29,18 @@ module.exports = {
       "warn",
       { allowConstantExport: true },
     ], // 기본 설정
+    "react/jsx-tag-spacing": [
+      "error",
+      {
+        closingSlash: "never",
+        beforeSelfClosing: "always",
+        afterOpening: "never",
+        beforeClosing: "never",
+      },
+    ],
+    "react/self-closing-comp": "error",
+    "react/display-name": "off",
+    "react/react-in-jsx-scope": "off",
 
     curly: "error", // 중괄호 생략 금지
     "no-var": "error", // var 금지
