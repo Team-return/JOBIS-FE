@@ -2,13 +2,14 @@ import { css, styled } from "styled-components";
 import { Text } from "@jobis/ui";
 import { themes } from "@jobis/design-token";
 import { Stack, Pagination, Loading } from "@/components";
-import { CellData, CompanyStatusKrToEn } from "@/constants";
+import { CellData } from "@/constants";
 import { useEffect, useState, type CSSProperties } from "react";
 import { Row } from "./row";
 import { Filter } from "./filter";
 import { useGetAllRecruitmentForm } from "@/apis";
-import { useCountNum } from "@/hooks";
+import { useNumCountAnimation } from "@/hooks";
 import { useRecruitmentFilter } from "@/stores";
+import { CompanyStatusKrToEn } from "@@types/enums";
 
 export const Recruitment = () => {
   const [page, setPage] = useState(1);
@@ -81,7 +82,7 @@ export const Recruitment = () => {
         <Text fontSize="body2" style={{ marginBottom: "4px" }}>
           총{" "}
           <span style={{ color: themes.Color.subColor.blue[20] }}>
-            {useCountNum(filteringRecruitments?.length || 0, 0, 1000)}
+            {useNumCountAnimation(filteringRecruitments?.length || 0, 0, 1000)}
           </span>
           개
         </Text>

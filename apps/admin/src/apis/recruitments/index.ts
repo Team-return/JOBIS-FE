@@ -4,7 +4,7 @@ import { MutationOptions, useMutation, useQuery } from "@tanstack/react-query";
 import type { RecruitmentFormResponse } from "@/apis";
 import type { RecruitmentStatusType, WinterInternType } from "@@types/types";
 import toast from "react-hot-toast";
-import { winterInternStringToBool } from "@/constants";
+import { winterInternStringToBool } from "@@types/enums";
 import { AxiosError } from "axios";
 
 const router = "/recruitments";
@@ -41,7 +41,7 @@ export const useChangeRecruitmentsStatus = (
 
   return useMutation({
     ...options,
-    mutationFn: async () => instance.patch(`${router}/status`, data),
+    mutationFn: () => instance.patch(`${router}/status`, data),
     onError: (err: AxiosError<AxiosError>) => {
       if (err.response) {
         switch (err.response.status) {

@@ -13,7 +13,7 @@ export const useSignIn = (signInData: SignInRequest, isCheck: boolean) => {
   const [, setCookies, removeCookies] = useCookies();
 
   return useMutation({
-    mutationFn: async () =>
+    mutationFn: () =>
       axios.post(`${import.meta.env.VITE_BASE_URL}${router}/login`, signInData),
     onSuccess: (res: AxiosResponse) => {
       if (res.data.authority === "TEACHER") {

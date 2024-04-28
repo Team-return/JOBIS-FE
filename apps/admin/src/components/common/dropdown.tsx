@@ -69,7 +69,7 @@ export const Dropdown = forwardRef(
                   ? themes.Color.primary[20]
                   : themes.Color.grayScale[60]
               }
-            ></ChevronImg>
+            />
           </Container>
           {isOpen && (
             <ListWrapper $width={width}>

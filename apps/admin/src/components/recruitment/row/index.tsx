@@ -1,17 +1,17 @@
 import { css, styled } from "styled-components";
 import { Text } from "@jobis/ui";
 import { themes } from "@jobis/design-token";
-import {
-  CellData,
-  CompanyStatusColor,
-  CompanyStatusKrToEn,
-  CompanyTypeEnToKr,
-} from "@/constants";
+import { CellData } from "@/constants";
 import { getValueByKey } from "@/utils";
 import { Checkbox, Stack } from "@/components";
 import type { RecruitmentFormType } from "@/apis";
 import { useSelectRecruitmentId } from "@/stores";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import {
+  CompanyStatusColor,
+  CompanyStatusKrToEn,
+  CompanyTypeEnToKr,
+} from "@@types/enums";
 
 export type PropsType = {
   data: RecruitmentFormType;

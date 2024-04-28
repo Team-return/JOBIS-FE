@@ -28,7 +28,7 @@ export const Checkbox = forwardRef(
   }
 );
 
-const CheckboxWrapper = styled.label<{ $width: string | undefined }>`
+const CheckboxWrapper = styled.label<{ $width?: string }>`
   display: flex;
   align-items: center;
   ${({ $width }) =>

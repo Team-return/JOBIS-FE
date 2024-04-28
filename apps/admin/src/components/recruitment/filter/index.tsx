@@ -10,7 +10,7 @@ import { useRecruitmentFilter, useSelectRecruitmentId } from "@/stores";
 import { useChangeRecruitmentsStatus } from "@/apis";
 import { useState } from "react";
 import type { RecruitmentStatusKrType } from "@@types/types";
-import { CompanyStatusKrToEn } from "@/constants";
+import { CompanyStatusKrToEn } from "@@types/enums";
 import { useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { Icon, Text } from "@jobis/ui";
@@ -95,7 +95,7 @@ export const Filter = () => {
                 <ChevronImg
                   $isopen={isOpen}
                   stroke={themes.Color.grayScale[60]}
-                ></ChevronImg>
+                />
               </DateWrapper>
             </Stack>
             {isOpen && (
@@ -123,7 +123,7 @@ export const Filter = () => {
                       setIsOpen(false);
                     }}
                     style={{ cursor: "pointer" }}
-                  ></Icon>
+                  />
                 </Stack>
                 <DateRangePicker
                   startDate={recruitmentFilter.startDate}

@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 
-export const useCountNum = (end: number, start = 0, duration = 2000) => {
+export const useNumCountAnimation = (
+  end: number,
+  start = 0,
+  duration = 2000
+) => {
   const [count, setCount] = useState(start);
   const frameRate = 1000 / 60;
   const totalFrame = Math.round(duration / frameRate);
