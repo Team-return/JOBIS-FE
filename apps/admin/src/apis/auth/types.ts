@@ -1,7 +1,8 @@
 export type RefreshResponse = {
+  access_expires_at: string;
   access_token: string;
-  access_token_expired_at: Date;
-  refresh_token: string;
-  refresh_token_expired_at: Date;
   authority: string;
+  platform_type: string;
+  refresh_expires_at: string;
+  refresh_token: string;
 };

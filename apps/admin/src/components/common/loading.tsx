@@ -1,23 +1,23 @@
-import { LoadingIcon } from "@assets/images";
-import { type HTMLAttributes } from "react";
+import { LoadIcon } from "@assets/images";
+import type { HTMLAttributes } from "react";
 import { styled } from "styled-components";
 
 type PropsType = {
   label?: string;
-  width?: string;
+  size?: number;
 } & HTMLAttributes<HTMLDivElement>;
 
-export const Loading = ({ width = "100%", ...props }: PropsType) => {
+export const Loading = ({ size = 28, ...props }: PropsType) => {
   return (
-    <Container $width={width} {...props}>
-      <LoadingIcon width={28} height={28} />
+    <Container $size={size} {...props}>
+      <img src={LoadIcon} width={size} height={size} />
     </Container>
   );
 };
 
-const Container = styled.div<{ $width: string }>`
-  width: 28px;
-  height: 28px;
+const Container = styled.div<{ $size: number }>`
+  width: ${({ $size }) => $size}px;
+  height: ${({ $size }) => $size}px;
 
   animation: load 1.5s ease-in-out infinite;
 

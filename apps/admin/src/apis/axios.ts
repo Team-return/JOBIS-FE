@@ -1,7 +1,7 @@
 /* eslint-disable unicorn/consistent-destructuring */
 import axios, { type AxiosError } from "axios";
 import { Cookies } from "react-cookie";
-import { reIssueToken } from "./auth";
+import { reIssueToken } from "@/apis";
 
 export const instance = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
@@ -29,12 +29,6 @@ instance.interceptors.response.use(
     if (axios.isAxiosError(error) && error.response) {
       const { config } = error;
       const refreshToken = cookies.get("refresh_token");
-      if (!refreshToken) {
-        cookies.remove("access_token");
-        cookies.remove("refresh_token");
-        window.location.href = "/signin";
-        return;
-      }
       if (
         error.response.data.message === "Invalid Token" ||
         error.response.data.message === "Token Expired" ||
@@ -48,8 +42,8 @@ instance.interceptors.response.use(
             .then(res => {
               flag = false;
               cookies.remove("refresh_token");
-              const accessExpired = new Date(res.access_token_expired_at);
-              const refreshExpired = new Date(res.refresh_token_expired_at);
+              const accessExpired = new Date(res.access_expires_at);
+              const refreshExpired = new Date(res.refresh_expires_at);
               cookies.set("access_token", res.access_token, {
                 expires: accessExpired,
               });

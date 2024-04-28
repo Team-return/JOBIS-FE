@@ -1,9 +1,9 @@
-import { useSignIn } from "@apis/users";
-import type { SignInRequest } from "@apis/users/types";
-import { Checkbox, Loading } from "@components/common";
-import { useForm } from "@hooks/useForm";
+import { useSignIn } from "@/apis";
+import type { SignInRequest } from "@/apis";
+import { Checkbox, Loading, Stack } from "@/components";
+import { useForm } from "@/hooks";
 import { themes } from "@jobis/design-token";
-import { Text, Icon, useToast } from "@jobis/ui";
+import { Text, Icon } from "@jobis/ui";
 import { useState } from "react";
 import { useCookies } from "react-cookie";
 import { styled } from "styled-components";
@@ -24,10 +24,9 @@ export const SignIn = () => {
     form,
     isSave
   );
-  const { toast } = useToast();
 
   const enterMutate = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter" && !signInIsPending) {
+    if (e.key === "Enter" && !signInIsPending && !!account_id && !!password) {
       signInMutate();
     }
   };
@@ -49,7 +48,7 @@ export const SignIn = () => {
         </label>
         <label>
           <Text fontSize="caption">비밀번호</Text>
-          <IconWrapper>
+          <Stack position="relative" direction="column" justify="center">
             <StyleInput
               name="password"
               value={password}
@@ -66,27 +65,23 @@ export const SignIn = () => {
                 setView(prev => !prev);
               }}
             />
-          </IconWrapper>
+          </Stack>
         </label>
       </InputWrapper>
-      <Checkbox
-        label="아이디 저장"
-        checked={isSave}
-        onChange={() => {
-          setIsSave(prev => !prev);
-          toast({
-            payload: {
-              message: "로그인에 성공하였습니다.",
-              type: "success",
-            },
-          });
-        }}
-      />
+      <Stack>
+        <Checkbox
+          label="아이디 저장"
+          checked={isSave}
+          onChange={() => {
+            setIsSave(prev => !prev);
+          }}
+        />
+      </Stack>
       <StyleBtn
         onClick={() => {
           signInMutate();
         }}
-        disabled={signInIsPending}
+        disabled={signInIsPending || !account_id || !password}
       >
         {signInIsPending ? (
           <Loading />
@@ -156,13 +151,10 @@ const StyleBtn = styled.button`
 
   color: ${themes.Color.grayScale[10]};
   cursor: pointer;
-`;
 
-const IconWrapper = styled.label`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  &:disabled {
+    opacity: 0.3;
+  }
 `;
 
 const EyeIcon = styled(Icon)`

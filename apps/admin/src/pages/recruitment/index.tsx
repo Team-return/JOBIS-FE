@@ -1,13 +1,22 @@
+import { Header, Recruitment } from "@/components";
+import { Footer } from "@jobis/ui";
 import { styled } from "styled-components";
 
 export const RecruitmentPage = () => {
-  return <Container></Container>;
+  return (
+    <Container>
+      <Header />
+      <Recruitment />
+      <Footer />
+    </Container>
+  );
 };
 
 const Container = styled.div`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
   width: 100vw;
-  height: 100vh;
+  margin-top: 70px;
+  padding-top: 56px;
 `;
