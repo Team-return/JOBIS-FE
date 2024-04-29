@@ -1,4 +1,4 @@
-import { RecruitmentPage, SignInPage } from "@/pages";
+import { CompanyPage, RecruitmentPage, SignInPage } from "@/pages";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
         <Route path="/" element={<RecruitmentPage />} />
         <Route path="/signin" element={<SignInPage />} />
         <Route path="/recruitment" element={<RecruitmentPage />} />
-        <Route path="/company" element={<></>} />
+        <Route path="/company" element={<CompanyPage />} />
         <Route path="/student" element={<></>} />
         <Route path="/application" element={<></>} />
         <Route path="*" element={<div>404</div>} />
