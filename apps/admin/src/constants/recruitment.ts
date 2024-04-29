@@ -1,4 +1,4 @@
-export const CellData = [
+export const RecruitmentCellData = [
   {
     title: "상태",
     width: "6%",
