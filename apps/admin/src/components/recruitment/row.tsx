@@ -45,7 +45,7 @@ export const RecruitmentRow = ({ data }: PropsType) => {
         fontSize="body2"
         fontWeight="medium"
         $color={CompanyStatusColor[data.status]}
-        style={{ justifyContent: "flex-start" }}
+        style={{ justifyContent: "flex-start", padding: "0px" }}
       >
         {getValueByKey(CompanyStatusKrToEn, data.status)}
       </StyleText>
@@ -128,7 +128,7 @@ export const RecruitmentRow = ({ data }: PropsType) => {
         $width={RecruitmentCellData[8].width}
         fontSize="body2"
         fontWeight="medium"
-        style={{ justifyContent: "flex-end" }}
+        style={{ justifyContent: "flex-end", padding: "0px" }}
       >
         {data.end_date || "상시모집"}
       </StyleText>

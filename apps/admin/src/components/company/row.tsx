@@ -37,7 +37,11 @@ export const CompanyRow = ({ data }: PropsType) => {
         fontSize="body2"
         fontWeight="medium"
         $color={themes.Color.grayScale[80]}
-        style={{ justifyContent: "flex-start", textAlign: "start" }}
+        style={{
+          justifyContent: "flex-start",
+          textAlign: "start",
+          padding: "0px",
+        }}
         $isClick={true}
         onClick={e => {
           e.stopPropagation();
@@ -113,7 +117,7 @@ export const CompanyRow = ({ data }: PropsType) => {
         $width={CompanyCellData[10].width}
         fontSize="body2"
         fontWeight="medium"
-        style={{ justifyContent: "flex-end" }}
+        style={{ justifyContent: "flex-end", padding: "0px" }}
         $isClick={!!data.review_count}
       >
         {data.review_count ? `${data.review_count}건` : "0건"}

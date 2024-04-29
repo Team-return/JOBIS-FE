@@ -6,7 +6,7 @@ import { CompanyIcon, DownArrowIcon, Rollback } from "@assets/images";
 import { themes } from "@jobis/design-token";
 import { useChangeCompanyMOU, useChangeCompanyType, useGetCodes } from "@/apis";
 import { useState } from "react";
-import { CompanyType } from "@@types/types";
+import type { CompanyType } from "@@types/types";
 import { useDidMountEffect } from "@/hooks";
 import { useQueryClient } from "@tanstack/react-query";
 

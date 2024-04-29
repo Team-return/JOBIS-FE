@@ -1,12 +1,11 @@
 import {
-  Header,
   Stack,
   Pagination,
   Loading,
   CompanyFilter,
   CompanyRow,
 } from "@/components";
-import { Footer, Text } from "@jobis/ui";
+import { Text } from "@jobis/ui";
 import { css, styled } from "styled-components";
 import { themes } from "@jobis/design-token";
 import { CompanyCellData } from "@/constants";
@@ -40,7 +39,7 @@ export const CompanyPage = () => {
     }
   };
 
-  const filteringRecruitments = companies?.companies
+  const filteringCompanies = companies?.companies
     .filter(
       item =>
         !companyFilter.region || item.region.includes(companyFilter.region)
@@ -69,7 +68,7 @@ export const CompanyPage = () => {
           <Text fontSize="body2" style={{ marginBottom: "4px" }}>
             총{" "}
             <span style={{ color: themes.Color.subColor.blue[20] }}>
-              {useNumCountAnimation(filteringRecruitments?.length || 0)}
+              {useNumCountAnimation(filteringCompanies?.length || 0)}
             </span>
             개
           </Text>
@@ -94,7 +93,7 @@ export const CompanyPage = () => {
             {companiesIsPending || companiesIsRefetching ? (
               <Loading size={50} />
             ) : (
-              filteringRecruitments
+              filteringCompanies
                 ?.filter((_, idx) => page * 10 > idx && (page - 1) * 10 <= idx)
                 .map(company => (
                   <CompanyRow key={company.company_id} data={company} />
@@ -103,7 +102,7 @@ export const CompanyPage = () => {
           </ContentWrapper>
         </StyleTable>
         <Pagination
-          totalItemsCount={filteringRecruitments?.length || 0}
+          totalItemsCount={filteringCompanies?.length || 0}
           activePage={page}
           setActivePage={setPage}
         />

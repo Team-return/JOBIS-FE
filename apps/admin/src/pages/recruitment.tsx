@@ -1,8 +1,13 @@
-import { Header, RecruitmentFilter, RecruitmentRow } from "@/components";
-import { Footer, Text } from "@jobis/ui";
+import {
+  RecruitmentFilter,
+  RecruitmentRow,
+  Stack,
+  Pagination,
+  Loading,
+} from "@/components";
+import { Text } from "@jobis/ui";
 import { css, styled } from "styled-components";
 import { themes } from "@jobis/design-token";
-import { Stack, Pagination, Loading } from "@/components";
 import { RecruitmentCellData } from "@/constants";
 import { useEffect, useState, type CSSProperties } from "react";
 import { useGetAllRecruitmentForm } from "@/apis";
