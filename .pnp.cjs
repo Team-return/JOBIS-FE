@@ -4951,7 +4951,7 @@ const RAW_RUNTIME_STATE =
           ["@vanilla-extract/dynamic", "npm:2.1.0"],\
           ["@vanilla-extract/esbuild-plugin", "virtual:fa304112c97151cffe567dbf453aa60763f4d4f8c084544ddaddb57c2c8eb5ddc94a248c6189c8d8d1ea382d4f245d83777dc9668806e2d9c1e735dc99bcb85e#npm:2.3.5"],\
           ["@vanilla-extract/recipes", "virtual:fa304112c97151cffe567dbf453aa60763f4d4f8c084544ddaddb57c2c8eb5ddc94a248c6189c8d8d1ea382d4f245d83777dc9668806e2d9c1e735dc99bcb85e#npm:0.5.2"],\
-          ["clsx", "npm:2.1.0"],\
+          ["clsx", "npm:2.1.1"],\
           ["react", "npm:18.2.0"],\
           ["react-dom", "virtual:3d56d234886d4ad97fa4f74937d18583af1e798e4510f038d7cd99af74d90f133c440647b0d8b3d140e241533fe7e777b5c917d06ca560a768461ecead1a64d3#npm:18.2.0"],\
           ["typescript", "patch:typescript@npm%3A5.0.3#optional!builtin<compat/typescript>::version=5.0.3&hash=b5f058"]\
@@ -4978,7 +4978,7 @@ const RAW_RUNTIME_STATE =
           ["@vanilla-extract/dynamic", "npm:2.1.0"],\
           ["@vanilla-extract/esbuild-plugin", "virtual:fa304112c97151cffe567dbf453aa60763f4d4f8c084544ddaddb57c2c8eb5ddc94a248c6189c8d8d1ea382d4f245d83777dc9668806e2d9c1e735dc99bcb85e#npm:2.3.5"],\
           ["@vanilla-extract/recipes", "virtual:fa304112c97151cffe567dbf453aa60763f4d4f8c084544ddaddb57c2c8eb5ddc94a248c6189c8d8d1ea382d4f245d83777dc9668806e2d9c1e735dc99bcb85e#npm:0.5.2"],\
-          ["clsx", "npm:2.1.0"],\
+          ["clsx", "npm:2.1.1"],\
           ["react", "npm:18.2.0"],\
           ["react-dom", "virtual:9845906954fdbefbb879db24fa8772d77a945dca59f459806df47a5b67245d4bc6502880b373cca7201062c81bea9f13f699f52de2004c037e79dbdbd5d97fb3#npm:18.2.0"],\
           ["typescript", "patch:typescript@npm%3A5.0.3#optional!builtin<compat/typescript>::version=5.0.3&hash=b5f058"]\
@@ -5004,7 +5004,7 @@ const RAW_RUNTIME_STATE =
           ["@vanilla-extract/dynamic", "npm:2.1.0"],\
           ["@vanilla-extract/esbuild-plugin", "virtual:fa304112c97151cffe567dbf453aa60763f4d4f8c084544ddaddb57c2c8eb5ddc94a248c6189c8d8d1ea382d4f245d83777dc9668806e2d9c1e735dc99bcb85e#npm:2.3.5"],\
           ["@vanilla-extract/recipes", "virtual:fa304112c97151cffe567dbf453aa60763f4d4f8c084544ddaddb57c2c8eb5ddc94a248c6189c8d8d1ea382d4f245d83777dc9668806e2d9c1e735dc99bcb85e#npm:0.5.2"],\
-          ["clsx", "npm:2.1.0"],\
+          ["clsx", "npm:2.1.1"],\
           ["react", "npm:18.2.0"],\
           ["react-dom", "virtual:3d56d234886d4ad97fa4f74937d18583af1e798e4510f038d7cd99af74d90f133c440647b0d8b3d140e241533fe7e777b5c917d06ca560a768461ecead1a64d3#npm:18.2.0"],\
           ["typescript", "patch:typescript@npm%3A5.0.3#optional!builtin<compat/typescript>::version=5.0.3&hash=b5f058"]\
@@ -12624,10 +12624,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["clsx", [\
-      ["npm:2.1.0", {\
-        "packageLocation": "./.yarn/cache/clsx-npm-2.1.0-29d286e1de-2e0ce7c3b6.zip/node_modules/clsx/",\
+      ["npm:2.1.1", {\
+        "packageLocation": "./.yarn/cache/clsx-npm-2.1.1-96125b98be-cdfb57fa6c.zip/node_modules/clsx/",\
         "packageDependencies": [\
-          ["clsx", "npm:2.1.0"]\
+          ["clsx", "npm:2.1.1"]\
         ],\
         "linkType": "HARD"\
       }]\
