@@ -8,6 +8,7 @@ import { Toaster } from "react-hot-toast";
 import "@themes/fonts.css";
 import "@jobis/design-token/global.css";
 import "@jobis/ui/style.css";
+import { BrowserRouter } from "react-router-dom";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -21,12 +22,14 @@ const queryClient = new QueryClient({
 });
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <QueryClientProvider client={queryClient}>
-    <ToastProvider>
-      <Toaster />
-      <GlobalStyle />
-      <App />
-      <ReactQueryDevtools />
-    </ToastProvider>
-  </QueryClientProvider>
+  <BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      <ToastProvider>
+        <Toaster />
+        <GlobalStyle />
+        <App />
+        <ReactQueryDevtools />
+      </ToastProvider>
+    </QueryClientProvider>
+  </BrowserRouter>
 );

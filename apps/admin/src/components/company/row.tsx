@@ -8,11 +8,11 @@ import { useSelectCompanyId } from "@/stores";
 import { useNavigate } from "react-router-dom";
 import { CompanyTypeEnToKr } from "@@types/enums";
 
-export type PropsType = {
+type PropsType = {
   data: CompanyType;
 };
 
-export const Row = ({ data }: PropsType) => {
+export const CompanyRow = ({ data }: PropsType) => {
   const navigate = useNavigate();
   const { selectCompanyId, addSelectCompanyId, deleteSelectCompanyId } =
     useSelectCompanyId();

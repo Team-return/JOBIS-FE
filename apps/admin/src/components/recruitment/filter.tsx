@@ -20,7 +20,7 @@ import { themes } from "@jobis/design-token";
 import OutsideClickHandler from "react-outside-click-handler";
 import { useDidMountEffect } from "@/hooks";
 
-export const Filter = () => {
+export const RecruitmentFilter = () => {
   const date = new Date();
   const iYear = date.getFullYear();
   const queryClient = useQueryClient();

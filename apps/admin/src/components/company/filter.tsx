@@ -10,7 +10,7 @@ import { CompanyType } from "@@types/types";
 import { useDidMountEffect } from "@/hooks";
 import { useQueryClient } from "@tanstack/react-query";
 
-export const Filter = () => {
+export const CompanyFilter = () => {
   const [companyType, setCompanyType] = useState<CompanyType>("CONTRACTING");
 
   const queryClient = useQueryClient();

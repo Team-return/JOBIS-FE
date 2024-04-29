@@ -17,7 +17,7 @@ export type PropsType = {
   data: RecruitmentFormType;
 };
 
-export const Row = ({ data }: PropsType) => {
+export const RecruitmentRow = ({ data }: PropsType) => {
   const navigate = useNavigate();
   const {
     selectRecruitmentId,
