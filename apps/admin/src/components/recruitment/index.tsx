@@ -2,7 +2,7 @@ import { css, styled } from "styled-components";
 import { Text } from "@jobis/ui";
 import { themes } from "@jobis/design-token";
 import { Stack, Pagination, Loading } from "@/components";
-import { CellData } from "@/constants";
+import { RecruitmentCellData } from "@/constants";
 import { useEffect, useState, type CSSProperties } from "react";
 import { Row } from "./row";
 import { Filter } from "./filter";
@@ -40,7 +40,7 @@ export const Recruitment = () => {
   const justify = (idx: number): CSSProperties["justifyContent"] => {
     if (idx === 0) {
       return "flex-start";
-    } else if (idx === CellData.length - 1) {
+    } else if (idx === RecruitmentCellData.length - 1) {
       return "flex-end";
     } else {
       return "center";
@@ -82,7 +82,7 @@ export const Recruitment = () => {
         <Text fontSize="body2" style={{ marginBottom: "4px" }}>
           총{" "}
           <span style={{ color: themes.Color.subColor.blue[20] }}>
-            {useNumCountAnimation(filteringRecruitments?.length || 0, 0, 1000)}
+            {useNumCountAnimation(filteringRecruitments?.length || 0)}
           </span>
           개
         </Text>
@@ -90,7 +90,7 @@ export const Recruitment = () => {
       <Filter />
       <StyleTable>
         <TitleWrapper>
-          {CellData.map((item, idx) => (
+          {RecruitmentCellData.map((item, idx) => (
             <Stack
               key={idx}
               width={item.width}

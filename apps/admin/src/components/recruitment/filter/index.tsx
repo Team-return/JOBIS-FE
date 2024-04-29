@@ -183,7 +183,10 @@ export const Filter = () => {
           value={recruitmentFilter.recruitmentStatus}
           options={["전체", "모집전", "모집중", "모집종료", "접수요청"]}
           changeHandler={item => {
-            setDropdownRecruitmentFilter("recruitmentStatus", item);
+            setDropdownRecruitmentFilter(
+              "recruitmentStatus",
+              item === "전체" ? "" : item
+            );
           }}
         />
         <Input

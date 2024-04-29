@@ -1,7 +1,7 @@
 import { css, styled } from "styled-components";
 import { Text } from "@jobis/ui";
 import { themes } from "@jobis/design-token";
-import { CellData } from "@/constants";
+import { RecruitmentCellData } from "@/constants";
 import { getValueByKey } from "@/utils";
 import { Checkbox, Stack } from "@/components";
 import type { RecruitmentFormType } from "@/apis";
@@ -41,7 +41,7 @@ export const Row = ({ data }: PropsType) => {
         <Checkbox checked={isSelect} onChange={() => {}} />
       </CheckboxWrapper>
       <StyleText
-        $width={CellData[0].width}
+        $width={RecruitmentCellData[0].width}
         fontSize="body2"
         fontWeight="medium"
         $color={CompanyStatusColor[data.status]}
@@ -50,7 +50,7 @@ export const Row = ({ data }: PropsType) => {
         {getValueByKey(CompanyStatusKrToEn, data.status)}
       </StyleText>
       <StyleText
-        $width={CellData[1].width}
+        $width={RecruitmentCellData[1].width}
         fontSize="body2"
         fontWeight="medium"
         $isClick={true}
@@ -63,7 +63,7 @@ export const Row = ({ data }: PropsType) => {
         {data.company_name}
       </StyleText>
       <StyleText
-        $width={CellData[2].width}
+        $width={RecruitmentCellData[2].width}
         fontSize="body2"
         fontWeight="medium"
         $isClick={true}
@@ -76,21 +76,21 @@ export const Row = ({ data }: PropsType) => {
         {data.hiring_jobs.replace(/,/g, " / ")}
       </StyleText>
       <StyleText
-        $width={CellData[3].width}
+        $width={RecruitmentCellData[3].width}
         fontSize="body2"
         fontWeight="medium"
       >
         {CompanyTypeEnToKr[data.company_type]}
       </StyleText>
       <StyleText
-        $width={CellData[4].width}
+        $width={RecruitmentCellData[4].width}
         fontSize="body2"
         fontWeight="medium"
       >
         {data.total_hiring_count}명
       </StyleText>
       <StyleText
-        $width={CellData[5].width}
+        $width={RecruitmentCellData[5].width}
         fontSize="body2"
         fontWeight="medium"
         $isClick={!!data.application_requested_count}
@@ -104,7 +104,7 @@ export const Row = ({ data }: PropsType) => {
         {data.application_requested_count}명
       </StyleText>
       <StyleText
-        $width={CellData[6].width}
+        $width={RecruitmentCellData[6].width}
         fontSize="body2"
         fontWeight="medium"
         $isClick={!!data.application_approved_count}
@@ -118,14 +118,14 @@ export const Row = ({ data }: PropsType) => {
         {data.application_approved_count}명
       </StyleText>
       <StyleText
-        $width={CellData[7].width}
+        $width={RecruitmentCellData[7].width}
         fontSize="body2"
         fontWeight="medium"
       >
         {data.start_date || "상시모집"}
       </StyleText>
       <StyleText
-        $width={CellData[8].width}
+        $width={RecruitmentCellData[8].width}
         fontSize="body2"
         fontWeight="medium"
         style={{ justifyContent: "flex-end" }}
