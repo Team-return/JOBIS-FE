@@ -1,37 +1,29 @@
 import { css, styled } from "styled-components";
 import { Text } from "@jobis/ui";
 import { themes } from "@jobis/design-token";
-import { CellData } from "@/constants";
-import { getValueByKey } from "@/utils";
+import { CompanyCellData } from "@/constants";
 import { Checkbox, Stack } from "@/components";
-import type { RecruitmentFormType } from "@/apis";
-import { useSelectRecruitmentId } from "@/stores";
+import type { CompanyType } from "@/apis";
+import { useSelectCompanyId } from "@/stores";
 import { useNavigate } from "react-router-dom";
-import {
-  CompanyStatusColor,
-  CompanyStatusKrToEn,
-  CompanyTypeEnToKr,
-} from "@@types/enums";
+import { CompanyTypeEnToKr } from "@@types/enums";
 
-export type PropsType = {
-  data: RecruitmentFormType;
+type PropsType = {
+  data: CompanyType;
 };
 
-export const Row = ({ data }: PropsType) => {
+export const CompanyRow = ({ data }: PropsType) => {
   const navigate = useNavigate();
-  const {
-    selectRecruitmentId,
-    addSelectRecruitmentId,
-    deleteSelectRecruitmentId,
-  } = useSelectRecruitmentId();
+  const { selectCompanyId, addSelectCompanyId, deleteSelectCompanyId } =
+    useSelectCompanyId();
 
-  const isSelect = selectRecruitmentId.includes(data.id);
+  const isSelect = selectCompanyId.includes(data.company_id);
 
   const clickHandler = () => {
     if (isSelect) {
-      deleteSelectRecruitmentId(data.id);
+      deleteSelectCompanyId(data.company_id);
     } else {
-      addSelectRecruitmentId(data.id);
+      addSelectCompanyId(data.company_id);
     }
   };
 
@@ -41,20 +33,12 @@ export const Row = ({ data }: PropsType) => {
         <Checkbox checked={isSelect} onChange={() => {}} />
       </CheckboxWrapper>
       <StyleText
-        $width={CellData[0].width}
+        $width={CompanyCellData[0].width}
         fontSize="body2"
         fontWeight="medium"
-        $color={CompanyStatusColor[data.status]}
-        style={{ justifyContent: "flex-start" }}
-      >
-        {getValueByKey(CompanyStatusKrToEn, data.status)}
-      </StyleText>
-      <StyleText
-        $width={CellData[1].width}
-        fontSize="body2"
-        fontWeight="medium"
-        $isClick={true}
         $color={themes.Color.grayScale[80]}
+        style={{ justifyContent: "flex-start", textAlign: "start" }}
+        $isClick={true}
         onClick={e => {
           e.stopPropagation();
           navigate(`/company/${data.company_id}`);
@@ -63,74 +47,76 @@ export const Row = ({ data }: PropsType) => {
         {data.company_name}
       </StyleText>
       <StyleText
-        $width={CellData[2].width}
+        $width={CompanyCellData[1].width}
         fontSize="body2"
         fontWeight="medium"
-        $isClick={true}
-        $color={themes.Color.grayScale[80]}
-        onClick={e => {
-          e.stopPropagation();
-          navigate(`/recruitment/${data.id}`);
-        }}
       >
-        {data.hiring_jobs.replace(/,/g, " / ")}
+        {data.region}
       </StyleText>
       <StyleText
-        $width={CellData[3].width}
+        $width={CompanyCellData[2].width}
+        fontSize="body2"
+        fontWeight="medium"
+      >
+        {data.business_area}
+      </StyleText>
+      <StyleText
+        $width={CompanyCellData[3].width}
+        fontSize="body2"
+        fontWeight="medium"
+      >
+        {data.workers_count}명
+      </StyleText>
+      <StyleText
+        $width={CompanyCellData[4].width}
+        fontSize="body2"
+        fontWeight="medium"
+      >
+        {data.take}억
+      </StyleText>
+      <StyleText
+        $width={CompanyCellData[5].width}
         fontSize="body2"
         fontWeight="medium"
       >
         {CompanyTypeEnToKr[data.company_type]}
       </StyleText>
       <StyleText
-        $width={CellData[4].width}
+        $width={CompanyCellData[6].width}
         fontSize="body2"
         fontWeight="medium"
       >
-        {data.total_hiring_count}명
+        {data.convention ? "Y" : "-"}
       </StyleText>
       <StyleText
-        $width={CellData[5].width}
-        fontSize="body2"
-        fontWeight="medium"
-        $isClick={!!data.application_requested_count}
-        onClick={e => {
-          if (data.application_requested_count) {
-            e.stopPropagation();
-            // 지원요청 모달 띄우기
-          }
-        }}
-      >
-        {data.application_requested_count}명
-      </StyleText>
-      <StyleText
-        $width={CellData[6].width}
-        fontSize="body2"
-        fontWeight="medium"
-        $isClick={!!data.application_approved_count}
-        onClick={e => {
-          if (data.application_approved_count) {
-            e.stopPropagation();
-            // 지원자 모달 띄우기
-          }
-        }}
-      >
-        {data.application_approved_count}명
-      </StyleText>
-      <StyleText
-        $width={CellData[7].width}
+        $width={CompanyCellData[7].width}
         fontSize="body2"
         fontWeight="medium"
       >
-        {data.start_date || "상시모집"}
+        {data.personal_contact ? "Y" : "-"}
       </StyleText>
       <StyleText
-        $width={CellData[8].width}
+        $width={CompanyCellData[8].width}
+        fontSize="body2"
+        fontWeight="medium"
+      >
+        {data.recent_recruit_year ? `${data.recent_recruit_year}년` : "-"}
+      </StyleText>
+      <StyleText
+        $width={CompanyCellData[9].width}
+        fontSize="body2"
+        fontWeight="medium"
+      >
+        {data.total_acceptance_count}명
+      </StyleText>
+      <StyleText
+        $width={CompanyCellData[10].width}
         fontSize="body2"
         fontWeight="medium"
         style={{ justifyContent: "flex-end" }}
+        $isClick={!!data.review_count}
       >
-        {data.end_date || "상시모집"}
+        {data.review_count ? `${data.review_count}건` : "0건"}
       </StyleText>
     </Container>
   );

@@ -56,7 +56,7 @@ const StyleButton = styled.button<{
       width: ${$width}px;
     `}
   height: ${({ $height }) => $height}px;
-  padding: 0 23px;
+  padding: 0 9px;
   gap: 8px;
   ${({ $variant }) =>
     $variant === "solid"

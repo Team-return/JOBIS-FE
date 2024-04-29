@@ -1,19 +1,16 @@
-import { RecruitmentPage, SignInPage } from "@/pages";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Header } from "@/components";
+import { Footer } from "@jobis/ui";
+import Router from "./router";
+import { useLocation } from "react-router-dom";
 
 function App() {
+  const location = useLocation();
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<RecruitmentPage />} />
-        <Route path="/signin" element={<SignInPage />} />
-        <Route path="/recruitment" element={<RecruitmentPage />} />
-        <Route path="/company" element={<></>} />
-        <Route path="/student" element={<></>} />
-        <Route path="/application" element={<></>} />
-        <Route path="*" element={<div>404</div>} />
-      </Routes>
-    </BrowserRouter>
+    <>
+      {!location.pathname.includes("signin") && <Header />}
+      <Router />
+      {!location.pathname.includes("signin") && <Footer />}
+    </>
   );
 }
 

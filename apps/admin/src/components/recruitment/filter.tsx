@@ -20,7 +20,7 @@ import { themes } from "@jobis/design-token";
 import OutsideClickHandler from "react-outside-click-handler";
 import { useDidMountEffect } from "@/hooks";
 
-export const Filter = () => {
+export const RecruitmentFilter = () => {
   const date = new Date();
   const iYear = date.getFullYear();
   const queryClient = useQueryClient();
@@ -183,7 +183,10 @@ export const Filter = () => {
           value={recruitmentFilter.recruitmentStatus}
           options={["전체", "모집전", "모집중", "모집종료", "접수요청"]}
           changeHandler={item => {
-            setDropdownRecruitmentFilter("recruitmentStatus", item);
+            setDropdownRecruitmentFilter(
+              "recruitmentStatus",
+              item === "전체" ? "" : item
+            );
           }}
         />
         <Input

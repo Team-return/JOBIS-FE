@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
-import { ArrowIcon } from "@assets/images";
+import { PaginationArrowIcon } from "@assets/images";
 import { themes } from "@jobis/design-token";
 
 type PropsType = {
@@ -26,7 +26,7 @@ export function Pagination({
         onClick={() => changePageNumber(activePage - 1)}
         disabled={activePage === 1}
       >
-        <ArrowImg src={ArrowIcon} alt="화살표" />
+        <ArrowImg src={PaginationArrowIcon} alt="화살표" />
       </Button>
       {Array.from({ length: Math.ceil(totalItemsCount / 10) || 1 }, (_, i) => (
         <Text
@@ -41,7 +41,11 @@ export function Pagination({
         onClick={() => changePageNumber(activePage + 1)}
         disabled={activePage === Math.ceil(totalItemsCount / 10)}
       >
-        <ArrowImg src={ArrowIcon} alt="화살표" style={{ rotate: "180deg" }} />
+        <ArrowImg
+          src={PaginationArrowIcon}
+          alt="화살표"
+          style={{ rotate: "180deg" }}
+        />
       </Button>
     </Nav>
   );

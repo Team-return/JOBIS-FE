@@ -56,11 +56,13 @@ export const Dropdown = forwardRef(
               fontWeight="regular"
               color={
                 isChangeBtn || value
-                  ? themes.Color.primary[20]
+                  ? value === "전체"
+                    ? themes.Color.grayScale[60]
+                    : themes.Color.primary[20]
                   : themes.Color.grayScale[60]
               }
             >
-              {value || placeholder}
+              {value === "" || value === "전체" ? placeholder : value}
             </Text>
             <ChevronImg
               $isopen={isOpen}
@@ -144,6 +146,7 @@ const ListWrapper = styled.ul<{ $width: CSSProperties["width"] }>`
 
 const StyleText = styled(Text)`
   color: ${themes.Color.grayScale[50]};
+  text-align: center;
   cursor: pointer;
 
   &:hover {

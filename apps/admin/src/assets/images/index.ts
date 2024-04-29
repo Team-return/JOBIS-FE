@@ -3,9 +3,11 @@ export * from "./rollback";
 
 export { default as LoadIcon } from "./loadIcon.svg";
 export { default as SearchIcon } from "./search.svg";
-export { default as ArrowIcon } from "./arrow.svg";
-export { default as Arrow2Icon } from "./arrow2.svg";
+export { default as PaginationArrowIcon } from "./paginationArrow.svg";
+export { default as DateArrowIcon } from "./dateArrow.svg";
 export { default as DoubleArrowIcon } from "./doubleArrow.svg";
 export { default as WaveIcon } from "./wave.svg";
+export { default as DownArrowIcon } from "./downArrow.svg";
+export { default as CompanyIcon } from "./company.svg";
 
 export { default as Logo } from "./logo.png";

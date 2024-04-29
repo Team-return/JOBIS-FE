@@ -1,17 +1,16 @@
+import { Header, RecruitmentFilter, RecruitmentRow } from "@/components";
+import { Footer, Text } from "@jobis/ui";
 import { css, styled } from "styled-components";
-import { Text } from "@jobis/ui";
 import { themes } from "@jobis/design-token";
 import { Stack, Pagination, Loading } from "@/components";
-import { CellData } from "@/constants";
+import { RecruitmentCellData } from "@/constants";
 import { useEffect, useState, type CSSProperties } from "react";
-import { Row } from "./row";
-import { Filter } from "./filter";
 import { useGetAllRecruitmentForm } from "@/apis";
 import { useNumCountAnimation } from "@/hooks";
 import { useRecruitmentFilter } from "@/stores";
 import { CompanyStatusKrToEn } from "@@types/enums";
 
-export const Recruitment = () => {
+export const RecruitmentPage = () => {
   const [page, setPage] = useState(1);
   const { recruitmentFilter } = useRecruitmentFilter();
 
@@ -40,7 +39,7 @@ export const Recruitment = () => {
   const justify = (idx: number): CSSProperties["justifyContent"] => {
     if (idx === 0) {
       return "flex-start";
-    } else if (idx === CellData.length - 1) {
+    } else if (idx === RecruitmentCellData.length - 1) {
       return "flex-end";
     } else {
       return "center";
@@ -74,55 +73,68 @@ export const Recruitment = () => {
     );
 
   return (
-    <Stack width="65%" direction="column" align="center">
-      <Stack align="flex-end" gap={8}>
-        <Text fontSize="h4" fontWeight="bold">
-          모집의뢰서
-        </Text>
-        <Text fontSize="body2" style={{ marginBottom: "4px" }}>
-          총{" "}
-          <span style={{ color: themes.Color.subColor.blue[20] }}>
-            {useNumCountAnimation(filteringRecruitments?.length || 0, 0, 1000)}
-          </span>
-          개
-        </Text>
+    <Container>
+      <Stack width="65%" direction="column" align="center">
+        <Stack align="flex-end" gap={8}>
+          <Text fontSize="h4" fontWeight="bold">
+            모집의뢰서
+          </Text>
+          <Text fontSize="body2" style={{ marginBottom: "4px" }}>
+            총{" "}
+            <span style={{ color: themes.Color.subColor.blue[20] }}>
+              {useNumCountAnimation(filteringRecruitments?.length || 0)}
+            </span>
+            개
+          </Text>
+        </Stack>
+        <RecruitmentFilter />
+        <StyleTable>
+          <TitleWrapper>
+            {RecruitmentCellData.map((item, idx) => (
+              <Stack
+                key={idx}
+                width={item.width}
+                justify={justify(idx)}
+                align="center"
+              >
+                {item.title}
+              </Stack>
+            ))}
+          </TitleWrapper>
+          <ContentWrapper
+            $isPending={
+              recruitmentFormsIsPending || recruitmentFormsIsRefetching
+            }
+          >
+            {recruitmentFormsIsPending || recruitmentFormsIsRefetching ? (
+              <Loading size={50} />
+            ) : (
+              filteringRecruitments
+                ?.filter((_, idx) => page * 10 > idx && (page - 1) * 10 <= idx)
+                .map(recruitment => (
+                  <RecruitmentRow key={recruitment.id} data={recruitment} />
+                ))
+            )}
+          </ContentWrapper>
+        </StyleTable>
+        <Pagination
+          totalItemsCount={filteringRecruitments?.length || 0}
+          activePage={page}
+          setActivePage={setPage}
+        />
       </Stack>
-      <Filter />
-      <StyleTable>
-        <TitleWrapper>
-          {CellData.map((item, idx) => (
-            <Stack
-              key={idx}
-              width={item.width}
-              justify={justify(idx)}
-              align="center"
-            >
-              {item.title}
-            </Stack>
-          ))}
-        </TitleWrapper>
-        <ContentWrapper
-          $isPending={recruitmentFormsIsPending || recruitmentFormsIsRefetching}
-        >
-          {recruitmentFormsIsPending || recruitmentFormsIsRefetching ? (
-            <Loading size={50} />
-          ) : (
-            filteringRecruitments
-              ?.filter((_, idx) => page * 10 > idx && (page - 1) * 10 <= idx)
-              .map(recruitment => (
-                <Row key={recruitment.id} data={recruitment} />
-              ))
-          )}
-        </ContentWrapper>
-      </StyleTable>
-      <Pagination
-        totalItemsCount={filteringRecruitments?.length || 0}
-        activePage={page}
-        setActivePage={setPage}
-      />
-    </Stack>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  margin-top: 70px;
+  padding-top: 56px;
+`;
 
 const StyleTable = styled.div`
   width: 100%;

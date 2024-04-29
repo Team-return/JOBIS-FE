@@ -1,12 +1,5 @@
 import { themes } from "@jobis/design-token";
 
-export const CompanyTypeEnToKr = {
-  LEAD: "선도기업",
-  PARTICIPATING: "참여기업",
-  CONTRACTING: "협약기업",
-  DEFAULT: "기본",
-} as const;
-
 export const CompanyStatusKrToEn = {
   전체: "",
   모집전: "READY",
