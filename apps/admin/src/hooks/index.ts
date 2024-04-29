@@ -1,3 +1,3 @@
 export * from "./useForm";
-export * from "./useCountUp";
+export * from "./useNumCountAnimation";
 export * from "./useDidMountEffect";
