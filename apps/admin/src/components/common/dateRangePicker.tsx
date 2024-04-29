@@ -1,4 +1,4 @@
-import { Arrow2Icon, DoubleArrowIcon, WaveIcon } from "@assets/images";
+import { DateArrowIcon, DoubleArrowIcon, WaveIcon } from "@assets/images";
 import { themes } from "@jobis/design-token";
 import { styled } from "styled-components";
 import { Icon, Text } from "@jobis/ui";
@@ -189,7 +189,7 @@ export const DateRangePicker = ({
                   }}
                 />
                 <ArrowIcon
-                  src={Arrow2Icon}
+                  src={DateArrowIcon}
                   alt="arrowIcon"
                   onClick={() => {
                     setCurrentDate(prev => ({
@@ -204,7 +204,7 @@ export const DateRangePicker = ({
               </Text>
               <Stack justify="flex-end" align="center" gap={8}>
                 <ArrowIcon
-                  src={Arrow2Icon}
+                  src={DateArrowIcon}
                   alt="arrowIcon"
                   style={{ rotate: "180deg" }}
                   onClick={() => {
