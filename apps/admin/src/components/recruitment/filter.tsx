@@ -1,5 +1,5 @@
 import {
-  Button,
+  BigButton,
   Checkbox,
   DateRangePicker,
   Dropdown,
@@ -9,12 +9,12 @@ import {
 import { useRecruitmentFilter, useSelectRecruitmentId } from "@/stores";
 import { useChangeRecruitmentsStatus } from "@/apis";
 import { useState } from "react";
-import type { RecruitmentStatusKrType } from "@@types/types";
-import { CompanyStatusKrToEn } from "@@types/enums";
+import type { RecruitmentStatusKrType } from "@/@types/types";
+import { CompanyStatusKrToEn } from "@/@types/enums";
 import { useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { Icon, Text } from "@jobis/ui";
-import { ChevronIcon, Rollback } from "@assets/images";
+import { ChevronIcon, Rollback } from "@/assets/images";
 import { styled } from "styled-components";
 import { themes } from "@jobis/design-token";
 import OutsideClickHandler from "react-outside-click-handler";
@@ -143,7 +143,7 @@ export const RecruitmentFilter = () => {
                   }}
                 />
                 <Stack justify="flex-end" margin="16px 0 0 0">
-                  <Button
+                  <BigButton
                     variant="primary"
                     width={90}
                     onClick={() => {
@@ -153,7 +153,7 @@ export const RecruitmentFilter = () => {
                     <Text fontSize="body3" fontWeight="bold">
                       확인
                     </Text>
-                  </Button>
+                  </BigButton>
                 </Stack>
               </DateBox>
             )}
@@ -199,7 +199,7 @@ export const RecruitmentFilter = () => {
         />
       </Stack>
       <Stack justify="flex-end" gap={8}>
-        <Button
+        <BigButton
           width={142}
           disabled={
             !recruitmentFilter.companyName &&
@@ -218,7 +218,7 @@ export const RecruitmentFilter = () => {
           <Text fontSize="body3" fontWeight="regular">
             필터 초기화
           </Text>
-        </Button>
+        </BigButton>
         <Dropdown
           disabled={selectRecruitmentId.length === 0 || isPending}
           placeholder="상태변경"

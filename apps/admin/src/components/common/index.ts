@@ -6,5 +6,7 @@ export * from "./stack";
 export * from "./dropdown";
 export * from "./input";
 export * from "./pagination";
-export * from "./button";
+export * from "./bigButton";
+export * from "./smallButton";
 export * from "./dateRangePicker";
+export * from "./textarea";

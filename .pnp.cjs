@@ -9172,6 +9172,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@types/file-saver", [\
+      ["npm:2.0.7", {\
+        "packageLocation": "./.yarn/cache/@types-file-saver-npm-2.0.7-39f33a4b39-c3d1cd80ea.zip/node_modules/@types/file-saver/",\
+        "packageDependencies": [\
+          ["@types/file-saver", "npm:2.0.7"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["@types/find-cache-dir", [\
       ["npm:3.2.1", {\
         "packageLocation": "./.yarn/cache/@types-find-cache-dir-npm-3.2.1-07fd2b6e78-bf5c4e96da.zip/node_modules/@types/find-cache-dir/",\
@@ -10781,6 +10790,7 @@ const RAW_RUNTIME_STATE =
           ["@jobis/ui", "virtual:9845906954fdbefbb879db24fa8772d77a945dca59f459806df47a5b67245d4bc6502880b373cca7201062c81bea9f13f699f52de2004c037e79dbdbd5d97fb3#workspace:packages/ui"],\
           ["@tanstack/react-query", "virtual:9845906954fdbefbb879db24fa8772d77a945dca59f459806df47a5b67245d4bc6502880b373cca7201062c81bea9f13f699f52de2004c037e79dbdbd5d97fb3#npm:5.28.14"],\
           ["@tanstack/react-query-devtools", "virtual:9845906954fdbefbb879db24fa8772d77a945dca59f459806df47a5b67245d4bc6502880b373cca7201062c81bea9f13f699f52de2004c037e79dbdbd5d97fb3#npm:5.28.14"],\
+          ["@types/file-saver", "npm:2.0.7"],\
           ["@types/react", "npm:18.2.74"],\
           ["@types/react-dom", "npm:18.2.23"],\
           ["@types/react-outside-click-handler", "npm:1.3.3"],\
@@ -10792,6 +10802,7 @@ const RAW_RUNTIME_STATE =
           ["eslint", "npm:8.57.0"],\
           ["eslint-plugin-react-hooks", "virtual:0f900c532def39d3661b294c63c25cb192443e8e260e7bea5cb02c869c3e6e66291400e226f22c507c8abc06fa67966b9df259c364ea5e7ac15e7214331dc16d#npm:4.6.0"],\
           ["eslint-plugin-react-refresh", "virtual:9845906954fdbefbb879db24fa8772d77a945dca59f459806df47a5b67245d4bc6502880b373cca7201062c81bea9f13f699f52de2004c037e79dbdbd5d97fb3#npm:0.4.6"],\
+          ["file-saver", "npm:2.0.5"],\
           ["react", "npm:18.2.0"],\
           ["react-cookie", "virtual:9845906954fdbefbb879db24fa8772d77a945dca59f459806df47a5b67245d4bc6502880b373cca7201062c81bea9f13f699f52de2004c037e79dbdbd5d97fb3#npm:7.1.4"],\
           ["react-dom", "virtual:9845906954fdbefbb879db24fa8772d77a945dca59f459806df47a5b67245d4bc6502880b373cca7201062c81bea9f13f699f52de2004c037e79dbdbd5d97fb3#npm:18.2.0"],\
@@ -15612,6 +15623,15 @@ const RAW_RUNTIME_STATE =
         "packagePeers": [\
           "@types/webpack",\
           "webpack"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["file-saver", [\
+      ["npm:2.0.5", {\
+        "packageLocation": "./.yarn/cache/file-saver-npm-2.0.5-2c3bc40d53-fbba443d9b.zip/node_modules/file-saver/",\
+        "packageDependencies": [\
+          ["file-saver", "npm:2.0.5"]\
         ],\
         "linkType": "HARD"\
       }]\

@@ -5950,6 +5950,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/file-saver@npm:^2.0.7":
+  version: 2.0.7
+  resolution: "@types/file-saver@npm:2.0.7"
+  checksum: 10/c3d1cd80eab1214767922cabac97681f3fb688e82b74890450d70deaca49537949bbc96d80d363d91e8f0a4752c7164909cc8902d9721c5c4809baafc42a3801
+  languageName: node
+  linkType: hard
+
 "@types/find-cache-dir@npm:^3.2.1":
   version: 3.2.1
   resolution: "@types/find-cache-dir@npm:3.2.1"
@@ -7136,6 +7143,7 @@ __metadata:
     "@jobis/ui": "workspace:^"
     "@tanstack/react-query": "npm:^5.28.14"
     "@tanstack/react-query-devtools": "npm:^5.28.14"
+    "@types/file-saver": "npm:^2.0.7"
     "@types/react": "npm:^18.2.66"
     "@types/react-dom": "npm:^18.2.22"
     "@types/react-outside-click-handler": "npm:^1.3.3"
@@ -7147,6 +7155,7 @@ __metadata:
     eslint: "npm:^8.57.0"
     eslint-plugin-react-hooks: "npm:^4.6.0"
     eslint-plugin-react-refresh: "npm:^0.4.6"
+    file-saver: "npm:^2.0.5"
     react: "npm:^18.2.0"
     react-cookie: "npm:^7.1.4"
     react-dom: "npm:^18.2.0"
@@ -11245,6 +11254,13 @@ __metadata:
   peerDependencies:
     webpack: ^4.0.0
   checksum: 10/4d5cdbd60ae9170228aee13c65e7d85fd34b29eaaaa26397d844896497d7389fd726365ea3d6b908a14858b42c0608505ecd1f54518b596ddd28e2f74a9e8a38
+  languageName: node
+  linkType: hard
+
+"file-saver@npm:^2.0.5":
+  version: 2.0.5
+  resolution: "file-saver@npm:2.0.5"
+  checksum: 10/fbba443d9b682fec0be6676c048a7ac688b9bd33b105c02e8e1a1cb3e354ed441198dc1f15dcbc137fa044bea73f8a7549f2617e3a952fa7d96390356d54a7c3
   languageName: node
   linkType: hard
 

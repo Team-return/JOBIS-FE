@@ -8,20 +8,20 @@ import {
 import { css, styled, type CSSProperties } from "styled-components";
 
 type PropsType = {
-  variant?: "solid" | "primary";
+  variant?: "gray" | "primary";
   width?: CSSProperties["width"];
   height?: CSSProperties["height"];
   icon?: ReactNode;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
-export const Button = forwardRef(
+export const SmallButton = forwardRef(
   (
     {
-      variant = "solid",
+      variant = "primary",
       children,
       icon,
       width,
-      height = 36,
+      height = 26,
       ...props
     }: PropsType,
     ref: ForwardedRef<HTMLButtonElement>
@@ -44,7 +44,7 @@ export const Button = forwardRef(
 const StyleButton = styled.button<{
   $width: CSSProperties["width"];
   $height: CSSProperties["height"];
-  $variant: "solid" | "primary";
+  $variant: "gray" | "primary";
 }>`
   display: flex;
   justify-content: center;
@@ -58,24 +58,25 @@ const StyleButton = styled.button<{
   height: ${({ $height }) => $height}px;
   padding: 0 9px;
   gap: 8px;
+
+  border: none;
+  border-radius: 40px;
+
+  font-size: ${themes.Font.caption};
+  font-weight: ${themes.FontWeight.medium};
+  cursor: pointer;
   ${({ $variant }) =>
-    $variant === "solid"
+    $variant === "gray"
       ? css`
-          border: 1px solid ${themes.Color.primary[20]};
+          background-color: ${themes.Color.grayScale[20]};
 
-          background-color: ${themes.Color.grayScale[30]};
-
-          color: ${themes.Color.primary[20]};
+          color: ${themes.Color.grayScale[60]};
         `
       : css`
-          border: none;
+          background-color: ${themes.Color.primary[10]};
 
-          background-color: ${themes.Color.primary[20]};
-
-          color: ${themes.Color.grayScale[10]};
+          color: ${themes.Color.primary[20]};
         `}
-  border-radius: 8px;
-  cursor: pointer;
 
   &:disabled {
     opacity: 0.5;
