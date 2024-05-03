@@ -158,7 +158,7 @@ export const ApplicationRow = ({ data }: PropsType) => {
               $isClick={true}
               style={{ position: "relative", justifyContent: "flex-end" }}
             >
-              {`${firstFileAttachment ? attachmentName(firstFileAttachment.url).slice(37) : data.attachments[0].url} ${data.attachments.length === 1 ? "" : `외 ${data.attachments.length - 1}`}개`}
+              {`${firstFileAttachment ? attachmentName(firstFileAttachment.url).slice(37) : data.attachments[0].url} ${data.attachments.length === 1 ? "" : `외 ${data.attachments.length - 1}개`}`}
               {isOpen && renderAttachments()}
             </StyleText>
             <ChevronImg
