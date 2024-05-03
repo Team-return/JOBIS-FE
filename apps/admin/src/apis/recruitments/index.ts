@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { instance } from "@/apis/axios";
 import { MutationOptions, useMutation, useQuery } from "@tanstack/react-query";
 import type { RecruitmentFormResponse } from "@/apis";

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { ApplicationENStatusType } from "@/@types/types";
 import { instance, type ApplicationResponse } from "@/apis";
 import {

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { MutationOptions, useMutation, useQuery } from "@tanstack/react-query";
 import { instance, type CompanyResponse } from "@/apis";
 import type { CompanyType } from "@/@types/types";

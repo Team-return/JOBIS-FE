@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { type DateType, instance } from "@/apis";
 import { useMutation, type MutationOptions } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
