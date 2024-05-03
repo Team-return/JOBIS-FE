@@ -6,11 +6,11 @@ import {
   Input,
   RejectedStatusModal,
   Stack,
-  useModalContext,
 } from "@/components";
 import {
   useApplicationFilter,
   useFieldTrainDate,
+  useModal,
   useRejectedMessage,
   useSelectApplication,
 } from "@/stores";
@@ -37,7 +37,7 @@ export const ApplicationFilter = () => {
   const iYear = date.getFullYear();
 
   const queryClient = useQueryClient();
-  const { openModal, closeModal } = useModalContext();
+  const { openModal, closeModal } = useModal();
   const [selectStatus, setSelectStatus] =
     useState<ApplicationKRStatusType>("승인");
 
@@ -52,7 +52,10 @@ export const ApplicationFilter = () => {
   const { rejectedMessage, resetRejectedMessage } = useRejectedMessage();
   const { fieldTrainDate, resetFieldTrainDate } = useFieldTrainDate();
 
-  const { mutate: fieldTrainApplicationMutate } = useFieldTrainApplication(
+  const {
+    mutate: fieldTrainApplicationMutate,
+    isPending: fieldTrainApplicationIsPending,
+  } = useFieldTrainApplication(
     fieldTrainDate,
     selectApplication.map(application => application.id),
     {
@@ -66,7 +69,10 @@ export const ApplicationFilter = () => {
     }
   );
 
-  const { mutate: rejectApplicationMutate } = useRejectApplication(
+  const {
+    mutate: rejectApplicationMutate,
+    isPending: rejectApplicationIsPending,
+  } = useRejectApplication(
     +selectApplication.map(application => application.id).join(""),
     rejectedMessage,
     {
@@ -80,18 +86,19 @@ export const ApplicationFilter = () => {
     }
   );
 
-  const { mutate: changeStatusMutate } = useChangeApplicationStatus(
-    getValueByKey(applicationStatus, selectStatus) as ApplicationENStatusType,
-    selectApplication.map(application => application.id),
-    {
-      onSuccess: () => {
-        toast.success("해당 지원서 상태가 변경 되었습니다.");
-        closeModal();
-        resetSelectApplication();
-        queryClient.invalidateQueries({ queryKey: ["getAllApplication"] });
-      },
-    }
-  );
+  const { mutate: changeStatusMutate, isPending: changeStatusIsPening } =
+    useChangeApplicationStatus(
+      getValueByKey(applicationStatus, selectStatus) as ApplicationENStatusType,
+      selectApplication.map(application => application.id),
+      {
+        onSuccess: () => {
+          toast.success("해당 지원서 상태가 변경 되었습니다.");
+          closeModal();
+          resetSelectApplication();
+          queryClient.invalidateQueries({ queryKey: ["getAllApplication"] });
+        },
+      }
+    );
 
   const statusHandler = (status: ApplicationKRStatusType) => {
     switch (status) {
@@ -150,17 +157,7 @@ export const ApplicationFilter = () => {
           placeholder="상태"
           width={95}
           value={applicationFilter.status}
-          options={[
-            "전체",
-            "승인요청",
-            "승인",
-            "전송",
-            "반려",
-            "합격",
-            "불합격",
-            "현장실습",
-            "근로계약",
-          ]}
+          options={["전체"].concat(Object.values(applicationStatus))}
           changeHandler={item => {
             setDropdownApplicationFilter("status", item === "전체" ? "" : item);
           }}
@@ -202,21 +199,16 @@ export const ApplicationFilter = () => {
           </Text>
         </BigButton>
         <Dropdown
-          // disabled={selectApplicationId.length === 0 || isPending}
-          disabled={selectApplication.length === 0}
+          disabled={
+            selectApplication.length === 0 ||
+            fieldTrainApplicationIsPending ||
+            rejectApplicationIsPending ||
+            changeStatusIsPening
+          }
           placeholder="상태변경"
           width={95}
           value={""}
-          options={[
-            "승인요청",
-            "승인",
-            "전송",
-            "반려",
-            "합격",
-            "불합격",
-            "현장실습",
-            "근로계약",
-          ]}
+          options={Object.values(applicationStatus)}
           changeHandler={item => {
             statusHandler(item as ApplicationKRStatusType);
           }}

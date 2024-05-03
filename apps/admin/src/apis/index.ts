@@ -22,5 +22,5 @@ export * from "./applications/type";
 export * from "./files";
 export * from "./files/type";
 
-export { useFieldTrainApplication } from "./acceptances";
+export * from "./acceptances";
 export * from "./acceptances/type";

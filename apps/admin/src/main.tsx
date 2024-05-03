@@ -9,7 +9,7 @@ import "@/themes/fonts.css";
 import "@jobis/design-token/global.css";
 import "@jobis/ui/style.css";
 import { BrowserRouter } from "react-router-dom";
-import { Modal, ModalContextProvider } from "@/components";
+import { Modal } from "@/components";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -24,16 +24,14 @@ const queryClient = new QueryClient({
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <BrowserRouter>
-    <ModalContextProvider>
-      <QueryClientProvider client={queryClient}>
-        <ToastProvider>
-          <Toaster />
-          <Modal />
-          <GlobalStyle />
-          <App />
-          <ReactQueryDevtools />
-        </ToastProvider>
-      </QueryClientProvider>
-    </ModalContextProvider>
+    <QueryClientProvider client={queryClient}>
+      <ToastProvider>
+        <Toaster />
+        <Modal />
+        <GlobalStyle />
+        <App />
+        <ReactQueryDevtools />
+      </ToastProvider>
+    </QueryClientProvider>
   </BrowserRouter>
 );

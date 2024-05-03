@@ -10,3 +10,4 @@ export * from "./bigButton";
 export * from "./smallButton";
 export * from "./dateRangePicker";
 export * from "./textarea";
+export * from "./modal";
