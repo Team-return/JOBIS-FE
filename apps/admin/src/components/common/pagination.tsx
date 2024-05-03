@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
-import { PaginationArrowIcon } from "@assets/images";
+import { PaginationArrowIcon } from "@/assets/images";
 import { themes } from "@jobis/design-token";
 
 type PropsType = {

@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { instance } from "@apis/axios";
+import { instance } from "@/apis/axios";
 import { MutationOptions, useMutation, useQuery } from "@tanstack/react-query";
 import type { RecruitmentFormResponse } from "@/apis";
-import type { RecruitmentStatusType, WinterInternType } from "@@types/types";
+import type { RecruitmentStatusType, WinterInternType } from "@/@types/types";
 import toast from "react-hot-toast";
-import { winterInternStringToBool } from "@@types/enums";
+import { winterInternStringToBool } from "@/@types/enums";
 import { AxiosError } from "axios";
 
 const router = "/recruitments";

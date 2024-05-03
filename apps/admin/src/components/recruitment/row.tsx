@@ -11,7 +11,7 @@ import {
   CompanyStatusColor,
   CompanyStatusKrToEn,
   CompanyTypeEnToKr,
-} from "@@types/enums";
+} from "@/@types/enums";
 
 export type PropsType = {
   data: RecruitmentFormType;

@@ -13,7 +13,7 @@ import { useEffect, useState, type CSSProperties } from "react";
 import { useGetAllRecruitmentForm } from "@/apis";
 import { useNumCountAnimation } from "@/hooks";
 import { useRecruitmentFilter } from "@/stores";
-import { CompanyStatusKrToEn } from "@@types/enums";
+import { CompanyStatusKrToEn } from "@/@types/enums";
 
 export const RecruitmentPage = () => {
   const [page, setPage] = useState(1);

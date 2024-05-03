@@ -13,7 +13,7 @@ import { useEffect, useState, type CSSProperties } from "react";
 import { useGetAllCompany } from "@/apis";
 import { useNumCountAnimation } from "@/hooks";
 import { useCompanyFilter } from "@/stores";
-import { CompanyTypeEnToKr } from "@@types/enums";
+import { CompanyTypeEnToKr } from "@/@types/enums";
 
 export const CompanyPage = () => {
   const [page, setPage] = useState(1);

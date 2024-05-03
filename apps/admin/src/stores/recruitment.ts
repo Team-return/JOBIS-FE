@@ -1,4 +1,4 @@
-import type { RecruitmentStatusKrType, WinterInternType } from "@@types/types";
+import type { RecruitmentStatusKrType, WinterInternType } from "@/@types/types";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 

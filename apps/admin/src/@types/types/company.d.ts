@@ -3,7 +3,7 @@ import {
   CompanyTypeEnToKr,
   CompanyStatusKrToEn,
   winterInternStringToBool,
-} from "@@types/enums";
+} from "@/@types/enums";
 
 export type CompanyType = keyof typeof CompanyTypeEnToKr;
 

@@ -1,4 +1,4 @@
-import { LoadIcon } from "@assets/images";
+import { LoadIcon } from "@/assets/images";
 import type { HTMLAttributes } from "react";
 import { styled } from "styled-components";
 

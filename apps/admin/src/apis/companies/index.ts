@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { instance } from "@apis/axios";
 import { MutationOptions, useMutation, useQuery } from "@tanstack/react-query";
-import type { CompanyResponse } from "@/apis";
-import type { CompanyType } from "@@types/types";
+import { instance, type CompanyResponse } from "@/apis";
+import type { CompanyType } from "@/@types/types";
 import toast from "react-hot-toast";
 import { AxiosError } from "axios";
 

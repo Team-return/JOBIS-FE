@@ -1,4 +1,4 @@
-import { Logo } from "@assets/images";
+import { Logo } from "@/assets/images";
 import { styled } from "styled-components";
 import { Text } from "@jobis/ui";
 import { themes } from "@jobis/design-token";

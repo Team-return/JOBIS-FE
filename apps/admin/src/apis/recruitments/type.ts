@@ -1,4 +1,4 @@
-import type { RecruitmentStatusType, CompanyType } from "@@types/types";
+import type { RecruitmentStatusType, CompanyType } from "@/@types/types";
 
 export type RecruitmentFormResponse = {
   recruitments: RecruitmentFormType[];
