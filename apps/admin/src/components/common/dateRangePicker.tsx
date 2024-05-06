@@ -1,8 +1,8 @@
-import { DateArrowIcon, DoubleArrowIcon, WaveIcon } from "@assets/images";
+import { DateArrowIcon, DoubleArrowIcon, WaveIcon } from "@/assets/images";
 import { themes } from "@jobis/design-token";
 import { styled } from "styled-components";
 import { Icon, Text } from "@jobis/ui";
-import { Button, Stack } from "@/components";
+import { BigButton, Stack } from "@/components";
 import { useEffect, useState } from "react";
 import OutsideClickHandler from "react-outside-click-handler";
 import { useDidMountEffect } from "@/hooks";
@@ -41,8 +41,6 @@ export const DateRangePicker = ({
     month: todayDate.getMonth() + 1,
   });
 
-  const { recruitmentFilter } = useRecruitmentFilter();
-
   const [selectDate, setSelectDate] = useState<{
     startDate: DateType;
     endDate: DateType;
@@ -71,9 +69,8 @@ export const DateRangePicker = ({
         endDate: { year, month, date },
       });
     } else if (
-      clickDate < new Date(`${recruitmentFilter.startDate}T00:00:00`) ||
-      clickDate.getTime() ===
-        new Date(`${recruitmentFilter.endDate}T00:00:00`).getTime()
+      clickDate < new Date(`${startDate}T00:00:00`) ||
+      clickDate.getTime() === new Date(`${endDate}T00:00:00`).getTime()
     ) {
       setSelectDate(prev => ({ ...prev, startDate: { year, month, date } }));
     } else {
@@ -98,10 +95,10 @@ export const DateRangePicker = ({
 
   useEffect(() => {
     setSelectDate({
-      startDate: getDateParts(recruitmentFilter.startDate),
-      endDate: getDateParts(recruitmentFilter.endDate),
+      startDate: getDateParts(startDate),
+      endDate: getDateParts(endDate),
     });
-  }, [recruitmentFilter.endDate, recruitmentFilter.startDate]);
+  }, [endDate, startDate]);
 
   useDidMountEffect(() => {
     if (isValidDate(selectDate.startDate) && isValidDate(selectDate.endDate)) {
@@ -244,17 +241,17 @@ export const DateRangePicker = ({
                     getDateFormatted({
                       ...currentDate,
                       date: idx + 1,
-                    }) === recruitmentFilter.startDate ||
+                    }) === startDate ||
                     getDateFormatted({
                       ...currentDate,
                       date: idx + 1,
-                    }) === recruitmentFilter.endDate
+                    }) === endDate
                   }
                   $isPeriod={
                     new Date(currentDate.year, currentDate.month - 1, idx + 1) >
-                      new Date(`${recruitmentFilter.startDate}T00:00:00`) &&
+                      new Date(`${startDate}T00:00:00`) &&
                     new Date(currentDate.year, currentDate.month - 1, idx + 1) <
-                      new Date(`${recruitmentFilter.endDate}T00:00:00`)
+                      new Date(`${endDate}T00:00:00`)
                   }
                 >
                   {idx + 1}
@@ -267,7 +264,7 @@ export const DateRangePicker = ({
               ))}
             </DateWrapper>
             <Stack justify="flex-end">
-              <Button
+              <BigButton
                 variant="primary"
                 width={92}
                 height={40}
@@ -278,7 +275,7 @@ export const DateRangePicker = ({
                 <Text fontSize="body2" fontWeight="bold">
                   확인
                 </Text>
-              </Button>
+              </BigButton>
             </Stack>
           </DatePicker>
         )}

@@ -6,7 +6,7 @@ import { Checkbox, Stack } from "@/components";
 import type { CompanyType } from "@/apis";
 import { useSelectCompanyId } from "@/stores";
 import { useNavigate } from "react-router-dom";
-import { CompanyTypeEnToKr } from "@@types/enums";
+import { CompanyTypeEnToKr } from "@/@types/enums";
 
 type PropsType = {
   data: CompanyType;

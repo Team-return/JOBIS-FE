@@ -22,17 +22,6 @@
 
     "baseUrl": ".",
     "paths": {
-      "@apis/*": ["src/apis/*"],
-      "@assets/*": ["src/assets/*"],
-      "@components/*": ["src/components/*"],
-      "@hooks/*": ["src/hooks/*"],
-      "@pages/*": ["src/pages/*"],
-      "@styles/*": ["src/styles/*"],
-      "@utils/*": ["src/utils/*"],
-      "@themes/*": ["src/themes/*"],
-      "@stores/*": ["src/stores/*"],
-      "@constants/*": ["src/constants/*"],
-      "@@types/*": ["src/@types/*"],
       "@/*": ["./src/*"]
     }
   },

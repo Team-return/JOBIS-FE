@@ -1,4 +1,4 @@
-import { SearchIcon } from "@assets/images";
+import { SearchIcon } from "@/assets/images";
 import { themes } from "@jobis/design-token";
 import {
   forwardRef,

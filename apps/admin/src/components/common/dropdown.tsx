@@ -1,4 +1,4 @@
-import { ChevronIcon } from "@assets/images";
+import { ChevronIcon } from "@/assets/images";
 import { themes } from "@jobis/design-token";
 import { Text } from "@jobis/ui";
 import {

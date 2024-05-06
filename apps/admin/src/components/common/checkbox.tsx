@@ -51,7 +51,7 @@ const StyleCheckbox = styled.input`
   &:checked {
     border-color: transparent;
 
-    background: url("/check.svg") no-repeat;
+    background: url("/checkImg.svg") no-repeat;
     background-color: ${themes.Color.primary[20]};
     background-position: 50%;
     background-repeat: no-repeat;

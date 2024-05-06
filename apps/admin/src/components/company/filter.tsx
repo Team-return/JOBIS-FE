@@ -1,12 +1,12 @@
-import { Button, Dropdown, Input, Stack } from "@/components";
+import { BigButton, Dropdown, Input, Stack } from "@/components";
 import { useCompanyFilter, useSelectCompanyId } from "@/stores";
 import toast from "react-hot-toast";
 import { Text } from "@jobis/ui";
-import { CompanyIcon, DownArrowIcon, Rollback } from "@assets/images";
+import { CompanyIcon, DownArrowIcon, Rollback } from "@/assets/images";
 import { themes } from "@jobis/design-token";
 import { useChangeCompanyMOU, useChangeCompanyType, useGetCodes } from "@/apis";
 import { useState } from "react";
-import type { CompanyType } from "@@types/types";
+import type { CompanyType } from "@/@types/types";
 import { useDidMountEffect } from "@/hooks";
 import { useQueryClient } from "@tanstack/react-query";
 
@@ -107,7 +107,7 @@ export const CompanyFilter = () => {
         />
       </Stack>
       <Stack justify="flex-end" gap={8}>
-        <Button
+        <BigButton
           width={120}
           disabled={
             !companyFilter.division &&
@@ -124,8 +124,8 @@ export const CompanyFilter = () => {
           <Text fontSize="body3" fontWeight="regular">
             필터 초기화
           </Text>
-        </Button>
-        <Button
+        </BigButton>
+        <BigButton
           width={128}
           icon={<img src={CompanyIcon} />}
           disabled={changeCompanyTypeIsPending || selectCompanyId.length === 0}
@@ -136,8 +136,8 @@ export const CompanyFilter = () => {
           <Text fontSize="body3" fontWeight="regular">
             참여기업 등록
           </Text>
-        </Button>
-        <Button
+        </BigButton>
+        <BigButton
           width={128}
           icon={<img src={CompanyIcon} />}
           disabled={changeCompanyTypeIsPending || selectCompanyId.length === 0}
@@ -148,8 +148,8 @@ export const CompanyFilter = () => {
           <Text fontSize="body3" fontWeight="regular">
             선도기업 등록
           </Text>
-        </Button>
-        <Button
+        </BigButton>
+        <BigButton
           width={104}
           icon={<img src={DownArrowIcon} />}
           disabled={changeCompanyMOUIsPending || selectCompanyId.length === 0}
@@ -160,7 +160,7 @@ export const CompanyFilter = () => {
           <Text fontSize="body3" fontWeight="regular">
             협약등록
           </Text>
-        </Button>
+        </BigButton>
       </Stack>
     </Stack>
   );

@@ -1,14 +1,15 @@
 import * as ReactDOM from "react-dom/client";
 import App from "./App.tsx";
-import { GlobalStyle } from "@themes/globalStyle.ts";
+import { GlobalStyle } from "@/themes/globalStyle.ts";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ToastProvider } from "@jobis/ui";
 import { Toaster } from "react-hot-toast";
-import "@themes/fonts.css";
+import "@/themes/fonts.css";
 import "@jobis/design-token/global.css";
 import "@jobis/ui/style.css";
 import { BrowserRouter } from "react-router-dom";
+import { Modal } from "@/components";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -26,6 +27,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <QueryClientProvider client={queryClient}>
       <ToastProvider>
         <Toaster />
+        <Modal />
         <GlobalStyle />
         <App />
         <ReactQueryDevtools />

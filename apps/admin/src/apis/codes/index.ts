@@ -1,7 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { instance } from "@apis/axios";
+import { instance, type CodesResponse, type CodesTypeEnum } from "@/apis";
 import { useQuery } from "@tanstack/react-query";
-import type { CodesResponse, CodesTypeEnum } from "@/apis";
 
 const router = "/codes";
 
