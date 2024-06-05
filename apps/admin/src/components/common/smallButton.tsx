@@ -51,10 +51,13 @@ const StyleButton = styled.button<{
   align-items: center;
   appearance: none;
   ${({ $width }) =>
-    $width &&
-    css`
-      width: ${$width}px;
-    `}
+    typeof $width === "number"
+      ? css`
+          width: ${$width}px;
+        `
+      : css`
+          width: ${$width};
+        `}
   height: ${({ $height }) => $height}px;
   padding: 0 9px;
   gap: 8px;
