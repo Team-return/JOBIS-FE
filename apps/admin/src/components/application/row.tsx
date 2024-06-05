@@ -14,6 +14,7 @@ import { ChevronIcon, FileIcon, UrlIcon } from "@/assets/images";
 import { useState } from "react";
 import OutsideClickHandler from "react-outside-click-handler";
 import { useDidMountEffect } from "@/hooks";
+import { convertFileName } from "@/utils";
 
 type PropsType = {
   data: ApplicationType;
@@ -48,10 +49,6 @@ export const ApplicationRow = ({ data }: PropsType) => {
         });
   };
 
-  const attachmentName = (attachment: string) => {
-    return attachment.split("/").at(-1)!;
-  };
-
   const firstFileAttachment = data.attachments.find(
     attachment => attachment.type === "FILE"
   );
@@ -60,6 +57,10 @@ export const ApplicationRow = ({ data }: PropsType) => {
     attachment.type === "FILE"
       ? setDownloadFile(attachment.url)
       : window.open(attachment.url, "_blank", "noopener, noreferrer");
+  };
+
+  const attachmentName = (attachment: string) => {
+    return attachment.split("/").at(-1)!;
   };
 
   const renderAttachments = () => (
@@ -75,11 +76,10 @@ export const ApplicationRow = ({ data }: PropsType) => {
                 maxWidth: attachment.type === "FILE" ? "100px" : "130px",
               }}
             >
-              {attachment.type === "FILE"
-                ? attachmentName(attachment.url)
-                    .slice(37)
-                    .slice(0, attachmentName(attachment.url).length - 40)
-                : attachment.url}
+              {convertFileName(attachment).slice(
+                0,
+                attachmentName(attachment.url).length - 40
+              )}
             </AttachmentText>
             {attachment.type === "FILE" && (
               <Text fontSize="body2" fontWeight="medium">
@@ -158,7 +158,7 @@ export const ApplicationRow = ({ data }: PropsType) => {
               $isClick={true}
               style={{ position: "relative", justifyContent: "flex-end" }}
             >
-              {`${firstFileAttachment ? attachmentName(firstFileAttachment.url).slice(37) : data.attachments[0].url} ${data.attachments.length === 1 ? "" : `외 ${data.attachments.length - 1}개`}`}
+              {`${firstFileAttachment ? convertFileName(firstFileAttachment) : data.attachments[0].url} ${data.attachments.length === 1 ? "" : `외 ${data.attachments.length - 1}개`}`}
               {isOpen && renderAttachments()}
             </StyleText>
             <ChevronImg
@@ -176,6 +176,7 @@ export const ApplicationRow = ({ data }: PropsType) => {
 
 const Container = styled(Stack)`
   cursor: pointer;
+  border-bottom: 1px solid ${themes.Color.grayScale[40]};
 
   &:hover {
     background-color: ${themes.Color.grayScale[40]};
@@ -206,7 +207,9 @@ const CheckboxWrapper = styled.div`
   display: flex;
   align-items: center;
   width: 40px;
-  height: 100%;
+  height: calc(100% + 2px);
+  border-bottom: 1px solid ${themes.Color.grayScale[40]};
+  border-top: 1px solid ${themes.Color.grayScale[40]};
   cursor: pointer;
 `;
 
