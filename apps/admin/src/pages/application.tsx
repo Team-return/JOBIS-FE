@@ -35,10 +35,10 @@ export const ApplicationPage = () => {
         item.company_name.includes(applicationFilter.companyOrStudentName) ||
         item.student_name.includes(applicationFilter.companyOrStudentName)
     )
-    .filter(item =>
-      applicationStatus[item.application_status].includes(
-        applicationFilter.status
-      )
+    .filter(
+      item =>
+        applicationFilter.status === "" ||
+        applicationStatus[item.application_status] === applicationFilter.status
     );
 
   return (
