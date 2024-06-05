@@ -13,7 +13,6 @@ import { applicationStatus, applicationStatusTextColor } from "@/@types/enums";
 import { ChevronIcon, FileIcon, UrlIcon } from "@/assets/images";
 import { useState } from "react";
 import OutsideClickHandler from "react-outside-click-handler";
-import { useDidMountEffect } from "@/hooks";
 import { convertFileName } from "@/utils";
 
 type PropsType = {
@@ -22,13 +21,7 @@ type PropsType = {
 
 export const ApplicationRow = ({ data }: PropsType) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-
-  const [downloadFile, setDownloadFile] = useState<string>("");
-  const { mutate } = useDownloadData(downloadFile);
-
-  useDidMountEffect(() => {
-    mutate();
-  }, [downloadFile]);
+  const { mutate } = useDownloadData();
 
   const { selectApplication, addSelectApplication, deleteSelectApplication } =
     useSelectApplication();
@@ -55,7 +48,7 @@ export const ApplicationRow = ({ data }: PropsType) => {
 
   const downloadOrOpenLink = (attachment: AttachmentUrlType) => {
     attachment.type === "FILE"
-      ? setDownloadFile(attachment.url)
+      ? mutate(attachment.url)
       : window.open(attachment.url, "_blank", "noopener, noreferrer");
   };
 

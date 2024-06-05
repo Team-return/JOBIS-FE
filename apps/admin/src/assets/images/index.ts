@@ -11,5 +11,6 @@ export { default as DownArrowIcon } from "./downArrow.svg";
 export { default as CompanyIcon } from "./company.svg";
 export { default as FileIcon } from "./file.svg";
 export { default as UrlIcon } from "./url.svg";
+export { default as FileDownArrow } from "./fileDownArrow.svg";
 
 export { default as Logo } from "./logo.png";
