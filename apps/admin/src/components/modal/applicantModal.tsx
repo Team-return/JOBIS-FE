@@ -1,14 +1,20 @@
 import { useModal } from "@/stores";
 import { themes } from "@jobis/design-token";
 import { Radio, Text } from "@jobis/ui";
-import { BigButton, Stack } from "@/components";
+import { BigButton, SmallButton, Stack } from "@/components";
 import { styled } from "styled-components";
 import { ApplicantFileCellData, ApplicantStudentCellData } from "@/constants";
-import { useChangeApplicationStatus, useGetAllApplication } from "@/apis";
+import {
+  useChangeApplicationStatus,
+  useDownloadData,
+  useGetAllApplication,
+  type AttachmentUrlType,
+} from "@/apis";
 import { useState } from "react";
 import { convertFileName } from "@/utils";
 import toast from "react-hot-toast";
 import { useQueryClient } from "@tanstack/react-query";
+import { FileDownArrow } from "@/assets/images";
 
 type PropsType = {
   status: "REQUESTED" | "APPROVED";
@@ -23,18 +29,29 @@ export const ApplicantModal = ({ isRequest, status, id }: PropsType) => {
   const queryClient = useQueryClient();
 
   const { data, refetch } = useGetAllApplication(status, id);
-  const { mutate } = useChangeApplicationStatus("APPROVED", [selectId], {
-    onSuccess: () => {
-      refetch();
-      toast.success("승인 상태로 변경되었습니다.");
-      queryClient.invalidateQueries({ queryKey: ["getAllRecruitmentForm"] });
-      queryClient.invalidateQueries({ queryKey: ["getAllApplication"] });
-    },
-  });
+  const { mutate: changeStatusMutate } = useChangeApplicationStatus(
+    "APPROVED",
+    [selectId],
+    {
+      onSuccess: () => {
+        refetch();
+        toast.success("승인 상태로 변경되었습니다.");
+        queryClient.invalidateQueries({ queryKey: ["getAllRecruitmentForm"] });
+        queryClient.invalidateQueries({ queryKey: ["getAllApplication"] });
+      },
+    }
+  );
+  const { mutate: downloadMutate } = useDownloadData();
 
   const selectStudent = data?.applications.find(
     item => item.application_id === selectId
   );
+
+  const downloadOrOpenLink = (attachment: AttachmentUrlType) => {
+    attachment.type === "FILE"
+      ? downloadMutate(attachment.url)
+      : window.open(attachment.url, "_blank", "noopener, noreferrer");
+  };
 
   return (
     <Stack
@@ -52,7 +69,7 @@ export const ApplicantModal = ({ isRequest, status, id }: PropsType) => {
           <ApproveBtn
             disabled={!selectId}
             onClick={() => {
-              !!selectId && mutate();
+              !!selectId && changeStatusMutate();
             }}
           >
             승인
@@ -131,7 +148,7 @@ export const ApplicantModal = ({ isRequest, status, id }: PropsType) => {
       </TitleWrapper>
       <Stack direction="column" gap={10}>
         {selectStudent ? (
-          selectStudent.attachments.map((item, idx) => (
+          selectStudent.attachments.map((attachment, idx) => (
             <Stack key={idx} width="100%" justify="center" align="center">
               <StyleText
                 $width="20%"
@@ -142,14 +159,27 @@ export const ApplicantModal = ({ isRequest, status, id }: PropsType) => {
                 {idx + 1}
               </StyleText>
               <StyleText
-                $width="80%"
+                $width="60%"
                 fontSize="body3"
                 fontWeight="medium"
                 style={{ justifyContent: "start" }}
                 color={themes.Color.grayScale[60]}
               >
-                {convertFileName(item)}
+                {convertFileName(attachment)}
               </StyleText>
+              <Stack width="20%">
+                <SmallButton
+                  height={26}
+                  icon={<img src={FileDownArrow} />}
+                  onClick={() => {
+                    downloadOrOpenLink(attachment);
+                  }}
+                >
+                  <Text fontSize="caption" fontWeight="medium">
+                    {attachment.type === "FILE" ? "다운" : "링크"}
+                  </Text>
+                </SmallButton>
+              </Stack>
             </Stack>
           ))
         ) : (
