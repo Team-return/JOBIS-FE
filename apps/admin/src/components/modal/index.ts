@@ -2,3 +2,4 @@
 export * from "./defaultChangeStatusModal";
 export * from "./rejectedStatusModal";
 export * from "./fieldTrainStatusModal";
+export * from "./applicantModal";

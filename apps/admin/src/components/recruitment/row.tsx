@@ -3,9 +3,9 @@ import { Text } from "@jobis/ui";
 import { themes } from "@jobis/design-token";
 import { RecruitmentCellData } from "@/constants";
 import { getValueByKey } from "@/utils";
-import { Checkbox, Stack } from "@/components";
+import { ApplicantModal, Checkbox, Stack } from "@/components";
 import type { RecruitmentFormType } from "@/apis";
-import { useSelectRecruitmentId } from "@/stores";
+import { useModal, useSelectRecruitmentId } from "@/stores";
 import { useNavigate } from "react-router-dom";
 import {
   CompanyStatusColor,
@@ -18,6 +18,7 @@ export type PropsType = {
 };
 
 export const RecruitmentRow = ({ data }: PropsType) => {
+  const { openModal } = useModal();
   const navigate = useNavigate();
   const {
     selectRecruitmentId,
@@ -97,7 +98,15 @@ export const RecruitmentRow = ({ data }: PropsType) => {
         onClick={e => {
           if (data.application_requested_count) {
             e.stopPropagation();
-            // 지원요청 모달 띄우기
+            openModal({
+              children: (
+                <ApplicantModal
+                  isRequest={true}
+                  status="REQUESTED"
+                  id={data.id}
+                />
+              ),
+            });
           }
         }}
       >
@@ -111,7 +120,15 @@ export const RecruitmentRow = ({ data }: PropsType) => {
         onClick={e => {
           if (data.application_approved_count) {
             e.stopPropagation();
-            // 지원자 모달 띄우기
+            openModal({
+              children: (
+                <ApplicantModal
+                  isRequest={false}
+                  status="APPROVED"
+                  id={data.id}
+                />
+              ),
+            });
           }
         }}
       >
@@ -138,12 +155,13 @@ export const RecruitmentRow = ({ data }: PropsType) => {
 
 const Container = styled(Stack)`
   cursor: pointer;
+  border-bottom: 1px solid ${themes.Color.grayScale[40]};
 
   &:hover {
-    background-color: ${themes.Color.grayScale[40]};
+    background-color: ${themes.Color.grayScale[30]};
 
     .checkbox {
-      background-color: ${themes.Color.grayScale[40]};
+      background-color: ${themes.Color.grayScale[30]};
 
       :first-child {
         border-color: ${themes.Color.grayScale[10]};
@@ -162,7 +180,9 @@ const CheckboxWrapper = styled.div`
   display: flex;
   align-items: center;
   width: 40px;
-  height: 100%;
+  height: calc(100% + 2px);
+  border-bottom: 1px solid ${themes.Color.grayScale[40]};
+  border-top: 1px solid ${themes.Color.grayScale[40]};
   cursor: pointer;
 `;
 
