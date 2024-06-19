@@ -10,6 +10,7 @@ import "@jobis/design-token/global.css";
 import "@jobis/ui/style.css";
 import { BrowserRouter } from "react-router-dom";
 import { Modal } from "@/components";
+import { HelmetProvider } from "react-helmet-async";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -26,11 +27,13 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <BrowserRouter>
     <QueryClientProvider client={queryClient}>
       <ToastProvider>
-        <Toaster />
-        <Modal />
-        <GlobalStyle />
-        <App />
-        <ReactQueryDevtools />
+        <HelmetProvider>
+          <Toaster />
+          <Modal />
+          <GlobalStyle />
+          <App />
+          <ReactQueryDevtools />
+        </HelmetProvider>
       </ToastProvider>
     </QueryClientProvider>
   </BrowserRouter>
