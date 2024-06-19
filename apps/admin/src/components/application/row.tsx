@@ -154,26 +154,30 @@ export const ApplicationRow = ({ data }: PropsType) => {
             align="center"
             gap={12}
             onClick={e => {
-              e.stopPropagation();
-              setIsOpen(prev => !prev);
+              if (data.attachments.length > 0) {
+                e.stopPropagation();
+                setIsOpen(prev => !prev);
+              }
             }}
           >
             <StyleText
               as="div"
               fontSize="body2"
               fontWeight="medium"
-              $isClick={true}
+              $isClick={data.attachments.length > 0}
               style={{ position: "relative", justifyContent: "flex-end" }}
             >
-              {`${firstFileAttachment ? convertFileName(firstFileAttachment) : data.attachments[0].url} ${data.attachments.length === 1 ? "" : `외 ${data.attachments.length - 1}개`}`}
+              {`${firstFileAttachment ? convertFileName(firstFileAttachment) : data.attachments[0]?.url || "첨부파일 없음"} ${data.attachments.length <= 1 ? "" : `외 ${data.attachments.length - 1}개`}`}
               {isOpen && renderAttachments()}
             </StyleText>
-            <ChevronImg
-              width={20}
-              height={20}
-              $isopen={isOpen}
-              stroke={themes.Color.grayScale[60]}
-            />
+            {data.attachments.length > 0 && (
+              <ChevronImg
+                width={20}
+                height={20}
+                $isopen={isOpen}
+                stroke={themes.Color.grayScale[60]}
+              />
+            )}
           </Stack>
         </OutsideClickHandler>
       </AttachmentWrapper>
