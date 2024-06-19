@@ -1,20 +1,18 @@
 import { useModal } from "@/stores";
 import { themes } from "@jobis/design-token";
-import { Radio, Text } from "@jobis/ui";
-import { BigButton, SmallButton, Stack } from "@/components";
+import { Text } from "@jobis/ui";
+import {
+  BigButton,
+  ApplicantFileRow,
+  Stack,
+  ApplicantStudentRow,
+} from "@/components";
 import { styled } from "styled-components";
 import { ApplicantFileCellData, ApplicantStudentCellData } from "@/constants";
-import {
-  useChangeApplicationStatus,
-  useDownloadData,
-  useGetAllApplication,
-  type AttachmentUrlType,
-} from "@/apis";
+import { useChangeApplicationStatus, useGetAllApplication } from "@/apis";
 import { useState } from "react";
-import { convertFileName } from "@/utils";
 import toast from "react-hot-toast";
 import { useQueryClient } from "@tanstack/react-query";
-import { FileDownArrow } from "@/assets/images";
 
 type PropsType = {
   status: "REQUESTED" | "APPROVED";
@@ -41,17 +39,10 @@ export const ApplicantModal = ({ isRequest, status, id }: PropsType) => {
       },
     }
   );
-  const { mutate: downloadMutate } = useDownloadData();
 
   const selectStudent = data?.applications.find(
     item => item.application_id === selectId
   );
-
-  const downloadOrOpenLink = (attachment: AttachmentUrlType) => {
-    attachment.type === "FILE"
-      ? downloadMutate(attachment.url)
-      : window.open(attachment.url, "_blank", "noopener, noreferrer");
-  };
 
   return (
     <Stack
@@ -91,46 +82,12 @@ export const ApplicantModal = ({ isRequest, status, id }: PropsType) => {
       </TitleWrapper>
       <Stack direction="column" gap={10}>
         {data?.applications.map((item, idx) => (
-          <Stack
+          <ApplicantStudentRow
             key={idx}
-            width="100%"
-            justify="center"
-            align="center"
-            onClick={() => {
-              setSelectId(item.application_id);
-            }}
-          >
-            <Radio
-              checked={selectId === item.application_id}
-              onChange={() => {
-                setSelectId(item.application_id);
-              }}
-            />
-            <StyleText
-              $width="30%"
-              fontSize="body3"
-              fontWeight="medium"
-              color={themes.Color.grayScale[60]}
-            >
-              {item.student_gcn}
-            </StyleText>
-            <StyleText
-              $width="30%"
-              fontSize="body3"
-              fontWeight="medium"
-              color={themes.Color.grayScale[60]}
-            >
-              {item.student_name}
-            </StyleText>
-            <StyleText
-              $width="30%"
-              fontSize="body3"
-              fontWeight="medium"
-              color={themes.Color.grayScale[60]}
-            >
-              {item.created_at}
-            </StyleText>
-          </Stack>
+            item={item}
+            setSelectId={setSelectId}
+            selectId={selectId}
+          />
         ))}
       </Stack>
       <TitleWrapper style={{ margin: "34px 0 0 0" }}>
@@ -149,38 +106,7 @@ export const ApplicantModal = ({ isRequest, status, id }: PropsType) => {
       <Stack direction="column" gap={10}>
         {selectStudent ? (
           selectStudent.attachments.map((attachment, idx) => (
-            <Stack key={idx} width="100%" justify="center" align="center">
-              <StyleText
-                $width="20%"
-                fontSize="body3"
-                fontWeight="medium"
-                color={themes.Color.grayScale[60]}
-              >
-                {idx + 1}
-              </StyleText>
-              <StyleText
-                $width="60%"
-                fontSize="body3"
-                fontWeight="medium"
-                style={{ justifyContent: "start" }}
-                color={themes.Color.grayScale[60]}
-              >
-                {convertFileName(attachment)}
-              </StyleText>
-              <Stack width="20%">
-                <SmallButton
-                  height={26}
-                  icon={<img src={FileDownArrow} />}
-                  onClick={() => {
-                    downloadOrOpenLink(attachment);
-                  }}
-                >
-                  <Text fontSize="caption" fontWeight="medium">
-                    {attachment.type === "FILE" ? "다운" : "링크"}
-                  </Text>
-                </SmallButton>
-              </Stack>
-            </Stack>
+            <ApplicantFileRow key={idx} attachment={attachment} idx={idx} />
           ))
         ) : (
           <Stack
@@ -242,16 +168,4 @@ const TitleWrapper = styled.div`
   color: ${themes.Color.grayScale[60]};
   font-size: ${themes.Font.body2};
   font-weight: ${themes.FontWeight.medium};
-`;
-
-const StyleText = styled(Text)<{ $width: string }>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: ${({ $width }) => $width};
-  height: 36px;
-
-  word-break: keep-all;
-
-  text-align: center;
 `;
