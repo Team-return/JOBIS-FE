@@ -4,7 +4,7 @@ import {
   type CSSProperties,
   type HTMLAttributes,
 } from "react";
-import { styled } from "styled-components";
+import { css, styled } from "styled-components";
 
 type PropsType = {
   align?: CSSProperties["alignItems"];
@@ -12,8 +12,10 @@ type PropsType = {
   direction?: CSSProperties["flexDirection"];
   position?: CSSProperties["position"];
   width?: CSSProperties["width"];
+  height?: CSSProperties["height"];
   gap?: CSSProperties["gap"];
   margin?: CSSProperties["margin"];
+  overflow?: CSSProperties["overflow"];
 } & HTMLAttributes<HTMLDivElement>;
 
 type StylePropsType = {
@@ -22,8 +24,10 @@ type StylePropsType = {
   $justify: CSSProperties["justifyContent"];
   $position: CSSProperties["position"];
   $width: CSSProperties["width"];
+  $height: CSSProperties["height"];
   $gap: CSSProperties["gap"];
   $margin: CSSProperties["margin"];
+  $overflow: CSSProperties["overflow"];
 };
 
 export const Stack = forwardRef(
@@ -34,7 +38,9 @@ export const Stack = forwardRef(
       align = "flex-start",
       justify = "flex-start",
       position = "static",
+      overflow = "visible",
       width = "100%",
+      height,
       gap = 0,
       margin = 0,
       ...props
@@ -49,8 +55,10 @@ export const Stack = forwardRef(
         $justify={justify}
         $position={position}
         $width={width}
+        $height={height}
         $gap={gap}
         $margin={margin}
+        $overflow={overflow}
         {...props}
       >
         {children}
@@ -67,7 +75,14 @@ export const StyledStack = styled.div<StylePropsType>`
   align-items: ${({ $align }) => $align};
   width: ${({ $width }) =>
     typeof $width === "number" ? `${$width}px` : $width};
+  ${({ $height }) =>
+    $height &&
+    css`
+      height: ${typeof $height === "number" ? `${$height}px` : $height};
+    `};
   margin: ${({ $margin }) =>
     typeof $margin === "number" ? `${$margin}px` : $margin};
   gap: ${({ $gap }) => $gap}px;
+
+  overflow: ${({ $overflow }) => $overflow};
 `;

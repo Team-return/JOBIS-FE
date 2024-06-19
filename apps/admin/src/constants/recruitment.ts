@@ -36,3 +36,33 @@ export const RecruitmentCellData = [
     width: "11%",
   },
 ];
+
+export const ApplicantStudentCellData = [
+  {
+    title: "",
+    width: "10%",
+  },
+  {
+    title: "학번",
+    width: "30%",
+  },
+  {
+    title: "이름",
+    width: "30%",
+  },
+  {
+    title: "지원일자",
+    width: "30%",
+  },
+];
+
+export const ApplicantFileCellData = [
+  {
+    title: "순번",
+    width: "10%",
+  },
+  {
+    title: "첨부파일",
+    width: "90%",
+  },
+];

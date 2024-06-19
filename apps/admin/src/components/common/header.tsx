@@ -82,7 +82,8 @@ const Container = styled.div`
   width: 100vw;
   height: 70px;
 
-  background-color: ${themes.Color.grayScale[30]};
+  background-color: ${themes.Color.grayScale[10]};
+  box-shadow: 0 0 4px 0 rgb(112 144 176 / 12%);
 `;
 
 const NavWrapper = styled.nav`

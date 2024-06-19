@@ -38,7 +38,7 @@ footer, header, hgroup, main, menu, nav, section {
 }
 
 body {
-    background-color: ${themes.Color.grayScale[30]};
+    background-color: ${themes.Color.grayScale[10]};
 
     line-height: 1;
 }

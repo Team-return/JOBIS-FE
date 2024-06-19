@@ -35,10 +35,10 @@ export const ApplicationPage = () => {
         item.company_name.includes(applicationFilter.companyOrStudentName) ||
         item.student_name.includes(applicationFilter.companyOrStudentName)
     )
-    .filter(item =>
-      applicationStatus[item.application_status].includes(
-        applicationFilter.status
-      )
+    .filter(
+      item =>
+        applicationFilter.status === "" ||
+        applicationStatus[item.application_status] === applicationFilter.status
     );
 
   return (
@@ -102,6 +102,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100vw;
+  min-width: 1200px;
   margin-top: 70px;
   padding-top: 56px;
 `;

@@ -1,5 +1,6 @@
 import type { ApplicationENStatusType } from "@/@types/types";
 import { instance, type ApplicationResponse } from "@/apis";
+import { convertObjectToQueryString } from "@/utils";
 import {
   useMutation,
   useQuery,
@@ -11,11 +12,19 @@ import toast from "react-hot-toast";
 const router = "/applications";
 
 /** 지원서를 조회하는 api입니다. */
-export const useGetAllApplication = () => {
+export const useGetAllApplication = (
+  status?: "REQUESTED" | "APPROVED",
+  id?: number
+) => {
   return useQuery({
-    queryKey: ["getAllApplication"],
+    queryKey: ["getAllApplication", status, id],
     queryFn: async () => {
-      const { data } = await instance.get<ApplicationResponse>(`${router}`);
+      const { data } = await instance.get<ApplicationResponse>(
+        `${router}${convertObjectToQueryString({
+          application_status: status,
+          recruitment_id: id,
+        })}`
+      );
       return data;
     },
   });
@@ -25,7 +34,7 @@ export const useGetAllApplication = () => {
 export const useChangeApplicationStatus = (
   status: ApplicationENStatusType,
   applicationIds: number[],
-  option: MutationOptions
+  option?: MutationOptions
 ) => {
   const data = {
     application_ids: applicationIds,

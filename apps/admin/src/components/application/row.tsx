@@ -13,7 +13,7 @@ import { applicationStatus, applicationStatusTextColor } from "@/@types/enums";
 import { ChevronIcon, FileIcon, UrlIcon } from "@/assets/images";
 import { useState } from "react";
 import OutsideClickHandler from "react-outside-click-handler";
-import { useDidMountEffect } from "@/hooks";
+import { convertFileName } from "@/utils";
 
 type PropsType = {
   data: ApplicationType;
@@ -21,13 +21,7 @@ type PropsType = {
 
 export const ApplicationRow = ({ data }: PropsType) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-
-  const [downloadFile, setDownloadFile] = useState<string>("");
-  const { mutate } = useDownloadData(downloadFile);
-
-  useDidMountEffect(() => {
-    mutate();
-  }, [downloadFile]);
+  const { mutate } = useDownloadData();
 
   const { selectApplication, addSelectApplication, deleteSelectApplication } =
     useSelectApplication();
@@ -48,18 +42,18 @@ export const ApplicationRow = ({ data }: PropsType) => {
         });
   };
 
-  const attachmentName = (attachment: string) => {
-    return attachment.split("/").at(-1)!;
-  };
-
   const firstFileAttachment = data.attachments.find(
     attachment => attachment.type === "FILE"
   );
 
   const downloadOrOpenLink = (attachment: AttachmentUrlType) => {
     attachment.type === "FILE"
-      ? setDownloadFile(attachment.url)
+      ? mutate(attachment.url)
       : window.open(attachment.url, "_blank", "noopener, noreferrer");
+  };
+
+  const attachmentName = (attachment: string) => {
+    return attachment.split("/").at(-1)!;
   };
 
   const renderAttachments = () => (
@@ -67,7 +61,12 @@ export const ApplicationRow = ({ data }: PropsType) => {
       {data.attachments.map((attachment, idx) => (
         <AttachmentItem key={idx}>
           <img src={attachment.type === "FILE" ? FileIcon : UrlIcon} alt="" />
-          <Stack>
+          <Stack
+            title={convertFileName(attachment).slice(
+              0,
+              attachmentName(attachment.url).length - 37
+            )}
+          >
             <AttachmentText
               fontSize="body2"
               fontWeight="medium"
@@ -75,11 +74,10 @@ export const ApplicationRow = ({ data }: PropsType) => {
                 maxWidth: attachment.type === "FILE" ? "100px" : "130px",
               }}
             >
-              {attachment.type === "FILE"
-                ? attachmentName(attachment.url)
-                    .slice(37)
-                    .slice(0, attachmentName(attachment.url).length - 40)
-                : attachment.url}
+              {convertFileName(attachment).slice(
+                0,
+                attachmentName(attachment.url).length - 40
+              )}
             </AttachmentText>
             {attachment.type === "FILE" && (
               <Text fontSize="body2" fontWeight="medium">
@@ -87,6 +85,15 @@ export const ApplicationRow = ({ data }: PropsType) => {
               </Text>
             )}
           </Stack>
+          {attachmentName(attachment.url).slice(-3) === "pdf" && (
+            <SmallButton
+              onClick={() => {
+                window.open(`/file?url=${encodeURI(attachment.url)}`);
+              }}
+            >
+              미리보기
+            </SmallButton>
+          )}
           <SmallButton onClick={() => downloadOrOpenLink(attachment)}>
             {attachment.type === "FILE" ? "다운로드" : "링크이동"}
           </SmallButton>
@@ -147,26 +154,30 @@ export const ApplicationRow = ({ data }: PropsType) => {
             align="center"
             gap={12}
             onClick={e => {
-              e.stopPropagation();
-              setIsOpen(prev => !prev);
+              if (data.attachments.length > 0) {
+                e.stopPropagation();
+                setIsOpen(prev => !prev);
+              }
             }}
           >
             <StyleText
               as="div"
               fontSize="body2"
               fontWeight="medium"
-              $isClick={true}
+              $isClick={data.attachments.length > 0}
               style={{ position: "relative", justifyContent: "flex-end" }}
             >
-              {`${firstFileAttachment ? attachmentName(firstFileAttachment.url).slice(37) : data.attachments[0].url} ${data.attachments.length === 1 ? "" : `외 ${data.attachments.length - 1}개`}`}
+              {`${firstFileAttachment ? convertFileName(firstFileAttachment) : data.attachments[0]?.url || "첨부파일 없음"} ${data.attachments.length <= 1 ? "" : `외 ${data.attachments.length - 1}개`}`}
               {isOpen && renderAttachments()}
             </StyleText>
-            <ChevronImg
-              width={20}
-              height={20}
-              $isopen={isOpen}
-              stroke={themes.Color.grayScale[60]}
-            />
+            {data.attachments.length > 0 && (
+              <ChevronImg
+                width={20}
+                height={20}
+                $isopen={isOpen}
+                stroke={themes.Color.grayScale[60]}
+              />
+            )}
           </Stack>
         </OutsideClickHandler>
       </AttachmentWrapper>
@@ -176,6 +187,7 @@ export const ApplicationRow = ({ data }: PropsType) => {
 
 const Container = styled(Stack)`
   cursor: pointer;
+  border-bottom: 1px solid ${themes.Color.grayScale[40]};
 
   &:hover {
     background-color: ${themes.Color.grayScale[40]};
@@ -206,7 +218,9 @@ const CheckboxWrapper = styled.div`
   display: flex;
   align-items: center;
   width: 40px;
-  height: 100%;
+  height: calc(100% + 2px);
+  border-bottom: 1px solid ${themes.Color.grayScale[40]};
+  border-top: 1px solid ${themes.Color.grayScale[40]};
   cursor: pointer;
 `;
 
@@ -223,7 +237,6 @@ const AttachmentBox = styled.div`
   top: 60px;
   left: 8px;
   z-index: 1;
-  width: 302px;
   padding: 12px 16px;
   border-radius: 4px;
 

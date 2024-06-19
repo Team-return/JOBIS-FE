@@ -1,12 +1,9 @@
+import { BigButton, Dropdown, Input, Stack } from "@/components";
 import {
-  BigButton,
   DefaultChangeStatusModal,
-  Dropdown,
   FieldTrainStatusModal,
-  Input,
   RejectedStatusModal,
-  Stack,
-} from "@/components";
+} from "@/pages";
 import {
   useApplicationFilter,
   useFieldTrainDate,

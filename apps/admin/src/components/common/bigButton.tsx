@@ -63,7 +63,7 @@ const StyleButton = styled.button<{
       ? css`
           border: 1px solid ${themes.Color.primary[20]};
 
-          background-color: ${themes.Color.grayScale[30]};
+          background-color: ${themes.Color.grayScale[10]};
 
           color: ${themes.Color.primary[20]};
         `

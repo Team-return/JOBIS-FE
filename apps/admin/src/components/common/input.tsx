@@ -54,7 +54,6 @@ const StyledInput = styled.input<{ $isSearch: boolean }>`
   border: 1px solid ${themes.Color.grayScale[50]};
   border-radius: ${({ $isSearch }) => ($isSearch ? "8px" : "4px")};
 
-  background-color: ${themes.Color.grayScale[30]};
   outline: none;
 
   font-size: ${({ $isSearch }) =>
