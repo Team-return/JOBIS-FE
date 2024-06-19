@@ -3,6 +3,20 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import fileSaver from "file-saver";
 
+export const getFile = async (url: string) => {
+  const res = await axios.get(
+    `${import.meta.env.VITE_FILE_URL}${encodeURI(url)}`,
+    {
+      responseType: "arraybuffer",
+      headers: {
+        "Content-Type": "application/pdf",
+        Accept: "application/pdf",
+      },
+    }
+  );
+  return res;
+};
+
 /** S3에서 파일 가져와서 다운로드 */
 export const useDownloadData = () => {
   return useMutation({
