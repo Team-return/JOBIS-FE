@@ -61,7 +61,12 @@ export const ApplicationRow = ({ data }: PropsType) => {
       {data.attachments.map((attachment, idx) => (
         <AttachmentItem key={idx}>
           <img src={attachment.type === "FILE" ? FileIcon : UrlIcon} alt="" />
-          <Stack>
+          <Stack
+            title={convertFileName(attachment).slice(
+              0,
+              attachmentName(attachment.url).length - 37
+            )}
+          >
             <AttachmentText
               fontSize="body2"
               fontWeight="medium"
@@ -80,6 +85,15 @@ export const ApplicationRow = ({ data }: PropsType) => {
               </Text>
             )}
           </Stack>
+          {attachmentName(attachment.url).slice(-3) === "pdf" && (
+            <SmallButton
+              onClick={() => {
+                window.open(`/file?url=${encodeURI(attachment.url)}`);
+              }}
+            >
+              미리보기
+            </SmallButton>
+          )}
           <SmallButton onClick={() => downloadOrOpenLink(attachment)}>
             {attachment.type === "FILE" ? "다운로드" : "링크이동"}
           </SmallButton>
@@ -219,7 +233,6 @@ const AttachmentBox = styled.div`
   top: 60px;
   left: 8px;
   z-index: 1;
-  width: 302px;
   padding: 12px 16px;
   border-radius: 4px;
 

@@ -1,6 +1,7 @@
 import {
   ApplicationPage,
   CompanyPage,
+  FileDetail,
   RecruitmentPage,
   SignInPage,
 } from "@/pages";
@@ -15,6 +16,7 @@ function Router() {
       <Route path="/company" element={<CompanyPage />} />
       <Route path="/student" element={<></>} />
       <Route path="/application" element={<ApplicationPage />} />
+      <Route path="/file" element={<FileDetail />} />
       <Route path="*" element={<div>404</div>} />
     </Routes>
   );

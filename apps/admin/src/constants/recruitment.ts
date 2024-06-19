@@ -59,10 +59,10 @@ export const ApplicantStudentCellData = [
 export const ApplicantFileCellData = [
   {
     title: "순번",
-    width: "20%",
+    width: "10%",
   },
   {
     title: "첨부파일",
-    width: "80%",
+    width: "90%",
   },
 ];
