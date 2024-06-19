@@ -24,3 +24,6 @@ export * from "./files/type";
 
 export * from "./acceptances";
 export * from "./acceptances/type";
+
+export * from "./reviews";
+export * from "./reviews/type";
