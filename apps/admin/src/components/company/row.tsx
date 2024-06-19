@@ -4,9 +4,10 @@ import { themes } from "@jobis/design-token";
 import { CompanyCellData } from "@/constants";
 import { Checkbox, Stack } from "@/components";
 import type { CompanyType } from "@/apis";
-import { useSelectCompanyId } from "@/stores";
+import { useModal, useSelectCompanyId } from "@/stores";
 import { useNavigate } from "react-router-dom";
 import { CompanyTypeEnToKr } from "@/@types/enums";
+import { ReviewModal } from "@/pages";
 
 type PropsType = {
   data: CompanyType;
@@ -26,6 +27,8 @@ export const CompanyRow = ({ data }: PropsType) => {
       addSelectCompanyId(data.company_id);
     }
   };
+
+  const { openModal, closeModal } = useModal();
 
   return (
     <Container position="relative" align="center" onClick={clickHandler}>
@@ -119,8 +122,14 @@ export const CompanyRow = ({ data }: PropsType) => {
         fontWeight="medium"
         style={{ justifyContent: "flex-end", padding: "0px" }}
         $isClick={!!data.review_count}
+        onClick={e => {
+          data.review_count && e.stopPropagation();
+          openModal({
+            children: <ReviewModal id={data.company_id} />,
+          });
+        }}
       >
-        {data.review_count ? `${data.review_count}건` : "0건"}
+        {data.review_count || 0}건
       </StyleText>
     </Container>
   );

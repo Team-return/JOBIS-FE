@@ -44,3 +44,22 @@ export const CompanyCellData = [
     width: "6%",
   },
 ];
+
+export const ReviewTitleCellData = [
+  {
+    title: "",
+    width: "10%",
+  },
+  {
+    title: "연도",
+    width: "30%",
+  },
+  {
+    title: "작성자",
+    width: "30%",
+  },
+  {
+    title: "후기 작성일자",
+    width: "30%",
+  },
+];
