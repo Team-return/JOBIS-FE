@@ -2,7 +2,7 @@
 
 import ReactQuery from "@/components/reactQuery";
 import "./globals.css";
-import StyledComponentsRegistry from "./lib/registry";
+import StyledComponentsRegistry from "../lib/registry";
 import { Noto_Sans_KR } from "next/font/google";
 import { ReactNode } from "react";
 import { ToastProvider } from "@jobis/ui";

@@ -11,6 +11,7 @@ import {
   SpanStyle,
 } from "./style.css";
 import { assignInlineVars } from "@vanilla-extract/dynamic";
+import { Text } from "../texts";
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (props, ref) => {
@@ -62,7 +63,9 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       >
         {!disabled && isLoading && <div className={SpinnerStyle} />}
         {leftIcon && <span className={SpanStyle}>{leftIcon}</span>}
-        <span>{children}</span>
+        <Text fontSize="body2" fontWeight="bold" whiteSpace="nowrap">
+          {children}
+        </Text>
         {rightIcon && <span className={SpanStyle}>{rightIcon}</span>}
       </button>
     );

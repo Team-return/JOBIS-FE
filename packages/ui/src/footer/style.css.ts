@@ -7,7 +7,6 @@ export const JustifyVariant = createVar();
 export const AlignVariant = createVar();
 
 export const FooterStyle = style({
-  marginLeft: "1000px",
   width: "100vw",
   backgroundColor: themes.Color.primary[40],
   padding: "48px 0",

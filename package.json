@@ -7,18 +7,19 @@
     "build": "nx build",
     "build:many": "nx run-many -t build",
     "build:affected": "npx nx affected -t build",
+    "graph": "nx run-many --target=build --graph",
     "dev:storybook": "nx storybook @jobis/storybook",
     "dev:packages": "nx run-many --target=dev --projects='@jobis/ui,@jobis/icons,@jobis/design-token'",
     "prepare": "husky install",
     "postinstall": "husky install && cp -a .husky/. .git/hooks/",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "lint:styled": "stylelint './{app,packages}/**/*.{js,ts,jsx,tsx}' --fix"
+    "lint:styled": "stylelint './{apps,packages}/**/*.{js,ts,jsx,tsx}' --fix"
   },
   "lint-staged": {
-    "./{app,packages}/**/*.{js,ts,jsx,tsx}": [
+    "./{apps,packages}/**/*.{js,ts,jsx,tsx}": [
       "eslint --fix",
       "prettier --config .prettierrc.cjs --write -u",
-      "stylelint './{app,packages}/**/*.{js,ts,jsx,tsx}' --fix"
+      "stylelint './{apps,packages}/**/*.{js,ts,jsx,tsx}' --fix"
     ]
   },
   "devDependencies": {
@@ -33,10 +34,12 @@
     "@types/styled-components": "^5.1.34",
     "@typescript-eslint/eslint-plugin": "^6.20.0",
     "@typescript-eslint/parser": "^6.20.0",
+    "@vercel/remote-nx": "^1.1.1",
     "@yarnpkg/pnpify": "^4.0.1",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.1.3",
+    "eslint-plugin-react": "^7.34.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
     "eslint-plugin-unicorn": "^50.0.1",

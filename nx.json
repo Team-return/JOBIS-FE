@@ -9,16 +9,32 @@
   },
   "tasksRunnerOptions": {
     "default": {
-      "runner": "nx/tasks-runners/default",
+      "runner": "nx-cloud",
       "options": {
-        "cacheableOperations": ["build", "test", "dev"]
+        "accessToken": "ZjZlMjQ5ZjctZjM0Zi00ZDIyLTgyYWMtOWQxOGZhYWI1ZjJkfHJlYWQtd3JpdGU=",
+        "cacheableOperations": ["build"]
+      }
+    },
+    "vercel": {
+      "runner": "@vercel/remote-nx",
+      "options": {
+        "cacheableOperations": ["build"],
+        "cacheDirectory": "/tmp/nx-cache",
+        "token": "<token>",
+        "teamId": "<teamId>"
       }
     }
   },
   "targetDefaults": {
     "build": {
       "cache": true,
-      "dependsOn": ["^build"]
+      "dependsOn": ["^build"],
+      "outputs": [
+        "{projectRoot}/build",
+        "{projectRoot}/dist",
+        "{projectRoot}/.next",
+        "{projectRoot}/storybook-static"
+      ]
     },
     "test": {
       "cache": true,
@@ -29,5 +45,5 @@
       "cache": true
     }
   },
-  "nxCloudAccessToken": "NWU0MzNiYTktMzJhNi00ZTFjLWE3ZWUtYjZjODJmZGQxYTUyfHJlYWQtd3JpdGU="
+  "nxCloudAccessToken": "ZjZlMjQ5ZjctZjM0Zi00ZDIyLTgyYWMtOWQxOGZhYWI1ZjJkfHJlYWQtd3JpdGU="
 }
