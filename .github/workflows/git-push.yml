@@ -17,6 +17,11 @@ jobs:
         run: sh ./build.sh
       - name: Check files after build
         run: ls -al ./output
+      - name: Delete .github directory
+        run: |
+          cd ./output
+          rm -rf .github
+          ls -al
       - name: Pushes to another repository
         id: push_directory
         uses: cpina/github-action-push-to-another-repository@main
