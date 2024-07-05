@@ -28,6 +28,6 @@ jobs:
           destination-repository-name: JOBIS-FE
           user-email: ${{ secrets.RETURN_ACCOUNT_EMAIL }}
           commit-message: ${{ github.event.commits[0].message }}
-          target-branch: develop
+          target-branch: ${{ github.ref_name }}
       - name: Test get variable exported by push-to-another-repository
         run: echo $DESTINATION_CLONED_DIRECTORY
