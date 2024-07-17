@@ -1,13 +1,14 @@
-name: git push into another repo to deploy to vercel
+name: git pull_request into another repo to deploy to vercel
 
 on:
-  push:
+  pull_request:
     branches: 
       - main
       - develop
 
 jobs:
-  build:
+  if_merged:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     container: pandoc/latex
     steps:
@@ -31,6 +32,6 @@ jobs:
           destination-repository-name: JOBIS-FE
           user-email: ${{ secrets.RETURN_ACCOUNT_EMAIL }}
           commit-message: ${{ github.event.commits[0].message }}
-          target-branch: ${{ github.ref_name }}
+          target-branch: ${{ github.base_ref }}
       - name: Test get variable exported by push-to-another-repository
         run: echo $DESTINATION_CLONED_DIRECTORY
