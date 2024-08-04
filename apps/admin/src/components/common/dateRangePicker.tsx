@@ -6,7 +6,6 @@ import { BigButton, Stack } from "@/components";
 import { useEffect, useState } from "react";
 import OutsideClickHandler from "react-outside-click-handler";
 import { useDidMountEffect } from "@/hooks";
-import { useRecruitmentFilter } from "@/stores";
 
 type PropsType = {
   startDate: string | null;
