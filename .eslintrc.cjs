@@ -70,7 +70,13 @@ module.exports = {
       "error",
       {
         case: "camelCase",
-        ignore: ["App.tsx", "vite-env.d.ts", "next-env.d.ts", /^vendor/i],
+        ignore: [
+          "App.tsx",
+          "vite-env.d.ts",
+          "next-env.d.ts",
+          "global-error.tsx",
+          /^vendor/i,
+        ],
       },
     ], // 파일명은 camelCase
     "unicorn/prevent-abbreviations": "off", //축약어 사용피하도록 권장 off
