@@ -28,7 +28,7 @@ export const CompanyRow = ({ data }: PropsType) => {
     }
   };
 
-  const { openModal, closeModal } = useModal();
+  const { openModal } = useModal();
 
   return (
     <Container position="relative" align="center" onClick={clickHandler}>
