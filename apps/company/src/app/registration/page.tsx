@@ -184,40 +184,35 @@ export default function Registration() {
       worker_number,
       business_area_code,
       business_number,
+      fax,
     } = data;
+
+    const requests = {
+      representative_phone_no: representative_phone_no.replaceAll("-", ""),
+      manager_phone_no: manager_phone_no?.replaceAll("-", ""),
+      sub_zip_code: sub_zip_code || undefined,
+      sub_address_detail: sub_address_detail || undefined,
+      sub_manager_name: sub_manager_name || undefined,
+      sub_manager_phone_no:
+        sub_manager_phone_no?.replaceAll("-", "") || undefined,
+      take: +take.toString().replaceAll(",", ""),
+      worker_number: +worker_number,
+      business_area_code:
+        businessCodes?.codes.find(
+          code => code.keyword === business_area_code.toString()
+        )?.code || 0,
+      fax: fax?.replaceAll("-", "") || undefined,
+    };
+
     searchParams.get("type") === "edit"
       ? updateCompany({
           ...data,
-          representative_phone_no: representative_phone_no.replaceAll("-", ""),
-          manager_phone_no: manager_phone_no?.replaceAll("-", ""),
-          sub_zip_code: sub_zip_code || undefined,
-          sub_address_detail: sub_address_detail || undefined,
-          sub_manager_name: sub_manager_name || undefined,
-          sub_manager_phone_no:
-            sub_manager_phone_no?.replaceAll("-", "") || undefined,
-          take: +take.toString().replaceAll(",", ""),
-          worker_number: +worker_number,
-          business_area_code:
-            businessCodes?.codes.find(
-              code => code.keyword === business_area_code.toString()
-            )?.code || 0,
+          ...requests,
         })
       : registerCompany({
           ...data,
+          ...requests,
           business_number: business_number.replaceAll("-", ""),
-          representative_phone_no: representative_phone_no.replaceAll("-", ""),
-          manager_phone_no: manager_phone_no?.replaceAll("-", ""),
-          sub_zip_code: sub_zip_code || undefined,
-          sub_address_detail: sub_address_detail || undefined,
-          sub_manager_name: sub_manager_name || undefined,
-          sub_manager_phone_no:
-            sub_manager_phone_no?.replaceAll("-", "") || undefined,
-          take: +take.toString().replaceAll(",", ""),
-          worker_number: +worker_number,
-          business_area_code:
-            businessCodes?.codes.find(
-              code => code.keyword === business_area_code.toString()
-            )?.code || 0,
         });
   };
 
@@ -316,6 +311,7 @@ export default function Registration() {
       <SubTitleTemplate
         title="기업 정보"
         components={[
+          /* eslint-disable react/jsx-key */
           <InputTemplate title="기업명" required>
             <Input
               width={604}
