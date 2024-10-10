@@ -311,8 +311,7 @@ export default function Registration() {
       <SubTitleTemplate
         title="기업 정보"
         components={[
-          /* eslint-disable react/jsx-key */
-          <InputTemplate title="기업명" required>
+          <InputTemplate key="company-name" title="기업명" required>
             <Input
               width={604}
               disabled
@@ -322,7 +321,7 @@ export default function Registration() {
               errorMessage={errors.name?.message}
             />
           </InputTemplate>,
-          <InputTemplate title="사업자번호" required>
+          <InputTemplate key="business-number" title="사업자번호" required>
             <Input
               width={604}
               disabled
@@ -338,7 +337,11 @@ export default function Registration() {
               errorMessage={errors.business_number?.message}
             />
           </InputTemplate>,
-          <InputTemplate title="기업 대표 번호" required>
+          <InputTemplate
+            key="representative-phone-no"
+            title="기업 대표 번호"
+            required
+          >
             <Controller
               control={control}
               name="representative_phone_no"
@@ -364,7 +367,7 @@ export default function Registration() {
               )}
             />
           </InputTemplate>,
-          <InputTemplate title="대표자" required>
+          <InputTemplate key="representative-name" title="대표자" required>
             <Input
               width={604}
               placeholder="직접입력"
@@ -374,7 +377,7 @@ export default function Registration() {
               errorMessage={errors.representative_name?.message}
             />
           </InputTemplate>,
-          <InputTemplate title="설립일" required>
+          <InputTemplate key="founded-at" title="설립일" required>
             <Controller
               control={control}
               name="founded_at"
@@ -400,7 +403,7 @@ export default function Registration() {
               )}
             />
           </InputTemplate>,
-          <InputTemplate title="주소(본사)" required>
+          <InputTemplate key="main-address" title="주소(본사)" required>
             <Flex direction="column" gap={8}>
               <Flex gap={8}>
                 <Input
@@ -437,7 +440,7 @@ export default function Registration() {
               />
             </Flex>
           </InputTemplate>,
-          <InputTemplate title="주소(지점)">
+          <InputTemplate key="address" title="주소(지점)">
             <Flex direction="column" gap={8}>
               <Flex gap={8}>
                 <Input
@@ -468,7 +471,7 @@ export default function Registration() {
               />
             </Flex>
           </InputTemplate>,
-          <InputTemplate title="매출액(년)" required>
+          <InputTemplate key="take" title="매출액(년)" required>
             <Controller
               control={control}
               name="take"
@@ -494,7 +497,7 @@ export default function Registration() {
               )}
             />
           </InputTemplate>,
-          <InputTemplate title="총 근로자수(명)" required>
+          <InputTemplate key="worker-number" title="총 근로자수(명)" required>
             <Controller
               control={control}
               name="worker_number"
@@ -523,7 +526,7 @@ export default function Registration() {
               )}
             />
           </InputTemplate>,
-          <InputTemplate title="사업분야" required>
+          <InputTemplate key="business-area" title="사업분야" required>
             <Flex direction="column" gap={4}>
               <S.Select
                 isError={!!errors.business_area_code}
@@ -534,8 +537,8 @@ export default function Registration() {
                 <S.Option value="" disabled selected>
                   선택 안함
                 </S.Option>
-                {businessAreas.map(area => (
-                  <S.Option>{area}</S.Option>
+                {businessAreas.map((area, index) => (
+                  <S.Option key={index}>{area}</S.Option>
                 ))}
               </S.Select>
               <Text
@@ -552,7 +555,7 @@ export default function Registration() {
       <SubTitleTemplate
         title="담당자"
         components={[
-          <InputTemplate title="담당자명(1)" required>
+          <InputTemplate key="manager-name" title="담당자명(1)" required>
             <Input
               width={604}
               placeholder="직접입력"
@@ -562,7 +565,11 @@ export default function Registration() {
               errorMessage={errors.manager_name?.message}
             />
           </InputTemplate>,
-          <InputTemplate title="담장자 전화번호(1)" required>
+          <InputTemplate
+            key="manage-phone-no"
+            title="담장자 전화번호(1)"
+            required
+          >
             <Controller
               control={control}
               name="manager_phone_no"
@@ -588,7 +595,7 @@ export default function Registration() {
               )}
             />
           </InputTemplate>,
-          <InputTemplate title="담당자명(2)">
+          <InputTemplate key="sub-manager-name" title="담당자명(2)">
             <Input
               width={604}
               placeholder="직접입력"
@@ -596,7 +603,7 @@ export default function Registration() {
               errorMessage={errors.sub_manager_name?.message}
             />
           </InputTemplate>,
-          <InputTemplate title="담장자 전화번호(2)">
+          <InputTemplate key="sub-manager-phone-no" title="담장자 전화번호(2)">
             <Controller
               control={control}
               name="sub_manager_phone_no"
@@ -621,18 +628,28 @@ export default function Registration() {
               )}
             />
           </InputTemplate>,
-          <InputTemplate title="이메일" required>
-            <Input
-              type="email"
-              width={604}
-              placeholder="직접입력"
-              {...register("email", {
-                required: "필수 입력 항목입니다.",
-              })}
-              errorMessage={errors.email?.message}
+          <InputTemplate key="email" title="이메일" required>
+            <Controller
+              control={control}
+              name="email"
+              rules={{
+                pattern: {
+                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                  message: "유효한 이메일 형식이 아닙니다.",
+                },
+              }}
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  width={604}
+                  placeholder="직접입력"
+                  {...register("email")}
+                  errorMessage={errors.email?.message}
+                />
+              )}
             />
           </InputTemplate>,
-          <InputTemplate title="팩스번호">
+          <InputTemplate key="fax" title="팩스번호">
             <Controller
               control={control}
               name="fax"
@@ -661,7 +678,7 @@ export default function Registration() {
       <SubTitleTemplate
         title="회사소개"
         components={[
-          <InputTemplate title="대표서비스명" required>
+          <InputTemplate key="service-name" title="대표서비스명" required>
             <Input
               width={604}
               placeholder="직접입력"
@@ -671,7 +688,7 @@ export default function Registration() {
               errorMessage={errors.service_name?.message}
             />
           </InputTemplate>,
-          <InputTemplate title="회사개요" required>
+          <InputTemplate key="company-introduce" title="회사개요" required>
             <Textarea
               width={604}
               placeholder="직접입력"
@@ -681,7 +698,7 @@ export default function Registration() {
               errorMessage={errors.company_introduce?.message}
             />
           </InputTemplate>,
-          <InputTemplate title="회사로고">
+          <InputTemplate key="logo" title="회사로고">
             {companyLogoPreview ? (
               <S.LogoImage
                 onClick={() => onUploadFile(companyLogoRef)}
@@ -704,7 +721,7 @@ export default function Registration() {
               onChange={uploadImgFile}
             />
           </InputTemplate>,
-          <InputTemplate title="사업자등록증" required>
+          <InputTemplate key="biz-registration" title="사업자등록증" required>
             <Flex direction="column">
               <S.AddFileButton onClick={() => onUploadFile(bizRegistrationRef)}>
                 <Text fontSize="body2" fontWeight="regular">
@@ -721,8 +738,8 @@ export default function Registration() {
                 onChange={uploadImgFile}
               />
               <Flex wrap="wrap" gap={8} style={{ width: 604, marginTop: 12 }}>
-                {previewFiles.bizRegistrationFile.map(file => (
-                  <S.FileWrapper type="button">
+                {previewFiles.bizRegistrationFile.map((file) => (
+                  <S.FileWrapper key={file.name} type="button">
                     <Flex align="center" gap={4}>
                       <Icon
                         icon="FileEarmarkArrowDown"
@@ -757,7 +774,7 @@ export default function Registration() {
               </Flex>
             </Flex>
           </InputTemplate>,
-          <InputTemplate title="파일첨부">
+          <InputTemplate key="file-add" title="파일첨부">
             <Flex direction="column">
               <S.AddFileButton onClick={() => onUploadFile(attachmentRef)}>
                 <Text fontSize="body2" fontWeight="regular">
@@ -776,7 +793,7 @@ export default function Registration() {
               />
               <Flex wrap="wrap" gap={8} style={{ width: 604, marginTop: 12 }}>
                 {previewFiles.attachmentFile.map((file, idx) => (
-                  <S.FileWrapper type="button">
+                  <S.FileWrapper key={idx} type="button">
                     <Flex align="center" gap={4}>
                       <Icon
                         icon="FileEarmarkArrowDown"
