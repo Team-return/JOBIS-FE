@@ -743,8 +743,8 @@ export default function Registration() {
                 onChange={uploadImgFile}
               />
               <Flex wrap="wrap" gap={8} style={{ width: 604, marginTop: 12 }}>
-                {previewFiles.bizRegistrationFile.map((file, index) => (
-                  <S.FileWrapper key={index} type="button">
+                {previewFiles.bizRegistrationFile.map((file) => (
+                  <S.FileWrapper key={file.name} type="button">
                     <Flex align="center" gap={4}>
                       <Icon
                         icon="FileEarmarkArrowDown"
