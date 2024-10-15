@@ -8,7 +8,7 @@ export type ImageType = "LOGO_IMAGE" | "EXTENSION_FILE";
 
 export const fileUpload = async (files: File[]) => {
   const body = files.map(file => ({
-    type: "EXTENSION_FILE",
+    type: "LOGO_IMAGE",
     file_name: file.name,
   }));
   const { data } = await instance.post<PresignedURLResponse>(
