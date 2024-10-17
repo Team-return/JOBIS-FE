@@ -507,9 +507,13 @@ export default function Registration() {
                   width={604}
                   placeholder="직접입력"
                   errorMessage={errors.worker_number?.message}
-                  onChange={e =>
-                    field.onChange(e.target.value.replaceAll(/[^0-9]/g, ""))
-                  }
+                  onChange={e => {
+                    const value = e.target.value.replaceAll(/[^0-9]/g, "");
+                    const numericValue = Number.parseInt(value, 10);
+                    field.onChange(
+                      numericValue > 32_767 ? 32_767 : numericValue
+                    );
+                  }}
                   icon={
                     <Text
                       fontSize="body2"
