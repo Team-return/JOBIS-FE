@@ -530,6 +530,17 @@ export default function Registration() {
                 {...register("business_area_code", {
                   required: "필수 선택 항목입니다.",
                 })}
+                onMouseDown={e => {
+                  if (searchParams.get("type") === "edit") {
+                    e.preventDefault();
+                  }
+                }}
+                style={{
+                  cursor:
+                    searchParams.get("type") === "edit"
+                      ? "not-allowed"
+                      : "pointer",
+                }}
               >
                 <S.Option value="" disabled selected>
                   선택 안함
@@ -706,7 +717,19 @@ export default function Registration() {
           </InputTemplate>,
           <InputTemplate title="사업자등록증" required>
             <Flex direction="column">
-              <S.AddFileButton onClick={() => onUploadFile(bizRegistrationRef)}>
+              <S.AddFileButton
+                onClick={() => {
+                  if (searchParams.get("type") !== "edit") {
+                    onUploadFile(bizRegistrationRef);
+                  }
+                }}
+                style={{
+                  cursor:
+                    searchParams.get("type") === "edit"
+                      ? "not-allowed"
+                      : "pointer",
+                }}
+              >
                 <Text fontSize="body2" fontWeight="regular">
                   파일 추가하기
                 </Text>
