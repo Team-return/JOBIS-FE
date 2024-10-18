@@ -106,7 +106,6 @@ export default function Registration() {
 
       const validNamePattern = /^[a-zA-Z0-9.]+$/;
       const fileName = files[0].name;
-      console.log(fileName);
       if (!validNamePattern.test(fileName)) {
         toast({
           payload: {
