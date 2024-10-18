@@ -26,8 +26,6 @@ export interface ICompanyRegisterRequest extends IUpdateCompanyInfoRequest {
   main_address_detail: string;
   sub_address_detail?: string;
   business_number: string;
-  biz_registration_url: string;
-  business_area_code: number | string;
   service_name: string;
   attachment_urls?: string[] | null;
 }
