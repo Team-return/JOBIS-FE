@@ -46,7 +46,6 @@ export default function Registration() {
       main_address_detail: myCompanyInfo?.main_address_detail || "",
       sub_address_detail: myCompanyInfo?.sub_address_detail,
       business_number: regex.buisness_number(myCompanyInfo?.biz_no || ""),
-      biz_registration_url: myCompanyInfo?.biz_registration_url || "",
       business_area_code:
         businessCodes?.codes.find(
           code => code.keyword === myCompanyInfo?.business_area
@@ -786,13 +785,6 @@ export default function Registration() {
                       size={16}
                       color={themes.Color.grayScale[70]}
                       cursor="pointer"
-                      onClick={() => {
-                        setValue("biz_registration_url", "");
-                        setPreviewFiles(prev => ({
-                          ...prev,
-                          bizRegistrationFile: [],
-                        }));
-                      }}
                     />
                   </S.FileWrapper>
                 ))}
