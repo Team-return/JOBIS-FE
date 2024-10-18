@@ -41,9 +41,15 @@ instance.interceptors.response.use(
 
       Sentry.captureMessage(data.message);
 
-      if (
-        response.data.message === "Invalid Token" ||
-        response.data.message === "Token Expired" ||
+      if (response.data.status && response.data.status > 500) {
+        window.location.href = "/serverCheck";
+        return Promise.reject(error);
+      }
+
+      if (status)
+        if (
+          response.data.message === "Invalid Token" ||
+          response.data.message === "Token Expired" ||
         message === "Request failed with status code 403"
       ) {
         const originalRequest = config;
