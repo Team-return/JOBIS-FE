@@ -277,8 +277,16 @@ const GatherModal = ({ setForm, areaIndex, setAreaIndex }: IPropsType) => {
         <Flex align="center">
           <Input
             type="number"
-            min={0}
-            value={area.hiring}
+            max={255}
+            value={area.hiring == 0 ? "" : area.hiring}
+            onInput={e => {
+              const value = Number(e.currentTarget.value);
+              if (value < 0) {
+                e.currentTarget.value = "0";
+              } else if (value > 255) {
+                e.currentTarget.value = "255";
+              }
+            }}
             onChange={e => {
               setArea({ ...area, hiring: +e.target.value });
             }}

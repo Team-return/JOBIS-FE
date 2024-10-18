@@ -1,6 +1,7 @@
 import axios, { AxiosError } from "axios";
 import { Cookies } from "react-cookie";
 import { ReissueToken } from "./auth";
+import * as Sentry from "@sentry/nextjs";
 
 export const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
@@ -28,13 +29,27 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   async response => response,
   async (error: AxiosError<AxiosError>) => {
+    console.error(error);
+    Sentry.captureException(error);
     if (axios.isAxiosError(error) && error.response) {
-      const { config } = error;
+      const {
+        config,
+        response: { data },
+      } = error;
       const refreshToken = cookie.get("refresh_token");
       const { response, message } = error;
-      if (
-        response.data.message === "Invalid Token" ||
-        response.data.message === "Token Expired" ||
+
+      Sentry.captureMessage(data.message);
+
+      if (response.data.status && response.data.status > 500) {
+        window.location.href = "/serverCheck";
+        return Promise.reject(error);
+      }
+
+      if (status)
+        if (
+          response.data.message === "Invalid Token" ||
+          response.data.message === "Token Expired" ||
         message === "Request failed with status code 403"
       ) {
         const originalRequest = config;
