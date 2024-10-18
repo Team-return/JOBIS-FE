@@ -526,9 +526,12 @@ export default function Registration() {
                   onChange={e => {
                     const value = e.target.value.replaceAll(/[^0-9]/g, "");
                     const numericValue = Number.parseInt(value, 10);
-                    field.onChange(
-                      numericValue > 32_767 ? 32_767 : numericValue
-                    );
+                    if (numericValue > 32_767) {
+                      numericValue = 32_767;
+                    } else if (numericValue < 0) {
+                      numericValue = 0;
+                    }
+                    field.onChange(numericValue);
                   }}
                   icon={
                     <Text
