@@ -103,6 +103,19 @@ export default function Registration() {
         }
         return;
       }
+
+      const validNamePattern = /^[a-zA-Z0-9.]+$/;
+      const fileName = files[0].name;
+      if (!validNamePattern.test(fileName)) {
+        toast({
+          payload: {
+            type: "error",
+            message: "파일 이름은 영어와 숫자로만 구성되어야 합니다.",
+          },
+        });
+        return;
+      }
+
       const response = await fileUpload(Array.from(files)).catch(
         (err: AxiosError<AxiosError>) => {
           if (err.response?.data.message === "Invalid Extension File") {
