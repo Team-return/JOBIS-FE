@@ -525,7 +525,7 @@ export default function Registration() {
                   errorMessage={errors.worker_number?.message}
                   onChange={e => {
                     const value = e.target.value.replaceAll(/[^0-9]/g, "");
-                    const numericValue = Number.parseInt(value, 10);
+                    let numericValue = Number.parseInt(value, 10);
                     if (numericValue > 32_767) {
                       numericValue = 32_767;
                     } else if (numericValue < 0) {
