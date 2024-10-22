@@ -25,6 +25,7 @@ export interface ICompanyRegisterRequest extends IUpdateCompanyInfoRequest {
   business_number: string;
   service_name: string;
   attachment_urls?: string[] | null;
+  biz_registration_url?: string;
 }
 
 export interface ICheckBuisnessNumberResponse {
