@@ -10,7 +10,7 @@ export const InputTemplate = ({
   children,
 }: IInputTemplate) => {
   return (
-    <Flex>
+    <Flex style={{ justifyContent: "space-between", width: "100%" }}>
       <Flex style={{ marginRight: "auto" }}>
         <Text fontSize="body2" fontWeight="regular">
           {title}
