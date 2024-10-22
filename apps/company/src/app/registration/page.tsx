@@ -682,7 +682,7 @@ export default function Registration() {
               onChange={uploadImgFile}
             />
           </InputTemplate>,
-          <InputTemplate key="biz-registration" title="사업자등록증" required>
+          <InputTemplate key="biz-registration" title="사업자등록증">
             <Flex direction="column">
               <S.AddFileButton
                 onClick={() => {
