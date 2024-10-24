@@ -19,6 +19,7 @@ import Image from "next/image";
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { useCreatePresignedURL } from "@/hooks/apis/useFilesApi";
+import { Checkbox } from "@/components/CheckBox/checkBox";
 import {
   useCompanyRegister,
   useMyCompanyInfo,
@@ -70,6 +71,7 @@ export default function Registration() {
         myCompanyInfo?.manager_phone_no || ""
       ),
       company_profile_url: myCompanyInfo?.company_logo_url,
+      branch_exists: myCompanyInfo?.branch_exists || false,
     },
   });
   const { toast } = useToast();
@@ -232,6 +234,10 @@ export default function Registration() {
   const preventClose = (e: BeforeUnloadEvent) => {
     e.preventDefault();
     e.returnValue = ""; //Chrome에서 동작하도록; deprecated
+  };
+
+  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValue("branch_exists", event.target.checked, {shouldValidate: true, shouldDirty: true});
   };
 
   useEffect(() => {
@@ -439,37 +445,14 @@ export default function Registration() {
                 })}
                 errorMessage={errors.main_address_detail?.message}
               />
-            </Flex>
-          </InputTemplate>,
-          <InputTemplate key="sub-address" title="주소(지점)">
-            <Flex direction="column" gap={8}>
-              <Flex gap={8}>
-                <Input
-                  width={367}
-                  disabled
-                  {...register("sub_address")}
-                  errorMessage={errors.sub_address?.message}
-                />
-                <Input
-                  width={111}
-                  disabled
-                  {...register("sub_zip_code")}
-                  errorMessage={errors.sub_zip_code?.message}
-                />
-                <Button
-                  type="button"
-                  variant="outline"
-                  onClick={() => openModal("SUB_ADDRESS")}
-                >
-                  검색
-                </Button>
+              <Flex align='center'>
+                <Checkbox 
+                  key='head_office' 
+                  onChange={handleCheckboxChange} 
+                  checked={getValues("branch_exists")}
+                ></Checkbox>
+                <p>본사</p>
               </Flex>
-              <Input
-                width={604}
-                placeholder="상세주소 입력"
-                {...register("sub_address_detail")}
-                errorMessage={errors.sub_address_detail?.message}
-              />
             </Flex>
           </InputTemplate>,
           <InputTemplate key="take" title="매출액(년)" required>
