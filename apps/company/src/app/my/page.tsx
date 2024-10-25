@@ -18,6 +18,7 @@ export default function My() {
   return (
     <S.Container>
       <SubTitleTemplate
+        key="company-info"
         title="기업정보"
         button={
           <S.CompanyInfoEditButton
@@ -32,7 +33,7 @@ export default function My() {
           </S.CompanyInfoEditButton>
         }
         components={[
-          <S.CompanyInfo>
+          <S.CompanyInfo key="business-number">
             <Text
               fontSize="body1"
               fontWeight="regular"
@@ -51,6 +52,7 @@ export default function My() {
         ]}
       />
       <SubTitleTemplate
+        key="recruitment"
         title="모집의뢰서"
         button={
           <Link href="/recruitments/chose">
@@ -61,14 +63,14 @@ export default function My() {
                 fontWeight="medium"
                 color={themes.Color.primary[20]}
               >
-                추가
+                {myRecruitmentList?.my_recruitments?.length ? "추가" : "등록"}
               </Text>
             </S.AddRecruitmentButton>
           </Link>
         }
         components={myRecruitmentList?.my_recruitments?.map(recruitment => {
           return (
-            <Flex align="center" gap={14}>
+            <Flex align="center" gap={14} key="my-recruitments">
               <S.CompanyInfo>
                 <Flex align="center" gap={12}>
                   <Icon icon="Recruitment" color={themes.Color.primary[20]} />
