@@ -32,7 +32,6 @@ import { useAreaState } from "@/store/areasState";
 import { useGetCode } from "@/hooks/apis/useCodeApi";
 import XBtn from "../../../../public/X.svg";
 import TechModal from "@/components/modal/techModal/techModal";
-import { hiringProgressType } from "@/utils/translate";
 import LicenseModal from "@/components/modal/licenseModal/licenseModal";
 import {
   useAddRecruitArea,
@@ -335,95 +334,87 @@ export default function Recruitments({ params }: { params: { id: string } }) {
         title="모집 년도"
         requiredMessage
         components={[
-          <InputTemplate title="모집기간" required>
-            <Flex direction="column" gap={8}>
-              <Flex align="center" gap={22}>
-                <Controller
-                  control={control}
-                  name="start_date"
-                  defaultValue=""
-                  rules={{
-                    required: {
-                      value: !alwaysRecruit,
-                      message: "필수 입력 항목입니다.",
-                    },
-                    pattern: {
-                      value: /^\d{4}-\d{2}-\d{2}$/,
-                      message: "유효한 날짜 형식이 아닙니다. (ex: yyyy-mm-dd)",
-                    },
-                  }}
-                  render={({ field }) => (
-                    <Input
-                      {...field}
-                      width={272}
-                      placeholder="yyyy-mm-dd"
-                      disabled={alwaysRecruit}
-                      maxLength={10}
-                      icon={
-                        <Icon
-                          icon="Date"
-                          color={themes.Color.grayScale[80]}
-                          size={20}
-                          cursor="pointer"
-                        />
-                      }
-                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                        field.onChange(regex.date_number(e.target.value))
-                      }
-                      errorMessage={
-                        alwaysRecruit ? undefined : errors.start_date?.message
-                      }
-                    />
-                  )}
-                />
-                <Text fontSize="h5" color={themes.Color.grayScale[60]}>
-                  ~
-                </Text>
-                <Controller
-                  control={control}
-                  name="end_date"
-                  defaultValue=""
-                  rules={{
-                    required: {
-                      value: !alwaysRecruit,
-                      message: "필수 입력 항목입니다.",
-                    },
-                    pattern: {
-                      value: /^\d{4}-\d{2}-\d{2}$/,
-                      message: "유효한 날짜 형식이 아닙니다. (ex: yyyy-mm-dd)",
-                    },
-                  }}
-                  render={({ field }) => (
-                    <Input
-                      {...field}
-                      width={272}
-                      placeholder="yyyy-mm-dd"
-                      disabled={alwaysRecruit}
-                      maxLength={10}
-                      icon={
-                        <Icon
-                          icon="Date"
-                          color={themes.Color.grayScale[80]}
-                          size={20}
-                          cursor="pointer"
-                        />
-                      }
-                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                        field.onChange(regex.date_number(e.target.value))
-                      }
-                      errorMessage={
-                        alwaysRecruit ? undefined : errors.end_date?.message
-                      }
-                    />
-                  )}
-                />
-              </Flex>
-              <Checkbox
-                checked={alwaysRecruit}
-                onClick={() => setAlwaysRecruit(prev => !prev)}
-              >
-                상시채용
-              </Checkbox>
+          <InputTemplate key="recruitment_period" title="모집기간" required>
+            <Flex align="center" gap={22}>
+              <Controller
+                control={control}
+                name="start_date"
+                defaultValue=""
+                rules={{
+                  required: {
+                    value: !alwaysRecruit,
+                    message: "필수 입력 항목입니다.",
+                  },
+                  pattern: {
+                    value: /^\d{4}-\d{2}-\d{2}$/,
+                    message: "유효한 날짜 형식이 아닙니다. (ex: yyyy-mm-dd)",
+                  },
+                }}
+                render={({ field }) => (
+                  <Input
+                    {...field}
+                    width={272}
+                    placeholder="yyyy-mm-dd"
+                    disabled={alwaysRecruit}
+                    maxLength={10}
+                    icon={
+                      <Icon
+                        icon="Date"
+                        color={themes.Color.grayScale[80]}
+                        size={20}
+                        cursor="pointer"
+                      />
+                    }
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      field.onChange(regex.date_number(e.target.value))
+                    }
+                    errorMessage={
+                      alwaysRecruit ? undefined : errors.start_date?.message
+                    }
+                  />
+                )}
+              />
+              <Text fontSize="h5" color={themes.Color.grayScale[60]}>
+                ~
+              </Text>
+              <Controller
+                control={control}
+                name="end_date"
+                defaultValue=""
+                rules={{
+                  required: {
+                    value: !alwaysRecruit,
+                    message: "필수 입력 항목입니다.",
+                  },
+                  pattern: {
+                    value: /^\d{4}-\d{2}-\d{2}$/,
+                    message: "유효한 날짜 형식이 아닙니다. (ex: yyyy-mm-dd)",
+                  },
+                }}
+                render={({ field }) => (
+                  <Input
+                    {...field}
+                    width={272}
+                    placeholder="yyyy-mm-dd"
+                    disabled={alwaysRecruit}
+                    maxLength={10}
+                    icon={
+                      <Icon
+                        icon="Date"
+                        color={themes.Color.grayScale[80]}
+                        size={20}
+                        cursor="pointer"
+                      />
+                    }
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      field.onChange(regex.date_number(e.target.value))
+                    }
+                    errorMessage={
+                      alwaysRecruit ? undefined : errors.end_date?.message
+                    }
+                  />
+                )}
+              />
             </Flex>
           </InputTemplate>,
         ]}
@@ -431,7 +422,11 @@ export default function Recruitments({ params }: { params: { id: string } }) {
       <SubTitleTemplate
         title="모집 분야"
         components={[
-          <InputTemplate title="모집 분야 추가" required>
+          <InputTemplate
+            key="add_recruitment_field"
+            title="모집 분야 추가"
+            required
+          >
             <Flex direction="column" gap={8} style={{ width: 604 }}>
               <Button
                 type="button"
@@ -531,7 +526,7 @@ export default function Recruitments({ params }: { params: { id: string } }) {
       <SubTitleTemplate
         title="자격 요건"
         components={[
-          <InputTemplate title="국가자격증">
+          <InputTemplate key="national_license" title="국가자격증">
             <Flex direction="column" gap={8} style={{ width: 604 }}>
               <Button
                 type="button"
@@ -542,7 +537,7 @@ export default function Recruitments({ params }: { params: { id: string } }) {
               </Button>
               <S.LicenseList>
                 {licenses.map((license, idx) => (
-                  <S.SelectedLicense>
+                  <S.SelectedLicense key="lincense">
                     <Text
                       fontSize="body3"
                       fontWeight="regular"
@@ -563,29 +558,12 @@ export default function Recruitments({ params }: { params: { id: string } }) {
               </S.LicenseList>
             </Flex>
           </InputTemplate>,
-          <InputTemplate title="성적">
+          <InputTemplate key="required_grade" title="우대사항">
             <Flex direction="column" gap={8}>
-              <Input
+              <Textarea
                 width={604}
-                placeholder="직접입력"
-                maxLength={3}
-                max={100}
-                {...register("required_grade", {
-                  max: {
-                    value: 100,
-                    message: "최대 100까지 입력할 수 있어요.",
-                  },
-                })}
-                icon={
-                  <Text
-                    fontSize="body2"
-                    fontWeight="regular"
-                    color={themes.Color.grayScale[60]}
-                  >
-                    %이내
-                  </Text>
-                }
-                errorMessage={errors.required_grade?.message}
+                placeholder="우대사항 입력"
+                {...register("required_grade")}
               />
             </Flex>
           </InputTemplate>,
@@ -594,7 +572,7 @@ export default function Recruitments({ params }: { params: { id: string } }) {
       <SubTitleTemplate
         title="근무 조건"
         components={[
-          <InputTemplate title="근무시간" required>
+          <InputTemplate key="working_hours" title="근무시간" required>
             <Flex direction="column" gap={8}>
               {watch("flexible_working") ? (
                 <Input
@@ -671,7 +649,7 @@ export default function Recruitments({ params }: { params: { id: string } }) {
               </Checkbox>
             </Flex>
           </InputTemplate>,
-          <InputTemplate title="실습수당" required>
+          <InputTemplate key="train_pay" title="실습수당" required>
             <Controller
               control={control}
               name="train_pay"
@@ -699,7 +677,7 @@ export default function Recruitments({ params }: { params: { id: string } }) {
               )}
             />
           </InputTemplate>,
-          <InputTemplate title="정규직 전환 시">
+          <InputTemplate key="pay" title="정규직 전환 시">
             <Controller
               control={control}
               name="pay"
@@ -726,21 +704,19 @@ export default function Recruitments({ params }: { params: { id: string } }) {
               )}
             />
           </InputTemplate>,
-          <InputTemplate title="복리후생">
-            <Textarea
-              width={604}
-              placeholder="직접입력"
-              {...register("benefits")}
-              errorMessage={errors.benefits?.message}
-            />
-          </InputTemplate>,
-          <InputTemplate title="병역특례">
-            <Flex style={{ width: 604 }}>
+          <InputTemplate key="benefits" title="복리후생">
+            <Flex direction="column" gap={8}>
+              <Input
+                width={604}
+                placeholder="직접입력"
+                {...register("benefits")}
+                errorMessage={errors.benefits?.message}
+              />
               <Checkbox
                 checked={watch("military_support")}
                 {...register("military_support")}
               >
-                병역특례 신청
+                산업 기능 요원 근무 가능 여부
               </Checkbox>
             </Flex>
           </InputTemplate>,
@@ -749,7 +725,7 @@ export default function Recruitments({ params }: { params: { id: string } }) {
       <SubTitleTemplate
         title="채용 절차"
         components={[
-          <InputTemplate title="채용절차" required>
+          <InputTemplate key="procedure" title="선발절차" required>
             <Flex direction="column" gap={10}>
               <S.ProcessButton onClick={() => openModal("HIRING_PROGRESS")}>
                 <Text fontSize="body2" fontWeight="regular">
@@ -757,19 +733,9 @@ export default function Recruitments({ params }: { params: { id: string } }) {
                 </Text>
                 <Icon icon="Plus" color={themes.Color.primary[20]} />
               </S.ProcessButton>
-              <Text
-                fontSize="body2"
-                color={themes.Color.grayScale[50]}
-                whiteSpace="pre-wrap"
-                style={{ width: 604 }}
-              >
-                {watch("hiring_progress")
-                  ?.map(progress => hiringProgressType[progress])
-                  .join(" → ")}
-              </Text>
             </Flex>
           </InputTemplate>,
-          <InputTemplate title="제출서류" required>
+          <InputTemplate key="submit_document" title="제출서류" required>
             <Flex direction="column" gap={8}>
               <Input
                 width={604}
@@ -802,13 +768,24 @@ export default function Recruitments({ params }: { params: { id: string } }) {
               </Flex>
             </Flex>
           </InputTemplate>,
-          <InputTemplate title="기타사항">
-            <Textarea
+          <InputTemplate key="etc" title="기타사항">
+            <Input
               width={604}
               placeholder="직접입력"
               {...register("etc")}
               errorMessage={errors.etc?.message}
             />
+          </InputTemplate>,
+          <InputTemplate key="availability" title="전환 가능 여부">
+            <Flex style={{ width: 604 }}>
+              <Checkbox
+                name="self_introduction"
+                checked={!submitDocumentOption.self_introduction}
+                onChange={changeCheckbox}
+              >
+                채용 전환 가능
+              </Checkbox>
+            </Flex>
           </InputTemplate>,
         ]}
       />
