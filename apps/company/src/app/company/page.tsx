@@ -78,7 +78,7 @@ export default function Company() {
           />
           <CompanyContentTemplate
             title="전화번호"
-            content={myCompanyInfo?.manager_phone_no}
+            content={myCompanyInfo?.representative_phone_no}
           />
         </Flex>
       </Flex>
