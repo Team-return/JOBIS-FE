@@ -4,7 +4,16 @@ import { TitleTemplate } from "@/components/titleTemplate";
 import { SubTitleTemplate } from "@/components/subTitleTemplate";
 import * as S from "./style";
 import { InputTemplate } from "@/components/inputTemplate";
-import { Input, Icon, Text, Flex, Button, useToast, Textarea, Checkbox } from "@jobis/ui";
+import {
+  Input,
+  Icon,
+  Text,
+  Flex,
+  Button,
+  useToast,
+  Textarea,
+  Checkbox,
+} from "@jobis/ui";
 import { themes } from "@jobis/design-token";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { ICompanyRegisterRequest } from "@/apis/company/types";
@@ -236,7 +245,10 @@ export default function Registration() {
   };
 
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue("headquarter", event.target.checked, {shouldValidate: true, shouldDirty: true});
+    setValue("headquarter", event.target.checked, {
+      shouldValidate: true,
+      shouldDirty: true,
+    });
   };
 
   useEffect(() => {
@@ -444,12 +456,12 @@ export default function Registration() {
                 })}
                 errorMessage={errors.main_address_detail?.message}
               />
-              <Flex align='center'>
-                <Checkbox 
-                  key='head_office' 
-                  onChange={handleCheckboxChange} 
+              <Flex align="center">
+                <Checkbox
+                  key="head_office"
+                  onChange={handleCheckboxChange}
                   checked={getValues("headquarter")}
-                ></Checkbox>
+                />
                 <p>본사</p>
               </Flex>
             </Flex>
