@@ -49,3 +49,15 @@ export const CompanyInfo = styled.div`
 
   background-color: ${themes.Color.grayScale[20]};
 `;
+
+export const Button = styled.button`
+  width: 310px;
+  height: 68px;
+  border: none;
+  border-radius: 4px;
+
+  background-color: #135c9d;
+
+  color: white;
+  font-size: 20px;
+`;
