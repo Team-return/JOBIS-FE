@@ -70,7 +70,7 @@ export default function Registration() {
         myCompanyInfo?.manager_phone_no || ""
       ),
       company_profile_url: myCompanyInfo?.company_logo_url,
-      branch_exists: myCompanyInfo?.branch_exists || false,
+      headquarter: myCompanyInfo?.headquarter || false,
     },
   });
   const { toast } = useToast();
@@ -236,7 +236,7 @@ export default function Registration() {
   };
 
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue("branch_exists", event.target.checked, {shouldValidate: true, shouldDirty: true});
+    setValue("headquarter", event.target.checked, {shouldValidate: true, shouldDirty: true});
   };
 
   useEffect(() => {
@@ -448,7 +448,7 @@ export default function Registration() {
                 <Checkbox 
                   key='head_office' 
                   onChange={handleCheckboxChange} 
-                  checked={getValues("branch_exists")}
+                  checked={getValues("headquarter")}
                 ></Checkbox>
                 <p>본사</p>
               </Flex>
