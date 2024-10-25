@@ -26,6 +26,7 @@ export interface ICompanyRegisterRequest extends IUpdateCompanyInfoRequest {
   service_name: string;
   attachment_urls?: string[] | null;
   biz_registration_url?: string;
+  headquarter?: boolean;
 }
 
 export interface ICheckBuisnessNumberResponse {
@@ -61,4 +62,5 @@ export interface IMyCompanyResponse {
   business_area: string;
   biz_registration_url: string;
   attachment_urls: string[];
+  headquarter: boolean;
 }

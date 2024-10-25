@@ -4,7 +4,16 @@ import { TitleTemplate } from "@/components/titleTemplate";
 import { SubTitleTemplate } from "@/components/subTitleTemplate";
 import * as S from "./style";
 import { InputTemplate } from "@/components/inputTemplate";
-import { Input, Icon, Text, Flex, Button, useToast, Textarea } from "@jobis/ui";
+import {
+  Input,
+  Icon,
+  Text,
+  Flex,
+  Button,
+  useToast,
+  Textarea,
+  Checkbox,
+} from "@jobis/ui";
 import { themes } from "@jobis/design-token";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { ICompanyRegisterRequest } from "@/apis/company/types";
@@ -70,6 +79,7 @@ export default function Registration() {
         myCompanyInfo?.manager_phone_no || ""
       ),
       company_profile_url: myCompanyInfo?.company_logo_url,
+      headquarter: myCompanyInfo?.headquarter || false,
     },
   });
   const { toast } = useToast();
@@ -232,6 +242,13 @@ export default function Registration() {
   const preventClose = (e: BeforeUnloadEvent) => {
     e.preventDefault();
     e.returnValue = ""; //Chrome에서 동작하도록; deprecated
+  };
+
+  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValue("headquarter", event.target.checked, {
+      shouldValidate: true,
+      shouldDirty: true,
+    });
   };
 
   useEffect(() => {
@@ -439,37 +456,14 @@ export default function Registration() {
                 })}
                 errorMessage={errors.main_address_detail?.message}
               />
-            </Flex>
-          </InputTemplate>,
-          <InputTemplate key="sub-address" title="주소(지점)">
-            <Flex direction="column" gap={8}>
-              <Flex gap={8}>
-                <Input
-                  width={367}
-                  disabled
-                  {...register("sub_address")}
-                  errorMessage={errors.sub_address?.message}
+              <Flex align="center">
+                <Checkbox
+                  key="head_office"
+                  onChange={handleCheckboxChange}
+                  checked={getValues("headquarter")}
                 />
-                <Input
-                  width={111}
-                  disabled
-                  {...register("sub_zip_code")}
-                  errorMessage={errors.sub_zip_code?.message}
-                />
-                <Button
-                  type="button"
-                  variant="outline"
-                  onClick={() => openModal("SUB_ADDRESS")}
-                >
-                  검색
-                </Button>
+                <p>본사</p>
               </Flex>
-              <Input
-                width={604}
-                placeholder="상세주소 입력"
-                {...register("sub_address_detail")}
-                errorMessage={errors.sub_address_detail?.message}
-              />
             </Flex>
           </InputTemplate>,
           <InputTemplate key="take" title="매출액(년)" required>
