@@ -4,7 +4,7 @@ import { TitleTemplate } from "@/components/titleTemplate";
 import { SubTitleTemplate } from "@/components/subTitleTemplate";
 import * as S from "./style";
 import { InputTemplate } from "@/components/inputTemplate";
-import { Input, Icon, Text, Flex, Button, useToast, Textarea } from "@jobis/ui";
+import { Input, Icon, Text, Flex, Button, useToast, Textarea, Checkbox } from "@jobis/ui";
 import { themes } from "@jobis/design-token";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { ICompanyRegisterRequest } from "@/apis/company/types";
@@ -19,7 +19,6 @@ import Image from "next/image";
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { useCreatePresignedURL } from "@/hooks/apis/useFilesApi";
-import { Checkbox } from "@/components/CheckBox/checkBox";
 import {
   useCompanyRegister,
   useMyCompanyInfo,
