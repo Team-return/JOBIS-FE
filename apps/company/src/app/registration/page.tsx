@@ -17,7 +17,14 @@ import {
 import { themes } from "@jobis/design-token";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { ICompanyRegisterRequest } from "@/apis/company/types";
-import { RefObject, useCallback, useEffect, useRef, useState } from "react";
+import {
+  RefObject,
+  TextareaHTMLAttributes,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { useModal } from "@/hooks/useModal";
 import { Address } from "react-daum-postcode";
 import DaumPostcode from "react-daum-postcode";
@@ -35,6 +42,7 @@ import {
 } from "@/hooks/apis/useCompanyApi";
 import { useGetCode } from "@/hooks/apis/useCodeApi";
 import { AxiosError } from "axios";
+import { Background } from "@/components/modal/style";
 
 export default function Registration() {
   const searchParams = useSearchParams();
@@ -85,6 +93,7 @@ export default function Registration() {
   const { toast } = useToast();
 
   const [companyLogoPreview, setCompanyLogoPreview] = useState("");
+  const [charCount, setCharCount] = useState(0);
   const [companyId, setCompanyId] = useState(0);
   const [previewFiles, setPreviewFiles] = useState<{
     bizRegistrationFile: File[];
@@ -250,6 +259,12 @@ export default function Registration() {
       shouldDirty: true,
     });
   };
+
+  useEffect(() => {
+    if (myCompanyInfo?.company_introduce) {
+      setCharCount(myCompanyInfo.company_introduce.length);
+    }
+  }, [myCompanyInfo]);
 
   useEffect(() => {
     (() => {
@@ -644,14 +659,35 @@ export default function Registration() {
             />
           </InputTemplate>,
           <InputTemplate key="company-introduce" title="회사개요" required>
-            <Textarea
-              width={604}
-              placeholder="직접입력"
-              {...register("company_introduce", {
-                required: "필수 입력 항목입니다.",
-              })}
-              errorMessage={errors.company_introduce?.message}
-            />
+            <div style={{ position: "relative", width: "604px" }}>
+              <Textarea
+                width={604}
+                placeholder="직접입력"
+                {...register("company_introduce", {
+                  required: "필수 입력 항목입니다.",
+                  maxLength: {
+                    value: 1000,
+                    message: "최대 1000자까지 입력 가능합니다.",
+                  },
+                  onChange: e => {
+                    setCharCount(e.target.value.length);
+                  },
+                })}
+                maxLength={1000}
+                errorMessage={errors.company_introduce?.message}
+              />
+              <div
+                style={{ position: "absolute", bottom: "12px", right: "12px" }}
+              >
+                <Text
+                  fontSize="body2"
+                  color={themes.Color.grayScale[60]}
+                  fontWeight="regular"
+                >
+                  {charCount}/1000
+                </Text>
+              </div>
+            </div>
           </InputTemplate>,
           <InputTemplate key="logo" title="회사로고">
             {companyLogoPreview ? (
