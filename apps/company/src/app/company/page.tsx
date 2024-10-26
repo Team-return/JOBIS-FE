@@ -47,7 +47,7 @@ export default function Company() {
             content={myCompanyInfo?.company_introduce}
           />
           <CompanyContentTemplate
-            title="본사 주소"
+            title={myCompanyInfo?.headquarter === true ? "주소(본사)" : "주소"}
             content={myCompanyInfo?.main_address}
           />
           <CompanyContentTemplate
