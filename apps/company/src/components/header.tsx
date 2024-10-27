@@ -40,7 +40,7 @@ export const Header = () => {
 const HeaderWrap = styled.div`
   position: fixed;
   display: flex;
-  z-index: 1;
+  z-index: 99;
   justify-content: space-between;
   align-items: center;
   width: 100%;
