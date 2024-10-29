@@ -13,7 +13,6 @@ export interface IUpdateCompanyInfoRequest {
   company_introduce: string;
   email: string;
   manager_name: string;
-  manager_phone_no: string;
   company_profile_url?: string;
   service_name: string;
   business_area_code: number | string;
