@@ -1856,6 +1856,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@channel.io/channel-web-sdk-loader@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@channel.io/channel-web-sdk-loader@npm:2.0.0"
+  checksum: 10/11bf96fa8863a9800537f674225bc3fa67cea59592a8bd1fc9d333e5db899e08ff885bd3380f67b62e0ba7ab3252a7ba2df636cf58f84b562584830ade370f6a
+  languageName: node
+  linkType: hard
+
 "@colors/colors@npm:1.5.0":
   version: 1.5.0
   resolution: "@colors/colors@npm:1.5.0"
@@ -3216,6 +3223,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@jobis/company@workspace:apps/company"
   dependencies:
+    "@channel.io/channel-web-sdk-loader": "npm:^2.0.0"
     "@jobis/design-token": "workspace:^"
     "@jobis/ui": "workspace:^"
     "@next/bundle-analyzer": "npm:^13.5.4"
