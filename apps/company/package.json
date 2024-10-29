@@ -9,6 +9,7 @@
     "start": "next start -p 4000"
   },
   "dependencies": {
+    "@channel.io/channel-web-sdk-loader": "^2.0.0",
     "@next/bundle-analyzer": "^13.5.4",
     "@sentry/nextjs": "^8",
     "@sentry/utils": "^8.33.1",
