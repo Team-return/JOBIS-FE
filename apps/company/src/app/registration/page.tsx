@@ -561,7 +561,7 @@ export default function Registration() {
             </InputTemplate>
             <InputTemplate
               key="representative_phone_no"
-              title="전화번호"
+              title="대표 연락처"
               required
             >
               <Controller
