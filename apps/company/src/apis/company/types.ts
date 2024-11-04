@@ -56,8 +56,6 @@ export interface IMyCompanyResponse {
   biz_registration_url: string;
   headquarter: boolean;
   manager_phone_no: string;
-
-  // 명세에 없는거
   take: number;
   sub_address?: string;
   sub_address_detail?: string;
