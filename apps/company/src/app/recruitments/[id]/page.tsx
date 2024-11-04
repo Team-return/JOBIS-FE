@@ -316,8 +316,8 @@ export default function Recruitments({ params }: { params: { id: string } }) {
       } else {
         const [startTime, endTime] =
           recruitmentDetail.working_hours.split(" ~ ");
-        setValue("start_time", startTime.slice(0, 5));
-        setValue("end_time", endTime.slice(0, 5));
+        setValue("start_time", startTime?.slice(0, 5));
+        setValue("end_time", endTime?.slice(0, 5));
       }
     }
   }, [recruitmentDetail, setValue, params.id]);
