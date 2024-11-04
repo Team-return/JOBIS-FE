@@ -43,11 +43,11 @@ export default function Company() {
             content={myCompanyInfo?.service_name}
           />
           <CompanyContentTemplate
-            title="회사 소개"
+            title="회사개요"
             content={myCompanyInfo?.company_introduce}
           />
           <CompanyContentTemplate
-            title={myCompanyInfo?.headquarter === true ? "주소(본사)" : "주소"}
+            title={myCompanyInfo?.headquarter === true ? "본사(주소)" : "주소"}
             content={myCompanyInfo?.main_address}
           />
           <CompanyContentTemplate
@@ -63,21 +63,33 @@ export default function Company() {
             content={myCompanyInfo?.manager_name}
           />
           <CompanyContentTemplate
+            title="담당자 연락처"
+            content={myCompanyInfo?.manager_phone_no}
+          />
+          <CompanyContentTemplate
             title="이메일"
             content={myCompanyInfo?.email}
           />
         </Flex>
         <Flex direction={"column"} gap={32}>
           <CompanyContentTemplate
+            title="사업 분야"
+            content={myCompanyInfo?.business_area}
+          />
+          <CompanyContentTemplate
+            title="매출액"
+            content={`${myCompanyInfo?.take}억`}
+          />
+          <CompanyContentTemplate
             title="사업자번호"
             content={myCompanyInfo?.biz_no}
           />
           <CompanyContentTemplate
             title="근로자 수"
-            content={myCompanyInfo?.workers_count}
+            content={`${myCompanyInfo?.workers_count}명`}
           />
           <CompanyContentTemplate
-            title="전화번호"
+            title="대표 번호"
             content={myCompanyInfo?.representative_phone_no}
           />
         </Flex>
