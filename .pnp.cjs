@@ -3315,6 +3315,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@channel.io/channel-web-sdk-loader", [\
+      ["npm:2.0.0", {\
+        "packageLocation": "./.yarn/cache/@channel.io-channel-web-sdk-loader-npm-2.0.0-a716027852-11bf96fa88.zip/node_modules/@channel.io/channel-web-sdk-loader/",\
+        "packageDependencies": [\
+          ["@channel.io/channel-web-sdk-loader", "npm:2.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["@colors/colors", [\
       ["npm:1.5.0", {\
         "packageLocation": "./.yarn/cache/@colors-colors-npm-1.5.0-875af3a8b4-9d226461c1.zip/node_modules/@colors/colors/",\
@@ -4939,6 +4948,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./apps/company/",\
         "packageDependencies": [\
           ["@jobis/company", "workspace:apps/company"],\
+          ["@channel.io/channel-web-sdk-loader", "npm:2.0.0"],\
           ["@jobis/design-token", "workspace:packages/design-token"],\
           ["@jobis/ui", "virtual:3d56d234886d4ad97fa4f74937d18583af1e798e4510f038d7cd99af74d90f133c440647b0d8b3d140e241533fe7e777b5c917d06ca560a768461ecead1a64d3#workspace:packages/ui"],\
           ["@next/bundle-analyzer", "npm:13.5.6"],\

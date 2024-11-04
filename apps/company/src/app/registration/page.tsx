@@ -83,9 +83,6 @@ export default function Registration() {
       company_introduce: myCompanyInfo?.company_introduce || "",
       email: myCompanyInfo?.email || "",
       manager_name: myCompanyInfo?.manager_name || "",
-      manager_phone_no: regex.phone_number(
-        myCompanyInfo?.manager_phone_no || ""
-      ),
       company_profile_url: myCompanyInfo?.company_logo_url,
       headquarter: myCompanyInfo?.headquarter || false,
     },
@@ -201,7 +198,6 @@ export default function Registration() {
   const onSubmit: SubmitHandler<ICompanyRegisterRequest> = data => {
     const {
       representative_phone_no,
-      manager_phone_no,
       sub_address_detail,
       sub_zip_code,
       take,
@@ -212,7 +208,6 @@ export default function Registration() {
 
     const requests = {
       representative_phone_no: representative_phone_no.replaceAll("-", ""),
-      manager_phone_no: manager_phone_no?.replaceAll("-", ""),
       sub_zip_code: sub_zip_code || undefined,
       sub_address_detail: sub_address_detail || undefined,
       take: +take.toString().replaceAll(",", ""),
@@ -368,36 +363,6 @@ export default function Registration() {
                 },
               })}
               errorMessage={errors.business_number?.message}
-            />
-          </InputTemplate>,
-          <InputTemplate
-            key="representative-phone-no"
-            title="기업 대표 번호"
-            required
-          >
-            <Controller
-              control={control}
-              name="representative_phone_no"
-              rules={{
-                required: "필수 입력 항목입니다.",
-                pattern: {
-                  value: /^\d{2,3}-\d{3,4}-\d{4}$/,
-                  message: "유효한 전화번호 형식이 아닙니다.",
-                },
-              }}
-              render={({ field }) => (
-                <Input
-                  {...field}
-                  type="tel"
-                  width={604}
-                  placeholder="nnn-nnnn-nnnn"
-                  maxLength={13}
-                  onChange={e =>
-                    field.onChange(regex.phone_number(e.target.value))
-                  }
-                  errorMessage={errors.representative_phone_no?.message}
-                />
-              )}
             />
           </InputTemplate>,
           <InputTemplate key="representative-name" title="대표자" required>
@@ -594,10 +559,14 @@ export default function Registration() {
                 errorMessage={errors.manager_name?.message}
               />
             </InputTemplate>
-            <InputTemplate key="manager-phone-no" title="전화번호" required>
+            <InputTemplate
+              key="representative_phone_no"
+              title="대표 연락처"
+              required
+            >
               <Controller
                 control={control}
-                name="manager_phone_no"
+                name="representative_phone_no"
                 rules={{
                   required: "필수 입력 항목입니다.",
                   pattern: {
@@ -615,7 +584,7 @@ export default function Registration() {
                     onChange={e =>
                       field.onChange(regex.phone_number(e.target.value))
                     }
-                    errorMessage={errors.manager_phone_no?.message}
+                    errorMessage={errors.representative_phone_no?.message}
                   />
                 )}
               />
