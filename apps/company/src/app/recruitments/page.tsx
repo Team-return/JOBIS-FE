@@ -224,86 +224,94 @@ export default function Recruitments() {
         requiredMessage
         components={[
           <InputTemplate title="모집기간" required key="period">
-            <Flex align="center" gap={22}>
-              <Controller
-                control={control}
-                name="start_date"
-                defaultValue=""
-                rules={{
-                  required: {
-                    value: !alwaysRecruit,
-                    message: "필수 입력 항목입니다.",
-                  },
-                  pattern: {
-                    value: /^\d{4}-\d{2}-\d{2}$/,
-                    message: "유효한 날짜 형식이 아닙니다. (ex: yyyy-mm-dd)",
-                  },
-                }}
-                render={({ field }) => (
-                  <Input
-                    {...field}
-                    width={272}
-                    placeholder="yyyy-mm-dd"
-                    disabled={alwaysRecruit}
-                    maxLength={10}
-                    icon={
-                      <Icon
-                        icon="Date"
-                        color={themes.Color.grayScale[80]}
-                        size={20}
-                        cursor="pointer"
-                      />
-                    }
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      field.onChange(regex.date_number(e.target.value))
-                    }
-                    errorMessage={
-                      alwaysRecruit ? undefined : errors.start_date?.message
-                    }
-                  />
-                )}
-              />
-              <Text fontSize="h5" color={themes.Color.grayScale[60]}>
-                ~
-              </Text>
-              <Controller
-                control={control}
-                name="end_date"
-                defaultValue=""
-                rules={{
-                  required: {
-                    value: !alwaysRecruit,
-                    message: "필수 입력 항목입니다.",
-                  },
-                  pattern: {
-                    value: /^\d{4}-\d{2}-\d{2}$/,
-                    message: "유효한 날짜 형식이 아닙니다. (ex: yyyy-mm-dd)",
-                  },
-                }}
-                render={({ field }) => (
-                  <Input
-                    {...field}
-                    width={272}
-                    placeholder="yyyy-mm-dd"
-                    disabled={alwaysRecruit}
-                    maxLength={10}
-                    icon={
-                      <Icon
-                        icon="Date"
-                        color={themes.Color.grayScale[80]}
-                        size={20}
-                        cursor="pointer"
-                      />
-                    }
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      field.onChange(regex.date_number(e.target.value))
-                    }
-                    errorMessage={
-                      alwaysRecruit ? undefined : errors.end_date?.message
-                    }
-                  />
-                )}
-              />
+            <Flex direction="column" gap={8}>
+              <Flex align="center" gap={22}>
+                <Controller
+                  control={control}
+                  name="start_date"
+                  defaultValue=""
+                  rules={{
+                    required: {
+                      value: !alwaysRecruit,
+                      message: "필수 입력 항목입니다.",
+                    },
+                    pattern: {
+                      value: /^\d{4}-\d{2}-\d{2}$/,
+                      message: "유효한 날짜 형식이 아닙니다. (ex: yyyy-mm-dd)",
+                    },
+                  }}
+                  render={({ field }) => (
+                    <Input
+                      {...field}
+                      width={272}
+                      placeholder="yyyy-mm-dd"
+                      disabled={alwaysRecruit}
+                      maxLength={10}
+                      icon={
+                        <Icon
+                          icon="Date"
+                          color={themes.Color.grayScale[80]}
+                          size={20}
+                          cursor="pointer"
+                        />
+                      }
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        field.onChange(regex.date_number(e.target.value))
+                      }
+                      errorMessage={
+                        alwaysRecruit ? undefined : errors.start_date?.message
+                      }
+                    />
+                  )}
+                />
+                <Text fontSize="h5" color={themes.Color.grayScale[60]}>
+                  ~
+                </Text>
+                <Controller
+                  control={control}
+                  name="end_date"
+                  defaultValue=""
+                  rules={{
+                    required: {
+                      value: !alwaysRecruit,
+                      message: "필수 입력 항목입니다.",
+                    },
+                    pattern: {
+                      value: /^\d{4}-\d{2}-\d{2}$/,
+                      message: "유효한 날짜 형식이 아닙니다. (ex: yyyy-mm-dd)",
+                    },
+                  }}
+                  render={({ field }) => (
+                    <Input
+                      {...field}
+                      width={272}
+                      placeholder="yyyy-mm-dd"
+                      disabled={alwaysRecruit}
+                      maxLength={10}
+                      icon={
+                        <Icon
+                          icon="Date"
+                          color={themes.Color.grayScale[80]}
+                          size={20}
+                          cursor="pointer"
+                        />
+                      }
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        field.onChange(regex.date_number(e.target.value))
+                      }
+                      errorMessage={
+                        alwaysRecruit ? undefined : errors.end_date?.message
+                      }
+                    />
+                  )}
+                />
+              </Flex>
+              <Checkbox
+                checked={alwaysRecruit}
+                onClick={() => setAlwaysRecruit(prev => !prev)}
+              >
+                상시채용
+              </Checkbox>
             </Flex>
           </InputTemplate>,
         ]}
