@@ -17,45 +17,12 @@ export default function My() {
   const { data: myCompanyInfo } = useMyCompanyInfo();
   const { data: myRecruitmentList } = useMyRecruitmentList();
 
-  const hasRecruitments = myRecruitmentList?.my_recruitments;
+  const hasRecruitments = !!myRecruitmentList?.my_recruitments?.length;
 
   return (
     <S.Container>
       {hasRecruitments ? (
         <>
-          <SubTitleTemplate
-            title="기업정보"
-            button={
-              <S.CompanyInfoEditButton
-                type="button"
-                onClick={() =>
-                  router.push(
-                    `/registration?name=${myCompanyInfo?.name}&business-number=${myCompanyInfo?.biz_no}&type=edit`
-                  )
-                }
-              >
-                수정
-              </S.CompanyInfoEditButton>
-            }
-            components={[
-              <S.CompanyInfo key="company-info">
-                <Text
-                  fontSize="body1"
-                  fontWeight="regular"
-                  color={themes.Color.grayScale[70]}
-                >
-                  {`사업자번호 : ${regex.buisness_number(myCompanyInfo?.biz_no || "")}`}
-                </Text>
-                <Text
-                  fontSize="body1"
-                  fontWeight="regular"
-                  color={themes.Color.primary[20]}
-                >
-                  {myCompanyInfo?.name || ""}
-                </Text>
-              </S.CompanyInfo>,
-            ]}
-          />
           <SubTitleTemplate
             title="모집의뢰서"
             button={
