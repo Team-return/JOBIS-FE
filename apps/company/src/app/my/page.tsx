@@ -2,19 +2,16 @@
 
 import { SubTitleTemplate } from "@/components/subTitleTemplate";
 import * as S from "./style";
-import { Icon, Text, Flex, Button } from "@jobis/ui";
+import { Icon, Text, Flex } from "@jobis/ui";
 import { themes } from "@jobis/design-token";
 import { useRouter } from "next/navigation";
-import { useMyCompanyInfo } from "@/hooks/apis/useCompanyApi";
 import { useMyRecruitmentList } from "@/hooks/apis/useRecruitmentsApi";
-import { regex } from "@/utils/regex";
 import Link from "next/link";
 import Image from "next/image";
 import XIcon from "../../../public/No.svg";
 
 export default function My() {
   const router = useRouter();
-  const { data: myCompanyInfo } = useMyCompanyInfo();
   const { data: myRecruitmentList } = useMyRecruitmentList();
 
   const hasRecruitments = !!myRecruitmentList?.my_recruitments?.length;
