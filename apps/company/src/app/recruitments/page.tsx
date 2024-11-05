@@ -444,14 +444,6 @@ export default function Recruitments() {
               </S.LicenseList>
             </Flex>
           </InputTemplate>,
-          <InputTemplate title="우대사항" key="preferential_treatment">
-            <Textarea
-              width={604}
-              placeholder="우대사항 입력"
-              {...register("preferential_treatment")}
-              errorMessage={errors.preferential_treatment?.message}
-            />
-          </InputTemplate>,
           <InputTemplate title="기타 자격 요건" key="additional_qualifications">
             <Textarea
               width={604}
