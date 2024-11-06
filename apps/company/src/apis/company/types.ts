@@ -16,6 +16,7 @@ export interface IUpdateCompanyInfoRequest {
   company_profile_url?: string;
   service_name: string;
   business_area_code: number | string;
+  manager_phone_no: string;
 }
 export interface ICompanyRegisterRequest extends IUpdateCompanyInfoRequest {
   name: string;
