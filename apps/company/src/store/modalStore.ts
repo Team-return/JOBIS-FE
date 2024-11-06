@@ -11,6 +11,7 @@ export type ModalType =
   | "EDIT_RECRUIT_AREA"
   | "ADD_RECRUIT_AREA"
   | "EDIT_COMPANY_INFO"
+  | "LOGOUT_AREA"
   | "";
 
 export interface IModalState {
