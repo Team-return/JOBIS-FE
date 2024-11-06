@@ -16,7 +16,6 @@ export default function My() {
   const router = useRouter();
   const { data: myCompanyInfo } = useMyCompanyInfo();
   const { data: myRecruitmentList } = useMyRecruitmentList();
-
   const hasRecruitments = myRecruitmentList?.my_recruitments;
 
   return (

@@ -7,9 +7,21 @@ import SeeMoreIcon from "../../../public/seemore.svg";
 import { themes } from "@jobis/design-token";
 import { CompanyContentTemplate } from "@/components/companyContentTemplate";
 import { useMyCompanyInfo } from "@/hooks/apis/useCompanyApi";
+import { useModal } from "@/hooks/useModal";
+import EditModal from "@/components/modal/editModal/editModal";
 
 export default function Company() {
   const { data: myCompanyInfo } = useMyCompanyInfo();
+  const { modalState, closeModal, openModal } = useModal();
+
+  const handleIconClick = () => {
+    if (modalState === "EDIT_COMPANY_INFO") {
+      closeModal();
+    } else {
+      openModal("EDIT_COMPANY_INFO");
+    }
+  };
+
   return (
     <S.Container>
       <S.Title>
@@ -33,7 +45,17 @@ export default function Company() {
             </Text>
           </div>
         </Flex>
-        <Image src={SeeMoreIcon} alt="더보기" style={{ cursor: "pointer" }} />
+        <S.IconWrapper>
+          <Image
+            src={SeeMoreIcon}
+            alt="더보기"
+            style={{ cursor: "pointer" }}
+            onClick={() => handleIconClick()}
+          />
+          {modalState === "EDIT_COMPANY_INFO" && (
+            <EditModal closeModal={closeModal} />
+          )}
+        </S.IconWrapper>
       </S.Title>
       <S.Line />
       <Flex gap={128} justify={"space-between"}>
@@ -47,7 +69,7 @@ export default function Company() {
             content={myCompanyInfo?.company_introduce}
           />
           <CompanyContentTemplate
-            title={myCompanyInfo?.headquarter === true ? "본사(주소)" : "주소"}
+            title={myCompanyInfo?.headquarter === true ? "주소(본사)" : "주소"}
             content={myCompanyInfo?.main_address}
           />
           <CompanyContentTemplate
