@@ -19,3 +19,17 @@ export const Container = styled.div`
   gap: 16px;
   box-shadow: 0 4px 20px 0 rgb(112 144 176 / 12%);
 `;
+
+export const Wrapper = styled.div`
+  width: 100%;
+  height: 100%;
+`;
+
+export const Box = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 50%;
+  cursor: pointer;
+`;
