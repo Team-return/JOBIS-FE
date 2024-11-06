@@ -12,7 +12,7 @@ import XIcon from "../../../public/No.svg";
 
 export default function My() {
   const router = useRouter();
-  const { data: myRecruitmentList } = useMyRecruitmentList();
+  const { data: myRecruitmentList, isLoading } = useMyRecruitmentList();
 
   const hasRecruitments = !!myRecruitmentList?.my_recruitments?.length;
 
