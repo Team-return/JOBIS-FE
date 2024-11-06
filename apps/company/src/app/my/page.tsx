@@ -2,59 +2,24 @@
 
 import { SubTitleTemplate } from "@/components/subTitleTemplate";
 import * as S from "./style";
-import { Icon, Text, Flex, Button } from "@jobis/ui";
+import { Icon, Text, Flex } from "@jobis/ui";
 import { themes } from "@jobis/design-token";
 import { useRouter } from "next/navigation";
-import { useMyCompanyInfo } from "@/hooks/apis/useCompanyApi";
 import { useMyRecruitmentList } from "@/hooks/apis/useRecruitmentsApi";
-import { regex } from "@/utils/regex";
 import Link from "next/link";
 import Image from "next/image";
 import XIcon from "../../../public/No.svg";
 
 export default function My() {
   const router = useRouter();
-  const { data: myCompanyInfo } = useMyCompanyInfo();
   const { data: myRecruitmentList } = useMyRecruitmentList();
-  const hasRecruitments = myRecruitmentList?.my_recruitments;
+
+  const hasRecruitments = !!myRecruitmentList?.my_recruitments?.length;
 
   return (
     <S.Container>
       {hasRecruitments ? (
         <>
-          <SubTitleTemplate
-            title="기업정보"
-            button={
-              <S.CompanyInfoEditButton
-                type="button"
-                onClick={() =>
-                  router.push(
-                    `/registration?name=${myCompanyInfo?.name}&business-number=${myCompanyInfo?.biz_no}&type=edit`
-                  )
-                }
-              >
-                수정
-              </S.CompanyInfoEditButton>
-            }
-            components={[
-              <S.CompanyInfo key="company-info">
-                <Text
-                  fontSize="body1"
-                  fontWeight="regular"
-                  color={themes.Color.grayScale[70]}
-                >
-                  {`사업자번호 : ${regex.buisness_number(myCompanyInfo?.biz_no || "")}`}
-                </Text>
-                <Text
-                  fontSize="body1"
-                  fontWeight="regular"
-                  color={themes.Color.primary[20]}
-                >
-                  {myCompanyInfo?.name || ""}
-                </Text>
-              </S.CompanyInfo>,
-            ]}
-          />
           <SubTitleTemplate
             title="모집의뢰서"
             button={
