@@ -51,7 +51,7 @@ const EditModal: React.FC<PropsType> = () => {
         </Text>
       </S.Box>
       {isLogoutModalOpen && (
-        <Modal width={379} onClose={handleCloseModal}>
+        <Modal width={380} onClose={handleCloseModal}>
           <LogoutModal />
         </Modal>
       )}
