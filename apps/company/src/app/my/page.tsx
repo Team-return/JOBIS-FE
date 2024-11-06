@@ -18,7 +18,9 @@ export default function My() {
 
   return (
     <S.Container>
-      {hasRecruitments ? (
+      {isLoading ? (
+        <></>
+      ) : hasRecruitments ? (
         <>
           <SubTitleTemplate
             title="모집의뢰서"
