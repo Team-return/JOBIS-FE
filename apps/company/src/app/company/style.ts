@@ -35,3 +35,8 @@ export const Line = styled.div`
     width: 960px;
   }
 `;
+
+export const IconWrapper = styled.div`
+  position: relative;
+  display: inline-block;
+`;

@@ -146,6 +146,8 @@ export default function Recruitments() {
       train_pay,
       submit_document,
       benefits,
+      preferential_treatment,
+      additional_qualifications,
       required_grade,
       etc,
       working_hours,
@@ -195,22 +197,33 @@ export default function Recruitments() {
         : `${start_time} ~ ${end_time}`,
       etc: etc || undefined,
       personal_contact: false,
+      preferential_treatment: preferential_treatment || undefined,
+      additional_qualifications: additional_qualifications || undefined,
     });
   };
 
   return (
     <S.Container onSubmit={handleSubmit(onSubmit)}>
-      <TitleTemplate
-        title="모집의뢰서 등록"
-        subTitle={
-          "등록된 정보는 본 시스템을 통해 접수된 건에 한하여\n정식적으로 검토되며, 등록된 정보는 서비스 이용에 활용됩니다."
-        }
-      />
+      {searchParams.get("winter") ? (
+        <TitleTemplate
+          title="모집의뢰서 등록(체험형)"
+          subTitle={
+            "등록된 정보는 본 시스템을 통해 접수된 건에 한하여\n정식적으로 검토되며, 등록된 정보는 서비스 이용에 활용됩니다."
+          }
+        />
+      ) : (
+        <TitleTemplate
+          title="모집의뢰서 등록(채용형)"
+          subTitle={
+            "등록된 정보는 본 시스템을 통해 접수된 건에 한하여\n정식적으로 검토되며, 등록된 정보는 서비스 이용에 활용됩니다."
+          }
+        />
+      )}
       <SubTitleTemplate
         title="모집 년도"
         requiredMessage
         components={[
-          <InputTemplate title="모집기간" required>
+          <InputTemplate title="모집기간" required key="period">
             <Flex direction="column" gap={8}>
               <Flex align="center" gap={22}>
                 <Controller
@@ -306,7 +319,11 @@ export default function Recruitments() {
       <SubTitleTemplate
         title="모집 분야"
         components={[
-          <InputTemplate title="모집 분야 추가" required>
+          <InputTemplate
+            title="모집 분야 추가"
+            required
+            key="add-recruitment-field"
+          >
             <Flex direction="column" gap={8} style={{ width: 604 }}>
               <Button
                 type="button"
@@ -403,7 +420,7 @@ export default function Recruitments() {
       <SubTitleTemplate
         title="자격 요건"
         components={[
-          <InputTemplate title="국가자격증">
+          <InputTemplate title="국가자격증" key="national-license">
             <Flex direction="column" gap={8} style={{ width: 604 }}>
               <Button
                 type="button"
@@ -414,7 +431,7 @@ export default function Recruitments() {
               </Button>
               <S.LicenseList>
                 {licenses.map((license, idx) => (
-                  <S.SelectedLicense>
+                  <S.SelectedLicense key="license">
                     <Text
                       fontSize="body3"
                       fontWeight="regular"
@@ -435,48 +452,20 @@ export default function Recruitments() {
               </S.LicenseList>
             </Flex>
           </InputTemplate>,
-          <InputTemplate title="성적">
-            <Flex direction="column" gap={8}>
-              <Controller
-                control={control}
-                name="required_grade"
-                rules={{
-                  max: {
-                    value: 100,
-                    message: "최대 100까지 입력할 수 있어요.",
-                  },
-                }}
-                render={({ field }) => (
-                  <Input
-                    {...field}
-                    width={604}
-                    placeholder="직접입력"
-                    maxLength={3}
-                    max={100}
-                    onChange={e =>
-                      field.onChange(e.target.value.replaceAll(/[^0-9]/g, ""))
-                    }
-                    icon={
-                      <Text
-                        fontSize="body2"
-                        fontWeight="regular"
-                        color={themes.Color.grayScale[60]}
-                      >
-                        %이내
-                      </Text>
-                    }
-                    errorMessage={errors.required_grade?.message}
-                  />
-                )}
-              />
-            </Flex>
+          <InputTemplate title="기타 자격 요건" key="additional_qualifications">
+            <Textarea
+              width={604}
+              placeholder="기타 자격 요건 입력"
+              {...register("additional_qualifications")}
+              errorMessage={errors.additional_qualifications?.message}
+            />
           </InputTemplate>,
         ]}
       />
       <SubTitleTemplate
         title="근무 조건"
         components={[
-          <InputTemplate title="근무시간" required>
+          <InputTemplate title="근무시간" required key="working_hours">
             <Flex direction="column" gap={8}>
               {watch("flexible_working") ? (
                 <Input
@@ -521,8 +510,8 @@ export default function Recruitments() {
                   </Text>
                   <Controller
                     control={control}
-                    defaultValue=""
                     name="end_time"
+                    defaultValue=""
                     rules={{
                       required: "필수 입력 항목입니다.",
                       pattern: {
@@ -553,7 +542,8 @@ export default function Recruitments() {
               </Checkbox>
             </Flex>
           </InputTemplate>,
-          <InputTemplate title="실습수당" required>
+
+          <InputTemplate title="실습수당" required key="train_pay">
             <Controller
               control={control}
               name="train_pay"
@@ -581,57 +571,70 @@ export default function Recruitments() {
               )}
             />
           </InputTemplate>,
-          <InputTemplate title="정규직 전환 시">
-            <Controller
-              control={control}
-              name="pay"
-              render={({ field }) => (
-                <Input
-                  {...field}
-                  width={604}
-                  placeholder="직접입력"
-                  maxLength={30}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    field.onChange(regex.money(e.target.value))
-                  }
-                  errorMessage={errors.pay?.message}
-                  icon={
-                    <Text
-                      fontSize="body2"
-                      fontWeight="regular"
-                      color={themes.Color.grayScale[60]}
-                    >
-                      만원/년
-                    </Text>
-                  }
+
+          searchParams.get("winter") ? (
+            <InputTemplate title="복리후생">
+              <Input
+                width={604}
+                placeholder="직접입력"
+                {...register("benefits")}
+                errorMessage={errors.benefits?.message}
+              />
+            </InputTemplate>
+          ) : (
+            <>
+              <InputTemplate title="정규직 전환 시">
+                <Controller
+                  control={control}
+                  name="pay"
+                  render={({ field }) => (
+                    <Input
+                      {...field}
+                      width={604}
+                      placeholder="직접입력"
+                      maxLength={30}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        field.onChange(regex.money(e.target.value))
+                      }
+                      errorMessage={errors.pay?.message}
+                      icon={
+                        <Text
+                          fontSize="body2"
+                          fontWeight="regular"
+                          color={themes.Color.grayScale[60]}
+                        >
+                          만원/년
+                        </Text>
+                      }
+                    />
+                  )}
                 />
-              )}
-            />
-          </InputTemplate>,
-          <InputTemplate title="복리후생">
-            <Textarea
-              width={604}
-              placeholder="직접입력"
-              {...register("benefits")}
-              errorMessage={errors.benefits?.message}
-            />
-          </InputTemplate>,
-          <InputTemplate title="병역특례">
-            <Flex style={{ width: 604 }}>
-              <Checkbox
-                checked={watch("military_support")}
-                {...register("military_support")}
-              >
-                병역특례 신청
-              </Checkbox>
-            </Flex>
-          </InputTemplate>,
+              </InputTemplate>
+
+              <InputTemplate title="복리후생">
+                <Flex direction="column" style={{ width: 604 }} gap={8}>
+                  <Input
+                    width={604}
+                    placeholder="직접입력"
+                    {...register("benefits")}
+                    errorMessage={errors.benefits?.message}
+                  />
+                  <Checkbox
+                    checked={watch("military_support")}
+                    {...register("military_support")}
+                  >
+                    산업 기능 요원 근무 가능 여부
+                  </Checkbox>
+                </Flex>
+              </InputTemplate>
+            </>
+          ),
         ]}
       />
       <SubTitleTemplate
         title="채용 절차"
         components={[
-          <InputTemplate title="채용절차" required>
+          <InputTemplate title="채용절차" required key="recruitment_procedures">
             <Flex direction="column" gap={10}>
               <S.ProcessButton onClick={() => openModal("HIRING_PROGRESS")}>
                 <Text fontSize="body2" fontWeight="regular">
@@ -651,7 +654,7 @@ export default function Recruitments() {
               </Text>
             </Flex>
           </InputTemplate>,
-          <InputTemplate title="제출서류" required>
+          <InputTemplate title="제출서류" required key="submit_document">
             <Flex direction="column" gap={8}>
               <Input
                 width={604}
@@ -684,16 +687,40 @@ export default function Recruitments() {
               </Flex>
             </Flex>
           </InputTemplate>,
-          <InputTemplate title="기타사항">
-            <Textarea
+          <InputTemplate title="기타사항" key="etc">
+            <Input
               width={604}
               placeholder="직접입력"
               {...register("etc")}
               errorMessage={errors.etc?.message}
             />
           </InputTemplate>,
+          searchParams.get("winter") ? (
+            <InputTemplate title="현장실습 연계 계획">
+              <Flex style={{ width: 604 }}>
+                <Checkbox
+                  checked={watch("integration_plan")}
+                  {...register("integration_plan")}
+                >
+                  연계 가능
+                </Checkbox>
+              </Flex>
+            </InputTemplate>
+          ) : (
+            <InputTemplate title="채용 전환 가능 여부">
+              <Flex style={{ width: 604 }}>
+                <Checkbox
+                  checked={watch("hire_convertible")}
+                  {...register("hire_convertible")}
+                >
+                  채용 전환 가능
+                </Checkbox>
+              </Flex>
+            </InputTemplate>
+          ),
         ]}
       />
+
       <Flex justify="flex-end" gap={12} style={{ width: 850 }}>
         <Link href={"/my"}>
           <Button
@@ -711,7 +738,7 @@ export default function Recruitments() {
             취소
           </Button>
         </Link>
-        <Button type="submit">확인</Button>
+        <Button type="submit">저장</Button>
       </Flex>
       {modalState === "HIRING_PROGRESS" && (
         <Modal width={780} onClose={closeModal}>

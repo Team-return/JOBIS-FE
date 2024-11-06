@@ -683,19 +683,7 @@ export default function Registration() {
           </InputTemplate>,
           <InputTemplate key="biz-registration" title="사업자등록증">
             <Flex direction="column">
-              <S.AddFileButton
-                onClick={() => {
-                  if (searchParams.get("type") !== "edit") {
-                    onUploadFile(bizRegistrationRef);
-                  }
-                }}
-                style={{
-                  cursor:
-                    searchParams.get("type") === "edit"
-                      ? "not-allowed"
-                      : "pointer",
-                }}
-              >
+              <S.AddFileButton onClick={() => onUploadFile(bizRegistrationRef)}>
                 <Text fontSize="body2" fontWeight="regular">
                   파일 추가하기
                 </Text>

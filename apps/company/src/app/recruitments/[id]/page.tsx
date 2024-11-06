@@ -316,8 +316,8 @@ export default function Recruitments({ params }: { params: { id: string } }) {
       } else {
         const [startTime, endTime] =
           recruitmentDetail.working_hours.split(" ~ ");
-        setValue("start_time", startTime.slice(0, 5));
-        setValue("end_time", endTime.slice(0, 5));
+        setValue("start_time", startTime?.slice(0, 5));
+        setValue("end_time", endTime?.slice(0, 5));
       }
     }
   }, [recruitmentDetail, setValue, params.id]);
@@ -325,7 +325,7 @@ export default function Recruitments({ params }: { params: { id: string } }) {
   return (
     <S.Container onSubmit={handleSubmit(onSubmit)}>
       <TitleTemplate
-        title="모집의뢰서 등록"
+        title="모집의뢰서 수정"
         subTitle={
           "등록된 정보는 본 시스템을 통해 접수된 건에 한하여\n정식적으로 검토되며, 등록된 정보는 서비스 이용에 활용됩니다."
         }
