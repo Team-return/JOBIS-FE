@@ -59,6 +59,7 @@ export default function Recruitments({ params }: { params: { id: string } }) {
     reset,
   } = useForm<IRecruitment & { start_time: string; end_time: string }>({
     values: {
+      integration_plan: !!recruitmentDetail?.integration_plan,
       winter_intern: recruitmentDetail?.winter_intern,
       benefits: recruitmentDetail?.benefits,
       end_date: recruitmentDetail?.end_date,
@@ -71,6 +72,7 @@ export default function Recruitments({ params }: { params: { id: string } }) {
       start_date: recruitmentDetail?.start_date,
       train_pay: regex.money(recruitmentDetail?.train_pay.toString() || ""),
       flexible_working: !!recruitmentDetail?.flexible_working,
+      hire_convertible: !!recruitmentDetail?.hire_convertible,
       areas:
         recruitmentDetail?.areas.map(area => {
           return {
