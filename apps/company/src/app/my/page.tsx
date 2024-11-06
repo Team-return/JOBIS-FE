@@ -15,13 +15,15 @@ import XIcon from "../../../public/No.svg";
 export default function My() {
   const router = useRouter();
   const { data: myCompanyInfo } = useMyCompanyInfo();
-  const { data: myRecruitmentList } = useMyRecruitmentList();
+  const { data: myRecruitmentList, isLoading } = useMyRecruitmentList();
 
   const hasRecruitments = myRecruitmentList?.my_recruitments;
 
   return (
     <S.Container>
-      {hasRecruitments ? (
+      {isLoading ? (
+        <></>
+      ) : hasRecruitments ? (
         <>
           <SubTitleTemplate
             title="기업정보"
