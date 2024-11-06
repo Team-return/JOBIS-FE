@@ -144,29 +144,34 @@ export default function Company() {
           />
           <CompanyContentTemplate
             title="파일첨부"
-            content={myCompanyInfo?.attachment_urls.map((file, idx) => (
-              <S.FileWrapper type="button" key={idx}>
-                <Flex align="center" gap={4}>
-                  <Icon
-                    icon="FileEarmarkArrowDown"
-                    size={16}
-                    color={themes.Color.grayScale[60]}
-                  />
-                  <Text
-                    fontSize="body3"
-                    fontWeight="regular"
-                    color={themes.Color.grayScale[60]}
-                    whiteSpace="nowrap"
-                    style={{ textOverflow: "ellipsis", maxWidth: 500 }}
-                  >
-                    {file
-                      .split("/")
-                      .pop()
-                      ?.replace(/^[\w-]+-/, "")}
-                  </Text>
-                </Flex>
-              </S.FileWrapper>
-            ))}
+            content={
+              myCompanyInfo?.attachment_urls &&
+              myCompanyInfo.attachment_urls.length > 0
+                ? myCompanyInfo.attachment_urls.map((file, idx) => (
+                    <S.FileWrapper type="button" key={idx}>
+                      <Flex align="center" gap={4}>
+                        <Icon
+                          icon="FileEarmarkArrowDown"
+                          size={16}
+                          color={themes.Color.grayScale[60]}
+                        />
+                        <Text
+                          fontSize="body3"
+                          fontWeight="regular"
+                          color={themes.Color.grayScale[60]}
+                          whiteSpace="nowrap"
+                          style={{ textOverflow: "ellipsis", maxWidth: 500 }}
+                        >
+                          {file
+                            .split("/")
+                            .pop()
+                            ?.replace(/^[\w-]+-/, "")}
+                        </Text>
+                      </Flex>
+                    </S.FileWrapper>
+                  ))
+                : null
+            }
           />
         </Flex>
       </Flex>
