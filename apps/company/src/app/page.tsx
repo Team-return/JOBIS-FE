@@ -142,35 +142,6 @@ export default function Home() {
               인증
             </Button>
           </Flex>
-          {isVerified && (
-            <Controller
-              control={control}
-              name="auth_code"
-              rules={{
-                required: {
-                  value: isVerified,
-                  message: "필수 입력 항목입니다.",
-                },
-                minLength: {
-                  value: 10,
-                  message: "인증코드는 10자입니다.",
-                },
-              }}
-              render={({ field }) => (
-                <Input
-                  {...field}
-                  label="인증코드"
-                  placeholder="인증 코드를 입력해주세요"
-                  maxLength={10}
-                  autoComplete="off"
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    field.onChange(e.target.value)
-                  }
-                  errorMessage={errors.auth_code?.message}
-                />
-              )}
-            />
-          )}
           <Button
             type="submit"
             disabled={!isVerified}

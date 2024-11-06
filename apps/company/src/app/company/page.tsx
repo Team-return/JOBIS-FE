@@ -2,14 +2,26 @@
 
 import Image from "next/image";
 import * as S from "./style";
-import { Text, Flex } from "@jobis/ui";
+import { Text, Flex, Icon } from "@jobis/ui";
 import SeeMoreIcon from "../../../public/seemore.svg";
 import { themes } from "@jobis/design-token";
 import { CompanyContentTemplate } from "@/components/companyContentTemplate";
 import { useMyCompanyInfo } from "@/hooks/apis/useCompanyApi";
+import { useModal } from "@/hooks/useModal";
+import EditModal from "@/components/modal/editModal/editModal";
 
 export default function Company() {
   const { data: myCompanyInfo } = useMyCompanyInfo();
+  const { modalState, closeModal, openModal } = useModal();
+
+  const handleIconClick = () => {
+    if (modalState === "EDIT_COMPANY_INFO") {
+      closeModal();
+    } else {
+      openModal("EDIT_COMPANY_INFO");
+    }
+  };
+
   return (
     <S.Container>
       <S.Title>
@@ -33,7 +45,17 @@ export default function Company() {
             </Text>
           </div>
         </Flex>
-        <Image src={SeeMoreIcon} alt="더보기" style={{ cursor: "pointer" }} />
+        <S.IconWrapper>
+          <Image
+            src={SeeMoreIcon}
+            alt="더보기"
+            style={{ cursor: "pointer" }}
+            onClick={() => handleIconClick()}
+          />
+          {modalState === "EDIT_COMPANY_INFO" && (
+            <EditModal closeModal={closeModal} />
+          )}
+        </S.IconWrapper>
       </S.Title>
       <S.Line />
       <Flex gap={128} justify={"space-between"}>
@@ -43,7 +65,7 @@ export default function Company() {
             content={myCompanyInfo?.service_name}
           />
           <CompanyContentTemplate
-            title="회사 소개"
+            title="회사개요"
             content={myCompanyInfo?.company_introduce}
           />
           <CompanyContentTemplate
@@ -63,22 +85,93 @@ export default function Company() {
             content={myCompanyInfo?.manager_name}
           />
           <CompanyContentTemplate
+            title="담당자 연락처"
+            content={myCompanyInfo?.manager_phone_no}
+          />
+          <CompanyContentTemplate
             title="이메일"
             content={myCompanyInfo?.email}
           />
         </Flex>
         <Flex direction={"column"} gap={32}>
           <CompanyContentTemplate
+            title="사업 분야"
+            content={myCompanyInfo?.business_area}
+          />
+          <CompanyContentTemplate
+            title="매출액"
+            content={`${myCompanyInfo?.take}억`}
+          />
+          <CompanyContentTemplate
             title="사업자번호"
             content={myCompanyInfo?.biz_no}
           />
           <CompanyContentTemplate
             title="근로자 수"
-            content={myCompanyInfo?.workers_count}
+            content={`${myCompanyInfo?.workers_count}명`}
           />
           <CompanyContentTemplate
-            title="전화번호"
+            title="대표 번호"
             content={myCompanyInfo?.representative_phone_no}
+          />
+          <CompanyContentTemplate
+            title="사업자 등록증"
+            content={
+              myCompanyInfo?.biz_registration_url ? (
+                <S.FileWrapper type="button">
+                  <Flex align="center" gap={4}>
+                    <Icon
+                      icon="FileEarmarkArrowDown"
+                      size={16}
+                      color={themes.Color.grayScale[60]}
+                    />
+                    <Text
+                      fontSize="body3"
+                      fontWeight="regular"
+                      color={themes.Color.grayScale[60]}
+                      whiteSpace="nowrap"
+                      style={{ textOverflow: "ellipsis", maxWidth: 500 }}
+                    >
+                      {myCompanyInfo.biz_registration_url
+                        .split("/")
+                        .pop()
+                        ?.replace(/^[\w-]+-/, "")}
+                    </Text>
+                  </Flex>
+                </S.FileWrapper>
+              ) : null
+            }
+          />
+          <CompanyContentTemplate
+            title="파일첨부"
+            content={
+              myCompanyInfo?.attachment_urls &&
+              myCompanyInfo.attachment_urls.length > 0
+                ? myCompanyInfo.attachment_urls.map((file, idx) => (
+                    <S.FileWrapper type="button" key={idx}>
+                      <Flex align="center" gap={4}>
+                        <Icon
+                          icon="FileEarmarkArrowDown"
+                          size={16}
+                          color={themes.Color.grayScale[60]}
+                        />
+                        <Text
+                          fontSize="body3"
+                          fontWeight="regular"
+                          color={themes.Color.grayScale[60]}
+                          whiteSpace="nowrap"
+                          style={{ textOverflow: "ellipsis", maxWidth: 500 }}
+                        >
+                          {file
+                            .split("/")
+                            .pop()
+                            ?.replace(/^[\w-]+-/, "")}
+                        </Text>
+                      </Flex>
+                    </S.FileWrapper>
+                  ))
+                : null
+            }
           />
         </Flex>
       </Flex>

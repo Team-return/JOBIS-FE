@@ -59,6 +59,7 @@ export default function Recruitments({ params }: { params: { id: string } }) {
     reset,
   } = useForm<IRecruitment & { start_time: string; end_time: string }>({
     values: {
+      integration_plan: !!recruitmentDetail?.integration_plan,
       winter_intern: recruitmentDetail?.winter_intern,
       benefits: recruitmentDetail?.benefits,
       end_date: recruitmentDetail?.end_date,
@@ -71,6 +72,7 @@ export default function Recruitments({ params }: { params: { id: string } }) {
       start_date: recruitmentDetail?.start_date,
       train_pay: regex.money(recruitmentDetail?.train_pay.toString() || ""),
       flexible_working: !!recruitmentDetail?.flexible_working,
+      hire_convertible: !!recruitmentDetail?.hire_convertible,
       areas:
         recruitmentDetail?.areas.map(area => {
           return {
@@ -316,8 +318,8 @@ export default function Recruitments({ params }: { params: { id: string } }) {
       } else {
         const [startTime, endTime] =
           recruitmentDetail.working_hours.split(" ~ ");
-        setValue("start_time", startTime.slice(0, 5));
-        setValue("end_time", endTime.slice(0, 5));
+        setValue("start_time", startTime?.slice(0, 5));
+        setValue("end_time", endTime?.slice(0, 5));
       }
     }
   }, [recruitmentDetail, setValue, params.id]);
@@ -325,7 +327,7 @@ export default function Recruitments({ params }: { params: { id: string } }) {
   return (
     <S.Container onSubmit={handleSubmit(onSubmit)}>
       <TitleTemplate
-        title="모집의뢰서 등록"
+        title="모집의뢰서 수정"
         subTitle={
           "등록된 정보는 본 시스템을 통해 접수된 건에 한하여\n정식적으로 검토되며, 등록된 정보는 서비스 이용에 활용됩니다."
         }

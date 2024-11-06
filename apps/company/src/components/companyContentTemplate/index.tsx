@@ -2,7 +2,7 @@ import * as S from "./style";
 
 interface PropType {
   title: string;
-  content?: string | number;
+  content?: React.ReactNode;
 }
 
 export const CompanyContentTemplate = ({ title, content }: PropType) => {

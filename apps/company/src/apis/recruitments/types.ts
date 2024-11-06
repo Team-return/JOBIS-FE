@@ -27,6 +27,8 @@ export interface IRecruitment {
   train_pay: string;
   pay?: string;
   benefits?: string;
+  preferential_treatment?: string;
+  additional_qualifications?: string;
   military_support: boolean;
   hiring_progress: IHiringProgress[];
   submit_document?: string;
@@ -35,6 +37,8 @@ export interface IRecruitment {
   etc?: string;
   winter_intern?: boolean;
   personal_contact: boolean;
+  integration_plan: boolean;
+  hire_convertible: boolean;
 }
 
 export interface IEditRecruitmentRequest
