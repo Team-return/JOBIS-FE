@@ -17,14 +17,7 @@ import {
 import { themes } from "@jobis/design-token";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { ICompanyRegisterRequest } from "@/apis/company/types";
-import {
-  RefObject,
-  TextareaHTMLAttributes,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { RefObject, useCallback, useEffect, useRef, useState } from "react";
 import { useModal } from "@/hooks/useModal";
 import { Address } from "react-daum-postcode";
 import DaumPostcode from "react-daum-postcode";
@@ -42,7 +35,6 @@ import {
 } from "@/hooks/apis/useCompanyApi";
 import { useGetCode } from "@/hooks/apis/useCodeApi";
 import { AxiosError } from "axios";
-import { Background } from "@/components/modal/style";
 
 export default function Registration() {
   const searchParams = useSearchParams();

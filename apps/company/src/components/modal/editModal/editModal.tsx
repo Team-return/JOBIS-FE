@@ -24,11 +24,14 @@ const EditModal: React.FC<PropsType> = () => {
   return (
     <S.Container>
       <Link
+        style={{ width: "100%", height: "100%" }}
         href={`/registration?name=${myCompanyInfo?.name}&business-number=${myCompanyInfo?.biz_no}&type=edit`}
       >
-        <Text fontSize="caption" color={themes.Color.grayScale[60]}>
-          수정
-        </Text>
+        <S.Box>
+          <Text fontSize="caption" color={themes.Color.grayScale[60]}>
+            수정
+          </Text>
+        </S.Box>
       </Link>
       <Text fontSize="caption" color={themes.Color.grayScale[60]}>
         로그아웃
