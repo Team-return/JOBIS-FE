@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import * as S from "./style";
-import { Text, Flex } from "@jobis/ui";
+import { Text, Flex, Icon } from "@jobis/ui";
 import SeeMoreIcon from "../../../public/seemore.svg";
 import { themes } from "@jobis/design-token";
 import { CompanyContentTemplate } from "@/components/companyContentTemplate";
@@ -113,6 +113,65 @@ export default function Company() {
           <CompanyContentTemplate
             title="대표 번호"
             content={myCompanyInfo?.representative_phone_no}
+          />
+          <CompanyContentTemplate
+            title="사업자 등록증"
+            content={
+              myCompanyInfo?.biz_registration_url ? (
+                <S.FileWrapper type="button">
+                  <Flex align="center" gap={4}>
+                    <Icon
+                      icon="FileEarmarkArrowDown"
+                      size={16}
+                      color={themes.Color.grayScale[60]}
+                    />
+                    <Text
+                      fontSize="body3"
+                      fontWeight="regular"
+                      color={themes.Color.grayScale[60]}
+                      whiteSpace="nowrap"
+                      style={{ textOverflow: "ellipsis", maxWidth: 500 }}
+                    >
+                      {myCompanyInfo.biz_registration_url
+                        .split("/")
+                        .pop()
+                        ?.replace(/^[\w-]+-/, "")}
+                    </Text>
+                  </Flex>
+                </S.FileWrapper>
+              ) : null
+            }
+          />
+          <CompanyContentTemplate
+            title="파일첨부"
+            content={
+              myCompanyInfo?.attachment_urls &&
+              myCompanyInfo.attachment_urls.length > 0
+                ? myCompanyInfo.attachment_urls.map((file, idx) => (
+                    <S.FileWrapper type="button" key={idx}>
+                      <Flex align="center" gap={4}>
+                        <Icon
+                          icon="FileEarmarkArrowDown"
+                          size={16}
+                          color={themes.Color.grayScale[60]}
+                        />
+                        <Text
+                          fontSize="body3"
+                          fontWeight="regular"
+                          color={themes.Color.grayScale[60]}
+                          whiteSpace="nowrap"
+                          style={{ textOverflow: "ellipsis", maxWidth: 500 }}
+                        >
+                          {file
+                            .split("/")
+                            .pop()
+                            ?.replace(/^[\w-]+-/, "")}
+                        </Text>
+                      </Flex>
+                    </S.FileWrapper>
+                  ))
+                : null
+            }
           />
         </Flex>
       </Flex>

@@ -40,3 +40,15 @@ export const IconWrapper = styled.div`
   position: relative;
   display: inline-block;
 `;
+
+export const FileWrapper = styled.button`
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+  border: none;
+  border-radius: 88px;
+
+  background-color: ${themes.Color.grayScale[30]};
+  outline: none;
+  gap: 12px;
+`;
