@@ -78,7 +78,7 @@ export default function Recruitments({ params }: { params: { id: string } }) {
           return {
             id: area.id,
             hiring: area.hiring,
-            additional_qualifications: area.additional_qualifications,
+            preferential_treatment: area.preferential_treatment,
             major_task: area.major_task,
             job_codes: area.job.map(res => res.id),
             tech_codes: area.tech.map(res => res.id),
@@ -250,7 +250,7 @@ export default function Recruitments({ params }: { params: { id: string } }) {
             id: area.id,
             hiring: area.hiring,
             major_task: area.major_task,
-            additional_qualifications: area.additional_qualifications ?? "",
+            preferential_treatment: area.preferential_treatment ?? "",
             job_codes: area.job.map(res => res.id),
             tech_codes: area.tech.map(res => res.id),
           } as IArea;
@@ -325,7 +325,15 @@ export default function Recruitments({ params }: { params: { id: string } }) {
   }, [recruitmentDetail, setValue, params.id]);
 
   return (
-    <S.Container onSubmit={handleSubmit(onSubmit)}>
+    <S.Container
+      onSubmit={handleSubmit(onSubmit)}
+      onKeyPress={event => {
+        const target = event.target as HTMLElement;
+        if (event.key === "Enter" && target.tagName.toLowerCase() === "input") {
+          event.preventDefault();
+        }
+      }}
+    >
       <TitleTemplate
         title={`모집의뢰서 수정 (${recruitmentDetail?.winter_intern ? "체험형" : "채용형"})`}
         subTitle={
@@ -454,7 +462,7 @@ export default function Recruitments({ params }: { params: { id: string } }) {
                       tech_codes,
                       hiring,
                       major_task,
-                      additional_qualifications,
+                      preferential_treatment,
                     } = area;
                     return (
                       <S.GatherFieldBox key={idx}>
@@ -479,8 +487,8 @@ export default function Recruitments({ params }: { params: { id: string } }) {
                           {major_task || "없음"}
                         </S.FieldText>
                         <S.FieldText style={{ top: 70 }}>
-                          기타 자격 요건 : {"\n"}
-                          {additional_qualifications || "없음"}
+                          우대사항 : {"\n"}
+                          {preferential_treatment || "없음"}
                         </S.FieldText>
                         <S.PeopleCount>{hiring}명</S.PeopleCount>
                         <Icon
@@ -499,7 +507,7 @@ export default function Recruitments({ params }: { params: { id: string } }) {
                               tech_codes,
                               hiring,
                               major_task,
-                              additional_qualifications,
+                              preferential_treatment,
                             });
                             setTechList(
                               tech_codes

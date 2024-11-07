@@ -325,7 +325,15 @@ export default function Registration() {
   }, []);
 
   return (
-    <S.Container onSubmit={handleSubmit(onSubmit)}>
+    <S.Container
+      onSubmit={handleSubmit(onSubmit)}
+      onKeyPress={event => {
+        const target = event.target as HTMLElement;
+        if (event.key === "Enter" && target.tagName.toLowerCase() === "input") {
+          event.preventDefault();
+        }
+      }}
+    >
       <TitleTemplate
         title="기업 정보 등록"
         subTitle={
@@ -384,7 +392,7 @@ export default function Registration() {
                   width={604}
                   placeholder="nnn-nnnn-nnnn"
                   maxLength={13}
-                  onChange={e =>
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     field.onChange(regex.phone_number(e.target.value))
                   }
                   errorMessage={errors.representative_phone_no?.message}
@@ -419,7 +427,7 @@ export default function Registration() {
                   width={604}
                   placeholder="yyyy-mm-dd"
                   maxLength={10}
-                  onChange={e =>
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     field.onChange(regex.date_number(e.target.value))
                   }
                   icon={<Icon icon="Date" size={20} />}
@@ -485,7 +493,9 @@ export default function Registration() {
                   placeholder="직접입력"
                   maxLength={30}
                   errorMessage={errors.take?.message}
-                  onChange={e => field.onChange(regex.money(e.target.value))}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                    field.onChange(regex.money(e.target.value))
+                  }
                   icon={
                     <Text
                       fontSize="body2"
@@ -512,7 +522,7 @@ export default function Registration() {
                   width={604}
                   placeholder="직접입력"
                   errorMessage={errors.worker_number?.message}
-                  onChange={e => {
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     const value = e.target.value.replaceAll(/[^0-9]/g, "");
                     let numericValue = Number.parseInt(value, 10);
                     if (numericValue > 32_767) {
@@ -604,7 +614,7 @@ export default function Registration() {
                     width={223}
                     placeholder="nnn-nnnn-nnnn"
                     maxLength={13}
-                    onChange={e =>
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                       field.onChange(regex.phone_number(e.target.value))
                     }
                     errorMessage={errors.manager_phone_no?.message}
