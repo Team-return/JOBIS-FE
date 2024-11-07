@@ -328,7 +328,7 @@ const GatherModal = ({ setForm, areaIndex, setAreaIndex }: IPropsType) => {
           <Textarea
             placeholder="직접입력"
             ref={textRef}
-            value={area.preferential_treatment}
+            value={area.preferential_treatment ?? ""}
             onInput={handleResizeHeight}
             onChange={e =>
               setArea({ ...area, preferential_treatment: e.target.value })

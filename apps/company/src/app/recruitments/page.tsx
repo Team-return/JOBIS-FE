@@ -146,7 +146,6 @@ export default function Recruitments() {
       train_pay,
       submit_document,
       benefits,
-      preferential_treatment,
       additional_qualifications,
       required_grade,
       etc,
@@ -197,13 +196,20 @@ export default function Recruitments() {
         : `${start_time} ~ ${end_time}`,
       etc: etc || undefined,
       personal_contact: false,
-      preferential_treatment: preferential_treatment || undefined,
       additional_qualifications: additional_qualifications || undefined,
     });
   };
 
   return (
-    <S.Container onSubmit={handleSubmit(onSubmit)}>
+    <S.Container
+      onSubmit={handleSubmit(onSubmit)}
+      onKeyPress={event => {
+        const target = event.target as HTMLElement;
+        if (event.key === "Enter" && target.tagName.toLowerCase() === "input") {
+          event.preventDefault();
+        }
+      }}
+    >
       {searchParams.get("winter") ? (
         <TitleTemplate
           title="모집의뢰서 등록(체험형)"
@@ -688,7 +694,7 @@ export default function Recruitments() {
             </Flex>
           </InputTemplate>,
           <InputTemplate title="기타사항" key="etc">
-            <Input
+            <Textarea
               width={604}
               placeholder="직접입력"
               {...register("etc")}
@@ -707,7 +713,7 @@ export default function Recruitments() {
               </Flex>
             </InputTemplate>
           ) : (
-            <InputTemplate title="채용 전환 가능 여부">
+            <InputTemplate title="전환 가능 여부">
               <Flex style={{ width: 604 }}>
                 <Checkbox
                   checked={watch("hire_convertible")}
