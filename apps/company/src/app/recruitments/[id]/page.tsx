@@ -793,12 +793,23 @@ export default function Recruitments({ params }: { params: { id: string } }) {
             </Flex>
           </InputTemplate>,
           <InputTemplate key="etc" title="기타사항">
-            <Input
+            {/* <Input
+              width={604}
+              placeholder="직접입력"
+              {...register("etc")}
+              errorMessage={errors.etc?.message}
+            /> */}
+            <Textarea
               width={604}
               placeholder="직접입력"
               {...register("etc")}
               errorMessage={errors.etc?.message}
             />
+            {/* <Textarea
+                width={604}
+                placeholder="기타 자격 요건"
+                {...register("additional_qualifications")}
+              /> */}
           </InputTemplate>,
           <InputTemplate key="availability" title="전환 가능 여부">
             <Flex style={{ width: 604 }}>

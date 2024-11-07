@@ -694,7 +694,7 @@ export default function Recruitments() {
             </Flex>
           </InputTemplate>,
           <InputTemplate title="기타사항" key="etc">
-            <Input
+            <Textarea
               width={604}
               placeholder="직접입력"
               {...register("etc")}
