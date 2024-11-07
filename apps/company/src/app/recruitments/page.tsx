@@ -707,7 +707,7 @@ export default function Recruitments() {
               </Flex>
             </InputTemplate>
           ) : (
-            <InputTemplate title="채용 전환 가능 여부">
+            <InputTemplate title="전환 가능 여부">
               <Flex style={{ width: 604 }}>
                 <Checkbox
                   checked={watch("hire_convertible")}

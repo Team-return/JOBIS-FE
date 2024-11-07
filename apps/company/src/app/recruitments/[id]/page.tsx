@@ -67,7 +67,7 @@ export default function Recruitments({ params }: { params: { id: string } }) {
       hiring_progress: recruitmentDetail?.hiring_progress || [],
       military_support: !!recruitmentDetail?.military,
       pay: regex.money(recruitmentDetail?.pay || ""),
-      required_grade: recruitmentDetail?.required_grade,
+      additional_qualifications: recruitmentDetail?.additional_qualifications,
       required_licenses: recruitmentDetail?.required_licenses || [],
       start_date: recruitmentDetail?.start_date,
       train_pay: regex.money(recruitmentDetail?.train_pay.toString() || ""),
@@ -78,7 +78,7 @@ export default function Recruitments({ params }: { params: { id: string } }) {
           return {
             id: area.id,
             hiring: area.hiring,
-            preferential_treatment: area.preferential_treatment,
+            additional_qualifications: area.additional_qualifications,
             major_task: area.major_task,
             job_codes: area.job.map(res => res.id),
             tech_codes: area.tech.map(res => res.id),
@@ -174,7 +174,7 @@ export default function Recruitments({ params }: { params: { id: string } }) {
       train_pay,
       submit_document,
       benefits,
-      required_grade,
+      additional_qualifications,
       etc,
       working_hours,
       start_time,
@@ -233,7 +233,7 @@ export default function Recruitments({ params }: { params: { id: string } }) {
       pay: pay?.replaceAll(",", "") || undefined,
       train_pay: train_pay.replaceAll(",", ""),
       benefits: benefits || undefined,
-      required_grade: required_grade || undefined,
+      additional_qualifications: additional_qualifications || undefined,
       working_hours: watch("flexible_working")
         ? working_hours
         : `${start_time} ~ ${end_time}`,
@@ -250,7 +250,7 @@ export default function Recruitments({ params }: { params: { id: string } }) {
             id: area.id,
             hiring: area.hiring,
             major_task: area.major_task,
-            preferential_treatment: area.preferential_treatment,
+            additional_qualifications: area.additional_qualifications ?? "",
             job_codes: area.job.map(res => res.id),
             tech_codes: area.tech.map(res => res.id),
           } as IArea;
@@ -327,7 +327,7 @@ export default function Recruitments({ params }: { params: { id: string } }) {
   return (
     <S.Container onSubmit={handleSubmit(onSubmit)}>
       <TitleTemplate
-        title="모집의뢰서 수정"
+        title={`모집의뢰서 수정 (${recruitmentDetail?.winter_intern ? "체험형" : "채용형"})`}
         subTitle={
           "등록된 정보는 본 시스템을 통해 접수된 건에 한하여\n정식적으로 검토되며, 등록된 정보는 서비스 이용에 활용됩니다."
         }
@@ -337,86 +337,94 @@ export default function Recruitments({ params }: { params: { id: string } }) {
         requiredMessage
         components={[
           <InputTemplate key="recruitment_period" title="모집기간" required>
-            <Flex align="center" gap={22}>
-              <Controller
-                control={control}
-                name="start_date"
-                defaultValue=""
-                rules={{
-                  required: {
-                    value: !alwaysRecruit,
-                    message: "필수 입력 항목입니다.",
-                  },
-                  pattern: {
-                    value: /^\d{4}-\d{2}-\d{2}$/,
-                    message: "유효한 날짜 형식이 아닙니다. (ex: yyyy-mm-dd)",
-                  },
-                }}
-                render={({ field }) => (
-                  <Input
-                    {...field}
-                    width={272}
-                    placeholder="yyyy-mm-dd"
-                    disabled={alwaysRecruit}
-                    maxLength={10}
-                    icon={
-                      <Icon
-                        icon="Date"
-                        color={themes.Color.grayScale[80]}
-                        size={20}
-                        cursor="pointer"
-                      />
-                    }
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      field.onChange(regex.date_number(e.target.value))
-                    }
-                    errorMessage={
-                      alwaysRecruit ? undefined : errors.start_date?.message
-                    }
-                  />
-                )}
-              />
-              <Text fontSize="h5" color={themes.Color.grayScale[60]}>
-                ~
-              </Text>
-              <Controller
-                control={control}
-                name="end_date"
-                defaultValue=""
-                rules={{
-                  required: {
-                    value: !alwaysRecruit,
-                    message: "필수 입력 항목입니다.",
-                  },
-                  pattern: {
-                    value: /^\d{4}-\d{2}-\d{2}$/,
-                    message: "유효한 날짜 형식이 아닙니다. (ex: yyyy-mm-dd)",
-                  },
-                }}
-                render={({ field }) => (
-                  <Input
-                    {...field}
-                    width={272}
-                    placeholder="yyyy-mm-dd"
-                    disabled={alwaysRecruit}
-                    maxLength={10}
-                    icon={
-                      <Icon
-                        icon="Date"
-                        color={themes.Color.grayScale[80]}
-                        size={20}
-                        cursor="pointer"
-                      />
-                    }
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      field.onChange(regex.date_number(e.target.value))
-                    }
-                    errorMessage={
-                      alwaysRecruit ? undefined : errors.end_date?.message
-                    }
-                  />
-                )}
-              />
+            <Flex direction="column" gap={8}>
+              <Flex align="center" gap={22}>
+                <Controller
+                  control={control}
+                  name="start_date"
+                  defaultValue=""
+                  rules={{
+                    required: {
+                      value: !alwaysRecruit,
+                      message: "필수 입력 항목입니다.",
+                    },
+                    pattern: {
+                      value: /^\d{4}-\d{2}-\d{2}$/,
+                      message: "유효한 날짜 형식이 아닙니다. (ex: yyyy-mm-dd)",
+                    },
+                  }}
+                  render={({ field }) => (
+                    <Input
+                      {...field}
+                      width={272}
+                      placeholder="yyyy-mm-dd"
+                      disabled={alwaysRecruit}
+                      maxLength={10}
+                      icon={
+                        <Icon
+                          icon="Date"
+                          color={themes.Color.grayScale[80]}
+                          size={20}
+                          cursor="pointer"
+                        />
+                      }
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        field.onChange(regex.date_number(e.target.value))
+                      }
+                      errorMessage={
+                        alwaysRecruit ? undefined : errors.start_date?.message
+                      }
+                    />
+                  )}
+                />
+                <Text fontSize="h5" color={themes.Color.grayScale[60]}>
+                  ~
+                </Text>
+                <Controller
+                  control={control}
+                  name="end_date"
+                  defaultValue=""
+                  rules={{
+                    required: {
+                      value: !alwaysRecruit,
+                      message: "필수 입력 항목입니다.",
+                    },
+                    pattern: {
+                      value: /^\d{4}-\d{2}-\d{2}$/,
+                      message: "유효한 날짜 형식이 아닙니다. (ex: yyyy-mm-dd)",
+                    },
+                  }}
+                  render={({ field }) => (
+                    <Input
+                      {...field}
+                      width={272}
+                      placeholder="yyyy-mm-dd"
+                      disabled={alwaysRecruit}
+                      maxLength={10}
+                      icon={
+                        <Icon
+                          icon="Date"
+                          color={themes.Color.grayScale[80]}
+                          size={20}
+                          cursor="pointer"
+                        />
+                      }
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        field.onChange(regex.date_number(e.target.value))
+                      }
+                      errorMessage={
+                        alwaysRecruit ? undefined : errors.end_date?.message
+                      }
+                    />
+                  )}
+                />
+              </Flex>
+              <Checkbox
+                checked={alwaysRecruit}
+                onClick={() => setAlwaysRecruit(prev => !prev)}
+              >
+                상시채용
+              </Checkbox>
             </Flex>
           </InputTemplate>,
         ]}
@@ -446,7 +454,7 @@ export default function Recruitments({ params }: { params: { id: string } }) {
                       tech_codes,
                       hiring,
                       major_task,
-                      preferential_treatment,
+                      additional_qualifications,
                     } = area;
                     return (
                       <S.GatherFieldBox key={idx}>
@@ -471,8 +479,8 @@ export default function Recruitments({ params }: { params: { id: string } }) {
                           {major_task || "없음"}
                         </S.FieldText>
                         <S.FieldText style={{ top: 70 }}>
-                          우대사항 : {"\n"}
-                          {preferential_treatment || "없음"}
+                          기타 자격 요건 : {"\n"}
+                          {additional_qualifications || "없음"}
                         </S.FieldText>
                         <S.PeopleCount>{hiring}명</S.PeopleCount>
                         <Icon
@@ -491,7 +499,7 @@ export default function Recruitments({ params }: { params: { id: string } }) {
                               tech_codes,
                               hiring,
                               major_task,
-                              preferential_treatment,
+                              additional_qualifications,
                             });
                             setTechList(
                               tech_codes
@@ -560,12 +568,12 @@ export default function Recruitments({ params }: { params: { id: string } }) {
               </S.LicenseList>
             </Flex>
           </InputTemplate>,
-          <InputTemplate key="required_grade" title="우대사항">
+          <InputTemplate key="additional_qualifications" title="기타 자격 요건">
             <Flex direction="column" gap={8}>
               <Textarea
                 width={604}
-                placeholder="우대사항 입력"
-                {...register("required_grade")}
+                placeholder="기타 자격 요건"
+                {...register("additional_qualifications")}
               />
             </Flex>
           </InputTemplate>,
@@ -679,33 +687,37 @@ export default function Recruitments({ params }: { params: { id: string } }) {
               )}
             />
           </InputTemplate>,
-          <InputTemplate key="pay" title="정규직 전환 시">
-            <Controller
-              control={control}
-              name="pay"
-              render={({ field }) => (
-                <Input
-                  {...field}
-                  width={604}
-                  placeholder="직접입력"
-                  maxLength={30}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    field.onChange(regex.money(e.target.value))
-                  }
-                  errorMessage={errors.pay?.message}
-                  icon={
-                    <Text
-                      fontSize="body2"
-                      fontWeight="regular"
-                      color={themes.Color.grayScale[60]}
-                    >
-                      만원/년
-                    </Text>
-                  }
+          <>
+            {!recruitmentDetail?.winter_intern && (
+              <InputTemplate key="pay" title="정규직 전환 시">
+                <Controller
+                  control={control}
+                  name="pay"
+                  render={({ field }) => (
+                    <Input
+                      {...field}
+                      width={604}
+                      placeholder="직접입력"
+                      maxLength={30}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        field.onChange(regex.money(e.target.value))
+                      }
+                      errorMessage={errors.pay?.message}
+                      icon={
+                        <Text
+                          fontSize="body2"
+                          fontWeight="regular"
+                          color={themes.Color.grayScale[60]}
+                        >
+                          만원/년
+                        </Text>
+                      }
+                    />
+                  )}
                 />
-              )}
-            />
-          </InputTemplate>,
+              </InputTemplate>
+            )}
+          </>,
           <InputTemplate key="benefits" title="복리후생">
             <Flex direction="column" gap={8}>
               <Input
@@ -714,12 +726,14 @@ export default function Recruitments({ params }: { params: { id: string } }) {
                 {...register("benefits")}
                 errorMessage={errors.benefits?.message}
               />
-              <Checkbox
-                checked={watch("military_support")}
-                {...register("military_support")}
-              >
-                산업 기능 요원 근무 가능 여부
-              </Checkbox>
+              {!recruitmentDetail?.winter_intern && (
+                <Checkbox
+                  checked={watch("military_support")}
+                  {...register("military_support")}
+                >
+                  산업 기능 요원 근무 가능 여부
+                </Checkbox>
+              )}
             </Flex>
           </InputTemplate>,
         ]}

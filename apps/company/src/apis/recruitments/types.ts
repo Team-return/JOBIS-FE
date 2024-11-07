@@ -4,7 +4,7 @@ export interface IArea {
   tech_codes: number[];
   hiring: number;
   major_task: string;
-  preferential_treatment: string;
+  additional_qualifications: string | null;
 }
 
 export type IHiringProgress =
@@ -55,6 +55,7 @@ export interface IMyRecruitmentResponse
   recruit_year: number;
   company_biz_no?: string;
   areas: {
+    additional_qualifications: string;
     id?: number;
     job: { id: number; name: string }[];
     tech: { id: number; name: string }[];
