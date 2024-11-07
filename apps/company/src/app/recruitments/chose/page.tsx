@@ -25,7 +25,6 @@ export default function Chose() {
     condition: boolean,
     path: string
   ) => {
-    console.log(condition);
     if (condition) {
       e.preventDefault();
       CheckToast(path);
