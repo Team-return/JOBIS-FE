@@ -12,7 +12,6 @@ export default function Chose() {
   const { data: checkRecruitment } = useCheckRecruitment();
 
   const CheckToast = (winterIntern: string) => {
-    console.log(winterIntern?.slice(-4));
     return toast({
       payload: {
         type: "error",
@@ -26,6 +25,7 @@ export default function Chose() {
     condition: boolean,
     path: string
   ) => {
+    console.log(condition);
     if (condition) {
       e.preventDefault();
       CheckToast(path);
@@ -57,7 +57,7 @@ export default function Chose() {
             onClick={e =>
               handleLinkClick(
                 e,
-                !checkRecruitment?.winter_intern,
+                !!checkRecruitment?.winter_intern,
                 "/recruitments?winter=true"
               )
             }
@@ -86,7 +86,7 @@ export default function Chose() {
             onClick={e =>
               handleLinkClick(
                 e,
-                !checkRecruitment?.experiential,
+                !!checkRecruitment?.experiential,
                 "/recruitments"
               )
             }
