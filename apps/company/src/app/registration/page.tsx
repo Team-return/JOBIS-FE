@@ -77,7 +77,9 @@ export default function Registration() {
       manager_name: myCompanyInfo?.manager_name || "",
       company_profile_url: myCompanyInfo?.company_logo_url,
       headquarter: myCompanyInfo?.headquarter || false,
-      manager_phone_no: myCompanyInfo?.manager_phone_no || "",
+      manager_phone_no: regex.phone_number(
+        myCompanyInfo?.manager_phone_no || ""
+      ),
     },
   });
   const { toast } = useToast();
@@ -191,6 +193,7 @@ export default function Registration() {
   const onSubmit: SubmitHandler<ICompanyRegisterRequest> = data => {
     const {
       representative_phone_no,
+      manager_phone_no,
       sub_address_detail,
       sub_zip_code,
       take,
@@ -201,6 +204,7 @@ export default function Registration() {
 
     const requests = {
       representative_phone_no: representative_phone_no.replaceAll("-", ""),
+      manager_phone_no: manager_phone_no.replaceAll("-", ""),
       sub_zip_code: sub_zip_code || undefined,
       sub_address_detail: sub_address_detail || undefined,
       take: +take.toString().replaceAll(",", ""),
@@ -582,6 +586,32 @@ export default function Registration() {
                 errorMessage={errors.manager_name?.message}
               />
             </InputTemplate>
+            {/* <InputTemplate key="manager_phone_no" title="전화번호" required>
+              <Controller
+                control={control}
+                name="manager_phone_no"
+                rules={{
+                  required: "필수 입력 항목입니다.",
+                  pattern: {
+                    value: /^\d{2,3}-\d{3,4}-\d{4}$/,
+                    message: "유효한 전화번호 형식이 아닙니다.",
+                  },
+                }}
+                render={({ field }) => (
+                  <Input
+                    {...field}
+                    type="tel"
+                    width={223}
+                    placeholder="nnn-nnnn-nnnn"
+                    maxLength={13}
+                    onChange={e =>
+                      field.onChange(regex.phone_number(e.target.value))
+                    }
+                    errorMessage={errors.manager_phone_no?.message}
+                  />
+                )}
+              />
+            </InputTemplate> */}
             <InputTemplate key="manager_phone_no" title="전화번호" required>
               <Controller
                 control={control}
@@ -608,6 +638,7 @@ export default function Registration() {
                 )}
               />
             </InputTemplate>
+            ,
           </Flex>,
           <InputTemplate key="email" title="이메일" required>
             <Controller
