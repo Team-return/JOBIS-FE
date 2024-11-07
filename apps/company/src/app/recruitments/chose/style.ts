@@ -17,6 +17,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
   width: 660px;
   height: 826px;
+  margin-top: 88px;
   padding: 60px;
 
   background-color: ${themes.Color.grayScale[10]};
