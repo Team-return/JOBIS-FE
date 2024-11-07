@@ -13,7 +13,6 @@ import XIcon from "../../../public/No.svg";
 export default function My() {
   const router = useRouter();
   const { data: myRecruitmentList, isLoading } = useMyRecruitmentList();
-
   const hasRecruitments = !!myRecruitmentList?.my_recruitments?.length;
 
   return (
@@ -98,7 +97,9 @@ export default function My() {
           >
             모집 의뢰서가 없습니다.
           </Text>
-          <S.Button>추가하기</S.Button>
+          <Link href={"/recruitments/chose"}>
+            <S.Button>추가하기</S.Button>
+          </Link>
         </div>
       )}
     </S.Container>
