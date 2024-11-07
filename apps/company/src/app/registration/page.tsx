@@ -586,32 +586,6 @@ export default function Registration() {
                 errorMessage={errors.manager_name?.message}
               />
             </InputTemplate>
-            {/* <InputTemplate key="manager_phone_no" title="전화번호" required>
-              <Controller
-                control={control}
-                name="manager_phone_no"
-                rules={{
-                  required: "필수 입력 항목입니다.",
-                  pattern: {
-                    value: /^\d{2,3}-\d{3,4}-\d{4}$/,
-                    message: "유효한 전화번호 형식이 아닙니다.",
-                  },
-                }}
-                render={({ field }) => (
-                  <Input
-                    {...field}
-                    type="tel"
-                    width={223}
-                    placeholder="nnn-nnnn-nnnn"
-                    maxLength={13}
-                    onChange={e =>
-                      field.onChange(regex.phone_number(e.target.value))
-                    }
-                    errorMessage={errors.manager_phone_no?.message}
-                  />
-                )}
-              />
-            </InputTemplate> */}
             <InputTemplate key="manager_phone_no" title="전화번호" required>
               <Controller
                 control={control}
