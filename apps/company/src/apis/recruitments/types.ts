@@ -74,3 +74,8 @@ export interface IMyRecruitmentListResponse {
     created_at: string;
   }[];
 }
+
+export interface IRecruitmentCheck {
+  winter_intern: boolean;
+  experiential: boolean;
+}
