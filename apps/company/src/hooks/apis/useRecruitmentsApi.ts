@@ -35,6 +35,8 @@ export const useCreateRecruitmentRequest = () => {
       router.push("/my");
     },
     onError: (err: AxiosError<AxiosError>) => {
+      console.log(err);
+
       if (err.response?.status === 400) {
         toast({
           payload: {
@@ -42,7 +44,7 @@ export const useCreateRecruitmentRequest = () => {
             message: "입력되지 않은 필드가 있습니다.",
           },
         });
-      } else if (err.response?.data.message === "Recruitment Already Exist") {
+      } else if (err.response?.status === 409) {
         toast({
           payload: {
             type: "error",
