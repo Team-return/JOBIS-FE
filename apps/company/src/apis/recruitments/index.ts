@@ -5,6 +5,7 @@ import {
   IMyRecruitmentListResponse,
   IMyRecruitmentResponse,
   IRecruitment,
+  IRecruitmentCheck,
 } from "./types";
 
 const router = "/recruitments";
@@ -58,5 +59,10 @@ export const recruitmentDetail = async (recruitmentId: string) => {
   const { data } = await instance.get<IMyRecruitmentResponse>(
     `${router}/${recruitmentId}`
   );
+  return data;
+};
+
+export const recruitmentCheck = async () => {
+  const { data } = await instance.get<IRecruitmentCheck>(`${router}/exists`);
   return data;
 };

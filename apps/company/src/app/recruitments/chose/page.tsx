@@ -1,10 +1,38 @@
 "use client";
 import * as S from "./style";
 import Link from "next/link";
-import { Text, Flex } from "@jobis/ui";
+import { Text, Flex, useToast } from "@jobis/ui";
 import { themes } from "@jobis/design-token";
+import { useCheckRecruitment } from "@/hooks/apis/useRecruitmentsApi";
+import { useRouter } from "next/navigation";
 
 export default function Chose() {
+  const { toast } = useToast();
+  const router = useRouter();
+  const { data: checkRecruitment } = useCheckRecruitment();
+
+  const CheckToast = (winterIntern: string) => {
+    return toast({
+      payload: {
+        type: "error",
+        message: `${winterIntern.slice(-4) === "true" ? "동계 체험형" : "채용형"} 모집의뢰서가 이미 존재합니다`,
+      },
+    });
+  };
+
+  const handleLinkClick = (
+    e: React.MouseEvent,
+    condition: boolean,
+    path: string
+  ) => {
+    if (condition) {
+      e.preventDefault();
+      CheckToast(path);
+    } else {
+      router.push(path);
+    }
+  };
+
   return (
     <S.Container>
       <S.Wrapper>
@@ -23,7 +51,16 @@ export default function Chose() {
           }
         </Text>
         <Flex direction="column" gap={16}>
-          <Link href={"/recruitments?winter=true"}>
+          <Link
+            href={"/recruitments?winter=true"}
+            onClick={e =>
+              handleLinkClick(
+                e,
+                !!checkRecruitment?.winter_intern,
+                "/recruitments?winter=true"
+              )
+            }
+          >
             <S.WinterOption>
               <Text
                 fontSize="h6"
@@ -43,7 +80,16 @@ export default function Chose() {
               </Text>
             </S.WinterOption>
           </Link>
-          <Link href={"/recruitments"}>
+          <Link
+            href={"/recruitments"}
+            onClick={e =>
+              handleLinkClick(
+                e,
+                !!checkRecruitment?.experiential,
+                "/recruitments"
+              )
+            }
+          >
             <S.RecruitOption>
               <Text
                 fontSize="h6"

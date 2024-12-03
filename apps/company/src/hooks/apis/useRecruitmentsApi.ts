@@ -4,6 +4,7 @@ import {
   deleteRecruitArea,
   myRecruitment,
   myRecruitmentList,
+  recruitmentCheck,
   recruitmentDetail,
   updateRecruitArea,
   updateRecruitment,
@@ -65,6 +66,11 @@ export const useMyRecruitment = () => {
   return useQuery(["myRecruit"], () => myRecruitment(), {
     retry: 1,
   });
+};
+
+/**모집의뢰서 존재 여부 체크 */
+export const useCheckRecruitment = () => {
+  return useQuery(["recruitment"], () => recruitmentCheck());
 };
 
 /** 모집의뢰서 수정 */
