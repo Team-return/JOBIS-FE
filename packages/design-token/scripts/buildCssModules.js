@@ -3,9 +3,9 @@ import fs from "node:fs";
 const generateThemeCss = () => {
   const cssString = `:root {
     --primary-10: #f3f3fb;
-    --primary-20: #135c9d;
-    --primary-30: #0f4c82;
-    --primary-40: #002c53;
+    --primary-20: #2f53ff;
+    --primary-30: #263ebf;
+    --primary-40: #132bac;
     --grayscale-10: #ffffff;
     --grayscale-20: #fafafa;
     --grayscale-30: #f7f7f7;
@@ -15,21 +15,17 @@ const generateThemeCss = () => {
     --grayscale-70: #444444;
     --grayscale-80: #333333;
     --grayscale-90: #000000;
-    --subcolor-red-10: #fce9e7;
-    --subcolor-red-20: #e74c3c;
-    --subcolor-green-10: #e5f8ee;
-    --subcolor-green-20: #2ecc71;
-    --subcolor-blue-10: #e0ebf6;
-    --subcolor-blue-20: #237bc9;
-    --subcolor-yellow-10: #fdf7e2;
-    --subcolor-yellow-20: #f1c40f;
+    --subcolor-blue-10: #f2f6ff;
+    --subcolor-blue-20: #e0ebf6;
+    --subcolor-blue-30: #237bc9;
+    --subcolor-blue-40: #002c53;
 }
 
 :root .theme-dark {
-    --primary-10: #002559;
-    --primary-20: #135c9d;
-    --primary-30: #2770b1;
-    --primary-40: #4f98d9;
+    --primary-10: #000dbe;
+    --primary-20: #2f4def;
+    --primary-30: #586ed4;
+    --primary-40: #4f8d9d;
     --grayscale-10: #000000;
     --grayscale-20: #060606;
     --grayscale-30: #191919;
@@ -39,14 +35,10 @@ const generateThemeCss = () => {
     --grayscale-70: #d9d9d9;
     --grayscale-80: #eeeeee;
     --grayscale-90: #ffffff;
-    --subcolor-red-10: #4c1914;
-    --subcolor-red-20: #e74c3c;
-    --subcolor-green-10: #0f4325;
-    --subcolor-green-20: #2ecc71;
-    --subcolor-blue-10: #0c2942;
-    --subcolor-blue-20: #237bc9;
-    --subcolor-yellow-10: #504105;
-    --subcolor-yellow-20: #f1c40f;
+    --subcolor-blue-10: #151a24;
+    --subcolor-blue-20: #0c2942;
+    --subcolor-blue-30: #237bc9;
+    --subcolor-blue-40: #002c53;
 }
 .h1 {
     font-size: 40px;
