@@ -1,6 +1,9 @@
 import { instance } from "@/apis/axios";
 import { MutationOptions, useMutation, useQuery } from "@tanstack/react-query";
-import type { RecruitmentFormResponse } from "@/apis";
+import type {
+  RecruitmentFormResponse,
+  TeacherRecruitmentListResponse,
+} from "@/apis";
 import type { RecruitmentStatusType, WinterInternType } from "@/@types/types";
 import toast from "react-hot-toast";
 import { winterInternStringToBool } from "@/@types/enums";
@@ -55,6 +58,19 @@ export const useChangeRecruitmentsStatus = (
       } else {
         toast.error("네트워크 연결을 확인해주세요.");
       }
+    },
+  });
+};
+
+/** 선생님 등록 모집 의뢰서 리스트 조회 */
+export const useTeacherRecruitmentList = () => {
+  return useQuery({
+    queryKey: ["teacherRecruitmentList"],
+    queryFn: async () => {
+      const { data } = await instance.get<TeacherRecruitmentListResponse>(
+        `${router}/teacher/manual`
+      );
+      return data;
     },
   });
 };

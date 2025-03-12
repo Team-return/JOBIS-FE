@@ -16,3 +16,9 @@ export type CompanyType = {
   total_acceptance_count: number;
   review_count: number;
 };
+
+export type RegisterCompanyRequest = {
+  companyName: string;
+  businessNumber: string;
+  companyProfileUrl: string;
+};

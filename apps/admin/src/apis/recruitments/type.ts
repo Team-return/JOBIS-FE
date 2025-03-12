@@ -17,3 +17,13 @@ export type RecruitmentFormType = {
   status: RecruitmentStatusType;
   total_hiring_count: number;
 };
+
+export type TeacherRecruitmentListResponse = {
+  recruitments: TeacherRecruitmentType[];
+};
+
+export type TeacherRecruitmentType = {
+  id: number;
+  company_name: string;
+  company_logo_url: string;
+};
