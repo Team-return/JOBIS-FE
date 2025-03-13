@@ -9,7 +9,7 @@ export const EmploymentStatus = () => {
   const [isAdd, setIsAdd] = useState(true);
 
   return (
-    <Stack direction="column">
+    <Stack direction="column" gap={isAdd ? 28 : 36}>
       <Stack justify="flex-end" gap={8}>
         <BigButton
           width={74}
@@ -22,15 +22,7 @@ export const EmploymentStatus = () => {
           기업 추가 +
         </BigButton>
       </Stack>
-      <Gap $height={isAdd ? 28 : 36} />
       {isAdd ? <AddStudent /> : <EmploymentCurrentSituation />}
     </Stack>
   );
 };
-
-const Gap = styled.div<{
-  $height: number;
-}>`
-  width: 100%;
-  height: ${({ $height }) => $height}px;
-`;

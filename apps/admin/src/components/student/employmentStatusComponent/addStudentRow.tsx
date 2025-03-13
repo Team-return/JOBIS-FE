@@ -19,15 +19,16 @@ export const AddStudentRow = ({ data }: PropsType) => {
 
   return (
     <Container position="relative" align="center" justify="flex-start">
-      <Profile src={data.company_logo_url} />
-      <Gap />
-      <StyleText
-        $width={AddStudentCellData[0].width}
-        fontSize="body2"
-        fontWeight="regular"
-      >
-        {data.company_name}
-      </StyleText>
+      <Stack gap={12}>
+        <Profile src={data.company_logo_url} />
+        <StyleText
+          $width={AddStudentCellData[0].width}
+          fontSize="body2"
+          fontWeight="regular"
+        >
+          {data.company_name}
+        </StyleText>
+      </Stack>
       <IconButton
         icon="Plus"
         color={themes.Color.grayScale[60]}
@@ -71,9 +72,4 @@ const Profile = styled.img`
   width: 36px;
   height: 36px;
   object-fit: contain;
-`;
-
-const Gap = styled.div`
-  width: 12px;
-  height: 100%;
 `;

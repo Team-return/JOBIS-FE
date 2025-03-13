@@ -87,82 +87,78 @@ export const CompanyRegister = () => {
   return (
     <Container>
       <Stack width="54%" direction="column" align="center">
-        <Text fontSize="h2" fontWeight="bold">
-          기업정보 등록
-        </Text>
-        <Gap $height={12} />
-        <SubTitle
-          fontSize="body2"
-          fontWeight="regular"
-          align="center"
-          color={themes.Color.grayScale[60]}
-        >
-          등록된 정보는 본 시스템을 통해 접수된 건에 한하여
-        </SubTitle>
-        <SubTitle
-          fontSize="body2"
-          fontWeight="regular"
-          color={themes.Color.grayScale[60]}
-        >
-          정식적으로 검토되며, 등록된 정보는 서비스 이용에 활용됩니다.
-        </SubTitle>
-        <Gap $height={80} />
-        <Stack justify="space-between">
-          <Text fontSize="h5" fontWeight="bold">
-            기업정보
+        <Stack direction="column" gap={12} align="center">
+          <Text fontSize="h2" fontWeight="bold">
+            기업정보 등록
           </Text>
-          <StyleText
-            fontSize="body3"
+          <SubTitle
+            fontSize="body2"
             fontWeight="regular"
-            color={themes.Color.subColor.blue[30]}
+            align="center"
+            color={themes.Color.grayScale[60]}
           >
-            <RequireIcon $left={-18} $top={5} />
-            표시는 필수 입력 항목입니다.
-          </StyleText>
+            등록된 정보는 본 시스템을 통해 접수된 건에 한하여
+          </SubTitle>
         </Stack>
-        <Gap $height={4} />
-        <Divider />
-        <Gap $height={20} />
-        <Stack direction="column">
-          <InputScope>
-            <LabelText fontSize="body2" fontWeight="regular">
-              기업명
-              <RequireIcon $left={3} $top={0} />
-            </LabelText>
-            <StyleInput
-              placeholder="직접입력"
-              name="companyName"
-              value={companyName}
-              onChange={handleChange}
-            />
-          </InputScope>
-          <Gap $height={40} />
-          <InputScope>
-            <LabelText fontSize="body2" fontWeight="regular">
-              사업자 번호
-              <RequireIcon $left={3} $top={0} />
-            </LabelText>
-            <StyleInput
-              placeholder="직접입력"
-              name="businessNumber"
-              value={businessNumber}
-              onChange={handleChange}
-            />
-          </InputScope>
+        <Stack direction="column" gap={80} align="center">
+          <SubTitle
+            fontSize="body2"
+            fontWeight="regular"
+            color={themes.Color.grayScale[60]}
+          >
+            정식적으로 검토되며, 등록된 정보는 서비스 이용에 활용됩니다.
+          </SubTitle>
+          <Stack justify="space-between">
+            <Text fontSize="h5" fontWeight="bold">
+              기업정보
+            </Text>
+            <StyleText
+              fontSize="body3"
+              fontWeight="regular"
+              color={themes.Color.subColor.blue[30]}
+            >
+              <RequireIcon $left={-18} $top={5} />
+              표시는 필수 입력 항목입니다.
+            </StyleText>
+          </Stack>
         </Stack>
-        <Gap $height={120} />
-        <Stack justify="space-between">
+        <Separator />
+        <Stack direction="column" gap={120}>
+          <Stack direction="column" gap={40}>
+            <InputScope>
+              <LabelText fontSize="body2" fontWeight="regular">
+                기업명
+                <RequireIcon $left={3} $top={0} />
+              </LabelText>
+              <StyleInput
+                placeholder="직접입력"
+                name="companyName"
+                value={companyName}
+                onChange={handleChange}
+              />
+            </InputScope>
+            <InputScope>
+              <LabelText fontSize="body2" fontWeight="regular">
+                사업자 번호
+                <RequireIcon $left={3} $top={0} />
+              </LabelText>
+              <StyleInput
+                placeholder="직접입력"
+                name="businessNumber"
+                value={businessNumber}
+                onChange={handleChange}
+              />
+            </InputScope>
+          </Stack>
           <Text fontSize="h5" fontWeight="bold">
             회사소개
           </Text>
         </Stack>
-        <Gap $height={4} />
-        <Divider />
-        <Gap $height={20} />
-        <Stack direction="column">
+        <Separator />
+        <Stack direction="column" gap={120}>
           <InputScope>
             <LabelText fontSize="body2" fontWeight="regular">
-              기업명
+              회사 로고
               <RequireIcon $left={3} $top={0} />
             </LabelText>
             <FileInput onClick={isPending ? () => {} : inputFile}>
@@ -180,51 +176,50 @@ export const CompanyRegister = () => {
               <Icon icon="Plus" color={themes.Color.primary[20]} />
             </FileInput>
           </InputScope>
-        </Stack>
-        <Gap $height={120} />
-        <Stack gap={8} justify="space-between" align="center">
-          <Button
-            onClick={() => navigate(-1)}
-            variant="outline"
-            style={{
-              height: "48px",
-              backgroundColor: themes.Color.grayScale[10],
-            }}
-          >
-            <Text
-              fontSize="body2"
-              fontWeight="regular"
-              color={themes.Color.subColor.blue[30]}
+          <Stack gap={8} justify="space-between" align="center">
+            <Button
+              onClick={() => navigate(-1)}
+              variant="outline"
+              style={{
+                height: "48px",
+                backgroundColor: themes.Color.grayScale[10],
+              }}
             >
-              취소
-            </Text>
-          </Button>
-          <Stack gap={12} justify="center">
-            <Circle $color={themes.Color.subColor.blue[30]} />
-            <Circle $color={themes.Color.grayScale[50]} />
+              <Text
+                fontSize="body2"
+                fontWeight="regular"
+                color={themes.Color.subColor.blue[30]}
+              >
+                취소
+              </Text>
+            </Button>
+            <Stack gap={12} justify="center">
+              <Circle $color={themes.Color.subColor.blue[30]} />
+              <Circle $color={themes.Color.grayScale[50]} />
+            </Stack>
+            <Button
+              style={{
+                height: "48px",
+                backgroundColor: themes.Color.subColor.blue[30],
+              }}
+              onClick={registerCompany}
+              isLoading={isPending}
+              disabled={
+                companyName.length *
+                  businessNumber.length *
+                  companyProfileUrl.length ==
+                0
+              }
+            >
+              <Text
+                fontSize="body2"
+                fontWeight="regular"
+                color={themes.Color.grayScale[10]}
+              >
+                다음
+              </Text>
+            </Button>
           </Stack>
-          <Button
-            style={{
-              height: "48px",
-              backgroundColor: themes.Color.subColor.blue[30],
-            }}
-            onClick={registerCompany}
-            isLoading={isPending}
-            disabled={
-              companyName.length *
-                businessNumber.length *
-                companyProfileUrl.length ==
-              0
-            }
-          >
-            <Text
-              fontSize="body2"
-              fontWeight="regular"
-              color={themes.Color.grayScale[10]}
-            >
-              다음
-            </Text>
-          </Button>
         </Stack>
       </Stack>
     </Container>
@@ -240,13 +235,6 @@ const Container = styled.div`
   margin-top: 56px;
   margin-bottom: 364px;
   padding: 80px 100px;
-`;
-
-const Gap = styled.div<{
-  $height: number;
-}>`
-  width: 100%;
-  height: ${({ $height }) => $height}px;
 `;
 
 const Circle = styled.div<{
@@ -327,4 +315,9 @@ const FileInput = styled.div`
   background-color: ${themes.Color.grayScale[10]};
   cursor: pointer;
   box-shadow: 0 0 0 1px ${themes.Color.primary[20]} inset;
+`;
+
+const Separator = styled(Divider)`
+  margin-top: 4px;
+  margin-bottom: 20px;
 `;

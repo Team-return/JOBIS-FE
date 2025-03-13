@@ -10,7 +10,7 @@ export const StudentPage = () => {
 
   return (
     <Container>
-      <Stack width="60%" direction="column" align="center">
+      <Stack width="60%" direction="column" align="center" gap={16}>
         <Stack position="relative" direction="row" gap={16}>
           {StudentTabItemData.map((label, index) => (
             <TapItem
@@ -28,7 +28,6 @@ export const StudentPage = () => {
             </TapItem>
           ))}
         </Stack>
-        <Gap />
         <EmploymentStatus />
       </Stack>
     </Container>
@@ -47,9 +46,4 @@ const Container = styled.div`
 
 const TapItem = styled(Text)`
   cursor: pointer;
-`;
-
-const Gap = styled.div`
-  width: 100%;
-  height: 16px;
 `;
