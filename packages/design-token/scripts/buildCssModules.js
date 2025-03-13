@@ -15,10 +15,16 @@ const generateThemeCss = () => {
     --grayscale-70: #444444;
     --grayscale-80: #333333;
     --grayscale-90: #000000;
-    --subcolor-blue-10: #f2f6ff;
-    --subcolor-blue-20: #e0ebf6;
-    --subcolor-blue-30: #237bc9;
-    --subcolor-blue-40: #002c53;
+    --subcolor-red-10: #FCE9E7;
+    --subcolor-red-20: #E74C3C;
+    --subcolor-blue-10: #F2F6FF;
+    --subcolor-blue-20: #E0EBF6;
+    --subcolor-blue-30: #237BC9;
+    --subcolor-blue-40: #002C53;
+    --subcolor-yellow-10: #FDF7E2;
+    --subcolor-yellow-20: #F1C40F;
+    --subcolor-green-10: #E5F8EE;
+    --subcolor-green-20: #2ECC71;
 }
 
 :root .theme-dark {
@@ -35,10 +41,16 @@ const generateThemeCss = () => {
     --grayscale-70: #d9d9d9;
     --grayscale-80: #eeeeee;
     --grayscale-90: #ffffff;
-    --subcolor-blue-10: #151a24;
-    --subcolor-blue-20: #0c2942;
-    --subcolor-blue-30: #237bc9;
-    --subcolor-blue-40: #002c53;
+    --subcolor-red-10: #4C1914;
+    --subcolor-red-20: #E74C3C;
+    --subcolor-blue-10: #151A24;
+    --subcolor-blue-20: #0C2942;
+    --subcolor-blue-30: #237BC9;
+    --subcolor-blue-40: #002C53;
+    --subcolor-yellow-10: #504105;
+    --subcolor-yellow-20: #F1C40F;
+    --subcolor-green-10: #0F4325;
+    --subcolor-green-20: #2ECC71;
 }
 .h1 {
     font-size: 40px;
