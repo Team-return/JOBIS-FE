@@ -54,7 +54,7 @@ export const StudentRegister = () => {
     }
 
     const parsedInput = Number(value);
-    if (Number.isNaN(parsedInput)) {
+    if (Number.isNaN(parsedInput) || parsedInput > 9999) {
       return;
     }
 
@@ -129,6 +129,7 @@ export const StudentRegister = () => {
               <StyleInput
                 value={value === -1 ? "" : value}
                 onChange={e => handleChange(index, e.target.value)}
+                maxLength={4}
                 onKeyDown={e => {
                   e.key === "Backspace" && deleteIndex(index);
                   e.key === "Enter" && focusIndex(index + 1);
