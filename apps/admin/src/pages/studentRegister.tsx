@@ -75,6 +75,7 @@ export const StudentRegister = () => {
   const registerStudents = () => {
     if (studentGcns.filter(e => e !== -1).length === 0) {
       navigate("/");
+      return;
     }
     mutate();
   };
