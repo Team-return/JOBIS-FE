@@ -249,10 +249,10 @@ const InputScope = styled.label`
   display: flex;
   direction: row;
   align-items: center;
+  width: 100%;
 `;
 
 const StyleInput = styled(Input)`
-  width: calc(54vw - 249px);
   padding: 12px;
   border: none;
 
