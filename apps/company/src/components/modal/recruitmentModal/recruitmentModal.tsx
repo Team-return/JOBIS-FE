@@ -279,6 +279,7 @@ const GatherModal = ({ setForm, areaIndex, setAreaIndex }: IPropsType) => {
             type="number"
             max={255}
             value={area.hiring == 0 ? "" : area.hiring}
+            onWheel={e => e.currentTarget.blur()}
             onInput={e => {
               const value = Number(e.currentTarget.value);
               if (value < 0) {
