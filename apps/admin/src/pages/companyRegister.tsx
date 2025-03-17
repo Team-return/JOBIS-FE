@@ -285,12 +285,13 @@ const RequireIcon = styled.span<{
 
 const InputScope = styled.label`
   display: flex;
-  direction: row;
   align-items: center;
+  width: 100%;
+  direction: row;
 `;
 
 const StyleInput = styled(Input)`
-  width: calc(54vw - 249px);
+  width: 100%;
   padding: 12px;
   border: none;
 
