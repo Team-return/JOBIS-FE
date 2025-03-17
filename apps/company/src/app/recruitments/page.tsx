@@ -258,7 +258,6 @@ export default function Recruitments() {
                           icon="Date"
                           color={themes.Color.grayScale[80]}
                           size={20}
-                          cursor="pointer"
                         />
                       }
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
