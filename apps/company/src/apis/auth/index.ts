@@ -15,7 +15,7 @@ export const companyLogin = async (body: ICompanyLoginRequest) => {
   return data;
 };
 
-export const ReissueToken = async (refreshToken: string) => {
+export const reissueToken = async (refreshToken: string) => {
   const { data } = await instance.put<IAuthorizationResponse>(
     `${router}/reissue?platform-type=WEB`,
     null,
