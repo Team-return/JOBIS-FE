@@ -527,7 +527,7 @@ export default function Registration() {
                     let numericValue = Number.parseInt(value, 10);
                     if (numericValue > 32_767) {
                       numericValue = 32_767;
-                    } else if (numericValue < 0) {
+                    } else if (Number.isNaN(numericValue) || numericValue < 0) {
                       numericValue = 0;
                     }
                     field.onChange(numericValue);
