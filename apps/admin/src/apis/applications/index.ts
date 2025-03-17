@@ -1,5 +1,9 @@
 import type { ApplicationENStatusType } from "@/@types/types";
-import { instance, type ApplicationResponse } from "@/apis";
+import {
+  instance,
+  type ApplicationResponse,
+  type EmploymentStatsResponse,
+} from "@/apis";
 import { convertObjectToQueryString } from "@/utils";
 import {
   useMutation,
@@ -88,6 +92,52 @@ export const useRejectApplication = (
           case 500:
             toast.error("개발자에게 문의해주세요.");
             break;
+        }
+      } else {
+        toast.error("네트워크 연결을 확인해주세요.");
+      }
+    },
+  });
+};
+
+/** 현재 취업 현황 조회 */
+export const useEmploymentStats = () => {
+  return useQuery({
+    queryKey: ["employmentStats"],
+    queryFn: async () => {
+      const { data } = await instance.get<EmploymentStatsResponse>(
+        `${router}/employment`
+      );
+      return data;
+    },
+  });
+};
+
+/** MOU회사 외 학생 합격처리 */
+export const useApproveStudents = (
+  recruitmentId: number,
+  studentGcns: Array<number>,
+  option: MutationOptions
+) => {
+  return useMutation({
+    ...option,
+    mutationFn: () =>
+      instance.post(`${router}/teacher/${recruitmentId}`, {
+        student_gcns: studentGcns.map(e => e.toString()),
+      }),
+    onError: (err: AxiosError<AxiosError>) => {
+      if (err.response) {
+        switch (err.response.status) {
+          case 401:
+            toast.error("3학년이 아닌 학생이 있어요.");
+            break;
+
+          case 404:
+            toast.error("학생을 찾을 수 없어요.");
+            break;
+
+          case 409:
+            toast.error("이미 합격처리된 학생이 있어요.");
         }
       } else {
         toast.error("네트워크 연결을 확인해주세요.");

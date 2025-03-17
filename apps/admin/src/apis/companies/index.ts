@@ -77,3 +77,55 @@ export const useChangeCompanyMOU = (
     },
   });
 };
+
+/** 기업체 등록(선생님) */
+export const useRegisterCompany = (
+  companyName: string,
+  businessNumber: string,
+  companyProfileUrl: string,
+  option: MutationOptions
+) => {
+  return useMutation({
+    ...option,
+    mutationFn: () =>
+      instance
+        .post(`${router}/teacher`, {
+          company_name: companyName,
+          business_number: businessNumber,
+          company_profile_url: companyProfileUrl,
+        })
+        .then(async () => {
+          const res = await instance.get("/recruitments/teacher/manual");
+          const list: {
+            id: number;
+            company_name: string;
+            company_profile_url: string;
+          }[] = res.data.recruitments;
+
+          const target = list.find(e => e.company_name == companyName);
+
+          if (!target) {
+            throw new Error("기업이 추가되지 않았습니다.");
+          }
+          return target.id;
+        }),
+    onError: (err: AxiosError<AxiosError>) => {
+      if (err.response) {
+        switch (err.response.status) {
+          case 400:
+            toast.error("정보를 전부 입력해주세요.");
+            break;
+
+          case 404:
+            toast.error("유효하지 않은 사업자 등록 번호입니다.");
+            break;
+
+          case 409:
+            toast.error("이미 존재하는 기업입니다.");
+        }
+      } else {
+        toast.error("네트워크 연결을 확인해주세요.");
+      }
+    },
+  });
+};

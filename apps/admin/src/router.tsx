@@ -1,6 +1,9 @@
 import {
   ApplicationPage,
   CompanyPage,
+  StudentPage,
+  CompanyRegister,
+  StudentRegister,
   FileDetail,
   RecruitmentPage,
   SignInPage,
@@ -14,9 +17,11 @@ function Router() {
       <Route path="/signin" element={<SignInPage />} />
       <Route path="/recruitment" element={<RecruitmentPage />} />
       <Route path="/company" element={<CompanyPage />} />
-      <Route path="/student" element={<></>} />
+      <Route path="/student" element={<StudentPage />} />
       <Route path="/application" element={<ApplicationPage />} />
       <Route path="/file" element={<FileDetail />} />
+      <Route path="/company-register" element={<CompanyRegister />} />
+      <Route path="/student-register/:id" element={<StudentRegister />} />
       <Route path="*" element={<div>404</div>} />
     </Routes>
   );

@@ -18,3 +18,16 @@ export type AttachmentUrlType = {
   url: string;
   type: string;
 };
+
+export type EmploymentStatsResponse = {
+  classes: {
+    class_id: number;
+    employment_rate_response_list: {
+      id: number;
+      company_name: string;
+      logo_url: string;
+    }[];
+    total_students: number;
+    passed_students: number;
+  }[];
+};

@@ -39,6 +39,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
                 [ErrorBorderColorVariant]: errorBorderColor,
                 [FocusBorderColorVariant]: focusBorderColor,
               }),
+              width: "100%",
             }}
             {...inputProps}
           />
