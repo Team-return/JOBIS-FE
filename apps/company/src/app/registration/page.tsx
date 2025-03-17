@@ -639,7 +639,9 @@ export default function Registration() {
                   {...field}
                   width={604}
                   placeholder="직접입력"
-                  {...register("email")}
+                  {...register("email", {
+                    required: "필수 입력 항목입니다.",
+                  })}
                   errorMessage={errors.email?.message}
                 />
               )}
