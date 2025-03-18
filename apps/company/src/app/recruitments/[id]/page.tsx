@@ -764,7 +764,9 @@ export default function Recruitments({ params }: { params: { id: string } }) {
               <Input
                 width={604}
                 placeholder="직접입력"
-                {...register("submit_document")}
+                {...register("submit_document", {
+                  required: "필수 입력 항목입니다.",
+                })}
                 errorMessage={errors.submit_document?.message}
               />
               <Flex gap={20}>
