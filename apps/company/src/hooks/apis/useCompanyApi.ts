@@ -33,7 +33,6 @@ export const useCompanyRegister = () => {
           message: "가입에 성공하였습니다",
         },
       });
-      router.push(`/my`);
       const accessTokenExpire = new Date(access_expires_at);
       const refresTokenExpire = new Date(refresh_expires_at);
       cookie.set("access_token", access_token, {
@@ -45,6 +44,7 @@ export const useCompanyRegister = () => {
         path: "/",
       });
       cookie.set("authority", authority);
+      router.push(`/my`);
     },
     onError: (err: AxiosError<AxiosError>) => {
       if (err.response?.data.message === "Company Not Exists") {
