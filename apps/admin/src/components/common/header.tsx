@@ -76,7 +76,7 @@ const Container = styled.div`
   position: fixed;
   top: 0;
   display: flex;
-  z-index: 1;
+  z-index: 1000;
   justify-content: space-around;
   align-items: center;
   width: 100vw;

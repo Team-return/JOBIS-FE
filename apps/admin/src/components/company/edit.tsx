@@ -1,0 +1,311 @@
+import { styled } from "styled-components";
+import { themes } from "@jobis/design-token";
+import { CompanyIcon, LeftArrow, LoudSpeaker, Required } from "@/assets/images";
+import { useNavigate, useParams } from "react-router-dom";
+import { Input, Textarea } from "@jobis/ui";
+import { useState } from "react";
+import DaumPostcode from "react-daum-postcode";
+import { Address } from "react-daum-postcode";
+
+interface ButtonProps {
+  radius: string;
+  width: string;
+  height: string;
+  color: string;
+  backGround?: string;
+  borderColor?: string;
+}
+
+export const CompanyEdit = () => {
+  const [modalState, setModalState] = useState<string>("");
+  const [mainAddress, setMainAddress] = useState<string>("");
+  const [mainZipCode, setMainZipCode] = useState<string>("");
+  const [subAddress, setSubAddress] = useState<string>("");
+  const [subZipCode, setSubZipCode] = useState<string>("");
+  const { id } = useParams();
+
+  const infos = [
+    "대표 서비스명",
+    "대표자",
+    "대표번호",
+    "설립일",
+    "담당자",
+    "전화번호",
+    "담당자2",
+    "전화번호2",
+    "매출액",
+    "근로자 수",
+    "사업분야",
+    "팩스번호",
+    "본사주소",
+    "이메일",
+    "지점주소",
+  ];
+  const navigate = useNavigate();
+
+  const closeModal = () => {
+    setModalState("");
+  };
+  const openModal = (addressType: "MAIN_ADDRESS" | "SUB_ADDRESS") => {
+    setModalState(addressType);
+  };
+
+  const selectAddress = (data: Address) => {
+    if (modalState === "MAIN_ADDRESS") {
+      setMainAddress(data?.address);
+      setMainZipCode(data?.zonecode);
+    } else if (modalState === "SUB_ADDRESS") {
+      setSubAddress(data?.address);
+      setSubZipCode(data?.zonecode);
+    }
+    closeModal();
+  };
+  return (
+    <Wrapper>
+      <ButtonDiv>
+        <Button
+          radius="102px"
+          width="131px"
+          color={themes.Color.grayScale[60]}
+          height="42px"
+          borderColor={themes.Color.grayScale[60]}
+          onClick={() => navigate(`/company/${id}`)}
+        >
+          <img src={LeftArrow} />
+          돌아가기
+        </Button>
+      </ButtonDiv>
+      <Header>
+        <span>
+          <img src="https://i.pinimg.com/236x/4b/4a/3d/4b4a3de254fcd11bc5efa1c3150dbe75.jpg" />
+          (주)겟차겟차겟차
+        </span>
+        <Button
+          radius="96px"
+          width="66px"
+          height="40px"
+          color={themes.Color.primary[20]}
+          backGround={themes.Color.primary[10]}
+          // onClick={}
+        >
+          수정
+        </Button>
+      </Header>
+      <Contents>
+        <Info>
+          <Title>
+            <img src={CompanyIcon} />
+            <span>회사소개</span>
+          </Title>
+          <Textarea isRequired placeholder="회사소개" />
+        </Info>
+        <Info>
+          <Title>
+            <img src={LoudSpeaker} />
+            <span>상세정보</span>
+          </Title>
+          <InfoContents>
+            {infos.map((data, index) => (
+              <div key={index}>
+                <span>
+                  {data}
+
+                  <img src={Required} />
+                </span>
+                {data === "본사주소" || data === "지점주소" ? (
+                  <div className="address">
+                    <span>
+                      <Input
+                        placeholder={data}
+                        isReadOnly
+                        value={data === "본사주소" ? mainAddress : subAddress}
+                      />
+                      <Button
+                        radius="4px"
+                        width="155px"
+                        height="56px"
+                        color={themes.Color.primary[20]}
+                        borderColor={themes.Color.primary[20]}
+                        onClick={() =>
+                          openModal(
+                            data === "본사주소" ? "MAIN_ADDRESS" : "SUB_ADDRESS"
+                          )
+                        }
+                      >
+                        주소검색
+                      </Button>
+                    </span>
+                    <Input placeholder="상세주소" />
+                  </div>
+                ) : (
+                  <div>
+                    <Input isRequired placeholder={data} />
+                  </div>
+                )}
+              </div>
+            ))}
+          </InfoContents>
+        </Info>
+      </Contents>
+      {(modalState === "MAIN_ADDRESS" || modalState === "SUB_ADDRESS") && (
+        <Modal onClick={closeModal}>
+          <div>
+            <DaumPostcode onComplete={selectAddress} />
+          </div>
+        </Modal>
+      )}
+    </Wrapper>
+  );
+};
+
+const Modal = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+
+  background: rgb(0 0 0 / 8%);
+
+  > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1000px;
+  }
+`;
+
+const Title = styled.div`
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid ${themes.Color.grayScale[50]};
+
+  > span {
+    color: ${themes.Color.primary[20]};
+    font-weight: ${themes.FontWeight.bold};
+  }
+`;
+
+const Info = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  > div {
+    color: ${themes.Color.grayScale[80]};
+    font-size: ${themes.Font.body2.fontSize};
+    font-weight: ${themes.FontWeight.regular};
+  }
+`;
+
+const InfoContents = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  column-gap: 120px;
+
+  > div {
+    display: flex;
+    justify-content: space-between;
+    width: 400px;
+
+    > span {
+      display: flex;
+
+      font-size: ${themes.Font.body1.fontSize};
+      font-weight: ${themes.FontWeight.bold};
+
+      > img {
+        width: 10px;
+        height: 10px;
+      }
+    }
+
+    > div {
+      width: 280px;
+    }
+
+    > div.address {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      > span {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+      }
+    }
+  }
+`;
+
+const Contents = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: 920px;
+`;
+
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+
+  > span {
+    display: flex;
+    align-items: center;
+    height: 72px;
+
+    font-size: ${themes.Font.h4.fontSize};
+    font-weight: ${themes.FontWeight.bold};
+    gap: 24px;
+
+    > img {
+      width: 72px;
+      height: 72px;
+      border-radius: 16px;
+    }
+  }
+`;
+
+const ButtonDiv = styled.div`
+  display: flex;
+  justify-content: left;
+  width: 100%;
+`;
+
+const Button = styled.div<ButtonProps>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: ${({ width }) => width};
+  height: ${({ height }) => height};
+  border: 1px solid ${({ borderColor }) => borderColor || "transparent"};
+  border-radius: ${({ radius }) => radius};
+
+  background-color: ${({ backGround }) => backGround || "transparent"};
+
+  color: ${({ color }) => color};
+  font-size: ${themes.Font.body1.fontSize};
+  font-weight: ${themes.FontWeight.medium};
+  gap: 8px;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.5;
+  }
+`;

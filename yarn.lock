@@ -8234,6 +8234,7 @@ __metadata:
     file-saver: "npm:^2.0.5"
     react: "npm:^18.2.0"
     react-cookie: "npm:^7.1.4"
+    react-daum-postcode: "npm:^3.2.0"
     react-dom: "npm:^18.2.0"
     react-helmet-async: "npm:^2.0.5"
     react-hot-toast: "npm:^2.4.1"
@@ -17995,6 +17996,15 @@ __metadata:
   peerDependencies:
     react: ">=16.8.0"
   checksum: 10/8cf6176980c2b60f415920108bc44537830189fb620ce3d493a595f7a6bf671ab5955bb325f637bef0039b26612764792f01aab307d9fe662591306345e36ab2
+  languageName: node
+  linkType: hard
+
+"react-daum-postcode@npm:^3.2.0":
+  version: 3.2.0
+  resolution: "react-daum-postcode@npm:3.2.0"
+  peerDependencies:
+    react: ">=16.8.0"
+  checksum: 10/d8d240bc26ee86f0648b12eaf5fa3e4677784ac06ffec3f8d367608790a9ef85f545100af3fe2819f06b26396a45b4bdf09cf34ef04d71181f36d9a493b0935e
   languageName: node
   linkType: hard
 

@@ -9,6 +9,8 @@ import {
   SignInPage,
 } from "@/pages";
 import { Route, Routes } from "react-router-dom";
+import { CompanyDetailPage } from "./pages/companyDetail";
+import { CompanyEditPage } from "./pages/companyEdit";
 
 function Router() {
   return (
@@ -17,6 +19,8 @@ function Router() {
       <Route path="/signin" element={<SignInPage />} />
       <Route path="/recruitment" element={<RecruitmentPage />} />
       <Route path="/company" element={<CompanyPage />} />
+      <Route path="/company/:id" element={<CompanyDetailPage />} />
+      <Route path="/company/:id/edit" element={<CompanyEditPage />} />
       <Route path="/student" element={<StudentPage />} />
       <Route path="/application" element={<ApplicationPage />} />
       <Route path="/file" element={<FileDetail />} />
