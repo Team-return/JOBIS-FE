@@ -6,6 +6,7 @@ import { Input, Textarea } from "@jobis/ui";
 import { useState } from "react";
 import DaumPostcode from "react-daum-postcode";
 import { Address } from "react-daum-postcode";
+import { formatValue } from "@/utils/regex";
 
 interface ButtonProps {
   radius: string;
@@ -17,11 +18,13 @@ interface ButtonProps {
 }
 
 export const CompanyEdit = () => {
-  const [modalState, setModalState] = useState<string>("");
-  const [mainAddress, setMainAddress] = useState<string>("");
-  const [mainZipCode, setMainZipCode] = useState<string>("");
-  const [subAddress, setSubAddress] = useState<string>("");
-  const [subZipCode, setSubZipCode] = useState<string>("");
+  const [formData, setFormData] = useState<Record<string, string>>({});
+
+  const [modalState, setModalState] = useState("");
+  const [mainAddress, setMainAddress] = useState("");
+  const [mainZipCode, setMainZipCode] = useState("");
+  const [subAddress, setSubAddress] = useState("");
+  const [subZipCode, setSubZipCode] = useState("");
   const { id } = useParams();
 
   const infos = [
@@ -60,6 +63,13 @@ export const CompanyEdit = () => {
     }
     closeModal();
   };
+
+  const handleChange = (key: string, value: string) => {
+    setFormData(prev => ({
+      ...prev,
+      [key]: formatValue(value, key),
+    }));
+  };
   return (
     <Wrapper>
       <ButtonDiv>
@@ -87,6 +97,7 @@ export const CompanyEdit = () => {
           color={themes.Color.primary[20]}
           backGround={themes.Color.primary[10]}
           // onClick={}
+          type="submit"
         >
           수정
         </Button>
@@ -109,7 +120,6 @@ export const CompanyEdit = () => {
               <div key={index}>
                 <span>
                   {data}
-
                   <img src={Required} />
                 </span>
                 {data === "본사주소" || data === "지점주소" ? (
@@ -139,7 +149,12 @@ export const CompanyEdit = () => {
                   </div>
                 ) : (
                   <div>
-                    <Input isRequired placeholder={data} />
+                    <Input
+                      isRequired
+                      placeholder={data}
+                      value={formData[data] || ""}
+                      onChange={e => handleChange(data, e.target.value)}
+                    />
                   </div>
                 )}
               </div>
@@ -288,7 +303,7 @@ const ButtonDiv = styled.div`
   width: 100%;
 `;
 
-const Button = styled.div<ButtonProps>`
+const Button = styled.button<ButtonProps>`
   display: flex;
   justify-content: center;
   align-items: center;
