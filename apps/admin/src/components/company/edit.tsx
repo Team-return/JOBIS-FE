@@ -28,22 +28,23 @@ export const CompanyEdit = () => {
   const { id } = useParams();
 
   const infos = [
-    "대표 서비스명",
-    "대표자",
-    "대표번호",
-    "설립일",
-    "담당자",
-    "전화번호",
-    "담당자2",
-    "전화번호2",
-    "매출액",
-    "근로자 수",
-    "사업분야",
-    "팩스번호",
-    "본사주소",
-    "이메일",
-    "지점주소",
+    { text: "대표 서비스명" },
+    { text: "대표자" },
+    { text: "대표번호", maxLength: 12 },
+    { text: "설립일", maxLength: 8 },
+    { text: "담당자" },
+    { text: "전화번호", maxLength: 12 },
+    { text: "담당자2" },
+    { text: "전화번호2", maxLength: 12 },
+    { text: "매출액" },
+    { text: "근로자 수" },
+    { text: "사업분야" },
+    { text: "팩스번호" },
+    { text: "본사주소" },
+    { text: "이메일" },
+    { text: "지점주소" },
   ];
+
   const navigate = useNavigate();
 
   const closeModal = () => {
@@ -119,16 +120,18 @@ export const CompanyEdit = () => {
             {infos.map((data, index) => (
               <div key={index}>
                 <span>
-                  {data}
+                  {data.text}
                   <img src={Required} />
                 </span>
-                {data === "본사주소" || data === "지점주소" ? (
+                {data.text === "본사주소" || data.text === "지점주소" ? (
                   <div className="address">
                     <span>
                       <Input
-                        placeholder={data}
-                        isReadOnly
-                        value={data === "본사주소" ? mainAddress : subAddress}
+                        placeholder={data.text}
+                        disabled
+                        value={
+                          data.text === "본사주소" ? mainAddress : subAddress
+                        }
                       />
                       <Button
                         radius="4px"
@@ -138,7 +141,9 @@ export const CompanyEdit = () => {
                         borderColor={themes.Color.primary[20]}
                         onClick={() =>
                           openModal(
-                            data === "본사주소" ? "MAIN_ADDRESS" : "SUB_ADDRESS"
+                            data.text === "본사주소"
+                              ? "MAIN_ADDRESS"
+                              : "SUB_ADDRESS"
                           )
                         }
                       >
@@ -151,9 +156,10 @@ export const CompanyEdit = () => {
                   <div>
                     <Input
                       isRequired
-                      placeholder={data}
-                      value={formData[data] || ""}
-                      onChange={e => handleChange(data, e.target.value)}
+                      placeholder={data.text}
+                      value={formData[data.text] || ""}
+                      onChange={e => handleChange(data.text, e.target.value)}
+                      maxLength={data.maxLength}
                     />
                   </div>
                 )}
