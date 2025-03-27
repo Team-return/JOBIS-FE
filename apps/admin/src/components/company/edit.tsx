@@ -39,7 +39,7 @@ export const CompanyEdit = () => {
     { text: "매출액" },
     { text: "근로자 수" },
     { text: "사업분야" },
-    { text: "팩스번호" },
+    { text: "팩스번호", maxLength: 11 },
     { text: "본사주소" },
     { text: "이메일" },
     { text: "지점주소" },
