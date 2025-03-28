@@ -22,9 +22,7 @@ export const CompanyEdit = () => {
 
   const [modalState, setModalState] = useState("");
   const [mainAddress, setMainAddress] = useState("");
-  const [mainZipCode, setMainZipCode] = useState("");
   const [subAddress, setSubAddress] = useState("");
-  const [subZipCode, setSubZipCode] = useState("");
   const { id } = useParams();
 
   const infos = [
@@ -57,10 +55,8 @@ export const CompanyEdit = () => {
   const selectAddress = (data: Address) => {
     if (modalState === "MAIN_ADDRESS") {
       setMainAddress(data?.address);
-      setMainZipCode(data?.zonecode);
     } else if (modalState === "SUB_ADDRESS") {
       setSubAddress(data?.address);
-      setSubZipCode(data?.zonecode);
     }
     closeModal();
   };
@@ -162,10 +158,8 @@ export const CompanyEdit = () => {
                       maxLength={data.maxLength}
                       errorMessage={
                         data.text === "이메일" &&
-                        (!formData[data.text] ||
-                          !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
-                            formData[data.text]
-                          ))
+                        formData[data.text] &&
+                        !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData[data.text])
                           ? "올바른 이메일 주소를 입력해주세요."
                           : ""
                       }
