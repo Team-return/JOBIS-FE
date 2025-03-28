@@ -28,12 +28,12 @@ export const CompanyEdit = () => {
   const infos = [
     { text: "대표 서비스명" },
     { text: "대표자" },
-    { text: "대표번호", maxLength: 12 },
+    { text: "대표번호", maxLength: 13 },
     { text: "설립일", maxLength: 8 },
     { text: "담당자" },
-    { text: "전화번호", maxLength: 12 },
+    { text: "전화번호", maxLength: 13 },
     { text: "담당자2" },
-    { text: "전화번호2", maxLength: 12 },
+    { text: "전화번호2", maxLength: 13 },
     { text: "매출액" },
     { text: "근로자 수" },
     { text: "사업분야" },
@@ -163,6 +163,14 @@ export const CompanyEdit = () => {
                           ? "올바른 이메일 주소를 입력해주세요."
                           : ""
                       }
+                      type={data.text === "근로자 수" ? "number" : "text"}
+                      onWheel={e => e.currentTarget.blur()}
+                      onKeyDown={e => {
+                        if (e.key === "-" || e.key === "e") {
+                          e.preventDefault();
+                        }
+                      }}
+                      min={0}
                     />
                   </div>
                 )}
