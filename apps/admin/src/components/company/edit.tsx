@@ -160,6 +160,15 @@ export const CompanyEdit = () => {
                       value={formData[data.text] || ""}
                       onChange={e => handleChange(data.text, e.target.value)}
                       maxLength={data.maxLength}
+                      errorMessage={
+                        data.text === "이메일" &&
+                        (!formData[data.text] ||
+                          !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+                            formData[data.text]
+                          ))
+                          ? "올바른 이메일 주소를 입력해주세요."
+                          : ""
+                      }
                     />
                   </div>
                 )}
