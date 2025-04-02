@@ -1,7 +1,8 @@
 import { styled } from "styled-components";
 import { themes } from "@jobis/design-token";
 import { CompanyIcon, LeftArrow, LoudSpeaker } from "@/assets/images";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useGetCompanyDetail } from "@/apis";
 
 interface ButtonProps {
   radius: string;
@@ -13,24 +14,27 @@ interface ButtonProps {
 }
 
 export const CompanyDetail = () => {
-  const infos = [
-    "대표 서비스명",
-    "대표자",
-    "대표번호",
-    "설립일",
-    "담당자",
-    "전화번호",
-    "담당자2",
-    "전화번호2",
-    "매출액",
-    "근로자 수",
-    "사업분야",
-    "팩스번호",
-    "본사주소",
-    "이메일",
-    "지점주소",
-  ];
   const navigate = useNavigate();
+  const location = useLocation();
+  const { data } = useGetCompanyDetail(location.pathname.split("/")[2]);
+
+  const infos = [
+    ["대표 서비스명", data?.service_name],
+    ["대표자", data?.representative_name],
+    ["대표번호", data?.representative_phone_no],
+    ["설립일", data?.founded_at],
+    ["담당자", data?.manager_name],
+    ["전화번호", data?.manager_phone_no],
+    ["담당자2", ""],
+    ["전화번호2", ""],
+    ["매출액", data?.take],
+    ["근로자 수", data?.worker_number],
+    ["사업분야", data?.business_area],
+    ["팩스번호", ""],
+    ["본사주소", data?.main_address],
+    ["이메일", data?.email],
+    ["지점주소", ""],
+  ];
 
   return (
     <Wrapper>
@@ -43,14 +47,19 @@ export const CompanyDetail = () => {
           borderColor={themes.Color.grayScale[60]}
           onClick={() => navigate("/company")}
         >
-          <img src={LeftArrow} />
-          돌아가기
+          <img src={LeftArrow} /> 돌아가기
         </Button>
       </ButtonDiv>
       <Header>
         <span>
-          <img src="https://i.pinimg.com/236x/4b/4a/3d/4b4a3de254fcd11bc5efa1c3150dbe75.jpg" />
-          (주)겟차겟차겟차
+          <img
+            src={
+              data?.company_profile_url
+                ? `${import.meta.env.VITE_FILE_URL}${data.company_profile_url}`
+                : "https://dsm-s3-bucket-jobis.s3.ap-northeast-2.amazonaws.com/LOGO_IMAGE/companydefault.png"
+            }
+          />
+          {data?.company_name || ""}
         </span>
         <Button
           radius="96px"
@@ -69,29 +78,23 @@ export const CompanyDetail = () => {
             <img src={CompanyIcon} />
             <span>회사소개</span>
           </Title>
-          <div>
-            겟 차는 오프 라인 자동차 구매 경험을 온 라 인으로 전환 하고 고객
-            중심 경험으로 개선 하기 위해 \n기술 개발과 시장 확장에 몰입하고 있
-            습니다. 그 결과 2015 년 창업 이후, 현재 누적 다운로드\n200만 건과
-            30겟차는 오프라인 자동차 구매 경험을 온라인으로 전환하고 고객 중심
-            경험으로 개선하기 위해\n기술 개발과 시장 확장에 몰입하고 있습니다.
-            그 결과로 2015 년 창업 이후, 현재 누적 다운로드\n200만 건과 30험을
-            온라인으로 전환하
-          </div>
+          <div>{data?.company_introduce}</div>
         </Info>
         <Info>
           <Title>
             <img src={LoudSpeaker} />
             <span>상세정보</span>
           </Title>
-          <InfoContents>
-            {infos.map((data, index) => (
-              <div key={index}>
-                <span>{data}</span>
-                {index}
-              </div>
-            ))}
-          </InfoContents>
+          <div>
+            <InfoContents>
+              {infos.map(([label, value], index) => (
+                <div key={index}>
+                  <span>{label}</span>
+                  {value || "-"}
+                </div>
+              ))}
+            </InfoContents>
+          </div>
         </Info>
       </Contents>
     </Wrapper>
@@ -115,12 +118,6 @@ const Info = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24px;
-
-  > div {
-    color: ${themes.Color.grayScale[80]};
-    font-size: ${themes.Font.body2.fontSize};
-    font-weight: ${themes.FontWeight.regular};
-  }
 `;
 
 const InfoContents = styled.div`
@@ -130,10 +127,12 @@ const InfoContents = styled.div`
 
   > div {
     display: flex;
-    justify-content: space-between;
-    width: 200px;
+    justify-content: start;
+    width: 388px;
 
     > span {
+      width: 108px;
+
       font-size: ${themes.Font.body1.fontSize};
       font-weight: ${themes.FontWeight.bold};
     }

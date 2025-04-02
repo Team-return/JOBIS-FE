@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 import { themes } from "@jobis/design-token";
 import { CompanyIcon, LeftArrow, LoudSpeaker, Required } from "@/assets/images";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Input, Textarea } from "@jobis/ui";
 import { useState } from "react";
 import DaumPostcode from "react-daum-postcode";
@@ -23,7 +23,6 @@ export const CompanyEdit = () => {
   const [modalState, setModalState] = useState("");
   const [mainAddress, setMainAddress] = useState("");
   const [subAddress, setSubAddress] = useState("");
-  const { id } = useParams();
 
   const infos = [
     { text: "대표 서비스명" },
