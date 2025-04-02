@@ -1,5 +1,10 @@
 import { MutationOptions, useMutation, useQuery } from "@tanstack/react-query";
-import { instance, type CompanyResponse } from "@/apis";
+import {
+  CompanyDetailResponse,
+  instance,
+  CompanyResponse,
+  CompanyDetailPatchRequest,
+} from "@/apis";
 import type { CompanyType } from "@/@types/types";
 import toast from "react-hot-toast";
 import { AxiosError } from "axios";
@@ -122,6 +127,45 @@ export const useRegisterCompany = (
 
           case 409:
             toast.error("이미 존재하는 기업입니다.");
+        }
+      } else {
+        toast.error("네트워크 연결을 확인해주세요.");
+      }
+    },
+  });
+};
+
+/** 회사정보 상세 조회 */
+export const useGetCompanyDetail = (companyId: number) => {
+  return useQuery({
+    queryKey: ["getCompanyDetail", companyId],
+    queryFn: async () => {
+      const { data } = await instance.get<CompanyDetailResponse>(
+        `${router}/${companyId}`
+      );
+      return data;
+    },
+  });
+};
+
+/** 회사정보 업데이트 */
+export const useChangeCompanyDetail = (
+  companyId: number,
+  data: CompanyDetailPatchRequest,
+  options: MutationOptions
+) => {
+  return useMutation({
+    ...options,
+    mutationFn: () => instance.patch(`${router}/${companyId}`, data),
+    onError: (err: AxiosError<AxiosError>) => {
+      if (err.response) {
+        switch (err.response.status) {
+          case 400:
+            toast.error("유효하지 않은 입력값이 있습니다.");
+            break;
+
+          default:
+            toast.error("예상할 수 없는 오류입니다.");
         }
       } else {
         toast.error("네트워크 연결을 확인해주세요.");
