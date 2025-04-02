@@ -166,7 +166,7 @@ export const CompanyEdit = () => {
                       type={data.text === "근로자 수" ? "number" : "text"}
                       onWheel={e => e.currentTarget.blur()}
                       onKeyDown={e => {
-                        if (e.key === "-" || e.key === "e") {
+                        if (e.key === "-") {
                           e.preventDefault();
                         }
                       }}
