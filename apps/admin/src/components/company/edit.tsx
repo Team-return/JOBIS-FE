@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 import { themes } from "@jobis/design-token";
 import { CompanyIcon, LeftArrow, LoudSpeaker, Required } from "@/assets/images";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Input, Textarea } from "@jobis/ui";
 import { useState } from "react";
 import DaumPostcode from "react-daum-postcode";
@@ -19,7 +19,7 @@ interface ButtonProps {
 
 export const CompanyEdit = () => {
   const [formData, setFormData] = useState<Record<string, string>>({});
-
+  const { id } = useParams();
   const [modalState, setModalState] = useState("");
   const [mainAddress, setMainAddress] = useState("");
   const [subAddress, setSubAddress] = useState("");
