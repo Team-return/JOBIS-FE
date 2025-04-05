@@ -1,10 +1,10 @@
 const Policy = () => {
   return (
     <>
-      {"< "}Team return{" >"}('https://jobis-student.team-return.com'이하
-      'JOBIS')은(는) 「개인정보 보호법」 제30조에 따라 정보주체의 개인정보를
-      보호하고 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여
-      다음과 같이 개인정보 처리방침을 수립·공개합니다.
+      {"< "}Team return{" >"}(&#39;https://jobis-student.team-return.com&#39;
+      이하 &#39;JOBIS&#39;)은(는) 「개인정보 보호법」 제30조에 따라 정보주체의
+      개인정보를 보호하고 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록
+      하기 위하여 다음과 같이 개인정보 처리방침을 수립·공개합니다.
       <br />
       <p>
         ○ 이 개인정보처리방침은 <em>2023</em>년 <em>1</em>월 <em>1</em>부터
@@ -16,8 +16,8 @@ const Policy = () => {
       </p>
       <strong>
         <em>
-          {"< "}Team return{" >"}('https://jobis-student.team-return.com'이하
-          'JOBIS')
+          {"< "}Team return{" >"}
+          (&#39;https://jobis-student.team-return.com&#39; 이하 &#39;JOBIS&#39;)
         </em>
         은(는) 다음의 목적을 위하여 개인정보를 처리합니다. 처리하고 있는
         개인정보는 다음의 목적 이외의 용도로는 이용되지 않으며 이용 목적이
@@ -279,26 +279,27 @@ const Policy = () => {
       <br />
       <p className="lh6 bs4">
         <strong>
-          제12조(개인정보 처리방침 변경)<em className="emphasis"></em>
+          제12조(개인정보 처리방침 변경)
+          <em className="emphasis" />
         </strong>
       </p>
       <br />
       <p className="sub_p">
         ① 이 개인정보처리방침은 2023년 1월 1부터 적용됩니다.
       </p>
-      <p className="sub_p"></p>
-      <p className="sub_p"></p>
+      <p className="sub_p" />
+      <p className="sub_p" />
       <p className="sub_p">
         ② 이전의 개인정보 처리방침은 아래에서 확인하실 수 있습니다.{" "}
       </p>
-      <p className="sub_p"></p>
-      <p className="sub_p"></p>
+      <p className="sub_p" />
+      <p className="sub_p" />
       <p className="sub_p">예시 ) - 20XX. X. X ~ 20XX. X. X 적용 (클릭) </p>
-      <p className="sub_p"></p>
-      <p className="sub_p"></p>
+      <p className="sub_p" />
+      <p className="sub_p" />
       <p className="sub_p">예시 ) - 20XX. X. X ~ 20XX. X. X 적용 (클릭) </p>
-      <p className="sub_p"></p>
-      <p className="sub_p"></p>
+      <p className="sub_p" />
+      <p className="sub_p" />
       <p className="sub_p">예시 ) - 20XX. X. X ~ 20XX. X. X 적용 (클릭)</p>
     </>
   );
