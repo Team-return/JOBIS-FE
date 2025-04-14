@@ -715,6 +715,7 @@ export default function Registration() {
               accept=".jpg, .png, .svg"
               ref={companyLogoRef}
               onChange={uploadImgFile}
+              width={0}
             />
           </InputTemplate>,
           <InputTemplate key="biz-registration" title="사업자등록증">

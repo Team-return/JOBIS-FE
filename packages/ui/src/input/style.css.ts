@@ -19,7 +19,7 @@ export const LabelStyle = style({
   gap: 4,
   color: themes.Color.grayScale[90],
   fontWeight: themes.FontWeight.regular,
-  // width: "100%",
+  width: "100%",
   ...themes.Font.body3,
 });
 
