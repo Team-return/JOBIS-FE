@@ -40,23 +40,23 @@ export const CompanyPage = () => {
   };
 
   const filteringCompanies = companies?.companies
-    .filter(
+    ?.filter(
       item =>
         !companyFilter.region || item.region.includes(companyFilter.region)
     )
-    .filter(
+    ?.filter(
       item =>
         !companyFilter.businessArea ||
         item.business_area.includes(companyFilter.businessArea)
     )
-    .filter(item =>
+    ?.filter(item =>
       companyFilter.division
         ? companyFilter.division === "협약기업"
           ? item.convention
           : CompanyTypeEnToKr[item.company_type] === companyFilter.division
         : true
     )
-    .filter(item => item.company_name.includes(companyFilter.companyName));
+    ?.filter(item => item.company_name.includes(companyFilter.companyName));
 
   return (
     <Container>

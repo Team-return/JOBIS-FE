@@ -1,2 +1,2 @@
-export * from "./EmploymentStatus";
+export * from "./employmentStatus";
 export * from "./employmentStatusComponent";

@@ -67,10 +67,10 @@ export const RecruitmentPage = () => {
   };
 
   const filteringRecruitments = recruitmentForms?.recruitments
-    .filter(item => item.company_name.includes(recruitmentFilter.companyName))
-    .filter(item => dateFilter("start", item.start_date))
-    .filter(item => dateFilter("end", item.end_date))
-    .filter(
+    ?.filter(item => item.company_name.includes(recruitmentFilter.companyName))
+    ?.filter(item => dateFilter("start", item.start_date))
+    ?.filter(item => dateFilter("end", item.end_date))
+    ?.filter(
       item =>
         !CompanyStatusKrToEn[recruitmentFilter.recruitmentStatus || "전체"] ||
         item.status ===

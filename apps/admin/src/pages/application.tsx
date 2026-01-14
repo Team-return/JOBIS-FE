@@ -30,12 +30,12 @@ export const ApplicationPage = () => {
   }, [applicationFilter]);
 
   const filteringApplications = applications?.applications
-    .filter(
+    ?.filter(
       item =>
         item.company_name.includes(applicationFilter.companyOrStudentName) ||
         item.student_name.includes(applicationFilter.companyOrStudentName)
     )
-    .filter(
+    ?.filter(
       item =>
         applicationFilter.status === "" ||
         applicationStatus[item.application_status] === applicationFilter.status
