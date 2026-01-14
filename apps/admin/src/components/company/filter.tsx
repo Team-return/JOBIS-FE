@@ -88,7 +88,7 @@ export const CompanyFilter = () => {
           width={95}
           value={companyFilter.businessArea}
           options={["전체"].concat(
-            businessAreas?.codes.map(code => code.keyword) || []
+            businessAreas?.codes?.map(code => code.keyword) || []
           )}
           changeHandler={item => {
             setDropdownCompanyFilter(

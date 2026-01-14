@@ -84,7 +84,9 @@ const GatherModal = ({ setForm, areaIndex, setAreaIndex }: IPropsType) => {
   useEffect(() => {
     if (jobs) {
       setAddedJob(
-        addedJob.filter(job => !jobs.codes.some(code => code.code === job.code))
+        addedJob.filter(
+          job => !jobs.codes?.some(code => code.code === job.code)
+        )
       );
     }
   }, [jobs, setAddedJob]);
@@ -114,8 +116,8 @@ const GatherModal = ({ setForm, areaIndex, setAreaIndex }: IPropsType) => {
                 <S.FieldWrapper key={idx}>
                   <S.Field>
                     {jobs?.codes
-                      .filter(code => code.job_type === type)
-                      .map(code => {
+                      ?.filter(code => code.job_type === type)
+                      ?.map(code => {
                         const techTech = {
                           code: code.code,
                           keyword: code.keyword,
@@ -144,8 +146,8 @@ const GatherModal = ({ setForm, areaIndex, setAreaIndex }: IPropsType) => {
           <S.Field>
             <Flex gap={8} wrap="wrap" style={{ width: 500 }}>
               {jobs?.codes
-                .filter(code => code.job_type === "ETC")
-                .map(code => {
+                ?.filter(code => code.job_type === "ETC")
+                ?.map(code => {
                   const techTech = {
                     code: code.code,
                     keyword: code.keyword,

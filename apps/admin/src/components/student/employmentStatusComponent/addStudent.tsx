@@ -13,7 +13,7 @@ export const AddStudent = () => {
       {isPending || isRefetching ? (
         <Loading />
       ) : (
-        data?.recruitments.map((company, index) => (
+        data?.recruitments?.map((company, index) => (
           <AddStudentRow key={index} data={company} />
         ))
       )}

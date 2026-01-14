@@ -2,7 +2,7 @@ import { useEmploymentStats } from "@/apis";
 import { Text } from "@jobis/ui";
 import { Loading, Stack } from "@/components";
 import { ClassIdToLabelData } from "@/constants";
-import styled from "styled-components";
+import { styled } from "styled-components";
 import { themes } from "@jobis/design-token";
 
 export const EmploymentCurrentSituation = () => {
@@ -10,8 +10,8 @@ export const EmploymentCurrentSituation = () => {
 
   return (
     <Container>
-      {isPending ?? <Loading />}
-      {data?.classes.map(item => {
+      {isPending && <Loading />}
+      {data?.classes?.map(item => {
         return (
           <Stack key={item.class_id} direction="column" gap={16}>
             <Header justify="space-between">
@@ -27,7 +27,7 @@ export const EmploymentCurrentSituation = () => {
               </RateText>
             </Header>
             <EmploymentRateContainer>
-              {item.employment_rate_response_list.map(
+              {item.employment_rate_response_list?.map(
                 (employmentRow, index) => (
                   <EmploymentRateItem key={index}>
                     <Logo

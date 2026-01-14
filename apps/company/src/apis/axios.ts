@@ -1,7 +1,6 @@
 import axios, { AxiosError } from "axios";
 import { Cookies } from "react-cookie";
 import { reissueToken } from "./auth";
-import * as Sentry from "@sentry/nextjs";
 
 export const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
@@ -30,7 +29,6 @@ instance.interceptors.response.use(
   async response => response,
   async (error: AxiosError<AxiosError>) => {
     console.error(error);
-    Sentry.captureException(error);
     if (axios.isAxiosError(error) && error.response) {
       const {
         config,
@@ -38,8 +36,6 @@ instance.interceptors.response.use(
       } = error;
       const refreshToken = cookie.get("refresh_token");
       const { response, message } = error;
-
-      Sentry.captureMessage(data.message);
 
       if (response.data.status && response.data.status > 500) {
         window.location.href = "/serverCheck";

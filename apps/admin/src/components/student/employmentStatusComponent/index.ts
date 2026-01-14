@@ -1,3 +1,3 @@
-export * from "./AddStudent";
-export * from "./AddStudentRow";
-export * from "./EmploymentCurrentSituation";
+export * from "./addStudent";
+export * from "./addStudentRow";
+export * from "./employmentCurrentSituation";

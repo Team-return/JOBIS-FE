@@ -21,7 +21,7 @@ export const ReviewModal = ({ id }: PropsType) => {
 
   const { data: reviewDetailData } = useGetReviewDetail(selectId);
 
-  const selectStudent = reviewsData?.reviews.find(
+  const selectStudent = reviewsData?.reviews?.find(
     item => item.review_id === selectId
   );
 
@@ -57,8 +57,8 @@ export const ReviewModal = ({ id }: PropsType) => {
       </TitleWrapper>
       <Stack direction="column" gap={10} margin="0 0 28px 0">
         {reviewsData?.reviews
-          .filter(item => item.writer.includes(search))
-          .map((item, idx) => (
+          ?.filter(item => item.writer.includes(search))
+          ?.map((item, idx) => (
             <ReviewStudentRow
               item={item}
               key={idx}
@@ -77,7 +77,7 @@ export const ReviewModal = ({ id }: PropsType) => {
         style={{ minHeight: "124px", maxHeight: "250px" }}
       >
         {selectId ? (
-          reviewDetailData?.qna_responses.map((qna, idx) => (
+          reviewDetailData?.qna_responses?.map((qna, idx) => (
             <ReviewBox key={idx} item={qna} />
           ))
         ) : (

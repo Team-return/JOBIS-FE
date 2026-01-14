@@ -40,7 +40,7 @@ export const ApplicantModal = ({ isRequest, status, id }: PropsType) => {
     }
   );
 
-  const selectStudent = data?.applications.find(
+  const selectStudent = data?.applications?.find(
     item => item.application_id === selectId
   );
 
@@ -81,7 +81,7 @@ export const ApplicantModal = ({ isRequest, status, id }: PropsType) => {
         ))}
       </TitleWrapper>
       <Stack direction="column" gap={10}>
-        {data?.applications.map((item, idx) => (
+        {data?.applications?.map((item, idx) => (
           <ApplicantStudentRow
             key={idx}
             item={item}
@@ -105,7 +105,7 @@ export const ApplicantModal = ({ isRequest, status, id }: PropsType) => {
       </TitleWrapper>
       <Stack direction="column" gap={10}>
         {selectStudent ? (
-          selectStudent.attachments.map((attachment, idx) => (
+          selectStudent.attachments?.map((attachment, idx) => (
             <ApplicantFileRow key={idx} attachment={attachment} idx={idx} />
           ))
         ) : (

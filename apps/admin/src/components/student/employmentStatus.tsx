@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { BigButton, Stack } from "@/components";
-import { styled } from "styled-components";
 import { AddStudent, EmploymentCurrentSituation } from "@/components";
 import { useNavigate } from "react-router-dom";
 
