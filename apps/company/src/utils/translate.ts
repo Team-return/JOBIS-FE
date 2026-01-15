@@ -15,5 +15,6 @@ export const hiringProgressType: Record<IHiringProgress, string> = {
 export const companyType = {
   LEAD: "선도기업",
   PARTICIPATING: "참여기업",
+  MANUAL_ADD: "수동등록",
   "": "",
 };
