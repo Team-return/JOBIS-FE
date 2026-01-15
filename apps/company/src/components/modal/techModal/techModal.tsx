@@ -59,7 +59,6 @@ const TechModal = () => {
         !addedTechList.some(list => list.keyword === tech.keyword)
       ) {
         pushArray(tech);
-        appendAddedTechList(tech);
       }
     }
     setSearch("");

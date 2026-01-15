@@ -8,7 +8,7 @@ export const AlignVariant = createVar();
 
 export const FooterStyle = style({
   width: "100vw",
-  backgroundColor: themes.Color.primary[40],
+  backgroundColor: themes.Color.subColor.blue[40],
   padding: "48px 0",
   boxSizing: "border-box",
   display: "flex",

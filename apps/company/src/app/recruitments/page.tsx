@@ -258,7 +258,6 @@ export default function Recruitments() {
                           icon="Date"
                           color={themes.Color.grayScale[80]}
                           size={20}
-                          cursor="pointer"
                         />
                       }
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -353,16 +352,16 @@ export default function Recruitments() {
                         <S.FieldBoxTitle>
                           분야:{" "}
                           {jobName?.codes
-                            .concat(addedJob)
-                            .filter(code => job_codes.includes(code?.code))
-                            .map(code => code.keyword)
-                            .join(" / ")}
+                            ?.concat(addedJob)
+                            ?.filter(code => job_codes.includes(code?.code))
+                            ?.map(code => code.keyword)
+                            ?.join(" / ")}
                         </S.FieldBoxTitle>
                         <S.FieldText>
                           사용기술 :{" "}
                           {techName?.codes
-                            .concat(addedTechList)
-                            .map(
+                            ?.concat(addedTechList)
+                            ?.map(
                               code =>
                                 tech_codes.includes(code?.code) &&
                                 `${code?.keyword} `

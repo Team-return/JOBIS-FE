@@ -20,6 +20,7 @@ const Modal = ({ onClose, children, width, closeAble }: ModalProps) => {
     <ModalPortal>
       <S.Background onClick={onClose}>
         <S.ModalContainer width={width} onClick={blockClick}>
+          {children}
           {closeAble && (
             <Icon
               cursor="pointer"
@@ -30,7 +31,6 @@ const Modal = ({ onClose, children, width, closeAble }: ModalProps) => {
               style={{ position: "absolute", top: 8, right: 8 }}
             />
           )}
-          {children}
         </S.ModalContainer>
       </S.Background>
     </ModalPortal>

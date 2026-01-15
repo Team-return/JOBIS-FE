@@ -19,6 +19,7 @@ export const LabelStyle = style({
   gap: 4,
   color: themes.Color.grayScale[90],
   fontWeight: themes.FontWeight.regular,
+  width: "100%",
   ...themes.Font.body3,
 });
 
@@ -26,6 +27,7 @@ export const InputWrapper = style({
   position: "relative",
   display: "flex",
   alignItems: "center",
+  width: "100%",
 });
 
 export const InputStyle = style({

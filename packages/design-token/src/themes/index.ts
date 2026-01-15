@@ -28,6 +28,8 @@ export const Color = {
     blue: {
       10: "var(--subcolor-blue-10)",
       20: "var(--subcolor-blue-20)",
+      30: "var(--subcolor-blue-30)",
+      40: "var(--subcolor-blue-40)",
     },
     yellow: {
       10: "var(--subcolor-yellow-10)",

@@ -264,7 +264,7 @@ export default function Recruitments({ params }: { params: { id: string } }) {
           area.job
             .filter(
               job =>
-                !jobName?.codes.map(jobCode => jobCode.code).includes(job.id)
+                !jobName?.codes?.map(jobCode => jobCode.code).includes(job.id)
             )
             .map(job => ({ keyword: job.name, code: job.id }))
         )
@@ -275,7 +275,7 @@ export default function Recruitments({ params }: { params: { id: string } }) {
             .filter(
               tech =>
                 !techName?.codes
-                  .map(techCode => techCode.code)
+                  ?.map(techCode => techCode.code)
                   .includes(tech.id)
             )
             .map(tech => ({ keyword: tech.name, code: tech.id }))
@@ -512,7 +512,7 @@ export default function Recruitments({ params }: { params: { id: string } }) {
                             setTechList(
                               tech_codes
                                 .map(techCode => {
-                                  return techName?.codes.find(
+                                  return techName?.codes?.find(
                                     code => code.code === techCode
                                   ) as ICode;
                                 })
@@ -764,7 +764,9 @@ export default function Recruitments({ params }: { params: { id: string } }) {
               <Input
                 width={604}
                 placeholder="직접입력"
-                {...register("submit_document")}
+                {...register("submit_document", {
+                  required: "필수 입력 항목입니다.",
+                })}
                 errorMessage={errors.submit_document?.message}
               />
               <Flex gap={20}>
