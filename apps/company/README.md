@@ -14,7 +14,6 @@
 > 사업자번호 인증
 <img width="1204" alt="스크린샷 2024-03-29 오후 12 19 01" src="https://github.com/Team-return/JOBIS/assets/102665117/271ef93c-b6dc-4cd5-b341-e7b42fd27721">
 <br />
-<br />
 
 > 인증코드 입력
 <img width="1204" alt="스크린샷 2024-03-29 오후 12 21 01" src="https://github.com/Team-return/JOBIS/assets/102665117/f1e31a0b-bfb4-4356-8f04-bc846466c5ca">
