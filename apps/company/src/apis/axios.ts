@@ -1,23 +1,53 @@
-import axios, { AxiosError } from "axios";
+import axios, { AxiosError, InternalAxiosRequestConfig } from "axios";
 import { Cookies } from "react-cookie";
-import { reissueToken } from "./auth";
+import { ReissueToken } from "./auth";
+import * as Sentry from "@sentry/nextjs";
+
+type ErrorResponseData = {
+  message?: string;
+  status?: number;
+};
+
+type RetryableRequestConfig = InternalAxiosRequestConfig & {
+  _retry?: boolean;
+};
 
 export const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
-  timeout: 10_000,
+  timeout: 10_000
 });
 
 const cookie = new Cookies();
+
+const clearAuthCookies = () => {
+  cookie.remove("access_token", { path: "/" });
+  cookie.remove("refresh_token", { path: "/" });
+  cookie.remove("authority", { path: "/" });
+};
+
+const redirectTo = (path: string) => {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  if (window.location.pathname !== path) {
+    window.location.href = path;
+  }
+};
 
 instance.interceptors.request.use(
   config => {
     const accessToken = cookie.get("access_token");
     const returnConfig = {
-      ...config,
+      ...config
     };
+
+    returnConfig.headers = returnConfig.headers ?? {};
+
     if (accessToken) {
-      returnConfig.headers!.Authorization = `Bearer ${accessToken}`;
+      returnConfig.headers.Authorization = `Bearer ${accessToken}`;
     }
+
     return returnConfig;
   },
   (error: AxiosError) => {
@@ -27,73 +57,86 @@ instance.interceptors.request.use(
 
 instance.interceptors.response.use(
   async response => response,
-  async (error: AxiosError<AxiosError>) => {
+  async (error: AxiosError<ErrorResponseData>) => {
     console.error(error);
-    if (axios.isAxiosError(error) && error.response) {
-      const {
-        config,
-        response: { data },
-      } = error;
-      const refreshToken = cookie.get("refresh_token");
-      const { response, message } = error;
+    Sentry.captureException(error);
 
-      if (response.data.status && response.data.status > 500) {
-        window.location.href = "/serverCheck";
-        throw error;
-      }
+    if (!axios.isAxiosError(error) || !error.response) {
+      throw error;
+    }
 
-      if (response.data.status === null) {
-        return;
-      }
+    const { config, response } = error;
+    const refreshToken = cookie.get("refresh_token");
+    const status = response.status ?? response.data?.status;
+    const responseMessage = response.data?.message;
+    Sentry.captureMessage(responseMessage ?? error.message);
+    const originalRequest = config as RetryableRequestConfig | undefined;
+    const isReissueRequest = originalRequest?.url?.includes("/auth/reissue");
+    const isAuthError =
+      status === 401 ||
+      status === 403 ||
+      responseMessage === "Invalid Token" ||
+      responseMessage === "Token Expired";
+
+    if ((response.data?.status ?? response.status) >= 500) {
+      redirectTo("/serverCheck");
+      throw error;
+    }
+
+    if (!isAuthError) {
+      throw error;
+    }
+
+    if (!originalRequest || originalRequest._retry || isReissueRequest) {
+      clearAuthCookies();
+      redirectTo("/");
+      throw error;
+    }
+
+    if (!refreshToken) {
+      clearAuthCookies();
+      redirectTo("/");
+      throw error;
+    }
+
+    originalRequest._retry = true;
+    cookie.remove("access_token", { path: "/" });
+
+    try {
+      const res = await ReissueToken(refreshToken);
+      const accessExpired = new Date(res.access_expires_at);
+      const refreshExpired = new Date(res.refresh_expires_at);
+
+      cookie.set("access_token", res.access_token, {
+        expires: accessExpired,
+        path: "/"
+      });
+      cookie.set("refresh_token", res.refresh_token, {
+        expires: refreshExpired,
+        path: "/"
+      });
+      cookie.set("authority", res.authority, { path: "/" });
+
+      originalRequest.headers = originalRequest.headers ?? {};
+      originalRequest.headers.Authorization = `Bearer ${res.access_token}`;
+
+      return instance(originalRequest);
+    } catch (reissueError) {
+      const reissueAxiosError = reissueError as AxiosError<ErrorResponseData>;
+      const reissueStatus =
+        reissueAxiosError.response?.status ??
+        reissueAxiosError.response?.data?.status;
 
       if (
-        response.data.message === "Invalid Token" ||
-        response.data.message === "Token Expired" ||
-        message === "Request failed with status code 403"
+        reissueStatus === 404 ||
+        reissueStatus === 401 ||
+        reissueStatus === 403
       ) {
-        const originalRequest = config;
-
-        if (refreshToken) {
-          cookie.remove("access_token");
-          reissueToken(refreshToken)
-            .then(res => {
-              const accessExpired = new Date(res.access_expires_at);
-              const refreshExpired = new Date(res.refresh_expires_at);
-
-              cookie.set("access_token", res.access_token, {
-                expires: accessExpired,
-                path: "/",
-              });
-              cookie.set("refresh_token", res.refresh_token, {
-                expires: refreshExpired,
-                path: "/",
-              });
-              cookie.set("authority", res.authority);
-              if (originalRequest!.headers) {
-                originalRequest!.headers.Authorization = `Bearer ${res.access_token}`;
-              }
-              return axios(originalRequest!);
-            })
-            .catch((err: AxiosError<AxiosError>) => {
-              const { response: errorResponse } = err;
-
-              if (
-                errorResponse?.data.status === 404 ||
-                errorResponse?.data.status === 401
-              ) {
-                cookie.remove("access_token");
-                cookie.remove("refresh_token");
-                window.location.href = "/";
-              }
-            });
-        } else {
-          cookie.remove("access_token");
-          cookie.remove("refresh_token");
-          window.location.href = "/";
-        }
-      } else {
-        throw error;
+        clearAuthCookies();
+        redirectTo("/");
       }
+
+      throw reissueError;
     }
   }
 );
