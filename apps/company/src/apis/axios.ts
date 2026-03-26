@@ -1,7 +1,6 @@
 import axios, { AxiosError, InternalAxiosRequestConfig } from "axios";
 import { Cookies } from "react-cookie";
-import { ReissueToken } from "./auth";
-import * as Sentry from "@sentry/nextjs";
+import { reissueToken } from "./auth";
 
 type ErrorResponseData = {
   message?: string;
@@ -59,7 +58,6 @@ instance.interceptors.response.use(
   async response => response,
   async (error: AxiosError<ErrorResponseData>) => {
     console.error(error);
-    Sentry.captureException(error);
 
     if (!axios.isAxiosError(error) || !error.response) {
       throw error;
@@ -69,7 +67,6 @@ instance.interceptors.response.use(
     const refreshToken = cookie.get("refresh_token");
     const status = response.status ?? response.data?.status;
     const responseMessage = response.data?.message;
-    Sentry.captureMessage(responseMessage ?? error.message);
     const originalRequest = config as RetryableRequestConfig | undefined;
     const isReissueRequest = originalRequest?.url?.includes("/auth/reissue");
     const isAuthError =
@@ -103,7 +100,7 @@ instance.interceptors.response.use(
     cookie.remove("access_token", { path: "/" });
 
     try {
-      const res = await ReissueToken(refreshToken);
+      const res = await reissueToken(refreshToken);
       const accessExpired = new Date(res.access_expires_at);
       const refreshExpired = new Date(res.refresh_expires_at);
 
