@@ -765,7 +765,13 @@ export default function Recruitments({ params }: { params: { id: string } }) {
                 width={604}
                 placeholder="직접입력"
                 {...register("submit_document", {
-                  required: "필수 입력 항목입니다.",
+                  // 자기소개서·이력서·포트폴리오 중 하나라도 체크했으면 직접입력은 비워도 된다
+                  validate: value =>
+                    !!value?.trim() ||
+                    Object.values(submitDocumentOption).some(
+                      unchecked => !unchecked
+                    ) ||
+                    "필수 입력 항목입니다.",
                 })}
                 errorMessage={errors.submit_document?.message}
               />
@@ -805,9 +811,8 @@ export default function Recruitments({ params }: { params: { id: string } }) {
           <InputTemplate key="availability" title="전환 가능 여부">
             <Flex style={{ width: 604 }}>
               <Checkbox
-                name="self_introduction"
-                checked={!submitDocumentOption.self_introduction}
-                onChange={changeCheckbox}
+                checked={watch("hire_convertible")}
+                {...register("hire_convertible")}
               >
                 채용 전환 가능
               </Checkbox>
