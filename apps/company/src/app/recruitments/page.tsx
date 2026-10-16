@@ -378,11 +378,11 @@ export default function Recruitments() {
                         <S.PeopleCount>{hiring}명</S.PeopleCount>
                         <Icon
                           icon="EditPencil"
-                          size={12}
+                          size={18}
                           style={{
                             position: "absolute",
-                            right: 40,
-                            top: 15,
+                            right: 42,
+                            top: 13,
                           }}
                           onClick={() => {
                             openModal("GATHER_FIELD");
@@ -405,8 +405,8 @@ export default function Recruitments() {
                           cursor="pointer"
                         />
                         <S.CancelIcon
-                          width={10}
-                          height={10}
+                          width={14}
+                          height={14}
                           onClick={() =>
                             setAreas(areas.filter((_, idx2) => idx2 !== idx))
                           }
