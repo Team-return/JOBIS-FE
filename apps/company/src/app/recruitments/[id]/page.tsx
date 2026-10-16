@@ -65,7 +65,7 @@ export default function Recruitments({ params }: { params: { id: string } }) {
       end_date: recruitmentDetail?.end_date,
       etc: recruitmentDetail?.etc,
       hiring_progress: recruitmentDetail?.hiring_progress || [],
-      military_support: !!recruitmentDetail?.military,
+      military_support: !!recruitmentDetail?.military_support,
       pay: regex.money(recruitmentDetail?.pay || ""),
       additional_qualifications: recruitmentDetail?.additional_qualifications,
       required_licenses: recruitmentDetail?.required_licenses || [],
@@ -237,7 +237,7 @@ export default function Recruitments({ params }: { params: { id: string } }) {
       working_hours: watch("flexible_working")
         ? working_hours
         : `${start_time} ~ ${end_time}`,
-      military: military_support || false,
+      military_support: military_support || false,
       etc: etc || undefined,
     });
   };
