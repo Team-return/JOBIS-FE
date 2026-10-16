@@ -31,8 +31,9 @@ export const Toast = (props: ToastPayload) => {
       case "error":
         return themes.Color.subColor.red[20];
 
+      // blue[20]은 배경용 연한 색이라 아이콘이 거의 안 보인다. 다른 타입처럼 진한 색을 쓴다
       case "message":
-        return themes.Color.subColor.blue[20];
+        return themes.Color.subColor.blue[30];
 
       case "warning":
         return themes.Color.subColor.yellow[20];
