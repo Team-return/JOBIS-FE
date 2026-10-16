@@ -63,11 +63,14 @@ const HeaderWrap = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 22px 340px;
+
+  /* 본문(기업 정보 1240px / 1440 이하 960px)과 좌우 끝을 맞춘다.
+     고정 340px이면 1441~1919px 화면에서 로고만 안쪽으로 밀려 보인다 */
+  padding: 22px max(20px, calc((100% - 1240px) / 2));
 
   background-color: #fff;
 
   @media (width <= 1440px) {
-    padding: 22px 240px;
+    padding: 22px max(20px, calc((100% - 960px) / 2));
   }
 `;
