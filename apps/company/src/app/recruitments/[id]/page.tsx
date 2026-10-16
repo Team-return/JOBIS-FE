@@ -57,6 +57,7 @@ export default function Recruitments({ params }: { params: { id: string } }) {
     setValue,
     control,
     reset,
+    trigger,
   } = useForm<IRecruitment & { start_time: string; end_time: string }>({
     values: {
       integration_plan: !!recruitmentDetail?.integration_plan,
@@ -160,6 +161,13 @@ export default function Recruitments({ params }: { params: { id: string } }) {
     const { name, checked } = e.target;
     setSubmitDocumentOption(prev => ({ ...prev, [name]: !checked }));
   };
+
+  // 서류를 체크하면 직접입력 필수 여부가 바뀌므로, 이미 떠 있는 오류를 다시 검사한다
+  useEffect(() => {
+    if (errors.submit_document) {
+      trigger("submit_document");
+    }
+  }, [submitDocumentOption, errors.submit_document, trigger]);
 
   const { mutateAsync: updateRecruitment } = useUpdateRecruitment(params!.id);
   const { mutateAsync: updateRecruitArea } = useUpdateRecruitArea();
