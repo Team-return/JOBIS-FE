@@ -36,6 +36,9 @@ const TechModal = () => {
     appendTechList(tech);
   };
 
+  // 목록에 없는 기술도 입력한 이름 그대로 추가할 수 있다는 걸 드러낸다
+  const addTechLabel = `직접 추가: ${search}`;
+
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
   };
@@ -93,6 +96,7 @@ const TechModal = () => {
           <div>
             <S.SearchInput
               type="text"
+              placeholder="없는 기술은 직접 입력"
               value={search}
               onChange={onChange}
               onKeyDown={e => e.key === "Enter" && addTech()}
@@ -102,7 +106,7 @@ const TechModal = () => {
             />
             <S.SearchIcon src={SearchBtn} width={40} height={40} alt="" />
             {search.length > 0 && (
-              <S.AddText onClick={addTech}>추가하기</S.AddText>
+              <S.AddText onClick={addTech}>{addTechLabel}</S.AddText>
             )}
           </div>
         </S.TitleWrapper>
