@@ -57,6 +57,7 @@ export default function Recruitments({ params }: { params: { id: string } }) {
     setValue,
     control,
     reset,
+    trigger,
   } = useForm<IRecruitment & { start_time: string; end_time: string }>({
     values: {
       integration_plan: !!recruitmentDetail?.integration_plan,
@@ -65,7 +66,7 @@ export default function Recruitments({ params }: { params: { id: string } }) {
       end_date: recruitmentDetail?.end_date,
       etc: recruitmentDetail?.etc,
       hiring_progress: recruitmentDetail?.hiring_progress || [],
-      military_support: !!recruitmentDetail?.military,
+      military_support: !!recruitmentDetail?.military_support,
       pay: regex.money(recruitmentDetail?.pay || ""),
       additional_qualifications: recruitmentDetail?.additional_qualifications,
       required_licenses: recruitmentDetail?.required_licenses || [],
@@ -161,6 +162,13 @@ export default function Recruitments({ params }: { params: { id: string } }) {
     setSubmitDocumentOption(prev => ({ ...prev, [name]: !checked }));
   };
 
+  // 서류를 체크하면 직접입력 필수 여부가 바뀌므로, 이미 떠 있는 오류를 다시 검사한다
+  useEffect(() => {
+    if (errors.submit_document) {
+      trigger("submit_document");
+    }
+  }, [submitDocumentOption, errors.submit_document, trigger]);
+
   const { mutateAsync: updateRecruitment } = useUpdateRecruitment(params!.id);
   const { mutateAsync: updateRecruitArea } = useUpdateRecruitArea();
   const { mutateAsync: addRecruitArea } = useAddRecruitArea(params!.id);
@@ -237,7 +245,7 @@ export default function Recruitments({ params }: { params: { id: string } }) {
       working_hours: watch("flexible_working")
         ? working_hours
         : `${start_time} ~ ${end_time}`,
-      military: military_support || false,
+      military_support: military_support || false,
       etc: etc || undefined,
     });
   };
@@ -493,11 +501,11 @@ export default function Recruitments({ params }: { params: { id: string } }) {
                         <S.PeopleCount>{hiring}명</S.PeopleCount>
                         <Icon
                           icon="EditPencil"
-                          size={12}
+                          size={18}
                           style={{
                             position: "absolute",
-                            right: 40,
-                            top: 15,
+                            right: 42,
+                            top: 13,
                           }}
                           onClick={() => {
                             openModal("GATHER_FIELD");
@@ -523,8 +531,8 @@ export default function Recruitments({ params }: { params: { id: string } }) {
                           cursor="pointer"
                         />
                         <S.CancelIcon
-                          width={10}
-                          height={10}
+                          width={14}
+                          height={14}
                           onClick={() => {
                             setAreas(areas.filter((_, idx2) => idx2 !== idx));
                             setDeleteAreas(prev => [...prev, area]);
@@ -765,7 +773,13 @@ export default function Recruitments({ params }: { params: { id: string } }) {
                 width={604}
                 placeholder="직접입력"
                 {...register("submit_document", {
-                  required: "필수 입력 항목입니다.",
+                  // 자기소개서·이력서·포트폴리오 중 하나라도 체크했으면 직접입력은 비워도 된다
+                  validate: value =>
+                    !!value?.trim() ||
+                    Object.values(submitDocumentOption).some(
+                      unchecked => !unchecked
+                    ) ||
+                    "필수 입력 항목입니다.",
                 })}
                 errorMessage={errors.submit_document?.message}
               />
@@ -805,9 +819,8 @@ export default function Recruitments({ params }: { params: { id: string } }) {
           <InputTemplate key="availability" title="전환 가능 여부">
             <Flex style={{ width: 604 }}>
               <Checkbox
-                name="self_introduction"
-                checked={!submitDocumentOption.self_introduction}
-                onChange={changeCheckbox}
+                checked={watch("hire_convertible")}
+                {...register("hire_convertible")}
               >
                 채용 전환 가능
               </Checkbox>

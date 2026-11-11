@@ -1,26 +1,47 @@
-import { Flex, Text } from "@jobis/ui";
-import Logobule from "../../public/logoBlue.png";
+import { Flex, Text, useToast } from "@jobis/ui";
+import LogoWithText from "../../public/logoWithText.png";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { styled } from "styled-components";
+import { Cookies } from "react-cookie";
+
+const cookie = new Cookies();
 
 export const Header = () => {
   const param = usePathname();
   const navigation = useRouter();
+  const { toast } = useToast();
+
+  // 토큰은 기업 등록을 마쳐야 발급된다. 등록 전에 메뉴로 이동하면 API가 401로 실패해
+  // 로그인 화면으로 튕기므로, 이동하지 않고 먼저 등록하라고 알린다
+  const goTo = (path: string) => {
+    if (!cookie.get("access_token") && !cookie.get("refresh_token")) {
+      toast({
+        payload: {
+          type: "message",
+          message: "기업 정보를 먼저 등록해주세요.",
+        },
+      });
+      return;
+    }
+    navigation.push(path);
+  };
   return (
     <HeaderWrap>
       <Image
-        src={Logobule}
+        src={LogoWithText}
         alt="자비스 로고"
+        width={90}
+        height={27}
         style={{ cursor: "pointer" }}
-        onClick={() => navigation.push("/my")}
+        onClick={() => goTo("/my")}
       />
       <Flex gap={48}>
         <Text
           fontSize="body2"
           style={{ cursor: "pointer" }}
           fontWeight={param.includes("my") ? "bold" : "medium"}
-          onClick={() => navigation.push("/my")}
+          onClick={() => goTo("/my")}
         >
           모집의뢰서
         </Text>
@@ -28,7 +49,7 @@ export const Header = () => {
           fontSize="body2"
           fontWeight={param.includes("company") ? "bold" : "medium"}
           style={{ cursor: "pointer" }}
-          onClick={() => navigation.push("/company")}
+          onClick={() => goTo("/company")}
         >
           내 기업정보
         </Text>
@@ -44,11 +65,18 @@ const HeaderWrap = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 22px 340px;
+
+  /* 로고 높이가 바뀌어도 헤더 높이(80px)는 그대로 둔다 */
+  box-sizing: border-box;
+  height: 80px;
+
+  /* 본문(기업 정보 1240px / 1440 이하 960px)과 좌우 끝을 맞춘다.
+     고정 340px이면 1441~1919px 화면에서 로고만 안쪽으로 밀려 보인다 */
+  padding: 22px max(20px, calc((100% - 1240px) / 2));
 
   background-color: #fff;
 
   @media (width <= 1440px) {
-    padding: 22px 240px;
+    padding: 22px max(20px, calc((100% - 960px) / 2));
   }
 `;

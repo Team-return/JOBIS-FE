@@ -116,12 +116,15 @@ export const AddText = styled.div`
   position: absolute;
   width: 250px;
   height: 40px;
-  padding: 10px 50px 10px 20px;
+  padding: 10px 20px;
   border-radius: 0 0 30px 30px;
 
   background-color: ${themes.Color.grayScale[30]};
+  overflow: hidden;
 
-  color: ${themes.Color.grayScale[50]};
+  color: ${themes.Color.primary[20]};
   text-align: left;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   cursor: pointer;
 `;

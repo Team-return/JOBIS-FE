@@ -92,7 +92,14 @@ const GatherModal = ({ setForm, areaIndex, setAreaIndex }: IPropsType) => {
   }, [jobs, setAddedJob]);
 
   return (
-    <S.Container>
+    <S.Container
+      // 이 모달은 포털로 그려져도 React 이벤트가 바깥 모집의뢰서 폼까지 올라간다.
+      // 모달 안에서 제출이 일어나면 모집의뢰서 전체가 저장되므로 여기서 끊는다
+      onSubmit={e => {
+        e.preventDefault();
+        e.stopPropagation();
+      }}
+    >
       <S.BigWrapper>
         <Text fontSize="h5" fontWeight="bold" align="left">
           채용직무<span style={{ color: "#0087FF" }}> *</span>
@@ -266,7 +273,7 @@ const GatherModal = ({ setForm, areaIndex, setAreaIndex }: IPropsType) => {
               </S.Card>
             );
           })}
-          <S.AddTechButton onClick={() => openModal("USE_TECH")}>
+          <S.AddTechButton type="button" onClick={() => openModal("USE_TECH")}>
             + 추가
           </S.AddTechButton>
         </S.CardWrapper>
@@ -340,7 +347,7 @@ const GatherModal = ({ setForm, areaIndex, setAreaIndex }: IPropsType) => {
         </Flex>
       </S.BigWrapper>
       <Flex justify="center" gap={15}>
-        <Button variant="outline" onClick={resetState}>
+        <Button type="button" variant="outline" onClick={resetState}>
           취소
         </Button>
         <Button

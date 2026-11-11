@@ -622,7 +622,6 @@ export default function Registration() {
                 )}
               />
             </InputTemplate>
-            ,
           </Flex>,
           <InputTemplate key="email" title="이메일" required>
             <Controller
