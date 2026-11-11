@@ -1,5 +1,5 @@
 import { Flex, Text, useToast } from "@jobis/ui";
-import Logobule from "../../public/logoBlue.png";
+import LogoWithText from "../../public/logoWithText.png";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { styled } from "styled-components";
@@ -29,8 +29,10 @@ export const Header = () => {
   return (
     <HeaderWrap>
       <Image
-        src={Logobule}
+        src={LogoWithText}
         alt="자비스 로고"
+        width={90}
+        height={27}
         style={{ cursor: "pointer" }}
         onClick={() => goTo("/my")}
       />
@@ -63,6 +65,10 @@ const HeaderWrap = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
+
+  /* 로고 높이가 바뀌어도 헤더 높이(80px)는 그대로 둔다 */
+  box-sizing: border-box;
+  height: 80px;
 
   /* 본문(기업 정보 1240px / 1440 이하 960px)과 좌우 끝을 맞춘다.
      고정 340px이면 1441~1919px 화면에서 로고만 안쪽으로 밀려 보인다 */
