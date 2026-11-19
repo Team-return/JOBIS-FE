@@ -10,6 +10,14 @@ import { useMyCompanyInfo } from "@/hooks/apis/useCompanyApi";
 import { useModal } from "@/hooks/useModal";
 import EditModal from "@/components/modal/editModal/editModal";
 
+// 업로드 API는 `EXTENSION_FILE/...` 같은 상대 경로를 돌려주므로 이미지 주소를 붙여 새 탭에서 연다
+const openFile = (path: string) => {
+  const url = /^https?:\/\//i.test(path)
+    ? path
+    : `${process.env.NEXT_PUBLIC_IMAGE_URL}/${path}`;
+  window.open(url, "_blank", "noopener,noreferrer");
+};
+
 export default function Company() {
   const { data: myCompanyInfo } = useMyCompanyInfo();
   const { modalState, closeModal, openModal } = useModal();
@@ -118,7 +126,10 @@ export default function Company() {
             title="사업자 등록증"
             content={
               myCompanyInfo?.biz_registration_url ? (
-                <S.FileWrapper type="button">
+                <S.FileWrapper
+                  type="button"
+                  onClick={() => openFile(myCompanyInfo.biz_registration_url)}
+                >
                   <Flex align="center" gap={4}>
                     <Icon
                       icon="FileEarmarkArrowDown"
@@ -148,7 +159,11 @@ export default function Company() {
               myCompanyInfo?.attachment_urls &&
               myCompanyInfo.attachment_urls.length > 0
                 ? myCompanyInfo.attachment_urls.map((file, idx) => (
-                    <S.FileWrapper type="button" key={idx}>
+                    <S.FileWrapper
+                      type="button"
+                      key={idx}
+                      onClick={() => openFile(file)}
+                    >
                       <Flex align="center" gap={4}>
                         <Icon
                           icon="FileEarmarkArrowDown"

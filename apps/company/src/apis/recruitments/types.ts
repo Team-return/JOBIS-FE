@@ -40,16 +40,12 @@ export interface IRecruitment {
   hire_convertible: boolean;
 }
 
-export interface IEditRecruitmentRequest
-  extends Omit<
-    IRecruitment,
-    "areas" | "personal_contact" | "winter_intern" | "military_support"
-  > {
-  military: boolean;
-}
+export type IEditRecruitmentRequest = Omit<
+  IRecruitment,
+  "areas" | "personal_contact" | "winter_intern"
+>;
 
-export interface IMyRecruitmentResponse
-  extends Omit<IRecruitment, "areas" | "military_support"> {
+export interface IMyRecruitmentResponse extends Omit<IRecruitment, "areas"> {
   recruitment_id: number;
   recruit_year: number;
   company_biz_no?: string;
@@ -63,7 +59,6 @@ export interface IMyRecruitmentResponse
     preferential_treatment: string;
   }[];
   company_name: string;
-  military: boolean;
   company_profile_url: string;
 }
 

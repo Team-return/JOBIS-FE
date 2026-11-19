@@ -18,7 +18,10 @@ const LicenseModal = ({ setForm, requiredLicensesArray }: PropsType) => {
   const { closeModal } = useModal();
   const [search, setSearch] = useState("");
   const [licenses, setLicenses] = useState<string[]>([]);
-  const { data: requiredLicenses } = useGetRequiredLicensesList(1, 1972);
+  const { data: requiredLicenses, isError } = useGetRequiredLicensesList(
+    1,
+    1972
+  );
   const requiredLicensesNames = requiredLicenses?.data.map(
     requiredLicense => requiredLicense.종목명
   );
@@ -70,6 +73,12 @@ const LicenseModal = ({ setForm, requiredLicensesArray }: PropsType) => {
         })}
       </S.SmallCardWrapper>
       <S.MaxSize>
+        {/* 공공데이터 API(인증키 필요) 조회가 실패하면 빈 목록 대신 실패했다고 알린다 */}
+        {isError && (
+          <S.ContentsText>
+            자격증 목록을 불러오지 못했습니다. 잠시 후 다시 시도해주세요.
+          </S.ContentsText>
+        )}
         <S.BigCardWrapper>
           {requiredLicensesFilteringData
             ?.filter(datas => datas.includes(search))
