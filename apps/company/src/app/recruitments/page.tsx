@@ -26,6 +26,7 @@ import { useModal } from "@/hooks/useModal";
 import Modal from "@/components/modal";
 import ProgressModal from "@/components/modal/progressModal/progressModal";
 import { regex } from "@/utils/regex";
+import { validateEndDate, validateStartDate } from "@/utils/recruitPeriod";
 import { useSearchParams } from "next/navigation";
 import GatherModal from "@/components/modal/recruitmentModal/recruitmentModal";
 import { useAreaState } from "@/store/areasState";
@@ -245,6 +246,9 @@ export default function Recruitments() {
                       value: /^\d{4}-\d{2}-\d{2}$/,
                       message: "유효한 날짜 형식이 아닙니다. (ex: yyyy-mm-dd)",
                     },
+                    // 지난 날짜로 모집기간을 등록하지 못하게 한다
+                    validate: value =>
+                      validateStartDate(value, { alwaysRecruit }),
                   }}
                   render={({ field }) => (
                     <Input
@@ -285,6 +289,12 @@ export default function Recruitments() {
                       value: /^\d{4}-\d{2}-\d{2}$/,
                       message: "유효한 날짜 형식이 아닙니다. (ex: yyyy-mm-dd)",
                     },
+                    validate: (value, formValues) =>
+                      validateEndDate(
+                        value,
+                        formValues.start_date,
+                        alwaysRecruit
+                      ),
                   }}
                   render={({ field }) => (
                     <Input
