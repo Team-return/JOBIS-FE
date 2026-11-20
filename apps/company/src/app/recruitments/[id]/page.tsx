@@ -815,17 +815,6 @@ export default function Recruitments({ params }: { params: { id: string } }) {
               errorMessage={errors.etc?.message}
             />
           </InputTemplate>,
-          <InputTemplate key="availability" title="전환 가능 여부">
-            <Flex style={{ width: 604 }}>
-              <Checkbox
-                name="self_introduction"
-                checked={!submitDocumentOption.self_introduction}
-                onChange={changeCheckbox}
-              >
-                채용 전환 가능
-              </Checkbox>
-            </Flex>
-          </InputTemplate>,
         ]}
       />
       <Flex justify="flex-end" gap={12} style={{ width: 850 }}>

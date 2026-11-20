@@ -197,6 +197,7 @@ export default function Recruitments() {
         : `${start_time} ~ ${end_time}`,
       etc: etc || undefined,
       personal_contact: false,
+      hire_convertible: false,
       additional_qualifications: additional_qualifications || undefined,
     });
   };
@@ -710,29 +711,24 @@ export default function Recruitments() {
               errorMessage={errors.etc?.message}
             />
           </InputTemplate>,
-          searchParams.get("winter") ? (
-            <InputTemplate title="현장실습 연계 계획">
-              <Flex style={{ width: 604 }}>
-                <Checkbox
-                  checked={watch("integration_plan")}
-                  {...register("integration_plan")}
+          // 채용 전환 가능 여부는 쓰지 않아 묻지 않고, 겨울인턴만 현장실습 연계 계획을 받는다
+          ...(searchParams.get("winter")
+            ? [
+                <InputTemplate
+                  title="현장실습 연계 계획"
+                  key="integration_plan"
                 >
-                  연계 가능
-                </Checkbox>
-              </Flex>
-            </InputTemplate>
-          ) : (
-            <InputTemplate title="전환 가능 여부">
-              <Flex style={{ width: 604 }}>
-                <Checkbox
-                  checked={watch("hire_convertible")}
-                  {...register("hire_convertible")}
-                >
-                  채용 전환 가능
-                </Checkbox>
-              </Flex>
-            </InputTemplate>
-          ),
+                  <Flex style={{ width: 604 }}>
+                    <Checkbox
+                      checked={watch("integration_plan")}
+                      {...register("integration_plan")}
+                    >
+                      연계 가능
+                    </Checkbox>
+                  </Flex>
+                </InputTemplate>,
+              ]
+            : []),
         ]}
       />
 
